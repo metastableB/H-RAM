@@ -1,0 +1,14 @@
+/* Created on 8th Jan 2015 
+ * metastableBarrett
+ *
+ * This document contains the versiond and other details of tools used for this project
+ */
+
+
+# Django 
+  1.7.2 BETA (8/1/15)
+
+# Python
+  3.4.2
+ 
+# Heroku
