@@ -1,2 +1,3 @@
-manage.py
+*.sqlite3
+*.pyc
 HRAM

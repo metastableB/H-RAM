@@ -1,0 +1,31 @@
+<html>
+
+<head>
+	<title>Sign In </title>
+	{% load staticfiles %}
+	<link type="text/css" rel="stylesheet" href="{%  static 'warmup/signin.css' %}">
+</head>
+
+<body>
+
+	<form action="/checkSignin/" method="POST">
+		<fieldset>
+		<legend align="center"><h2> Sign In</h2> </legend>
+		<div id="error">
+		{% if errors %}
+			{% for error in errors %}
+				{{ error }}<br/>
+			{% endfor %}
+		{% endif %}
+		</div>
+		<div id="entries">
+		<lable> Username &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;        : </lable><input type="text" name="username"><br/><br/>
+		<lable> Password &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;        : </lable><input type="password" name="paswrd" ><br/><br/>
+		</fieldset><br/>
+		<p align="center"><input type="submit" name="submit" value="Log In" id="login" ></p>
+		
+	</form>
+
+
+</body>
+</html>

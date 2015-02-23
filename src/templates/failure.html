@@ -1,0 +1,16 @@
+<html>
+<head>
+	<title>Failure</title>
+	{% load staticfiles %}
+	<link type="text/css" rel="stylesheet" href="{% static 'warmup/failure.css' %}">
+</head>
+<body>
+	<div id="message"> 
+		{{msg}}
+	</div><br/>
+	<form action="/register/" id="register">
+		You can register at &nbsp;&nbsp;&nbsp;&nbsp;
+		<input type="submit" value="Register" id="button">
+	</form> 
+</body>
+</html>
