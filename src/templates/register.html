@@ -1,0 +1,34 @@
+<html>
+<head>
+	<title>Register</title>
+	{% load staticfiles %}
+	<link type="text/css" rel="stylesheet" href="{% static 'warmup/register.css' %}">
+</head>
+</head>
+
+<body>
+	<form action="/check/" method="POST" id="register">
+		<fieldset>
+		<legend align="center"><h2> Register</h2> </legend>
+		<div id="errors">
+		{% if errors %}
+				{% for error in errors %}
+				 	{{ error }} <br/>
+				{% endfor %}
+		{% endif %}
+		</div>
+		<lable> Username &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;       : </lable><input type="text" name="username"><br/><br/>
+		<lable> Password &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;         : </lable><input type="password" name="pass1" ><br/><br/>
+		<lable> Confirm Password : </lable><input type="password" name="pass2"><br/><br/>
+		<br/>
+		<p><input type="submit" name="submit" value="Register" id="registerButton" ></p>
+		</fieldset>
+	</form>
+	<form action="/signin/" id="signin">
+		If already registered then 
+		<input type="submit" value="Sign In" id="button">
+	</form>
+
+</body>
+</html>
+
