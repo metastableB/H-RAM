@@ -1,0 +1,26 @@
+<html>
+
+<head>
+	<title>Testing </title>
+	{% load staticfiles %}
+	<link type="text/css" rel="stylesheet" href="{%  static 'src/test.css' %}">
+</head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript">
+function submitform(){
+	
+	document.pic1.submit();
+	$('body').append("HI its working");
+}	
+
+</script>
+
+<body>
+	
+<form action="/bookRoom/" method="POST" name="pic1">
+	<a href="javascript: submitform()"><img src="{% static 'src/whiteButton.png'%}"  width="200" height="200"></a>
+</form>
+
+
+</body>
+</html>

@@ -1,7 +1,7 @@
 from django.db import models
 
 class UserList(models.Model):
-    uniqueId = models.AutoField(primary_key = True)
+    #uniqueId = models.AutoField(primary_key = True)
     rollNumber = models.CharField(max_length = 10)
     username = models.CharField(max_length = 30)
     # TODO : use SHA-2 hash function
@@ -9,26 +9,26 @@ class UserList(models.Model):
 
 
 class FriendsPreference(models.Model):
-    UId = models.ForeignKey(UserList)
+    #UId = models.ForeignKey(UserList)
     # TODO : whether to store userId or rollnumber of the friend
-    preferedfriendUId1 = models.IntegerField(max_lenght = 10)
-    preferedfriendUId2 = models.IntegerField(max_lenght = 10)
-    preferedfriendUId3 = models.IntegerField(max_lenght = 10)
-    preferedfriendUId4 = models.IntegerField(max_lenght = 10)
-    preferedfriendUId5 = models.IntegerField(max_lenght = 10)
+    preferedfriendUId1 = models.IntegerField(max_length = 10)
+    preferedfriendUId2 = models.IntegerField(max_length = 10)
+    preferedfriendUId3 = models.IntegerField(max_length = 10)
+    preferedfriendUId4 = models.IntegerField(max_length = 10)
+    preferedfriendUId5 = models.IntegerField(max_length = 10)
 
 class RoomPreference(models.Model):
     # Each UId will have a correspinding set of entries in the table
     # when quieried for a UId this will return a list which acts 
     # as a sub-table of sorts for each user
-    UId = models.ForeignKey(UserList)
+    #UId = models.ForeignKey(UserList)
     preferenceNumber = models.IntegerField(max_length = 3)
     preferedRoom = models.IntegerField(max_length=4)
 
 
 class StudentBioDataTable(models.Model):
-	uId = models.ForeignKey(UserList)
-	rollNo =  models.CharField(10)
+	#UId = models.ForeignKey(UserList)
+	rollNo =  models.CharField(max_length=10)
 
 	# Introduction
 	# TODO : Restrict this field

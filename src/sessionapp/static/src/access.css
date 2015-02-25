@@ -1,0 +1,27 @@
+body{
+	background: #A0A0A0;
+	font-family: cambria;
+}
+input{
+	height : 40px;
+	width : 200px;
+	border-radius: 5px;
+	border:0;
+	font-family: comic sans ms;
+	font-size: 20px;
+}
+form{
+	margin-top:5%;
+	margin-left:5%;
+	margin-right:5%;
+	float:left;
+	font-family: comic sans ms;
+	font-size: 20px;
+}
+
+#button{
+	color:white;
+	background:#0099FF;
+	width:200px;
+	cursor:pointer;
+}

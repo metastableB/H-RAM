@@ -2,14 +2,14 @@
 <head>
 	<title>Profile Page</title>
 	{% load staticfiles %}
-	<link rel="stylesheet" type="text/css" href="{% static 'warmup/profile.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'src/profile.css' %}">
 </head>
 <body>
 	<div id="msg">
 		WELCOME {{username}}!!!<br/>
-			You have logged in {{count}} times into your profle page.
+			
 	</div><br/><br/><br/>
-	<form action="/register/" id="logout">
+	<form action="/logout/" id="logout">
 		<input type="submit" value="Log Out" id="button">
 	</form> 
 </body>
