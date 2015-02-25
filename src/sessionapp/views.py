@@ -5,6 +5,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import Context, loader
 from django.core.context_processors import csrf
 from sessionapp.models import RoomPreference,UserList
+from django.db.models import Max
 
 def register(request):
 	#for register
@@ -17,11 +18,23 @@ def access(request):
 	return render_to_response('access.html')
 
 def bookRoom(request):
-	#request.method=="POST"
-	#roomNumber= request.POST['roomNumber']
+	# TODO : Deal with this
+	#request.method == "POST"
 	if 'username' in request.session:
-		newroom= RoomPreference(preferenceNumber="1",preferedRoom="301")
-		newroom.save()
+		logInUsername = request.session['username']
+		userDetails = UserList.objects.get(username = logInUsername)
+	 	userRoomPreference = RoomPreference.objects.all().filter(uId = userDetails.uniqueId)
+	 	if userRoomPreference.count () > 0 :
+	 		userRoomPreference = userRoomPreference.order_by('-preferenceNumber')[0]	
+	 		userRoomPreferenceNumber = userRoomPreference.preferenceNumber
+	 	else:
+	 		userRoomPreferenceNumber = 0
+	 		userRoomPreference = None
+	 		
+	 	userRoomPreferenceNumber = userRoomPreferenceNumber + 1	
+		newRoomPreference = RoomPreference(uId = userDetails ,rollNumber = userDetails.rollNumber,
+			preferenceNumber = userRoomPreferenceNumber ,preferedRoom = "301")
+		newRoomPreference.save()
 		return render_to_response('home.html')
 	
 	return render_to_response('success.html')
@@ -107,7 +120,7 @@ def validate(request):
 			validpassword=True
 		else:
 			errors.append("Please enter a password.")
-		if(validpassword&validuser):			
+		if(validpassword & validuser):			
 			try:
 				user = UserList.objects.get(username=username)
 			except UserList.DoesNotExist:
@@ -123,19 +136,19 @@ def validate(request):
 					return HttpResponseRedirect('/profilePage')
 				else:
 					errors.append("Password is incorrect.")
-					return render_to_response('signin.html',{'errors':errors})
+					return render_to_response('login.html',{'errors':errors})
 			if not user:
 				return render_to_response('failure.html',{'msg':"Please register and then log in"})
 		else:
-			return render_to_response('signin.html',{'errors':errors})
+			return render_to_response('login.html',{'errors':errors})
 	else:
-		return render_to_response('signin.html')
+		return render_to_response('login.html')
 
 def profile(request):
 	if 'username' in request.session:
 		user = request.session['username']
 		return render_to_response('profile.html',{'username':user})
-	return HttpResponseRedirect('/signin')
+	return HttpResponseRedirect('/login')
 
 def logout(request):
 	try:
@@ -143,7 +156,7 @@ def logout(request):
 		del request.session['username']
 	except keyError:
 		pass
-	return HttpResponseRedirect('/signin')
+	return HttpResponseRedirect('/login')
 	#return HttpResponse("You are looged out!!!")
 
 '''def checkIfloggedIn(request):
@@ -151,8 +164,8 @@ def logout(request):
 		return True
 	return False'''
 
-def signin(request):
-	return render_to_response('signin.html')
+def login(request):
+	return render_to_response('login.html')
 
 
 
