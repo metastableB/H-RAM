@@ -16,11 +16,16 @@ def home(request):
 def access(request):
 	return render_to_response('access.html')
 
+def openGrid(request):
+	return render_to_response('tables.html')
+
 def bookRoom(request):
 	#request.method=="POST"
 	#roomNumber= request.POST['roomNumber']
 	if 'username' in request.session:
-		newroom= RoomPreference(preferenceNumber="1",preferedRoom="301")
+		request.method=="POST"
+		roomNumber= request.Form['number']
+		newroom= RoomPreference(preferenceNumber="1",preferedRoom=roomNumber)
 		newroom.save()
 		return render_to_response('home.html')
 	

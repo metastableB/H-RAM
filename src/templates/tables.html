@@ -1,0 +1,45 @@
+<html>
+<head>
+	<title>Testing </title>
+	{% load staticfiles %}
+	<link type="text/css" rel="stylesheet" href="{%  static 'src/tables.css' %}">
+</head>
+<script type = "text/javascript">
+	var images = ["{% static 'src/whiteSquare.png' %}","{% static 'src/greenSquare.png' %}"]
+	function toggle(id)
+	{
+		//var str1 = "#";
+		//var id = imageNumber.toString();
+		//var id = str1.concat(imagenumber);
+		var source = document.getElementById(id).src;
+		if(source == images[0])
+			document.getElementById(id).src = images[1];
+		else
+			document.getElementById(id).src = images[0];
+	}
+
+</script>
+
+<body>
+	<table align="center" cellspacing = "10" border="1">
+		<tr>
+			<td><button onclick="toggle(alpha)" ><img src = "{% static 'src/whiteButton.png' %}" id = "alpha" width="150" height="150"></button></td>
+			<td><img src = "{% static 'src/whiteButton.png' %}" width="150" height="150"></td>
+			<td><img src = "{% static 'src/whiteButton.png' %}" width="150" height="150"></td>
+		</tr>
+		<tr>
+			<td><img src = "{% static 'src/whiteButton.png' %}" width="150" height="150"></td>
+			<td><img src = "{% static 'src/whiteButton.png' %}" width="150" height="150"></td>
+			<td><img src = "{% static 'src/whiteButton.png' %}" width="150" height="150"></td>
+		</tr>
+		<tr>
+			<td><img src = "{% static 'src/whiteButton.png' %}" width="150" height="150"></td>
+			<td><img src = "{% static 'src/whiteButton.png' %}" width="150" height="150"></td>
+			<td><img src = "{% static 'src/whiteButton.png' %}" width="150" height="150"></td>
+		</tr>
+	</table>
+
+
+
+</body>
+</html>
