@@ -6,29 +6,34 @@ class UserList(models.Model):
     username = models.CharField(max_length = 30)
     # TODO : use SHA-2 hash function
     password = models.CharField(max_length = 64)
-
+    def  __unicode__ (self):
+    	return self.username
 
 class FriendsPreference(models.Model):
-    UId = models.ForeignKey(UserList)
+    uId = models.ForeignKey(UserList)
     # TODO : whether to store userId or rollnumber of the friend
-    preferedfriendUId1 = models.IntegerField(max_lenght = 10)
-    preferedfriendUId2 = models.IntegerField(max_lenght = 10)
-    preferedfriendUId3 = models.IntegerField(max_lenght = 10)
-    preferedfriendUId4 = models.IntegerField(max_lenght = 10)
-    preferedfriendUId5 = models.IntegerField(max_lenght = 10)
+    preferedfriendUId1 = models.IntegerField(max_length = 10)
+    preferedfriendUId2 = models.IntegerField(max_length = 10)
+    preferedfriendUId3 = models.IntegerField(max_length = 10)
+    preferedfriendUId4 = models.IntegerField(max_length = 10)
+    preferedfriendUId5 = models.IntegerField(max_length = 10)
+    def  __unicode__ (self):
+    	return u'%s' %(self.uId)
 
 class RoomPreference(models.Model):
     # Each UId will have a correspinding set of entries in the table
     # when quieried for a UId this will return a list which acts 
     # as a sub-table of sorts for each user
-    UId = models.ForeignKey(UserList)
+    uId = models.ForeignKey(UserList)
+    rollNumber = models.CharField(max_length = 10)
     preferenceNumber = models.IntegerField(max_length = 3)
-    preferedRoom = models.IntegerField(max_length=4)
-
+    preferedRoom = models.IntegerField(max_length = 4)
+    def  __unicode__ (self):
+    	return u'%10s: %-5s %-5s' %(self.uId,self.preferenceNumber,self.preferedRoom)
 
 class StudentBioDataTable(models.Model):
 	uId = models.ForeignKey(UserList)
-	rollNo =  models.CharField(10)
+	rollNumber =  models.CharField(max_length=10)
 
 	# Introduction
 	# TODO : Restrict this field
@@ -86,4 +91,5 @@ class StudentBioDataTable(models.Model):
 	qualifyingYear =  models.IntegerField(max_length = 7)
 	qualifyingBoard = models.CharField(max_length = 50)
 	qualifyingPercentageMarks =  models.IntegerField(max_length = 7)
-
+	def  __unicode__ (self):
+		return u'%s' %(self.uId)

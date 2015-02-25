@@ -1,10 +1,11 @@
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404, render
 from django.shortcuts import render_to_response
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.template import Context, loader
 from django.core.context_processors import csrf
-#from lo.models import Post
+from sessionapp.models import RoomPreference,UserList
+from django.db.models import Max
 
 def register(request):
 	#for register
@@ -13,7 +14,35 @@ def register(request):
 def home(request):
 	return render_to_response('home.html')
 
-def check(request):
+def access(request):
+	return render_to_response('access.html')
+
+def bookRoom(request):
+	# TODO : Deal with this
+	#request.method == "POST"
+	if 'username' in request.session:
+		logInUsername = request.session['username']
+		userDetails = UserList.objects.get(username = logInUsername)
+	 	userRoomPreference = RoomPreference.objects.all().filter(uId = userDetails.uniqueId)
+	 	if userRoomPreference.count () > 0 :
+	 		userRoomPreference = userRoomPreference.order_by('-preferenceNumber')[0]	
+	 		userRoomPreferenceNumber = userRoomPreference.preferenceNumber
+	 	else:
+	 		userRoomPreferenceNumber = 0
+	 		userRoomPreference = None
+	 		
+	 	userRoomPreferenceNumber = userRoomPreferenceNumber + 1	
+		newRoomPreference = RoomPreference(uId = userDetails ,rollNumber = userDetails.rollNumber,
+			preferenceNumber = userRoomPreferenceNumber ,preferedRoom = "301")
+		newRoomPreference.save()
+		return render_to_response('home.html')
+	
+	return render_to_response('success.html')
+
+def test(request):
+	return render_to_response('testing.html')
+
+'''def check(request):
 	if request.method=="POST":
 		errors=[]
 		validUsername = False
@@ -72,14 +101,14 @@ def check(request):
 			return render_to_response('register.html',{'errors':errors})
 	else:
 		return render_to_response('register.html')
-
-def check_signin(request):
+'''
+def validate(request):
 	if request.method == 'POST':
 		incorrect = "Incorrect Password"
 		errors=[]
 		valid = False
 		validuser = False
-		validpass=False
+		validpassword=False
 		username = request.POST['username']
 		if (len(username)!=0):
 			validuser=True
@@ -88,40 +117,55 @@ def check_signin(request):
 			
 		password = request.POST['paswrd']
 		if (len(password)!=0):
-			validpass=True
+			validpassword=True
 		else:
 			errors.append("Please enter a password.")
-		if(validpass&validuser):			
+		if(validpassword & validuser):			
 			try:
-				usr = Post.objects.get(username=username)
-			except Post.DoesNotExist:
-				usr = None
+				user = UserList.objects.get(username=username)
+			except UserList.DoesNotExist:
+				user = None
 
-			if (usr):
-				if(password == usr.password):
+			if (user):
+				if(password == user.password):
 					valid=True
 
 				if(valid):
-					count=usr.count
-					usr.count=count+1
-					count=count+1
-					usr.save()
-					return render_to_response('profile.html',{'username':username,'count':count})
+					request.session['member_id'] = user.rollNumber
+					request.session['username'] = user.username
+					return HttpResponseRedirect('/profilePage')
 				else:
 					errors.append("Password is incorrect.")
-					return render_to_response('signin.html',{'errors':errors})
-			if not usr:
+					return render_to_response('login.html',{'errors':errors})
+			if not user:
 				return render_to_response('failure.html',{'msg':"Please register and then log in"})
 		else:
-			return render_to_response('signin.html',{'errors':errors})
+			return render_to_response('login.html',{'errors':errors})
 	else:
-		return render_to_response('signin.html')
+		return render_to_response('login.html')
 
+def profile(request):
+	if 'username' in request.session:
+		user = request.session['username']
+		return render_to_response('profile.html',{'username':user})
+	return HttpResponseRedirect('/login')
 
+def logout(request):
+	try:
+		del request.session['member_id']
+		del request.session['username']
+	except keyError:
+		pass
+	return HttpResponseRedirect('/login')
+	#return HttpResponse("You are looged out!!!")
 
+'''def checkIfloggedIn(request):
+	if 'username' in request.session:
+		return True
+	return False'''
 
-def signin(request):
-	return render_to_response('signin.html')
+def login(request):
+	return render_to_response('login.html')
 
 
 

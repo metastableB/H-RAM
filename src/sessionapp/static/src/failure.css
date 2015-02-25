@@ -1,0 +1,31 @@
+body{
+	background: #A0A0A0;
+	font-family: cambria;
+}
+#message{
+	font-size:30px;
+	color: red;
+	margin-left:30%;
+	margin-top:10%;
+}
+form{
+	font-size: 18px;
+	margin-left:33%;
+}
+input{
+	height : 40px;
+	width : 300px;
+	border-radius: 5px;
+	border:0;
+	font-family: comic sans ms;
+	font-size: 20px;
+}
+#button{
+	font-size: 16px;
+	background: #E0E0E0;
+	width:200px;
+	cursor:pointer;
+}
+#button:hover{
+	background: #D0D0D0;
+}
