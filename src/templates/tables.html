@@ -4,18 +4,63 @@
 	{% load staticfiles %}
 	<link type="text/css" rel="stylesheet" href="{%  static 'src/tables.css' %}">
 </head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script type = "text/javascript">
 	var images = ["{% static 'src/whiteSquare.png' %}","{% static 'src/greenSquare.png' %}"]
-	function toggle(id)
+	function toggle(name,number)
 	{
-		//var str1 = "#";
+		var str1 = "";
 		//var id = imageNumber.toString();
 		//var id = str1.concat(imagenumber);
-		var source = document.getElementById(id).src;
-		if(source == images[0])
-			document.getElementById(id).src = images[1];
+		//var source = document.getElementById(id).src;
+		//if(source == images[0])
+		//	document.getElementById(id).src = images[1];
+		//else
+		//	document.getElementById(id).src = images[0];
+		var idname = name.toString();
+		var idold = document.getElementById(idname).style.background;
+		var id = idold.slice(25);
+		if(id == "green")
+		{
+			document.getElementById(idname).style.background = "yellow";
+			var field = document.getElementsByName(idname);
+			field.value = "-1";
+		}
 		else
-			document.getElementById(id).src = images[0];
+		{
+			document.getElementById(idname).style.background = "green";
+			var field = document.getElementsByName(idname);
+			field.value = number;
+			document.getElementById("hello").innerHTML = number + "   " + field.value;
+		}//var idold = document.getElementById("first").style.background;
+		//var id = idold.slice(25);
+		
+	}
+	function submitform(){
+	
+	document.form1.submit();
+	$('body').append("HI its working");
+	}
+	function BookRoom(idvalue,number)
+	{
+		var idname = idvalue.toString();
+		var idold = document.getElementById(idname).style.background;
+		var id = idold.slice(25);
+		if(id == "green")
+		{
+			document.getElementById("hello").innerHTML = "in the function!!!";
+			my_form=document.createElement('FORM');
+			my_form.name='myForm';
+			my_form.method='POST';
+			my_form.action='/bookRoom/';
+
+			my_tb=document.createElement('INPUT');
+			my_tb.type='TEXT';
+			my_tb.name='roomNumber';
+			my_tb.value=number;
+			my_form.appendChild(my_tb);
+			my_form.submit();
+		}
 	}
 
 </script>
@@ -23,21 +68,35 @@
 <body>
 	<table align="center" cellspacing = "10" border="1">
 		<tr>
-			<td><button onclick="toggle(alpha)" ><img src = "{% static 'src/whiteButton.png' %}" id = "alpha" width="150" height="150"></button></td>
-			<td><img src = "{% static 'src/whiteButton.png' %}" width="150" height="150"></td>
-			<td><img src = "{% static 'src/whiteButton.png' %}" width="150" height="150"></td>
+			<a href="#"><td id="first" onclick="toggle('first','301')">&nbsp;</td></a>
+			<a href="#"><td id="second" onclick="toggle('second','302')">&nbsp;</td></a>
+			<a href="#"><td id="third" onclick="toggle('third','303')">&nbsp;</td></a>
 		</tr>
 		<tr>
-			<td><img src = "{% static 'src/whiteButton.png' %}" width="150" height="150"></td>
-			<td><img src = "{% static 'src/whiteButton.png' %}" width="150" height="150"></td>
-			<td><img src = "{% static 'src/whiteButton.png' %}" width="150" height="150"></td>
+			<a href="#"><td id="fourth" onclick="toggle('fourth','304')">&nbsp;</td></a>
+			<a href="#"><td id="fifth" onclick="toggle('fifth','305')">&nbsp;</td></a>
+			<a href="#"><td id="sixth" onclick="toggle('sixth','306')">&nbsp;</td></a>
 		</tr>
 		<tr>
-			<td><img src = "{% static 'src/whiteButton.png' %}" width="150" height="150"></td>
-			<td><img src = "{% static 'src/whiteButton.png' %}" width="150" height="150"></td>
-			<td><img src = "{% static 'src/whiteButton.png' %}" width="150" height="150"></td>
+			<a href="#"><td id="seventh" onclick="toggle('seventh','307')">&nbsp;</td></a>
+			<a href="#"><td id="eight" onclick="toggle('eight','308')">&nbsp;</td></a>
+			<a href="#"><td id="nineth" onclick="toggle('nineth','309')">&nbsp;</td></a>
 		</tr>
 	</table>
+	<div id="hello"></div>
+	<form action="/bookRoom/" method="POST" id = "form1">
+		<input type="hidden" name ="first" id ="first" value="301">
+		<input type="hidden" name ="second" id ="second" value="302">
+		<input type="hidden" name ="third" id ="third" value="303">
+		<input type="hidden" name ="fourth" id ="fourth" value="304">
+		<input type="hidden" name ="fifth" id ="fifth" value="305">
+		<input type="hidden" name ="sixth" id ="sixth" value="306">
+		<input type="hidden" name ="seventh" id ="seventh" value="307">
+		<input type="hidden" name ="eight" id ="eight" value="308">
+		<input type="hidden" name ="nineth" id ="nineth" value="309">
+		<button onclick = "submitForm()">Submit</button>
+	</form>
+	<p id ="hello"></p>
 
 
 

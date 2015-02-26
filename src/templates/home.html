@@ -2,5 +2,10 @@
 <head></head>
 <body>
 	Home Page!!!
+	{% if errors %}
+			{% for error in errors %}
+				{{ error }}<br/>
+			{% endfor %}
+		{% endif %}
 </body>
 </html>

@@ -2,6 +2,9 @@ table,td,tr{
 	margin-top: 5%;
 	border:1px bold;
 }
-#first{
-	background: yellow;
+
+td{
+width:150px;
+height:150px;
+background: yellow;
 }
