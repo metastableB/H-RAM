@@ -1,0 +1,10 @@
+body {
+	background: red;
+}
+#circleClick {
+	display: block;
+	top: 50%;
+    margin-left: auto;
+    margin-right: auto 
+}
+

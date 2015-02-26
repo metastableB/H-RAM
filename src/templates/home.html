@@ -1,6 +1,93 @@
+<!DOCTYPE html>
 <html>
-<head></head>
+<head>
+  {% load staticfiles %}
+ 	<meta charset="UTF-8">
+
+<title>Menu</title>
+<style>
+
+body {
+    background-image: url("{% static 'src/background.jpg'%}");
+    background-color: #00f;
+}
+
+.table {
+background: rgba(255,255,255,0.5);
+}
+.titleTable {
+  background-color: #fff;
+  opacity: 0.5;
+}
+
+.buttonz input[type=submit]{
+	width: 65%	;
+	height: 80%;
+	background: #0df;
+	border: 1px solid #fff;
+	cursor: pointer;
+	border-radius: 2px;
+	color: #000;
+	font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
+	font-size: 16px;
+	font-weight: 400;
+	padding: 20px;
+}
+
+.buttonz input[type=submit]:hover {
+	opacity: 0.8;
+}
+
+.buttonz input[type=submit]:active {
+	opacity: 0.6;
+}
+
+.buttonz input[type=button]{
+  width: 65%  ;
+  height: 80%;
+  background: #0df;
+  border: 1px solid #fff;
+  cursor: pointer;
+  border-radius: 2px;
+  color: #000;
+  font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 20px;
+}
+
+.buttonz input[type=button]:hover {
+  opacity: 0.8;
+}
+
+.buttonz input[type=button]:active {
+  opacity: 0.6;
+}
+
+</style>
+</head>
+<table class="titleTable" STYLE="position:absolute; top:1%; left:1%; width:98%; height:5% ">
+  <tr> 
+    <td align="left" style="position:absolute; left:5%; top:10%;"> Home </td>
+    <td align="rignt" style="position:absolute; left:90%; top:9%;">  <a href="/logout">Logout</a></td> 
+</table>
 <body>
-	Home Page!!!
+<table class='table' STYLE="position:absolute; top:15%; left:15%; width:70%; height:70% ">
+  <tr><form action = "/test">
+    <td align="center"><div class="buttonz"><input type="submit" value="Preference"></div></td>
+    </form>
+    <td align="center"><div class="buttonz"><input type="button" value="button r-1"></div></td>	
+  </tr>
+
+  <tr>
+    <td align="center"><div class="buttonz"><input type="button" value="button l-2"></div></td>
+    <td align="center"><div class="buttonz"><input type="button" value="button r-2"></div></td>
+  </tr>
+  
+  <tr>
+    <td align="center"><div class="buttonz"><input type="button" value="button l-3"></div></td>
+    <td align="center"><div class="buttonz"><input type="button" value="button r-3"></div></td>		
+  </tr>
+</table>
 </body>
 </html>

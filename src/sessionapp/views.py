@@ -133,12 +133,12 @@ def validate(request):
 				if(valid):
 					request.session['member_id'] = user.rollNumber
 					request.session['username'] = user.username
-					return HttpResponseRedirect('/profilePage')
+					return HttpResponseRedirect('/home')
 				else:
 					errors.append("Password is incorrect.")
 					return render_to_response('login.html',{'errors':errors})
 			if not user:
-				return render_to_response('failure.html',{'msg':"Please register and then log in"})
+				return render_to_response('failure.html'.html,{'msg':"Please Enter the correct credentials"})
 		else:
 			return render_to_response('login.html',{'errors':errors})
 	else:

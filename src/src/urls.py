@@ -6,7 +6,7 @@ urlpatterns = patterns('',
     # url(r'^$', 'src.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
 
-    url(r'^$','sessionapp.views.home'),
+    url(r'^$','sessionapp.views.validate'),
     url(r'^profilePage/$','sessionapp.views.profile'),
     #url(r'^check/$','sessionapp.views.check'),
     url(r'^login/$','sessionapp.views.login'),
@@ -16,4 +16,5 @@ urlpatterns = patterns('',
     url(r'^access/$','sessionapp.views.access'),
     url(r'^bookRoom/$','sessionapp.views.bookRoom'),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^home/','sessionapp.views.home')
 )

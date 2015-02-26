@@ -1,32 +1,30 @@
+<!DOCTYPE html>
 <html>
-
 <head>
-	<title>Sign In </title>
-	{% load staticfiles %}
-	<link type="text/css" rel="stylesheet" href="{%  static 'src/signin.css' %}">
+<meta charset="utf-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+ {% load staticfiles %}
+ <link rel="stylesheet" href="{% static "src/login.css" %}">
+<title>H-RAM</title>
 </head>
-
 <body>
-	<h2 align="center">Indian Institute of Technology Patna</h2>
-	<h3 align="center">Hostel Room Allocation System</h3>
-	<form action="/checkSignin/" method="POST">
-		<fieldset>
-		<legend align="center"><h2> Sign In</h2> </legend>
-		<div id="error">
+<div id="error">
 		{% if errors %}
 			{% for error in errors %}
 				{{ error }}<br/>
 			{% endfor %}
 		{% endif %}
-		</div>
-		<div id="entries">
-		<lable> Username &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;        : </lable><input type="text" name="username"><br/><br/>
-		<lable> Password &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;        : </lable><input type="password" name="paswrd" ><br/><br/>
-		</fieldset><br/>
-		<p align="center"><input type="submit" name="submit" value="Log In" id="login" ></p>
-		
-	</form>
+</div>
+  <section class="container">
+    <div class="login">
+      <h1 align = "center">Login</h1>
+      <form action = "/checkSignin/" method="post">
+        <p align = "center"><input type="text" name="username" value="" placeholder="Username"></p>
+        <p align = "center"><input type="password" name="paswrd" value="" placeholder="Password"></p>
+        <p align = "center" class="submit"><input type="submit" name="submit" value="Login" id="login"></p>
+      </form>
+    </div>
 
-
+    </section>
 </body>
 </html>

@@ -3,13 +3,13 @@
 <head>
 
   <meta charset="UTF-8">
-
+ {% load staticfiles %}
 <title>H-RAM</title>
 <style>
 
 body {
-    background-image: url("background.jpg");
-    background-color: #00f;
+    background-image: url("{% static 'src/background.jpg' %}");
+    background-color: #0f0;
 }
 
 div.transbox {
@@ -103,12 +103,25 @@ div.transbox {
 <body>
 
 <div class="transbox">
-<img src="IITP_Logo.png" alt="IITP_Logo" STYLE="position:absolute; TOP:2%; LEFT:7%; WIDTH:35%; HEIGHT:80%" >
+<img src="{% static 'src/iitplogo.png' %}" alt="IITP_Logo" STYLE="position:absolute; TOP:2%; LEFT:7%; WIDTH:20%; HEIGHT:20%" >
 <div class="title">IITP &nbsp; H-RAM</div>
+<div id="error">
+		{% if errors %}
+			{% for error in errors %}
+				{{ error }}<br/>
+			{% endfor %}
+		{% endif %}
+</div>
 <div class="login">
-	<input type="text" placeholder="username" name="user"><br>
-	<input type="password" placeholder="password" name="password"><br>
-	<input type="button" value="Log in">
+<form action="/checkSignin/" method="POST">
+	
+	<div id="entries">
+	<lable> Username &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;        : </lable><input type="text" name="username"><br/><br/>
+	<lable> Password &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;        : </lable><input type="password" name="paswrd" ><br/><br/>
+	</fieldset><br/>
+	<p align="center"><input type="submit" name="submit" value="Log In" id="login" ></p>
+	
+</form>
 </div>
 </div>
 
