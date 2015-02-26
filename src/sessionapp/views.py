@@ -12,7 +12,12 @@ def register(request):
 	return render_to_response('register.html')
 
 def home(request):
-	return render_to_response('home.html')
+	#return render_to_response('home.html')
+	if 'username' in request.session:
+		return render_to_response('home.html')
+	else :
+		return HttpResponseRedirect('/login')
+
 
 def access(request):
 	return render_to_response('access.html')
@@ -151,12 +156,16 @@ def profile(request):
 	return HttpResponseRedirect('/login')
 
 def logout(request):
-	try:
-		del request.session['member_id']
-		del request.session['username']
-	except keyError:
-		pass
-	return HttpResponseRedirect('/login')
+	if 'username' in request.session:
+		try:
+			del request.session['member_id']
+			del request.session['username']
+		except keyError:
+			pass
+		return HttpResponseRedirect('/login')
+	else :
+		return HttpResponseRedirect('/login')
+
 	#return HttpResponse("You are looged out!!!")
 
 '''def checkIfloggedIn(request):
