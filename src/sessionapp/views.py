@@ -83,8 +83,19 @@ def bookRoom(request):
 	
 	return render_to_response('success.html')
 
+
+'''def bookRoom(request):
+	if 'username' in request.session:
+		preferenceList = request.POST.getlist('preferenceList')
+		return render_to_response('home.html',{'errors' : preferenceList})
+	else:
+		return render_to_response('success.html')'''
+
 def test(request):
 	return render_to_response('testing.html')
+
+def floorPlan(request):
+	return render_to_response('floors.html')
 
 '''def check(request):
 	if request.method=="POST":

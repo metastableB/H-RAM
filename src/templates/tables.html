@@ -7,7 +7,7 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script type = "text/javascript">
 	var images = ["{% static 'src/whiteSquare.png' %}","{% static 'src/greenSquare.png' %}"]
-	function toggle(name,number)
+	function toggle(name,no)
 	{
 		var str1 = "";
 		//var id = imageNumber.toString();
@@ -18,6 +18,7 @@
 		//else
 		//	document.getElementById(id).src = images[0];
 		var idname = name.toString();
+		number = no.toString();
 		var idold = document.getElementById(idname).style.background;
 		var id = idold.slice(25);
 		if(id == "green")
@@ -30,38 +31,19 @@
 		{
 			document.getElementById(idname).style.background = "green";
 			var field = document.getElementsByName(idname);
-			field.value = number;
-			document.getElementById("hello").innerHTML = number + "   " + field.value;
+			document.getElementById("hello").innerHTML = number + "   " + document.getElementsByName(idname).value;
+			document.getElementsByName(idname).value = number;
+			document.getElementById("hello").innerHTML = number + "   " + document.getElementsByName(idname).value;
 		}//var idold = document.getElementById("first").style.background;
 		//var id = idold.slice(25);
 		
 	}
-	function submitform(){
+	function submitForm(){
 	
-	document.form1.submit();
+	document.getElementById("form1").submit();
 	$('body').append("HI its working");
 	}
-	function BookRoom(idvalue,number)
-	{
-		var idname = idvalue.toString();
-		var idold = document.getElementById(idname).style.background;
-		var id = idold.slice(25);
-		if(id == "green")
-		{
-			document.getElementById("hello").innerHTML = "in the function!!!";
-			my_form=document.createElement('FORM');
-			my_form.name='myForm';
-			my_form.method='POST';
-			my_form.action='/bookRoom/';
-
-			my_tb=document.createElement('INPUT');
-			my_tb.type='TEXT';
-			my_tb.name='roomNumber';
-			my_tb.value=number;
-			my_form.appendChild(my_tb);
-			my_form.submit();
-		}
-	}
+	
 
 </script>
 
@@ -85,18 +67,17 @@
 	</table>
 	<div id="hello"></div>
 	<form action="/bookRoom/" method="POST" id = "form1">
-		<input type="hidden" name ="first" id ="first" value="301">
-		<input type="hidden" name ="second" id ="second" value="302">
-		<input type="hidden" name ="third" id ="third" value="303">
-		<input type="hidden" name ="fourth" id ="fourth" value="304">
-		<input type="hidden" name ="fifth" id ="fifth" value="305">
-		<input type="hidden" name ="sixth" id ="sixth" value="306">
-		<input type="hidden" name ="seventh" id ="seventh" value="307">
-		<input type="hidden" name ="eight" id ="eight" value="308">
-		<input type="hidden" name ="nineth" id ="nineth" value="309">
+		<input type="hidden" name ="first" id ="first" value="-1">
+		<input type="hidden" name ="second" id ="second" value="-1">
+		<input type="hidden" name ="third" id ="third" value="-1">
+		<input type="hidden" name ="fourth" id ="fourth" value="-1">
+		<input type="hidden" name ="fifth" id ="fifth" value="-1">
+		<input type="hidden" name ="sixth" id ="sixth" value="-1">
+		<input type="hidden" name ="seventh" id ="seventh" value="-1">
+		<input type="hidden" name ="eight" id ="eight" value="-1">
+		<input type="hidden" name ="nineth" id ="nineth" value="-1">
 		<button onclick = "submitForm()">Submit</button>
 	</form>
-	<p id ="hello"></p>
 
 
 
