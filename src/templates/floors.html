@@ -5,51 +5,56 @@
 	<link type="text/css" rel="stylesheet" href="{%  static 'src/floors.css' %}">
 </head>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script type = "text/javascript" src="{%  static 'src/jquery-1.4.2.min.js'%}"></script>
 <script type = "text/javascript">
 	var images = ["{% static 'src/whiteSquare.png' %}","{% static 'src/greenSquare.png' %}"]
 	var preferenceOrder = [];
 	function toggle(no)
 	{
-		var str1 = "";
-		//var id = imageNumber.toString();
-		//var id = str1.concat(imagenumber);
-		//var source = document.getElementById(id).src;
-		//if(source == images[0])
-		//	document.getElementById(id).src = images[1];
-		//else
-		//	document.getElementById(id).src = images[0];
-		//var idname = name.toString();
 		var number = no.toString();
-		var idold = document.getElementById(number).style.background;
-		var id = idold.slice(25);
-		if(id == "green")
+		var idold = document.getElementById(number).style.opacity;
+		//var id = idold.slice(25);
+		if(idold == "0.5")
 		{
-			document.getElementById(number).style.background = "yellow";
-			var field = document.getElementsByName(number);
-			field.value = "-1";
+			document.getElementById(number).style.opacity = "1";
+			var index = preferenceOrder.indexOf(number);
+			preferenceOrder.splice(index,1);
+			printPreferenceOrder(preferenceOrder);
+			//document.getElementById("preferences").innerHTML = "<h3> Preference Order </h3><br>"  + preferenceOrder.toString() + "<br>";
 		}
 		else
 		{
-			document.getElementById(number).style.background = "green";
+			document.getElementById(number).style.opacity = "0.5";
 			preferenceOrder.push(number);
 			var field = document.getElementsByName(number);
-			//document.getElementById("hello").innerHTML = number + "   " + document.getElementsByName(number).value;
-			//document.getElementsByName(number).value = number;
-			document.getElementById("hello").innerHTML = document.getElementById("hello").innerHTML + number + "   " + preferenceOrder.toString() + "<br>";
+			printPreferenceOrder(preferenceOrder);
+			//document.getElementById("preferences").innerHTML = "<h3>Preference Order </h3><br>" + preferenceOrder.toString() + "<br>";
+			//document.getElementById("hello").innerHTML = document.getElementById("hello").innerHTML + number + "   " + preferenceOrder.toString() + "<br>";
 			//preferenceOrder.append(number);
 		}//var idold = document.getElementById("first").style.background;
 		//var id = idold.slice(25);
 		
 	}
-	function appendPreferenceOrder()
+	function printPreferenceOrder(listOfPreferences)
+	{
+		var i = 0;
+		var temp;
+		document.getElementById("preferences").innerHTML = "<h3>Preference Order </h3><br>";
+		for(i=0;i<listOfPreferences.length;i++)
+		{
+			document.getElementById("preferences").innerHTML = document.getElementById("preferences").innerHTML + (i+1) + "." + listOfPreferences[i] + "<br>";
+		}
+	}
+	/*function appendPreferenceOrder()
 	{
 		//document.getElementById("preferences").innerHTML = document.getElementById("preferences").innerHTML + preferenceOrder[preferenceOrder.length-1] + "<br>";
 		document.getElementById("preferences").innerHTML = document.getElementById("preferences").innerHTML + preferenceOrder.toString() + "<br>";
-	}
+	}*/
 	function submitForm(){
-		document.getElementById("preferences").innerHTML = document.getElementById("preferences").innerHTML + "In submit form() <br>";
-		//$.post("/bookRoom/",{'preferenceList[]': preferenceOrder});
-		console.log("create post is working!");
+		//document.getElementById("preferences").innerHTML = document.getElementById("preferences").innerHTML + "In submit form() <br>";
+		//$.post("/bookRoom/",{'preferenceList' : preferenceOrder});
+		/*console.log("create post is working!");
 		$.ajax({
 		    url: "/bookRoom/",
 		    type: "POST", //this is the default though, you don't actually need to always mention it
@@ -61,160 +66,395 @@
 		    failure: function(data) { 
 		        alert('Got an error dude');
 		    }
-		});
-	//document.getElementById("form1").submit();
-	//$('body').append("HI its working");
+		});*/
+		document.getElementById("preference").value = preferenceOrder.toString();
+		document.getElementById("preferences").innerHTML = document.getElementById("preferences").innerHTML + preferenceOrder.toString() + "<br>";
+		document.getElementById("form1").submit();
+		//$('body').append("HI its working");
+		/*my_form=document.createElement('FORM');
+		my_form.name='myForm';
+		my_form.method='POST';
+		my_form.action='/bookRoom/';
+		my_tb=document.createElement('INPUT');
+		my_tb.type='TEXT';
+		my_tb.name='myInput';
+		my_tb.value=preferenceOrder.toString();
+		my_form.appendChild(my_tb);
+		//document.body.add(my_form,document.body.elements[0]);
+		document.my_form.submit();*/
 	}
+	/*function LoadAnotherPage()
+	{
+		$("#floor_plan").load("tables.html");
+	}*/
+	/*$(document).ready(function(){
+                 $("#load").click(function(){
+                     $("#floor_plan").load("tables.html");
+                 });
+            });
+
+	///document.getElementById("hello").innerHTML = document.getElementById("hello").innerHTML + document.getElementById("floor_choice").value;
+	$("#floor_choice").change(function())*/
+	/*$("#floor_choice").on("change",function(){
+		$("floor_plan").load("success.html");
+	});*/
+	/*$("#floor_choice").change(function(){
+		document.getElementById("hello").innerHTML = document.getElementById("hello").innerHTML + "hello guys!!!";
+		$("floor_plan").load("success.html");
+	});
+	document.getElementById("hello").innerHTML = document.getElementById("hello").innerHTML + $("#floor_choice option:selected").text() + $("#floor_choice").val();*/
 	
+
+
+	/*function load()
+	{	
+		var temp =  '<object type="text/html" data="../floor1" style="width:100%;height:100%"></object>'
+		document.getElementById("floor_plan").innerHTML = temp;	
+	}*/
+	function loadfloor1()
+	{
+		$("#floor1").show();
+		$("#floor2").hide();
+		$("#floor3").hide();
+	}
+	function loadfloor2()
+	{
+		$("#floor2").show();
+		$("#floor1").hide();
+		$("#floor3").hide();
+	}
+	function loadfloor3()
+	{
+		$("#floor3").show();
+		$("#floor2").hide();
+		$("#floor1").hide();
+	}
+	function dothis()
+	{
+		$("#floor2").hide();
+		$("#floor3").hide();
+	}
+	/*$( "#loading" ).click(function() {
+		$( "#floor2" ).hide();
+	});*/
 
 </script>
 
-<body>
+<body onload="dothis()">
+	<h2 align = "center">Hostel Room Allocation</h2>
 	<div id = "floor_plan">
-		<table cellspacing = "5" border="1">
-			<tr>
-				<td id = "301" onclick = "toggle('301')">&nbsp;</td>
-				<td id = "302" onclick = "toggle('302')">&nbsp;</td>
-				<td id = "303" onclick = "toggle('303')">&nbsp;</td>
-				<td id = "304" onclick = "toggle('304')">&nbsp;</td> 
-				<td id = "305" onclick = "toggle('305')">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-			</tr>
-			<tr>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-			</tr>
-			<tr>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-			</tr>
-			<tr>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-			</tr>
-			<tr>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-			</tr>
-			<tr>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-			</tr>
-			<tr>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-			</tr>
-			<tr>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-			</tr>
-			<tr>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-			</tr>
-			<tr>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-				<td id = "" onclick = "toggle()">&nbsp;</td>
-			</tr>
-		</table>
+		<div id = "floor1" >
+			<table cellspacing = "0" border="1" >
+				<tr>
+					<td id = "101" onclick = "toggle('101')"><img src = "{% static 'src/4.png'%}" title = "101" width="100%" height="100%"></td>
+					<td id = "102" onclick = "toggle('102')"><img src = "{% static 'src/3.png'%}" title = "102" width="100%" height="100%"></td>
+					<td id = "103" onclick = "toggle('103')"><img src = "{% static 'src/4.png'%}" title = "103" width="100%" height="100%"></td>
+					<td id = "104" onclick = "toggle('104')"><img src = "{% static 'src/3.png'%}" title = "104" width="100%" height="100%"></td> 
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td id = "105" onclick = "toggle('105')"><img src = "{% static 'src/4.png'%}" title = "105" width="100%" height="100%"></td>
+					<td id = "106" onclick = "toggle('106')"><img src = "{% static 'src/3.png'%}" title = "106" width="100%" height="100%"></td>
+					<td id = "107" onclick = "toggle('107')"><img src = "{% static 'src/4.png'%}" title = "107" width="100%" height="100%"></td>
+					<td id = "108" onclick = "toggle('108')"><img src = "{% static 'src/3.png'%}" title = "108" width="100%" height="100%"></td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td id = "109" onclick = "toggle('109')"><img src = "{% static 'src/2.png'%}" title = "109" width="100%" height="100%"></td>
+					<td id = "110" onclick = "toggle('110')"><img src = "{% static 'src/1.png'%}" title = "110" width="100%" height="100%"></td>
+					<td id = "111" onclick = "toggle('111')"><img src = "{% static 'src/2.png'%}" title = "111" width="100%" height="100%"></td>
+					<td id = "112" onclick = "toggle('112')"><img src = "{% static 'src/1.png'%}" title = "112" width="100%" height="100%"></td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td id = "113" onclick = "toggle('113')"><img src = "{% static 'src/2.png'%}" title = "113" width="100%" height="100%"></td>
+					<td id = "114" onclick = "toggle('114')"><img src = "{% static 'src/1.png'%}" title = "114" width="100%" height="100%"></td>
+					<td id = "115" onclick = "toggle('115')"><img src = "{% static 'src/2.png'%}" title = "115" width="100%" height="100%"></td>
+					<td id = "116" onclick = "toggle('116')"><img src = "{% static 'src/1.png'%}" title = "116" width="100%" height="100%"></td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td id = "117" onclick = "toggle('117')"><img src = "{% static 'src/4.png'%}" title = "117" width="100%" height="100%"></td>
+					<td id = "118" onclick = "toggle('118')"><img src = "{% static 'src/3.png'%}" title = "118" width="100%" height="100%"></td>
+					<td id = "119" onclick = "toggle('119')"><img src = "{% static 'src/4.png'%}" title = "119" width="100%" height="100%"></td>
+					<td id = "120" onclick = "toggle('120')"><img src = "{% static 'src/3.png'%}" title = "120" width="100%" height="100%"></td> 
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td id = "121" onclick = "toggle('121')"><img src = "{% static 'src/4.png'%}" title = "121" width="100%" height="100%"></td>
+					<td id = "122" onclick = "toggle('122')"><img src = "{% static 'src/3.png'%}" title = "122" width="100%" height="100%"></td>
+					<td id = "123" onclick = "toggle('123')"><img src = "{% static 'src/4.png'%}" title = "123" width="100%" height="100%"></td>
+					<td id = "124" onclick = "toggle('124')"><img src = "{% static 'src/3.png'%}" title = "124" width="100%" height="100%"></td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td id = "125" onclick = "toggle('125')"><img src = "{% static 'src/2.png'%}" title = "125" width="100%" height="100%"></td>
+					<td id = "126" onclick = "toggle('126')"><img src = "{% static 'src/1.png'%}" title = "126" width="100%" height="100%"></td>
+					<td id = "127" onclick = "toggle('127')"><img src = "{% static 'src/2.png'%}" title = "127" width="100%" height="100%"></td>
+					<td id = "128" onclick = "toggle('128')"><img src = "{% static 'src/1.png'%}" title = "128" width="100%" height="100%"></td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td id = "129" onclick = "toggle('129')"><img src = "{% static 'src/2.png'%}" title = "129" width="100%" height="100%"></td>
+					<td id = "130" onclick = "toggle('130')"><img src = "{% static 'src/1.png'%}" title = "130" width="100%" height="100%"></td>
+					<td id = "131" onclick = "toggle('131')"><img src = "{% static 'src/2.png'%}" title = "130" width="100%" height="100%"></td>
+					<td id = "132" onclick = "toggle('132')"><img src = "{% static 'src/1.png'%}" title = "132" width="100%" height="100%"></td>
+				</tr>
+			</table>
+		</div>
+		<div id = "floor2" >
+			<table cellspacing = "0" border="1" >
+				<tr>
+					<td id = "201" onclick = "toggle('201')"><img src = "{% static 'src/4.png'%}" title = "201" width="100%" height="100%"></td>
+					<td id = "202" onclick = "toggle('202')"><img src = "{% static 'src/3.png'%}" title = "202" width="100%" height="100%"></td>
+					<td id = "203" onclick = "toggle('203')"><img src = "{% static 'src/4.png'%}" title = "203" width="100%" height="100%"></td>
+					<td id = "204" onclick = "toggle('204')"><img src = "{% static 'src/3.png'%}" title = "204" width="100%" height="100%"></td> 
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td id = "205" onclick = "toggle('205')"><img src = "{% static 'src/4.png'%}" title = "205" width="100%" height="100%"></td>
+					<td id = "206" onclick = "toggle('206')"><img src = "{% static 'src/3.png'%}" title = "206" width="100%" height="100%"></td>
+					<td id = "207" onclick = "toggle('207')"><img src = "{% static 'src/4.png'%}" title = "207" width="100%" height="100%"></td>
+					<td id = "208" onclick = "toggle('208')"><img src = "{% static 'src/3.png'%}" title = "208" width="100%" height="100%"></td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td id = "209" onclick = "toggle('209')"><img src = "{% static 'src/2.png'%}" title = "209" width="100%" height="100%"></td>
+					<td id = "210" onclick = "toggle('210')"><img src = "{% static 'src/1.png'%}" title = "210" width="100%" height="100%"></td>
+					<td id = "211" onclick = "toggle('211')"><img src = "{% static 'src/2.png'%}" title = "211" width="100%" height="100%"></td>
+					<td id = "212" onclick = "toggle('212')"><img src = "{% static 'src/1.png'%}" title = "212" width="100%" height="100%"></td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td id = "213" onclick = "toggle('213')"><img src = "{% static 'src/2.png'%}" title = "213" width="100%" height="100%"></td>
+					<td id = "214" onclick = "toggle('214')"><img src = "{% static 'src/1.png'%}" title = "214" width="100%" height="100%"></td>
+					<td id = "215" onclick = "toggle('215')"><img src = "{% static 'src/2.png'%}" title = "215" width="100%" height="100%"></td>
+					<td id = "216" onclick = "toggle('216')"><img src = "{% static 'src/1.png'%}" title = "216" width="100%" height="100%"></td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td id = "217" onclick = "toggle('217')"><img src = "{% static 'src/4.png'%}" title = "217" width="100%" height="100%"></td>
+					<td id = "218" onclick = "toggle('218')"><img src = "{% static 'src/3.png'%}" title = "218" width="100%" height="100%"></td>
+					<td id = "219" onclick = "toggle('219')"><img src = "{% static 'src/4.png'%}" title = "219" width="100%" height="100%"></td>
+					<td id = "220" onclick = "toggle('220')"><img src = "{% static 'src/3.png'%}" title = "220" width="100%" height="100%"></td> 
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td id = "221" onclick = "toggle('221')"><img src = "{% static 'src/4.png'%}" title = "221" width="100%" height="100%"></td>
+					<td id = "222" onclick = "toggle('222')"><img src = "{% static 'src/3.png'%}" title = "222" width="100%" height="100%"></td>
+					<td id = "223" onclick = "toggle('223')"><img src = "{% static 'src/4.png'%}" title = "223" width="100%" height="100%"></td>
+					<td id = "224" onclick = "toggle('224')"><img src = "{% static 'src/3.png'%}" title = "224" width="100%" height="100%"></td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td id = "225" onclick = "toggle('225')"><img src = "{% static 'src/2.png'%}" title = "225" width="100%" height="100%"></td>
+					<td id = "226" onclick = "toggle('226')"><img src = "{% static 'src/1.png'%}" title = "226" width="100%" height="100%"></td>
+					<td id = "227" onclick = "toggle('227')"><img src = "{% static 'src/2.png'%}" title = "227" width="100%" height="100%"></td>
+					<td id = "228" onclick = "toggle('228')"><img src = "{% static 'src/1.png'%}" title = "228" width="100%" height="100%"></td>
+					<td>&nbsp;</td
+					<td>&nbsp;</td>
+					<td id = "229" onclick = "toggle('229')"><img src = "{% static 'src/2.png'%}" title = "229" width="100%" height="100%"></td>
+					<td id = "230" onclick = "toggle('230')"><img src = "{% static 'src/1.png'%}" title = "230" width="100%" height="100%"></td>
+					<td id = "231" onclick = "toggle('231')"><img src = "{% static 'src/2.png'%}" title = "231" width="100%" height="100%"></td>
+					<td id = "232" onclick = "toggle('232')"><img src = "{% static 'src/1.png'%}" title = "232" width="100%" height="100%"></td>
+				</tr>
+			</table>
+		</div>
+		<div id = "floor3">
+			<table cellspacing = "0" border="1" >
+				<tr>
+					<td id = "301" onclick = "toggle('301')"><img src = "{% static 'src/4.png'%}" title = "301" width="100%" height="100%"></td>
+					<td id = "302" onclick = "toggle('302')"><img src = "{% static 'src/3.png'%}" title = "302" width="100%" height="100%"></td>
+					<td id = "303" onclick = "toggle('303')"><img src = "{% static 'src/4.png'%}" title = "303" width="100%" height="100%"></td>
+					<td id = "304" onclick = "toggle('304')"><img src = "{% static 'src/3.png'%}" title = "304" width="100%" height="100%"></td> 
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td id = "305" onclick = "toggle('305')"><img src = "{% static 'src/4.png'%}" title = "305" width="100%" height="100%"></td>
+					<td id = "306" onclick = "toggle('306')"><img src = "{% static 'src/3.png'%}" title = "306" width="100%" height="100%"></td>
+					<td id = "307" onclick = "toggle('307')"><img src = "{% static 'src/4.png'%}" title = "307" width="100%" height="100%"></td>
+					<td id = "308" onclick = "toggle('308')"><img src = "{% static 'src/3.png'%}" title = "308" width="100%" height="100%"></td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td id = "309" onclick = "toggle('309')"><img src = "{% static 'src/2.png'%}" title = "309" width="100%" height="100%"></td>
+					<td id = "310" onclick = "toggle('310')"><img src = "{% static 'src/1.png'%}" title = "310" width="100%" height="100%"></td>
+					<td id = "311" onclick = "toggle('311')"><img src = "{% static 'src/2.png'%}" title = "311" width="100%" height="100%"></td>
+					<td id = "312" onclick = "toggle('312')"><img src = "{% static 'src/1.png'%}" title = "312" width="100%" height="100%"></td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td id = "313" onclick = "toggle('313')"><img src = "{% static 'src/2.png'%}" title = "313" width="100%" height="100%"></td>
+					<td id = "314" onclick = "toggle('314')"><img src = "{% static 'src/1.png'%}" title = "314" width="100%" height="100%"></td>
+					<td id = "315" onclick = "toggle('315')"><img src = "{% static 'src/2.png'%}" title = "315" width="100%" height="100%"></td>
+					<td id = "316" onclick = "toggle('316')"><img src = "{% static 'src/1.png'%}" title = "316" width="100%" height="100%"></td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td id = "317" onclick = "toggle('317')"><img src = "{% static 'src/4.png'%}" title = "317" width="100%" height="100%"></td>
+					<td id = "318" onclick = "toggle('318')"><img src = "{% static 'src/3.png'%}" title = "318" width="100%" height="100%"></td>
+					<td id = "319" onclick = "toggle('319')"><img src = "{% static 'src/4.png'%}" title = "319" width="100%" height="100%"></td>
+					<td id = "320" onclick = "toggle('320')"><img src = "{% static 'src/3.png'%}" title = "320" width="100%" height="100%"></td> 
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td id = "321" onclick = "toggle('321')"><img src = "{% static 'src/4.png'%}" title = "321" width="100%" height="100%"></td>
+					<td id = "322" onclick = "toggle('322')"><img src = "{% static 'src/3.png'%}" title = "322" width="100%" height="100%"></td>
+					<td id = "323" onclick = "toggle('323')"><img src = "{% static 'src/4.png'%}" title = "323" width="100%" height="100%"></td>
+					<td id = "324" onclick = "toggle('324')"><img src = "{% static 'src/3.png'%}" title = "324" width="100%" height="100%"></td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td id = "325" onclick = "toggle('325')"><img src = "{% static 'src/2.png'%}" title = "325" width="100%" height="100%"></td>
+					<td id = "326" onclick = "toggle('326')"><img src = "{% static 'src/1.png'%}" title = "326" width="100%" height="100%"></td>
+					<td id = "327" onclick = "toggle('327')"><img src = "{% static 'src/2.png'%}" title = "327" width="100%" height="100%"></td>
+					<td id = "328" onclick = "toggle('328')"><img src = "{% static 'src/1.png'%}" title = "328" width="100%" height="100%"></td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td id = "329" onclick = "toggle('329')"><img src = "{% static 'src/2.png'%}" title = "329" width="100%" height="100%"></td>
+					<td id = "330" onclick = "toggle('330')"><img src = "{% static 'src/1.png'%}" title = "330" width="100%" height="100%"></td>
+					<td id = "331" onclick = "toggle('331')"><img src = "{% static 'src/2.png'%}" title = "331" width="100%" height="100%"></td>
+					<td id = "332" onclick = "toggle('332')"><img src = "{% static 'src/1.png'%}" title = "332" width="100%" height="100%"></td>
+				</tr>
+			</table>
+		</div>
 	</div>
-	<div id="image_arrows">
-		<button onclick="appendPreferenceOrder()"><img src="{% static 'src/forwardarrow.png'%}" width="50" height = "50"></button><br><br><br>
-		<button><img src = "{% static 'src/backarrow.png'%}" width="50" height="50"></button>
-	</div><br><br>
 	<div id = "preferences">
-		<h3 align="center">Preference Order</h3>
+		<h3>Preference Order</h3>
 	</div>
 	
-	<!--<form>
-		<input type="hidden" name ="first" id ="first" value="-1">
-		<input type="hidden" name ="second" id ="second" value="-1">
-		<input type="hidden" name ="third" id ="third" value="-1">
-		<input type="hidden" name ="fourth" id ="fourth" value="-1">
-		<input type="hidden" name ="fifth" id ="fifth" value="-1">
-		<input type="hidden" name ="sixth" id ="sixth" value="-1">
-		<input type="hidden" name ="seventh" id ="seventh" value="-1">
-		<input type="hidden" name ="eight" id ="eight" value="-1">
-		<input type="hidden" name ="nineth" id ="nineth" value="-1">
+	<form action = "/bookRoom/" method = "POST" id = "form1">
+		<input type="hidden" name ="preference" id ="preference" value="Hello">
 		<button onclick = "submitForm()">Submit</button>
-	</form>-->
-	<button onclick = "submitForm()">Submit</button>
+	</form>
+	<button onclick="loadfloor1()">1<sup>st</sup> Floor</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<button onclick="loadfloor2()">2<sup>nd</sup> Floor</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<button onclick="loadfloor3()">3<sup>rd</sup> Floor</button>
 	<p id ="hello"></p>
 
 

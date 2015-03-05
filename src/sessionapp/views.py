@@ -20,76 +20,27 @@ def openGrid(request):
 	return render_to_response('tables.html')
 
 def bookRoom(request):
-	#request.method=="POST"
-	#roomNumber= request.POST['roomNumber']
-	roomnumber = []
-	error = []
-	i = 0
 	if 'username' in request.session:
-		request.method=="POST"
-		error.append(request.POST['first'])
-		error.append(request.POST['second'])
-		error.append(request.POST['third'])
-		error.append(request.POST['fourth'])
-		error.append(request.POST['fifth'])
-		error.append(request.POST['sixth'])
-		error.append(request.POST['seventh'])
-		error.append(request.POST['eight'])
-		error.append(request.POST['nineth'])
-		if(request.POST["first"] != "-1"):
-		
-			roomnumber.append(request.POST['first'])
-			i = i+1
-		if(request.POST['second'] != '-1'):
-		
-			roomnumber.append(request.POST['second'])
-			i = i+1
-		if(request.POST['third'] != '-1'):
-		#else:
-			roomnumber.append(request.POST['third'])
-			i = i+1
-		if(request.POST['fourth'] != '-1'):
-			roomnumber.append(request.POST['fourth'])
-			i = i+1
-		if(request.POST['fifth'] != '-1'):
-		#else:
-			roomnumber.append(request.POST['fifth'])
-			i = i+1
-		if(request.POST['sixth'] != '-1'):
-		#else:
-			roomnumber.append(request.POST['sixth'])
-			i = i+1
-		if(request.POST['seventh'] != '-1'):
-		#else:
-			roomnumber.append(request.POST['seventh'])
-			i = i+1
-		if(request.POST['eight'] != '-1'):
-		#else:
-			roomnumber.append(request.POST['eight'])
-			i = i+1
-		if(request.POST['nineth'] != '-1'):
-		#else:
-			roomnumber.append(request.POST['nineth'])
-			i = i+1
+		preferenceList = request.POST['preference']
+		i = 0 
+		temp = ""
+		preferenceOrder = []
+		for char in preferenceList:
+			if(char != ","):
+				temp += char
+			elif(char == ","):
+				preferenceOrder.append(temp)
+				temp = ""
+				i += 1
+		preferenceOrder.append(temp)						#As the last room in the preference was not getting into the array.
 		j=0
-		error.append(i)
-		for j in range(i-1):
-			newroom = RoomPreference(preferenceNumber = 2,preferedRoom = '305')
+		for j in range(len(preferenceOrder)) :
+			newroom = RoomPreference(preferenceNumber=j+1,preferedRoom=preferenceOrder[j])
 			newroom.save()
-			j += 1
-		#newroom= RoomPreference(preferenceNumber="1",preferedRoom=roomNumber)
-		#newroom.save()
-		return render_to_response('home.html',{'errors' : error})
-	
-	return render_to_response('success.html')
 
-
-'''def bookRoom(request):
-	if 'username' in request.session:
-		preferenceList = request.POST.getlist('preferenceList')
-		return render_to_response('home.html',{'errors' : preferenceList})
+		return render_to_response('home.html',{'errors' : preferenceOrder})
 	else:
-		return render_to_response('success.html')'''
+		return render_to_response('success.html')
 
 def test(request):
 	return render_to_response('testing.html')

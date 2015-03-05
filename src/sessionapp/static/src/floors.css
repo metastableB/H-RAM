@@ -14,11 +14,13 @@ td{
 width:6%;
 height:auto;
 cursor: pointer;
-background: yellow;
+background: #0f0f0f;
+
 }
+
 #floor_plan{
 	width:60%;
-	height:60%;
+	height:80%;
 	float:left;
 	margin-left:1%;
 }
@@ -31,14 +33,17 @@ background: yellow;
 #preferences{
 	float:right;
 	padding:1%;
-	width:25%;
-	height:auto;
-	margin-top:-23%;
+	width:33%;
+	height:60%;
+	margin-top:-2%;
+	overflow-y:scroll;
+}
+form button{
+	margin-top:3%;
+	margin-right:2%;
 }
 form{
 	padding:2%;
-	clear: both;
 }
-button{
-	margin-top:50%;
+
 

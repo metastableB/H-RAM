@@ -17,5 +17,6 @@ urlpatterns = patterns('',
     url(r'^bookRoom/$','sessionapp.views.bookRoom'),
     url(r'^floorPlan/$','sessionapp.views.floorPlan'),
     url(r'^openGrid/$','sessionapp.views.openGrid'),
+    #url(r'^floor1/$','sessionapp.views.floor1'),
     url(r'^admin/', include(admin.site.urls)),
 )
