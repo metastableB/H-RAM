@@ -1,0 +1,55 @@
+body {
+	height: 100%;
+	width: 100%;
+}
+
+table{
+	border:1px bold;
+	width:100%;
+	height:100%;
+
+}
+
+td{
+width:6%;
+height:auto;
+cursor: pointer;
+background: #0f0f0f;
+
+}
+
+#floor_plan{
+	width:60%;
+	height:80%;
+	float:left;
+	margin-left:1%;
+}
+#image_arrows{
+	float:left;
+	padding:2%;
+	width:10%;
+	height:auto;
+}
+#preferences{
+	float:right;
+	padding:1%;
+	width:33%;
+	height:60%;
+	margin-top:-2%;
+	overflow-y:scroll;
+}
+form button{
+	margin-top:3%;
+	margin-right:2%;
+}
+form{
+	padding:2%;
+}
+.titleTable {
+  background-color: #fff;
+  opacity: 0.5;
+}
+button{
+	margin-top:3%;
+}
+

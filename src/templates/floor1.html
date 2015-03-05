@@ -1,0 +1,178 @@
+<html>
+<head>
+	<title>Floor 1 </title>
+	{% load staticfiles %}
+	<link type="text/css" rel="stylesheet" href="{%  static 'src/floor1.css' %}">
+</head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script type = "text/javascript" src="{%  static 'src/jquery-1.4.2.min.js'%}"></script>
+<script type = "text/javascript">
+	var images = ["{% static 'src/whiteSquare.png' %}","{% static 'src/greenSquare.png' %}"]
+	var preferenceOrder = [];
+	function toggle(no)
+	{
+		var number = no.toString();
+		var idold = document.getElementById(number).style.background;
+		var id = idold.slice(25);
+		if(id == "green")
+		{
+			document.getElementById(number).style.background = "yellow";
+			var index = preferenceOrder.indexOf(number);
+			preferenceOrder.splice(index,1);
+			document.getElementById("preferences").innerHTML = document.getElementById("preferences").innerHTML + preferenceOrder.toString() + "<br>";
+		}
+		else
+		{
+			document.getElementById(number).style.background = "green";
+			preferenceOrder.push(number);
+			var field = document.getElementsByName(number);
+			document.getElementById("preferences").innerHTML = document.getElementById("preferences").innerHTML + preferenceOrder.toString() + "<br>";
+			document.getElementById("hello").innerHTML = document.getElementById("hello").innerHTML + number + "   " + preferenceOrder.toString() + "<br>";
+		}
+		
+	}
+	function appendPreferenceOrder()
+	{
+		document.getElementById("preferences").innerHTML = document.getElementById("preferences").innerHTML + preferenceOrder.toString() + "<br>";
+	}
+	function submitForm()
+	{
+		document.getElementById("preferences").innerHTML = document.getElementById("preferences").innerHTML + "In submit form() <br>";
+		document.getElementById("preference").value = preferenceOrder.toString();
+		document.getElementById("preferences").innerHTML = document.getElementById("preferences").innerHTML + preferenceOrder.toString() + "<br>";
+		document.getElementById("form1").submit();
+	}
+	function load()
+	{
+		var temp =  '<object type="text/html" data="../floor1" style="width:100%;height:100%"></object>'
+		document.getElementById("floor_plan").innerHTML = temp;	
+	}
+</script>
+<body>
+	<div id = "floor_plan">
+		<table cellspacing = "5" border="1">
+			<tr>
+				<td id = "201" onclick = "toggle('201')">&nbsp;</td>
+				<td id = "202" onclick = "toggle('202')">&nbsp;</td>
+				<td id = "203" onclick = "toggle('203')">&nbsp;</td>
+				<td id = "204" onclick = "toggle('204')">&nbsp;</td> 
+				<td id = "205" onclick = "toggle('205')">&nbsp;</td>
+				<td id = "206" onclick = "toggle('206')">&nbsp;</td>
+				<td id = "207" onclick = "toggle('207')">&nbsp;</td>
+				<td id = "208" onclick = "toggle('208')">&nbsp;</td>
+				<td id = "209" onclick = "toggle('209')">&nbsp;</td>
+				<td id = "210" onclick = "toggle('210')">&nbsp;</td>
+			</tr>
+			<tr>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+			</tr>
+			<tr>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+			</tr>
+			<tr>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+			</tr>
+			<tr>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+			</tr>
+			<tr>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+			</tr>
+			<tr>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+			</tr>
+			<tr>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+			</tr>
+			<tr>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+			</tr>
+			<tr>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+				<td id = "" onclick = "toggle()">&nbsp;</td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>

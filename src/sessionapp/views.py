@@ -22,30 +22,46 @@ def home(request):
 def access(request):
 	return render_to_response('access.html')
 
+def openGrid(request):
+	return render_to_response('tables.html')
+
 def bookRoom(request):
-	# TODO : Deal with this
-	#request.method == "POST"
 	if 'username' in request.session:
 		logInUsername = request.session['username']
+		preferenceList = request.POST['preference']
 		userDetails = UserList.objects.get(username = logInUsername)
 	 	userRoomPreference = RoomPreference.objects.all().filter(uId = userDetails.uniqueId)
-	 	if userRoomPreference.count () > 0 :
+		if userRoomPreference.count () > 0 :
 	 		userRoomPreference = userRoomPreference.order_by('-preferenceNumber')[0]	
-	 		userRoomPreferenceNumber = userRoomPreference.preferenceNumber
+	 		lastPreference = userRoomPreference.preferenceNumber
 	 	else:
-	 		userRoomPreferenceNumber = 0
+	 		lastPreference = 0
 	 		userRoomPreference = None
-	 		
-	 	userRoomPreferenceNumber = userRoomPreferenceNumber + 1	
-		newRoomPreference = RoomPreference(uId = userDetails ,rollNumber = userDetails.rollNumber,
-			preferenceNumber = userRoomPreferenceNumber ,preferedRoom = "301")
-		newRoomPreference.save()
-		return render_to_response('home.html')
-	
-	return render_to_response('success.html')
+	 	i = 0 
+		temp = ""
+		preferenceOrder = []
+		for char in preferenceList:
+			if(char != ","):
+				temp += char
+			elif(char == ","):
+				preferenceOrder.append(temp)
+				temp = ""
+				i += 1
+		preferenceOrder.append(temp)						#As the last room in the preference was not getting into the array.
+		j=0
+		for j in range(len(preferenceOrder)) :
+			newroom = RoomPreference(uId = userDetails ,rollNumber = userDetails.rollNumber ,preferenceNumber=j+lastPreference+1,preferedRoom=preferenceOrder[j])
+			newroom.save()
+
+		return render_to_response('home.html',{'errors' : preferenceOrder})
+	else:
+		return render_to_response('success.html')
 
 def test(request):
 	return render_to_response('testing.html')
+
+def floorPlan(request):
+	return render_to_response('floors.html')
 
 '''def check(request):
 	if request.method=="POST":
