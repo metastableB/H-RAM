@@ -20,5 +20,7 @@ urlpatterns = patterns('',
     url(r'^openGrid/$','sessionapp.views.openGrid'),
     #url(r'^floor1/$','sessionapp.views.floor1'),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^home/','sessionapp.views.home')
+    url(r'^home/','sessionapp.views.home'),
+    #url(r'^allocate/','sessionapp.views.allocationMethod')
+
 )

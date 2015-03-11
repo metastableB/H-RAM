@@ -28,8 +28,21 @@ class RoomPreference(models.Model):
     rollNumber = models.CharField(max_length = 10)
     preferenceNumber = models.IntegerField(max_length = 3)
     preferedRoom = models.IntegerField(max_length = 4)
+    valid = models.IntegerField(max_length = 1, default = 1)
     def  __unicode__ (self):
     	return u'%10s: %-5s %-5s' %(self.uId,self.preferenceNumber,self.preferedRoom)
+
+class RoomList(models.Model):
+	# Holds information regarding each room
+	roomNumber = models.CharField(max_length = 5)
+	floor = models.CharField(max_length = 5)
+	#wing = models.CharField(max_length = 5)
+	#uId = models.ForeignKey(UserList)
+	count = models.IntegerField(max_length = 4 , default = 0)
+	x = models.IntegerField(max_length = 3)
+	y = models.IntegerField(max_length = 3)
+	def __unicode__ (self):
+		return u'%10s %10s'%(self.roomNumber,self.uId)
 
 class StudentBioDataTable(models.Model):
 	uId = models.ForeignKey(UserList)

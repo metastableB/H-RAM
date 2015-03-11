@@ -6,6 +6,8 @@ from django.template import Context, loader
 from django.core.context_processors import csrf
 from sessionapp.models import RoomPreference,UserList
 from django.db.models import Max
+import random
+import allocation
 
 def register(request):
 	#for register
@@ -159,7 +161,7 @@ def validate(request):
 					errors.append("Password is incorrect.")
 					return render_to_response('login.html',{'errors':errors})
 			if not user:
-				return render_to_response('failure.html'.html,{'msg':"Please Enter the correct credentials"})
+				return render_to_response('failure.html',{'msg':"Please Enter the correct credentials"})
 		else:
 			return render_to_response('login.html',{'errors':errors})
 	else:
@@ -192,8 +194,30 @@ def logout(request):
 def login(request):
 	return render_to_response('login.html')
 
+def alloctationMethod(request):
+	preference = 1
+	maxPreference =  RoomPreference.objects.all().aggregate(Max('preferenceNumber'))
+	for preference in range(maxPreference):
+		iThPreferences = RoomPreference.objects.all().filter(preferenceNumber = i, valid = 1)
+		# updating count
+		for tempPreference in iThPreferences:
+			roomNo = tempPreference.preferedRoom
+			allocFlag = RoomList.objects.all().filter(roomNumber = roomNo)
+			if allocFlag.count != -1 :
+				allocFlag.count += 1
+		allocation.sortAllocate(preference,iThPreferences)
+'''
+def makeRoomList(request):
+	roomno =1;
+	for roomno in range(32):
+		newRoom1 = RoomList(roomNumber = roomno+100 ,)
 
-
-
-
-
+		newroom = RoomPreference(uId = userDetails ,rollNumber = userDetails.rollNumber ,preferenceNumber=j+lastPreference+1,preferedRoom=preferenceOrder[j])
+			newroom.save()	
+	floor = models.CharField(max_length = 5)
+	#wing = models.CharField(max_length = 5)
+	uId = models.ForeignKey(UserList)
+	count = models.IntegerField(max_length = 4 , default = 0)
+	x = models.IntegerField(max_length = 3)
+	y = models.IntegerField(max_length = 3)
+'''
