@@ -4,7 +4,7 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import Context, loader
 from django.core.context_processors import csrf
-from sessionapp.models import RoomPreference,UserList
+from sessionapp.models import RoomPreference,UserList,RoomList
 from django.db.models import Max
 import random
 import allocation
@@ -194,18 +194,21 @@ def logout(request):
 def login(request):
 	return render_to_response('login.html')
 
-def alloctationMethod(request):
+def allocationMethod(request):
 	preference = 1
 	maxPreference =  RoomPreference.objects.all().aggregate(Max('preferenceNumber'))
-	for preference in range(maxPreference):
-		iThPreferences = RoomPreference.objects.all().filter(preferenceNumber = i, valid = 1)
+	for preference in range(100):
+		iThPreferences = RoomPreference.objects.all().filter(preferenceNumber = preference, valid = 1)
 		# updating count
 		for tempPreference in iThPreferences:
 			roomNo = tempPreference.preferedRoom
 			allocFlag = RoomList.objects.all().filter(roomNumber = roomNo)
 			if allocFlag.count != -1 :
-				allocFlag.count += 1
+				temp =allocFlag.count() 
+				temp +=1
+				allocFlag.count = temp
 		allocation.sortAllocate(preference,iThPreferences)
+	return HttpResponseRedirect('/home',{'errors' : "allocated"})
 '''
 def makeRoomList(request):
 	roomno =1;
