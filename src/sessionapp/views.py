@@ -4,7 +4,11 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import Context, loader
 from django.core.context_processors import csrf
+<<<<<<< HEAD
 from sessionapp.models import RoomPreference,UserList,RoomList
+=======
+from sessionapp.models import RoomPreference,UserList,FriendsPreference
+>>>>>>> a789518a0cd4bf687ee7ff02e9471fb0b4ea19c6
 from django.db.models import Max
 import random
 import allocation
@@ -13,6 +17,13 @@ def register(request):
 	#for register
 	return render_to_response('register.html')
 
+def friendsprefrence(request):
+	#for friends prefrence list
+	if 'username' in request.session:
+		return render_to_response('friendspref.html')
+	else :
+		return HttpResponseRedirect('/login')
+
 def home(request):
 	#return render_to_response('home.html')
 	if 'username' in request.session:
@@ -20,6 +31,54 @@ def home(request):
 	else :
 		return HttpResponseRedirect('/login')
 
+def recordFriendsPreference(request):
+	if 'username' in request.session:
+		errors = []
+		username = request.session['username']
+		userDetails = UserList.objects.get(username = username)
+		#user = FriendsPreference(uId = userDetails)
+		friend1 = request.POST['friend1']
+		checkFriend1 = UserList.objects.get(rollNumber = friend1)
+		if not checkFriend1:
+			errors.append("Enter a valid first friend")
+			return render_to_response('friendspref.html',{'errors':errors})
+		friend2 = request.POST['friend2']
+		checkFriend2 = UserList.objects.get(rollNumber = friend2)
+		if not checkFriend2:
+			errors.append("Enter a valid second friend")
+			return render_to_response('friendspref.html',{'errors':errors})
+
+		friend3 = request.POST['friend3']
+		checkFriend3 = UserList.objects.get(rollNumber = friend3)
+		if not checkFriend3:
+			errors.append("Enter a valid third friend")
+			return render_to_response('friendspref.html',{'errors':errors})
+
+		friend4 = request.POST['friend4']
+		checkFriend4 = UserList.objects.get(rollNumber = friend4)
+		if not checkFriend4:
+			errors.append("Enter a valid fourth friend")
+			return render_to_response('friendspref.html',{'errors':errors})
+
+		friend5 = request.POST['friend5']
+		checkFriend5 = UserList.objects.get(rollNumber = friend5)
+		if not checkFriend5:
+			errors.append("Enter a valid fifth friend")
+			return render_to_response('friendspref.html',{'errors':errors})
+		newuser = FriendsPreference(uId = userDetails,preferedfriendUId1 = friend1,preferedfriendUId2 = friend2,preferedfriendUId3 = friend3,preferedfriendUId4 = friend4,preferedfriendUId5 = friend5)
+		newuser.save()
+		return HttpResponse("Your preference list has been recorded!!!")
+
+
+		'''user.preferedfriendUId1 = friend1
+		user.preferedfriendUId2 = friend2
+		user.preferedfriendUId3 = friend3
+		user.preferedfriendUId4 = friend4
+		user.preferedfriendUId4 = friend5'''
+
+
+	else:
+		return HttpResponseRedirect('/login')
 
 def access(request):
 	return render_to_response('access.html')
@@ -161,7 +220,8 @@ def validate(request):
 					errors.append("Password is incorrect.")
 					return render_to_response('login.html',{'errors':errors})
 			if not user:
-				return render_to_response('failure.html',{'msg':"Please Enter the correct credentials"})
+				errors.append("Please Enter the correct credentials.")
+				return render_to_response('login.html',{'errors':errors})
 		else:
 			return render_to_response('login.html',{'errors':errors})
 	else:
@@ -224,3 +284,4 @@ def makeRoomList(request):
 	x = models.IntegerField(max_length = 3)
 	y = models.IntegerField(max_length = 3)
 '''
+
