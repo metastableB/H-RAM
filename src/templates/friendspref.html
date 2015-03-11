@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+ {% load staticfiles %}
+ <link rel="stylesheet" href="{% static "src/login.css" %}">
+<title>Friends Prefrences</title>
+<style>
+body {
+    background-image: url("{% static 'src/background.jpg'%}");
+}
+</style>
+</head>
+<body>
+<div id="error">
+		{% if errors %}
+			{% for error in errors %}
+				{{ error }}<br/>
+			{% endfor %}
+		{% endif %}
+</div>
+  <section class="container">
+    <div class="login">
+      <h1 align = "center">Fill in the Friends Prefrences</h1>
+      <form action = "/recordFriendsPreference/" method = "POST">
+        <p align = "center"><input type="text" name="friend1" value="" placeholder="Roll No 1"></p>
+        <p align = "center"><input type="text" name="friend2" value="" placeholder="Roll No 2"></p>
+        <p align = "center"><input type="text" name="friend3" value="" placeholder="Roll No 3"></p>
+        <p align = "center"><input type="text" name="friend4" value="" placeholder="Roll No 4"></p>
+        <p align = "center"><input type="text" name="friend5" value="" placeholder="Roll No 5"></p>
+        <p align = "center" class="submit"><input type="submit" name="submit" value="Submit" id="login"></p>
+      </form>
+    </div>
+
+    </section>
+</body>
+</html>
