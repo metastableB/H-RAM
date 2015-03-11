@@ -2,6 +2,11 @@
 <head>
 	<title>Testing </title>
 	{% load staticfiles %}
+	<style>
+body {
+    background-image: url("{% static 'src/background.jpg'%}");
+}
+</style>
 	<link type="text/css" rel="stylesheet" href="{%  static 'src/floors.css' %}">
 </head>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -141,7 +146,7 @@
 </script>
 
 <body onload="dothis()">
-	<h2 align = "center">Hostel Room Allocation</h2>
+	<h2 align = "center" style="color:white">Hostel Room Allocation</h2>
 	<div id = "floor_plan">
 		<div id = "floor1" >
 			<table cellspacing = "0" border="1" >
@@ -445,7 +450,7 @@
 		</div>
 	</div>
 	<div id = "preferences">
-		<h3>Preference Order</h3>
+		<h3 style="color:white" >Preference Order</h3>
 	</div>
 	<button onclick="loadfloor1()">1<sup>st</sup> Floor</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<button onclick="loadfloor2()">2<sup>nd</sup> Floor</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

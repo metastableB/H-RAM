@@ -12,11 +12,11 @@ class UserList(models.Model):
 class FriendsPreference(models.Model):
     uId = models.ForeignKey(UserList)
     # TODO : whether to store userId or rollnumber of the friend
-    preferedfriendUId1 = models.IntegerField(max_length = 10)
-    preferedfriendUId2 = models.IntegerField(max_length = 10)
-    preferedfriendUId3 = models.IntegerField(max_length = 10)
-    preferedfriendUId4 = models.IntegerField(max_length = 10)
-    preferedfriendUId5 = models.IntegerField(max_length = 10)
+    preferedfriendUId1 = models.CharField(max_length = 10)
+    preferedfriendUId2 = models.CharField(max_length = 10)
+    preferedfriendUId3 = models.CharField(max_length = 10)
+    preferedfriendUId4 = models.CharField(max_length = 10)
+    preferedfriendUId5 = models.CharField(max_length = 10)
     def  __unicode__ (self):
     	return u'%s' %(self.uId)
 
@@ -29,6 +29,7 @@ class RoomPreference(models.Model):
     preferenceNumber = models.IntegerField(max_length = 3)
     preferedRoom = models.IntegerField(max_length = 4)
     valid = models.IntegerField(max_length = 1, default = 1)
+
     def  __unicode__ (self):
     	return u'%10s: %-5s %-5s' %(self.uId,self.preferenceNumber,self.preferedRoom)
 
