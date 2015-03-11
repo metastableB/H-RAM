@@ -4,11 +4,7 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import Context, loader
 from django.core.context_processors import csrf
-<<<<<<< HEAD
-from sessionapp.models import RoomPreference,UserList,RoomList
-=======
-from sessionapp.models import RoomPreference,UserList,FriendsPreference
->>>>>>> a789518a0cd4bf687ee7ff02e9471fb0b4ea19c6
+from sessionapp.models import RoomPreference,UserList,RoomList,FriendsPreference
 from django.db.models import Max
 import random
 import allocation
