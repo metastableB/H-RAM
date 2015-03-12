@@ -4,62 +4,77 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import Context, loader
 from django.core.context_processors import csrf
-from sessionapp.models import RoomPreference,UserList,RoomList
+from sessionapp.models import RoomPreference,UserList,RoomList,FriendsPreference
 from django.db.models import Max
 import random
+import math
 
-def sortAllocate( preference , iThPreferences):
-	roomList = RoomList.objects.all().exclude(count = 0 ).exclude(count = -1)
-	#roomList = roomList.objects.all().order_by('count')
-	
+def sortAllocate(preference):
+	roomList = RoomList.objects.all().exclude(counter = 0 ).exclude(counter = -1).order_by('counter')
+		
 	for room in roomList:
-		if room.count == 1 :
-			userRoll = RoomPreference.objects.all().filter(preferedRoom = room.roomNumber).rollNumber
+		tosave = RoomList.objects.get(roomNumber = room.roomNumber)
+		if room.counter == 1 :
+			user = RoomPreference.objects.get(preferedRoom = room.roomNumber , preferenceNumber = preference)
+			userRoll = user.rollNumber
 		else :
 			userRoll = allocate(room)
-		setFlags(userRoll , room)
-		room.count = -1 
+		setFlags(userRoll , tosave)
+		tosave.counter = -1 
+		tosave.rollNumber = userRoll
+		tosave.save()
 
 def allocate(room):
-	V = -1
+	V = 0
 	candidateId = -1
-	condidates = RoomPreference.objects.all().filter(preferedRoom = room, valid = 1)
+	candidates = RoomPreference.objects.all().filter(preferedRoom = room.roomNumber, valid = 1)
 	
 	for eachCandidate in candidates:
-		tempV = eculidianV(eachCandidate , room)
+		tempV = euclidianV(eachCandidate , room)
 		if tempV > V :
 			V = tempV
 			candidateId = eachCandidate.rollNumber
-	if V!= -1 :
+	if  V != 0 :
 		return candidateId
 	else :
 		return random.choice(candidates).rollNumber
 
 def euclidianV(candidate,room):
-	friendList = FriendsPreference.objects.all().fileter(uId = candidate.uId)
+	# V = (no of friends / average weighted distance)
+	# Weighted distance = distance/weight
+	# weight = 6 - pref no
+	friendList = FriendsPreference.objects.all().filter(uId = candidate.uId)
 	x = room.x
 	y = room.y
-	count = 0
+	tempcount = 0
 	for eachFriend in friendList:
-		friendsRoom = RoolList.objects.all().filter(uId = eachFriend.uId)
+		try:
+			friendsRoom = RoomList.objects.get(rollNumber = eachFriend.rollNumber)	 		
+		except RoomList.DoesNotExist:
+			friendsRoom = None
+		distance = 0
 		if friendsRoom != None:
-			count += 1
+			tempcount += 1
 			distance += math.sqrt((friendsRoom.x - x)*(friendsRoom.x - x) + (friendsRoom.y - y)*(friendsRoom.y - y))
+			weight = PreferenceTable.objects.get(rollNumber = eachFriend.rollNumber , preferedRoom = friendsRoom.roomNumber)
+			distance = distance /(6-weight)
 
-	if count == 0 :
+	if tempcount == 0 :
 		return 0
 	else :
-		return distance/count 
+		return tempcount *tempCount /distance
 
-def setFlags(userId , room):
-	preferenceTableEntries = RoomPreference.objects.all().filter(uId = userId)
+def setFlags(userRoll , room):
+	preferenceTableEntries = RoomPreference.objects.all().filter(rollNumber = userRoll)
 	for eachEntry in preferenceTableEntries :
 		eachEntry.valid = -1
+		eachEntry.save()
 
 	preferenceTableEntries2 = RoomPreference.objects.all().filter(preferedRoom = room.roomNumber)
 	for eachEntry in preferenceTableEntries2:
 		eachEntry.valid = -1
-	room.uId = userId	
+		eachEntry.save()
+	
 		
 	# in preference table , mark all entries of UserID = -1
 		# in prefecrence table mark all occurances of room = -1

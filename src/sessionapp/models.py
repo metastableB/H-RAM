@@ -11,6 +11,7 @@ class UserList(models.Model):
 
 class FriendsPreference(models.Model):
     uId = models.ForeignKey(UserList)
+    rollNumber = models.CharField(max_length = 10)
     # TODO : whether to store userId or rollnumber of the friend
     preferedfriendUId1 = models.CharField(max_length = 10)
     preferedfriendUId2 = models.CharField(max_length = 10)
@@ -36,14 +37,15 @@ class RoomPreference(models.Model):
 class RoomList(models.Model):
 	# Holds information regarding each room
 	roomNumber = models.CharField(max_length = 5)
+	rollNumber = models.CharField(max_length = 10,default = '-1')
 	floor = models.CharField(max_length = 5)
 	#wing = models.CharField(max_length = 5)
 	#uId = models.ForeignKey(UserList)
-	count = models.IntegerField(max_length = 4 , default = 0)
+	counter = models.IntegerField(max_length = 4 , default = 0)
 	x = models.IntegerField(max_length = 3)
 	y = models.IntegerField(max_length = 3)
 	def __unicode__ (self):
-		return u'%10s %10s'%(self.roomNumber,self.uId)
+		return u'%10s %10s (x,y) %d %d counter %d'%(self.roomNumber,self.rollNumber,self.x,self.y,self.counter)
 
 class StudentBioDataTable(models.Model):
 	uId = models.ForeignKey(UserList)

@@ -31,6 +31,7 @@ def recordFriendsPreference(request):
 	if 'username' in request.session:
 		errors = []
 		username = request.session['username']
+		rollNumber = request.session['member_id']
 		userDetails = UserList.objects.get(username = username)
 		#user = FriendsPreference(uId = userDetails)
 		friend1 = request.POST['friend1']
@@ -61,10 +62,11 @@ def recordFriendsPreference(request):
 		if not checkFriend5:
 			errors.append("Enter a valid fifth friend")
 			return render_to_response('friendspref.html',{'errors':errors})
-		newuser = FriendsPreference(uId = userDetails,preferedfriendUId1 = friend1,preferedfriendUId2 = friend2,preferedfriendUId3 = friend3,preferedfriendUId4 = friend4,preferedfriendUId5 = friend5)
+		newuser = FriendsPreference(uId = userDetails,rollNumber = rollNumber ,preferedfriendUId1 = friend1,preferedfriendUId2 = friend2,preferedfriendUId3 = friend3,preferedfriendUId4 = friend4,preferedfriendUId5 = friend5)
 		newuser.save()
-		return HttpResponse("Your preference list has been recorded!!!")
-
+		errors = []
+		errors.append("Your preferences have been saved")
+		return render_to_response('home.html',{'errors' : errors})
 
 		'''user.preferedfriendUId1 = friend1
 		user.preferedfriendUId2 = friend2
@@ -253,18 +255,20 @@ def login(request):
 def allocationMethod(request):
 	preference = 1
 	maxPreference =  RoomPreference.objects.all().aggregate(Max('preferenceNumber'))
-	for preference in range(100):
+	for preference in range(1,10):
 		iThPreferences = RoomPreference.objects.all().filter(preferenceNumber = preference, valid = 1)
-		# updating count
+		# updating counter
 		for tempPreference in iThPreferences:
 			roomNo = tempPreference.preferedRoom
-			allocFlag = RoomList.objects.all().filter(roomNumber = roomNo)
-			if allocFlag.count != -1 :
-				temp =allocFlag.count() 
-				temp +=1
-				allocFlag.count = temp
-		allocation.sortAllocate(preference,iThPreferences)
-	return HttpResponseRedirect('/home',{'errors' : "allocated"})
+			allocFlag = RoomList.objects.get(roomNumber = roomNo)
+			if allocFlag.counter != -1 :
+				temp = allocFlag.counter 
+				temp += 1
+				toSave = RoomList.objects.get(roomNumber = roomNo)
+				toSave.counter = temp
+				toSave.save()
+		allocation.sortAllocate(preference)
+	return render_to_response('home.html')
 '''
 def makeRoomList(request):
 	roomno =1;
