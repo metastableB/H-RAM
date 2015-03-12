@@ -268,7 +268,14 @@ def allocationMethod(request):
 				toSave.counter = temp
 				toSave.save()
 		allocation.sortAllocate(preference)
-	return render_to_response('home.html')
+
+	results = []	
+	resultList = RoomList.objects.all().filter(counter = -1)
+	for i in range(resultList.count()):
+		results.append(resultList[i].rollNumber + "  " + resultList[i].roomNumber) 
+
+	return render_to_response('allocationResults.html',{'results' : results})
+	#return render_to_response('home.html')
 '''
 def makeRoomList(request):
 	roomno =1;

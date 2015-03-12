@@ -15,8 +15,11 @@ def sortAllocate(preference):
 	for room in roomList:
 		tosave = RoomList.objects.get(roomNumber = room.roomNumber)
 		if room.counter == 1 :
-			user = RoomPreference.objects.get(preferedRoom = room.roomNumber , preferenceNumber = preference)
-			userRoll = user.rollNumber
+			user = RoomPreference.objects.all().filter(preferedRoom = room.roomNumber , preferenceNumber = preference)
+			if user.count() == 1:
+				userRoll = user[0].rollNumber
+			else :
+				userRoll = allocate(room)
 		else :
 			userRoll = allocate(room)
 		setFlags(userRoll , tosave)
