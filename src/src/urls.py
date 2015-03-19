@@ -20,5 +20,24 @@ urlpatterns = patterns('',
     url(r'^openGrid/$','sessionapp.views.openGrid'),
     #url(r'^floor1/$','sessionapp.views.floor1'),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^home/','sessionapp.views.home')
+    url(r'^home/','sessionapp.views.home'),
+
+    #views related to election app
+    url(r'^EVoting/$','evoting.views.evotingHomePage'),
+    url(r'^EVoting/nominationForm/$','evoting.views.nominationForm'),
+    url(r'^EVoting/validateCandidate/$','evoting.views.validateCandidate'),
+    url(r'^EVoting/BallotPage/$','evoting.views.BallotPage'),
+    url(r'^EVoting/createElectionPasswords/$','evoting.views.createElectionPasswords'),
+    url(r'^EVoting/electionPasswordForm/$','evoting.views.electionPasswordForm'),
+    url(r'^EVoting/recordVote/$','evoting.views.recordVote'),
+
+
+    #These url are only accessed by the administrator
+    #url(r'^EVoting/sendmail/$','evoting.views.sendmail'),
+    url(r'^EVoting/admin/$','evoting.views.adminLogin'),
+    url(r'^EVoting/admin/home$','evoting.views.adminHomePage'),
+    url(r'^EVoting/admin/createFinalNomineesList/$','evoting.views.createFinalNomineesList'),
+    url(r'^EVoting/admin/positions-for-election/$','evoting.views.FillElectionPositions'),
+    url(r'^EVoting/admin/record-positions-for-election/$','evoting.views.RecordElectionPositions'),
+    url(r'^EVoting/verifySupport/(?P<hashedKey>.*)/$','evoting.views.verifySupport'),
 )

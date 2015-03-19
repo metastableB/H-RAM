@@ -30,14 +30,14 @@ def bookRoom(request):
 		logInUsername = request.session['username']
 		preferenceList = request.POST['preference']
 		userDetails = UserList.objects.get(username = logInUsername)
-	 	userRoomPreference = RoomPreference.objects.all().filter(uId = userDetails.uniqueId)
+		userRoomPreference = RoomPreference.objects.all().filter(uId = userDetails.uniqueId)
 		if userRoomPreference.count () > 0 :
 	 		userRoomPreference = userRoomPreference.order_by('-preferenceNumber')[0]	
 	 		lastPreference = userRoomPreference.preferenceNumber
-	 	else:
+		else:
 	 		lastPreference = 0
 	 		userRoomPreference = None
-	 	i = 0 
+		i = 0 
 		temp = ""
 		preferenceOrder = []
 		for char in preferenceList:
@@ -159,7 +159,7 @@ def validate(request):
 					errors.append("Password is incorrect.")
 					return render_to_response('login.html',{'errors':errors})
 			if not user:
-				return render_to_response('failure.html'.html,{'msg':"Please Enter the correct credentials"})
+				return render_to_response('failure.html',{'msg':"Please Enter the correct credentials"})
 		else:
 			return render_to_response('login.html',{'errors':errors})
 	else:

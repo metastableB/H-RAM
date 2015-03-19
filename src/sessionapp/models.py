@@ -4,10 +4,17 @@ class UserList(models.Model):
     uniqueId = models.AutoField(primary_key = True)
     rollNumber = models.CharField(max_length = 10)
     username = models.CharField(max_length = 30)
-    # TODO : use SHA-2 hash function
+    # TODO : use SHA-1 hash function
     password = models.CharField(max_length = 64)
+    emailId = models.EmailField(max_length = 254)
+    # for temporary purpose created hostel in userlist
+    hostelAlloted = models.CharField(max_length = 30)
     def  __unicode__ (self):
     	return self.username
+
+class AdminDetail(models.Model):
+	username = models.CharField(max_length = 50)
+	password = models.CharField(max_length = 64)
 
 class FriendsPreference(models.Model):
     uId = models.ForeignKey(UserList)
