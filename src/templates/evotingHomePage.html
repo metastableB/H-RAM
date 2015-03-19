@@ -4,7 +4,7 @@
   {% load staticfiles %}
  	<meta charset="UTF-8">
 
-<title>Menu</title>
+<title>EVoting</title>
 <style>
 
 body {
@@ -72,25 +72,35 @@ background: rgba(255,255,255,0.5);
     <td align="left" style="position:absolute; left:5%; top:10%;"> Home </td>
     <td align="rignt" style="position:absolute; left:90%; top:9%;">  <a href="/logout">Logout</a></td> 
 </table>
-<table class="titleTable" STYLE="position:absolute; top:7%; left:1%; width:98%; height:5% ">
-  <tr> 
-        <td align="center" style="position:absolute; left:40%; top:9%;"> {%if errors %}{% for error in errors %}{{error}}{%endfor%}{%endif%}
-        </td> 
+
+<table class = "titleTable" style="position:absolute; top:7%; left:1%; width:98%; height:5%">
+	<tr>
+		<td align = "center"> 
+{% if errors %}
+	{% for error in errors %}
+		{{ error }}
+	{% endfor %}
+{% endif %}
+		</td>
+	</tr>
 </table>
-  <table class='table' STYLE="position:absolute; top:15%; left:15%; width:70%; height:70% ">
-  <tr>
-    <td align="center"><form action = "/test"><div class="buttonz"><input type="submit" value="Room Preference"></div></td></form>
-    <td align="center"><form action = "/fpref"><div class="buttonz"><input type="submit" value="Friends Preference"></div></td></form>
+
+
+
+<table class='table' STYLE="position:absolute; top:15%; left:15%; width:70%; height:70% ">
+  <tr><form action = "/EVoting/nominationForm/">
+    <td align="center"><div class="buttonz"><input type="submit" value="Nomination Form"></div></td>
+    </form>
   </tr>
 
   <tr>
-    <td align="center"><form action = "/allocate"><div class="buttonz"><input type="submit" value="button l-2"></div></form></td>
-    <td align="center"><div class="buttonz"><input type="button" value="button r-2"></div></td>
+     <form action="/EVoting/electionPasswordForm/">
+    <td align="center"><div class="buttonz"><input type="submit" value="Create Passwords"></div></td> </form>
   </tr>
   
   <tr>
-    <td align="center"><div class="buttonz"><input type="button" value="button l-3"></div></td>
-    <form action = "/EVoting"><td align="center"><div class="buttonz"><input type="submit" value="evoting"></div></td></form>		
+    <form action="/EVoting/BallotPage/">
+    <td align="center"><div class="buttonz"><input type="submit" value="Ballot Page"></div></td></form>
   </tr>
 </table>
 </body>

@@ -1,0 +1,69 @@
+<html>
+
+<head>
+	<title>Ballot page</title>
+	{% load staticfiles %}
+	<link rel="stylesheet" href="{% static "src/forms.css" %}">
+</head>
+<body>
+	<form action = "/EVoting/recordVote/" method = "POST">
+		<fieldset>
+			<legend align = "center"><h2>Ballot Paper</h2></legend>
+			<!--<lable><b> General Secretory : </b></lable>
+			<select type="text" name = "generalSecretory" value="">
+			{% if generalSecretoryNominees %}
+				{% for nominee in  generalSecretoryNominees %}
+					<option value = {{nominee}}>{{nominee}}</option>
+				{% endfor%}
+					
+			{% endif %}
+			</select><br><br>
+			<lable><b>mess Secretory : </b></lable>
+			<select type="text" name = "messSecretory" value="">
+			{% if messSecretoryNominees %}
+			
+				{% for nominee in  messSecretoryNominees %}
+					<option value = {{nominee}}>{{nominee}}</option>
+				{% endfor%}
+					
+			{% endif %}
+			</select><br><br>
+			<lable><b>Cultural Secretory : </b></lable>
+				<select type="text" name = "culturalSecretory" value="">
+			{% if culturalSecretoryNominees %}
+			
+				{% for nominee in  culturalSecretoryNominees %}
+					<option value = {{nominee}}>{{nominee}}</option>
+				{% endfor%}
+					
+			{% endif %}
+			</select><br><br>
+			<lable><b>Sports Secretory : </b></lable>
+				<select type="text" name = "sportsSecretory" value="">
+			{% if sportsSecretoryNominees %}
+			
+				{% for nominee in  sportsSecretoryNominees %}
+					<option value = {{nominee}}>{{nominee}}</option>
+				{% endfor%}
+					
+			{% endif %}
+			</select><br><br>
+		-->
+			{% if positionsList %}
+				{% for positionNominee in positionsList %}
+					<lable><b>{{positionNominee|first}} : </b></lable>
+					<select type = "text" name = "{{positionNominee|first}}">
+						{% for p in positionNominee %}
+						{% if forloop.counter != 1 %}
+							<option value="{{p}}">{{p}}</option>
+						{%endif%}
+						{%endfor%}
+					</select><br><br>
+				{% endfor %}
+			{% endif %}
+			<input align="center" type = "password" name="password" placeholder="Password"><br><br>
+			<input align="center" type="submit" name="submit" value="submit">
+		</fieldset>
+	</form>
+</body>
+</html>
