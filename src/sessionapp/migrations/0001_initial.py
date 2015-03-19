@@ -11,20 +11,9 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='AdminDetail',
-            fields=[
-                ('id', models.AutoField(primary_key=True, serialize=False, auto_created=True, verbose_name='ID')),
-                ('username', models.CharField(max_length=50)),
-                ('password', models.CharField(max_length=64)),
-            ],
-            options={
-            },
-            bases=(models.Model,),
-        ),
-        migrations.CreateModel(
             name='FriendsPreference',
             fields=[
-                ('id', models.AutoField(primary_key=True, serialize=False, auto_created=True, verbose_name='ID')),
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('preferedfriendUId1', models.IntegerField(max_length=10)),
                 ('preferedfriendUId2', models.IntegerField(max_length=10)),
                 ('preferedfriendUId3', models.IntegerField(max_length=10)),
@@ -38,7 +27,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='RoomPreference',
             fields=[
-                ('id', models.AutoField(primary_key=True, serialize=False, auto_created=True, verbose_name='ID')),
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('rollNumber', models.CharField(max_length=10)),
                 ('preferenceNumber', models.IntegerField(max_length=3)),
                 ('preferedRoom', models.IntegerField(max_length=4)),
@@ -50,7 +39,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='StudentBioDataTable',
             fields=[
-                ('id', models.AutoField(primary_key=True, serialize=False, auto_created=True, verbose_name='ID')),
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('rollNumber', models.CharField(max_length=10)),
                 ('jeeRegistrationNo', models.CharField(max_length=10)),
                 ('jeeAIR', models.IntegerField(max_length=7)),
@@ -96,12 +85,10 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='UserList',
             fields=[
-                ('uniqueId', models.AutoField(primary_key=True, serialize=False)),
+                ('uniqueId', models.AutoField(serialize=False, primary_key=True)),
                 ('rollNumber', models.CharField(max_length=10)),
                 ('username', models.CharField(max_length=30)),
                 ('password', models.CharField(max_length=64)),
-                ('emailId', models.EmailField(max_length=254)),
-                ('hostelAlloted', models.CharField(max_length=30)),
             ],
             options={
             },
