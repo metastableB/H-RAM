@@ -21,21 +21,21 @@ background: rgba(255,255,255,0.5);
 }
 
 .buttonz input[type=submit]{
-	width: 65%	;
-	height: 80%;
-	background: #0df;
-	border: 1px solid #fff;
-	cursor: pointer;
-	border-radius: 2px;
-	color: #000;
-	font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
-	font-size: 16px;
-	font-weight: 400;
-	padding: 20px;
+  width: 65%  ;
+  height: 80%;
+  background: #0df;
+  border: 1px solid #fff;
+  cursor: pointer;
+  border-radius: 2px;
+  color: #000;
+  font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 20px;
 }
 
 .buttonz input[type=submit]:hover {
-	opacity: 0.8;
+	text-shadow: 0 0 10px rgba(255,255,255,1) , 0 0 20px rgba(255,255,255,1) , 0 0 30px rgba(255,255,255,1) , 0 0 40px #0000ff , 0 0 70px #0000ff , 0 0 80px #0000ff , 0 0 100px #00f ;
 }
 
 .buttonz input[type=submit]:active {
@@ -65,13 +65,40 @@ background: rgba(255,255,255,0.5);
 }
 
 </style>
+      <link type="text/css" rel="stylesheet" href="{%  static 'src/bootstrap.min.css' %}">
 </head>
 <body>
-<table class="titleTable" STYLE="position:absolute; top:1%; left:1%; width:98%; height:5% ">
+
+  <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">H-RAM</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
+            <li><a href="/logout">Logout</a></li>
+          </ul>
+
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+
+
+<!--<table class="titleTable" STYLE="position:absolute; top:1%; left:1%; width:98%; height:5% ">
   <tr> 
     <td align="left" style="position:absolute; left:5%; top:10%;"> Home </td>
     <td align="rignt" style="position:absolute; left:90%; top:9%;">  <a href="/logout">Logout</a></td> 
-</table>
+</table>-->
 
 <table class='table' STYLE="position:absolute; top:15%; left:15%; width:70%; height:70% ">
   <tr>
@@ -86,7 +113,7 @@ background: rgba(255,255,255,0.5);
   
   <tr>
     <td align="center"><div class="buttonz"><input type="button" value="button l-3"></div></td>
-    <td align="center"><div class="buttonz"><input type="button" value="button r-3"></div></td>		
+    <form action = "/EVoting"><td align="center"><div class="buttonz"><input type="submit" value="evoting"></div></td></form> 		
   </tr>
 </table>
 </body>
