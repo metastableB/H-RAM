@@ -11,7 +11,18 @@ table#title_box{
     background: rgba(17, 12, 234, 0.5);
 	box-shadow: 1;
 }
-
+td#buttons_vertical{
+	width:auto;
+	height:100%;
+	background: rgba(17, 12, 234,0.5);
+	border-style: solid;
+}
+td#preferences_vertical{
+	width:auto;
+	height:100%;
+	background: rgba(17, 12, 234,0.5);
+	border-style: solid;
+}
 /*table{
 	border:1px bold;
 	width:80%;
@@ -99,27 +110,27 @@ opacity:0.1;
 width: 50px;
 height: 10px;
 cursor: pointer;
-background-color: #AA482E;
+background-color: #707BB9;
 }
 
 not_clickable_hori_gallery{
 width: 50px;
 height: 10px;
 cursor: pointer;
-background-color: #AA482E;
+background-color: #707BB9;
 }
 
 #junct_gallery{
 width: 10px;
 height: 10px;
 cursor: pointer;
-background-color: #AA482E;	
+background-color: #707BB9;	
 }
 #vert_gallery{
 width: 10px;
 height: 50px;
 cursor: pointer;
-background-color: #AA482E;
+background-color: #707BB9;
 }
 
 
@@ -127,7 +138,7 @@ background-color: #AA482E;
 width: 10px;
 height: 50px;
 cursor: pointer;
-background-color: #AA482E;
+background-color: #707BB9;
 }
 
 #floor_plan{
@@ -144,10 +155,11 @@ background-color: #AA482E;
 }
 #preferences{
 	float:right;
-	padding:1%;
-	width:33%;
-	height:60%;
-	margin-top:-2%;
+	/*padding:1%;
+	width:33%;*/
+	color:blue;
+	width:auto;
+	height:100%;
 	overflow-y:scroll;
 }
 table#buttons{
