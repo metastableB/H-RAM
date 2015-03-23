@@ -146,108 +146,463 @@ body {
 </script>
 
 <body onload="dothis()">
-	<h2 align = "center" style="color:white">Hostel Room Allocation</h2>
-	<div id = "floor_plan">
-		<div id = "floor1" >
-			<table cellspacing = "0" border="1" >
-				<tr>
-					<td id = "101" onclick = "toggle('101')"><img src = "{% static 'src/4.png'%}" title = "101" width="100%" height="100%"></td>
-					<td id = "102" onclick = "toggle('102')"><img src = "{% static 'src/3.png'%}" title = "102" width="100%" height="100%"></td>
-					<td id = "103" onclick = "toggle('103')"><img src = "{% static 'src/4.png'%}" title = "103" width="100%" height="100%"></td>
-					<td id = "104" onclick = "toggle('104')"><img src = "{% static 'src/3.png'%}" title = "104" width="100%" height="100%"></td> 
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td id = "105" onclick = "toggle('105')"><img src = "{% static 'src/4.png'%}" title = "105" width="100%" height="100%"></td>
-					<td id = "106" onclick = "toggle('106')"><img src = "{% static 'src/3.png'%}" title = "106" width="100%" height="100%"></td>
-					<td id = "107" onclick = "toggle('107')"><img src = "{% static 'src/4.png'%}" title = "107" width="100%" height="100%"></td>
-					<td id = "108" onclick = "toggle('108')"><img src = "{% static 'src/3.png'%}" title = "108" width="100%" height="100%"></td>
+<table id="title_box" >
+	<tr>
+		<td align="center">Hotel Room Allocation</td>
+	</tr>
+</table>
+
+<div class = "floor_plan">
+	<div id = "floor1" >
+		<table id="table1" cellspacing = "0" border="1" >
+			<tr>
+				<td id = "101" class='clickable'  onclick = "toggle('101')">A01</td>
+				<td id = "102" class='clickable' onclick = "toggle('102')">A02</td>
+				<td id = "103" class='clickable' onclick = "toggle('103')">A03</td>
+				<td id = "104" class='clickable' onclick = "toggle('104')">A04</td> 
+				<td id = "105" class='not_clickable_washroom'></td>
+				<td id = "106" class='not_clickable_vert_gallery'></td>
+				<td id = "107" class='not_clickable_washroom'></td>
+				<td id = "108" class='clickable' onclick = "toggle('108')">A08</td>
+				<td id = "109" class='clickable' onclick = "toggle('109')">A09</td>
+				<td id = "110" class='clickable' onclick = "toggle('110')">A10</td>
+				<td id = "111" class='clickable' onclick = "toggle('111')">A11</td>
+				<td id = "112" class='clickable' onclick = "toggle('112')">A12</td>
+				<td id = "113" class='clickable' onclick = "toggle('113')">A13</td>
+				<td id = "114" class='clickable' onclick = "toggle('114')">A14</td>
+				<td id = "115" class='clickable' onclick = "toggle('115')">A15</td> 
+				<td id = "116" class='not_clickable_washroom' ></td>
+				<td id = "117" class='not_clickable_vert_gallery' ></td>
+				<td id = "118" class='not_clickable_washroom' ></td>
+				<td id = "119" class='clickable' onclick = "toggle('119')">A19</td>
+				<td id = "120" class='clickable' onclick = "toggle('120')">A20</td>
+				<td id = "121" class='clickable' onclick = "toggle('121')">A21</td>
+				<td id = "122" class='clickable' onclick = "toggle('122')">A22</td>
+			</tr>
+			<tr>
+				<td class='not_clickable' id ='hori_gallery'></td>
+				<td class='not_clickable' id ='hori_gallery'></td>
+				<td class='not_clickable' id ='hori_gallery'></td>
+				<td class='not_clickable' id ='hori_gallery'></td>
+				<td class='not_clickable' id ='hori_gallery'></td>
+				<td class='not_clickable' id ='junct_gallery'></td>
+				<td class='not_clickable' id ='hori_gallery'></td>
+				<td class='not_clickable' id ='hori_gallery'></td>
+				<td class='not_clickable' id ='hori_gallery'></td>
+				<td class='not_clickable' id ='hori_gallery'></td>
+				<td class='not_clickable' id ='hori_gallery'></td>
+				<td class='not_clickable' id ='hori_gallery'></td>
+				<td class='not_clickable' id ='hori_gallery'></td>
+				<td class='not_clickable' id ='hori_gallery'></td>
+				<td class='not_clickable' id ='hori_gallery'></td>
+				<td class='not_clickable' id ='hori_gallery'></td>
+				<td class='not_clickable' id ='junct_gallery'></td>
+				<td class='not_clickable' id ='hori_gallery'></td>
+				<td class='not_clickable' id ='hori_gallery'></td>
+				<td class='not_clickable' id ='hori_gallery'></td>
+				<td class='not_clickable' id ='hori_gallery'></td>
+				<td class='not_clickable' id ='hori_gallery'></td>
+
+				
+			</tr>
+			<tr>
+				<td class='clickable' id = "109" onclick = "toggle('109')">109</td>
+				<td id = "110" class='clickable' onclick = "toggle('110')">110</td>
+					<td id = "111" class='clickable' onclick = "toggle('111')">111</td>
+					<td id = "112" class='clickable' onclick = "toggle('112')">112</td> 
+					<td id = "113" class='clickable' onclick = "toggle('113')">113</td>
+					<td class='not_clickable' id ='vert_gallery'></td>
+					<td id = "114" class='clickable' onclick = "toggle('114')">114</td>
+					<td id = "114" class='clickable' onclick = "toggle('114')">114</td>
+					<td id = "115" class='clickable' onclick = "toggle('115')">115</td>
+					<td id = "116" class='clickable' onclick = "toggle('116')">116</td>
+					<td class='clickable' id = "109" onclick = "toggle('109')">109</td>
+					<td id = "110" class='clickable' onclick = "toggle('110')">110</td>
+					<td id = "111" class='clickable' onclick = "toggle('111')">111</td>
+					<td id = "112" class='clickable' onclick = "toggle('112')">112</td> 
+					<td id = "113" class='clickable' onclick = "toggle('113')">113</td>
+					<td id = "114" class='clickable' onclick = "toggle('114')">114</td>
+					<td class='not_clickable' id ='vert_gallery'></td>
+					<td id = "114" class='clickable' onclick = "toggle('114')">114</td>
+					<td id = "115" class='clickable' onclick = "toggle('115')">115</td>
+					<td id = "114" class='clickable' onclick = "toggle('114')">114</td>
+					<td id = "115" class='clickable' onclick = "toggle('115')">115</td>
+					<td id = "114" class='clickable' onclick = "toggle('114')">114</td>
+					
+					
+					
+				
 				</tr>
 				<tr>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='junct_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='junct_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					
 				</tr>
 				<tr>
-					<td id = "109" onclick = "toggle('109')"><img src = "{% static 'src/2.png'%}" title = "109" width="100%" height="100%"></td>
-					<td id = "110" onclick = "toggle('110')"><img src = "{% static 'src/1.png'%}" title = "110" width="100%" height="100%"></td>
-					<td id = "111" onclick = "toggle('111')"><img src = "{% static 'src/2.png'%}" title = "111" width="100%" height="100%"></td>
-					<td id = "112" onclick = "toggle('112')"><img src = "{% static 'src/1.png'%}" title = "112" width="100%" height="100%"></td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td id = "113" onclick = "toggle('113')"><img src = "{% static 'src/2.png'%}" title = "113" width="100%" height="100%"></td>
-					<td id = "114" onclick = "toggle('114')"><img src = "{% static 'src/1.png'%}" title = "114" width="100%" height="100%"></td>
-					<td id = "115" onclick = "toggle('115')"><img src = "{% static 'src/2.png'%}" title = "115" width="100%" height="100%"></td>
-					<td id = "116" onclick = "toggle('116')"><img src = "{% static 'src/1.png'%}" title = "116" width="100%" height="100%"></td>
+					<td class='not_clickable' id ='sitout'></td>
+					<td class='not_clickable' id ='sitout'></td>
+					<td class='not_clickable' id ='sitout'></td>
+					<td id = "112" class='clickable' onclick = "toggle('112')">112</td> 
+					<td id = "113" class='clickable' onclick = "toggle('113')">113</td>
+					<td class='not_clickable' id ='vert_gallery'></td>
+					<td class='not_clickable' id='sitout'></td>
+					<td class='not_clickable' id='sitout'></td>
+					<td class='not_clickable' id='sitout'></td>
+					<td class='not_clickable' id='sitout'></td>
+					<td class='not_clickable' id='sitout'></td>
+					<td class='not_clickable' id='sitout'></td>
+					<td class='not_clickable' id='sitout'></td>
+					<td class='not_clickable' id='sitout'></td>
+					<td class='not_clickable' id='sitout'></td>
+					<td class='not_clickable' id='sitout'></td> 
+					<!--
+					<td id = "114" class='clickable' onclick = "toggle('114')">114</td>
+					<td id = "114" class='clickable' onclick = "toggle('114')">114</td>
+					<td id = "115" class='clickable' onclick = "toggle('115')">115</td>
+					<td id = "116" class='clickable' onclick = "toggle('116')">116</td>
+					<td class='clickable' id = "109" onclick = "toggle('109')">109</td>
+					<td id = "110" class='clickable' onclick = "toggle('110')">110</td>
+					<td id = "111" class='clickable' onclick = "toggle('111')">111</td>
+					<td id = "112" class='clickable' onclick = "toggle('112')">112</td> 
+					<td id = "113" class='clickable' onclick = "toggle('113')">113</td>
+					<td id = "114" class='clickable' onclick = "toggle('114')">114</td>-->
+					<td class='not_clickable' id ='vert_gallery'></td>
+					<td id = "114" class='clickable' onclick = "toggle('114')">114</td>
+					<td id = "115" class='clickable' onclick = "toggle('115')">115</td>
+					<td class='not_clickable' id='sitout'></td>
+					<td class='not_clickable' id='sitout'></td>
+					<td class='not_clickable' id='sitout'></td>
+								
 				</tr>
 				<tr>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
+					<td class='not_clickable' id='sitout'></td>
+					<td class='not_clickable' id='sitout'></td>
+					<td class='not_clickable' id='sitout'></td> 
+					<td id = "120" class='clickable' onclick = "toggle('120')">120</td> 
+					<td id = "121" class='clickable' onclick = "toggle('121')">121</td>
+					<td class='not_clickable' id ='vert_gallery'></td>
+					<!--<td id = "121" class='clickable' onclick = "toggle('121')">121</td>
+					<td id = "122" class='clickable' onclick = "toggle('122')">122</td>
+					<td id = "123" class='clickable' onclick = "toggle('123')">123</td>
+					<td id = "124" class='clickable' onclick = "toggle('124')">124</td>
+					<td id = "117" class='clickable' onclick = "toggle('117')">117</td>
+					<td id = "118" class='clickable' onclick = "toggle('118')">118</td>
+					<td id = "119" class='clickable' onclick = "toggle('119')">119</td>
+					<td id = "120" class='clickable' onclick = "toggle('120')">120</td> 
+					<td id = "121" class='clickable' onclick = "toggle('121')">121</td>
+					<td id = "122" class='clickable' onclick = "toggle('122')">122</td>-->
+					<td class='not_clickable' id='sitout'></td>
+					<td class='not_clickable' id='sitout'></td>
+					<td class='not_clickable' id='sitout'></td>
+					<td class='not_clickable' id='sitout'></td>
+					<td class='not_clickable' id='sitout'></td>
+					<td class='not_clickable' id='sitout'></td>
+					<td class='not_clickable' id='sitout'></td>
+					<td class='not_clickable' id='sitout'></td>
+					<td class='not_clickable' id='sitout'></td>
+					<td class='not_clickable' id='sitout'></td>
+					<td class='not_clickable' id ='vert_gallery'></td>
+					<td id = "122" class='clickable' onclick = "toggle('122')">122</td>
+					<td id = "123" class='clickable' onclick = "toggle('123')">123</td>
+					<td class='not_clickable' id='sitout'></td>
+					<td class='not_clickable' id='sitout'></td>
+					<td class='not_clickable' id='sitout'></td>
 				</tr>
 				<tr>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='junct_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='junct_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
 				</tr>
 				<tr>
-					<td id = "117" onclick = "toggle('117')"><img src = "{% static 'src/4.png'%}" title = "117" width="100%" height="100%"></td>
-					<td id = "118" onclick = "toggle('118')"><img src = "{% static 'src/3.png'%}" title = "118" width="100%" height="100%"></td>
-					<td id = "119" onclick = "toggle('119')"><img src = "{% static 'src/4.png'%}" title = "119" width="100%" height="100%"></td>
-					<td id = "120" onclick = "toggle('120')"><img src = "{% static 'src/3.png'%}" title = "120" width="100%" height="100%"></td> 
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td id = "121" onclick = "toggle('121')"><img src = "{% static 'src/4.png'%}" title = "121" width="100%" height="100%"></td>
-					<td id = "122" onclick = "toggle('122')"><img src = "{% static 'src/3.png'%}" title = "122" width="100%" height="100%"></td>
-					<td id = "123" onclick = "toggle('123')"><img src = "{% static 'src/4.png'%}" title = "123" width="100%" height="100%"></td>
-					<td id = "124" onclick = "toggle('124')"><img src = "{% static 'src/3.png'%}" title = "124" width="100%" height="100%"></td>
+					<td id = "125" class='clickable' onclick = "toggle('125')">125</td>
+					<td id = "126" class='clickable' onclick = "toggle('126')">126</td>
+					<td id = "127" class='clickable' onclick = "toggle('127')">127</td>
+					<td id = "128" class='clickable' onclick = "toggle('128')">128</td>
+					<td class='not_clickable' id ='washroom'></td>
+					<td class='not_clickable' id ='vert_gallery'></td>
+					<!--<td class='not_clickable' id ='washroom'></td>
+					<td id = "129" class='clickable' onclick = "toggle('129')">128</td>
+					<td id = "130" class='clickable' onclick = "toggle('130')">129</td>
+					<td id = "131" class='clickable' onclick = "toggle('131')">131</td>
+					<td id = "132" class='clickable' onclick = "toggle('132')">132</td>
+					<td id = "125" class='clickable' onclick = "toggle('125')">125</td>
+					<td id = "126" class='clickable' onclick = "toggle('126')">126</td>
+					<td id = "127" class='clickable' onclick = "toggle('127')">127</td>
+					<td id = "128" class='clickable' onclick = "toggle('128')">128</td>
+					<td class='not_clickable' id ='washroom'></td>!-->
+					<td class='not_clickable' id='sitout'></td>
+					<td class='not_clickable' id='sitout'></td>
+					<td class='not_clickable' id='sitout'></td>
+					<td class='not_clickable' id='sitout'></td>
+					<td class='not_clickable' id='sitout'></td>
+					<td class='not_clickable' id='sitout'></td>
+					<td class='not_clickable' id='sitout'></td>
+					<td class='not_clickable' id='sitout'></td>
+					<td class='not_clickable' id='sitout'></td>
+					<td class='not_clickable' id='sitout'></td>
+					<td class='not_clickable' id ='vert_gallery'></td>
+					<td class='not_clickable' id ='washroom'></td>
+					<td id = "129" class='clickable' onclick = "toggle('129')">128</td>
+					<td id = "130" class='clickable' onclick = "toggle('130')">129</td>
+					<td id = "131" class='clickable' onclick = "toggle('131')">131</td>
+					<td id = "132" class='clickable' onclick = "toggle('132')">132</td>
 				</tr>
 				<tr>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
+					<td class='clickable' id = "101" onclick = "toggle('101')">101</td>
+					<td id = "102" class='clickable' onclick = "toggle('102')">102</td>
+					<td id = "103" class='clickable' onclick = "toggle('103')">103</td>
+					<td id = "104" class='clickable' onclick = "toggle('104')">104</td> 
+					<td class='not_clickable' id ='washroom'></td>
+					<td class='not_clickable' id ='vert_gallery'></td><!--
+					<td class='not_clickable' id ='washroom'></td>
+					<td id = "105" class='clickable' onclick = "toggle('105')">105</td>
+					<td id = "106" class='clickable' onclick = "toggle('106')">106</td>
+					<td id = "107" class='clickable' onclick = "toggle('107')">107</td>
+					<td id = "108" class='clickable' onclick = "toggle('108')">108</td>
+					<td class='clickable' id = "101" onclick = "toggle('101')">101</td>
+					<td id = "102" class='clickable' onclick = "toggle('102')">102</td>
+					<td id = "103" class='clickable' onclick = "toggle('103')">103</td>
+					<td id = "104" class='clickable' onclick = "toggle('104')">104</td> 
+					<td class='not_clickable' id ='washroom'></td>-->
+					<td class='not_clickable' id='sitout'></td>
+					<td class='not_clickable' id='sitout'></td>
+					<td class='not_clickable' id='sitout'></td>
+					<td class='not_clickable' id='sitout'></td>
+					<td class='not_clickable' id='sitout'></td>
+					<td class='not_clickable' id='sitout'></td>
+					<td class='not_clickable' id='sitout'></td>
+					<td class='not_clickable' id='sitout'></td>
+					<td class='not_clickable' id='sitout'></td>
+					<td class='not_clickable' id='sitout'></td>
+					<td class='not_clickable' id ='vert_gallery'></td>
+					<td class='not_clickable' id ='washroom'></td>
+					<td id = "105" class='clickable' onclick = "toggle('105')">105</td>
+					<td id = "106" class='clickable' onclick = "toggle('106')">106</td>
+					<td id = "107" class='clickable' onclick = "toggle('107')">107</td>
+					<td id = "108" class='clickable' onclick = "toggle('108')">108</td>
 				</tr>
 				<tr>
-					<td id = "125" onclick = "toggle('125')"><img src = "{% static 'src/2.png'%}" title = "125" width="100%" height="100%"></td>
-					<td id = "126" onclick = "toggle('126')"><img src = "{% static 'src/1.png'%}" title = "126" width="100%" height="100%"></td>
-					<td id = "127" onclick = "toggle('127')"><img src = "{% static 'src/2.png'%}" title = "127" width="100%" height="100%"></td>
-					<td id = "128" onclick = "toggle('128')"><img src = "{% static 'src/1.png'%}" title = "128" width="100%" height="100%"></td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td id = "129" onclick = "toggle('129')"><img src = "{% static 'src/2.png'%}" title = "129" width="100%" height="100%"></td>
-					<td id = "130" onclick = "toggle('130')"><img src = "{% static 'src/1.png'%}" title = "130" width="100%" height="100%"></td>
-					<td id = "131" onclick = "toggle('131')"><img src = "{% static 'src/2.png'%}" title = "130" width="100%" height="100%"></td>
-					<td id = "132" onclick = "toggle('132')"><img src = "{% static 'src/1.png'%}" title = "132" width="100%" height="100%"></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='junct_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='junct_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+				</tr>
+				<tr>
+					<td class='clickable' id = "109" onclick = "toggle('109')">109</td>
+					<td id = "110" class='clickable' onclick = "toggle('110')">110</td>
+					<td id = "111" class='clickable' onclick = "toggle('111')">111</td>
+					<td id = "112" class='clickable' onclick = "toggle('112')">112</td> 
+					<td id = "113" class='clickable' onclick = "toggle('113')">113</td>
+					<td class='not_clickable' id ='vert_gallery'></td>
+					<td id = "114" class='clickable' onclick = "toggle('114')">114</td>
+					<td id = "114" class='clickable' onclick = "toggle('114')">114</td>
+					<td id = "115" class='clickable' onclick = "toggle('115')">115</td>
+					<td id = "116" class='clickable' onclick = "toggle('116')">116</td>
+					<td class='clickable' id = "109" onclick = "toggle('109')">109</td>
+					<td id = "110" class='clickable' onclick = "toggle('110')">110</td>
+					<td id = "111" class='clickable' onclick = "toggle('111')">111</td>
+					<td id = "112" class='clickable' onclick = "toggle('112')">112</td> 
+					<td id = "113" class='clickable' onclick = "toggle('113')">113</td>
+					<td id = "114" class='clickable' onclick = "toggle('114')">114</td>
+					<td class='not_clickable' id ='vert_gallery'></td>
+					<td id = "114" class='clickable' onclick = "toggle('114')">114</td>
+					<td id = "115" class='clickable' onclick = "toggle('115')">115</td>
+					<td id = "116" class='clickable' onclick = "toggle('116')">116</td>
+					<td id = "131" class='clickable' onclick = "toggle('131')">131</td>
+					<td id = "132" class='clickable' onclick = "toggle('132')">132</td>
+				
+				</tr>
+				<tr>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='junct_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='junct_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+				</tr>
+				<tr>
+					<td class='clickable' id = "109" onclick = "toggle('109')">109</td>
+					<td id = "110" class='clickable' onclick = "toggle('110')">110</td>
+					<td id = "111" class='clickable' onclick = "toggle('111')">111</td>
+					<td id = "112" class='clickable' onclick = "toggle('112')">112</td> 
+					<td id = "113" class='clickable' onclick = "toggle('113')">113</td>
+					<td class='not_clickable' id ='vert_gallery'></td>
+					<td id = "114" class='clickable' onclick = "toggle('114')">114</td>
+					<td id = "114" class='clickable' onclick = "toggle('114')">114</td>
+					<td id = "115" class='clickable' onclick = "toggle('115')">115</td>
+					<td id = "116" class='clickable' onclick = "toggle('116')">116</td>
+					<td class='clickable' id = "109" onclick = "toggle('109')">109</td>
+					<td id = "110" class='clickable' onclick = "toggle('110')">110</td>
+					<td id = "111" class='clickable' onclick = "toggle('111')">111</td>
+					<td id = "112" class='clickable' onclick = "toggle('112')">112</td> 
+					<td id = "113" class='clickable' onclick = "toggle('113')">113</td>
+					<td id = "114" class='clickable' onclick = "toggle('114')">114</td>
+					<td class='not_clickable' id ='vert_gallery'></td>
+					<td id = "114" class='clickable' onclick = "toggle('114')">114</td>
+					<td id = "115" class='clickable' onclick = "toggle('115')">115</td>
+					<td id = "116" class='clickable' onclick = "toggle('116')">116</td>
+					<td id = "131" class='clickable' onclick = "toggle('131')">131</td>
+					<td id = "132" class='clickable' onclick = "toggle('132')">132</td>
+				
+				</tr>
+				<tr>
+					<td id = "117" class='clickable' onclick = "toggle('117')">117</td>
+					<td id = "118" class='clickable' onclick = "toggle('118')">118</td>
+					<td id = "119" class='clickable' onclick = "toggle('119')">119</td>
+					<td id = "120" class='clickable' onclick = "toggle('120')">120</td> 
+					<td id = "121" class='clickable' onclick = "toggle('121')">121</td>
+					<td class='not_clickable' id ='vert_gallery'></td>
+					<td id = "121" class='clickable' onclick = "toggle('121')">121</td>
+					<td id = "122" class='clickable' onclick = "toggle('122')">122</td>
+					<td id = "123" class='clickable' onclick = "toggle('123')">123</td>
+					<td id = "124" class='clickable' onclick = "toggle('124')">124</td>
+					<td id = "117" class='clickable' onclick = "toggle('117')">117</td>
+					<td id = "118" class='clickable' onclick = "toggle('118')">118</td>
+					<td id = "119" class='clickable' onclick = "toggle('119')">119</td>
+					<td id = "120" class='clickable' onclick = "toggle('120')">120</td> 
+					<td id = "121" class='clickable' onclick = "toggle('121')">121</td>
+					<td id = "122" class='clickable' onclick = "toggle('122')">122</td>
+					<td class='not_clickable' id ='vert_gallery'></td>
+					<td id = "122" class='clickable' onclick = "toggle('122')">122</td>
+					<td id = "123" class='clickable' onclick = "toggle('123')">123</td>
+					<td id = "124" class='clickable' onclick = "toggle('124')">124</td>
+					<td id = "131" class='clickable' onclick = "toggle('131')">131</td>
+					<td id = "132" class='clickable' onclick = "toggle('132')">132</td>
+				</tr>
+				<tr>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='junct_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='junct_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+					<td class='not_clickable' id ='hori_gallery'></td>
+				</tr>
+				<tr>
+					<td id = "125" class='clickable' onclick = "toggle('125')">125</td>
+					<td id = "126" class='clickable' onclick = "toggle('126')">126</td>
+					<td id = "127" class='clickable' onclick = "toggle('127')">127</td>
+					<td id = "128" class='clickable' onclick = "toggle('128')">128</td>
+					<td class='not_clickable' id ='washroom'></td>
+					<td class='not_clickable' id ='vert_gallery'></td>
+					<!--<td class='not_clickable' id ='washroom'></td>
+					<td id = "129" class='clickable' onclick = "toggle('129')">128</td>
+					<td id = "130" class='clickable' onclick = "toggle('130')">129</td>
+					<td id = "131" class='clickable' onclick = "toggle('131')">131</td>
+					<td id = "132" class='clickable' onclick = "toggle('132')">132</td>
+					<td id = "125" class='clickable' onclick = "toggle('125')">125</td>
+					<td id = "126" class='clickable' onclick = "toggle('126')">126</td>
+					<td id = "127" class='clickable' onclick = "toggle('127')">127</td>
+					<td id = "128" class='clickable' onclick = "toggle('128')">128</td>
+					<td class='not_clickable' id ='washroom'></td>-->
+					<td class='not_clickable' id='sitout'></td>
+					<td class='not_clickable' id='sitout'></td>
+					<td class='not_clickable' id='sitout'></td>
+					<td class='not_clickable' id='sitout'></td>
+					<td class='not_clickable' id='sitout'></td>
+					<td class='not_clickable' id='sitout'></td>
+					<td class='not_clickable' id='sitout'></td>
+					<td class='not_clickable' id='sitout'></td>
+					<td class='not_clickable' id='sitout'></td>
+					<td class='not_clickable' id='sitout'></td>
+					<td class='not_clickable' id ='vert_gallery'></td>
+					<td class='not_clickable' id ='washroom'></td>
+					<td id = "129" class='clickable' onclick = "toggle('129')">128</td>
+					<td id = "130" class='clickable' onclick = "toggle('130')">129</td>
+					<td id = "131" class='clickable' onclick = "toggle('131')">131</td>
+					<td id = "132" class='clickable' onclick = "toggle('132')">132</td>
 				</tr>
 			</table>
 		</div>
+
 		<div id = "floor2" >
 			<table cellspacing = "0" border="1" >
 				<tr>
@@ -449,20 +804,27 @@ body {
 			</table>
 		</div>
 	</div>
-	<div id = "preferences">
+<!--	<div id = "preferences">
 		<h3 style="color:white" >Preference Order</h3>
-	</div>
-	<button onclick="loadfloor1()">1<sup>st</sup> Floor</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<button onclick="loadfloor2()">2<sup>nd</sup> Floor</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<button onclick="loadfloor3()">3<sup>rd</sup> Floor</button>
-	<form action = "/bookRoom/" method = "POST" id = "form1">
-		<input type="hidden" name ="preference" id ="preference" value="">
-		<button onclick = "submitForm()">Submit</button>
-	</form>
-	
+	</div>-->
+	<div id="button_list">
+		<table id="buttons">
+			<tr>
+				<td><button onclick="loadfloor1()">1<sup>st</sup> Floor</button></td>
+				<td><button onclick="loadfloor2()">2<sup>nd</sup> Floor</button></td>
+				<td><button onclick="loadfloor3()">3<sup>rd</sup> Floor</button></td>
+			</tr>
+		</table>
+		<table id="submitButton">
+			<tr>
+				<td align="center"><form action = "/bookRoom/" method = "POST" id = "form1">
+					<input type="hidden" name ="preference" id ="preference" value="">
+					<button align="center"onclick = "submitForm()">Submit</button>
+					</form>
+				</td>
+			</tr>
+		</table>	
 	<p id ="hello"></p>
-
-
 
 </body>
 </html>
