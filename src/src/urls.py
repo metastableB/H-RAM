@@ -46,4 +46,7 @@ urlpatterns = patterns('',
     url(r'^EVoting/admin/record-positions-for-election/$','evoting.views.RecordElectionPositions'),
     url(r'^EVoting/verifySupport/(?P<hashedKey>.*)/$','evoting.views.verifySupport'),
 
+    # Dummy links
+    #url(r'^webmail$','sessionapp.views.webmail'),
+    
 )
