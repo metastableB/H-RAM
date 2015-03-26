@@ -21,9 +21,10 @@ class SupportersDetails(models.Model):
 	firstSupporterHashKey = models.CharField(max_length = 64)
 	secondSupporterHashKey = models.CharField(max_length = 64)
 
-
+#final list of all the nominees
 class ListOfNominee(models.Model):
 	nomineesName = models.CharField(max_length = 60)
+	nomineesRollNo = models.CharField(max_length = 10)
 	position = models.CharField(max_length = 50)
 	hostel = models.CharField(max_length = 30)
 	NumberOfVotes = models.IntegerField(max_length = 7,default = 0)
@@ -36,6 +37,7 @@ class VotersList(models.Model):
 class Ballot(models.Model):
 	voter = models.ForeignKey(VotersList)
 	position = models.CharField(max_length = 50)
+	hostel = models.CharField(max_length = 30)
 	nomineeSelected = models.CharField(max_length = 60)
 	#this is like a flag
 	#if gooPassphrase is used then it is 1 else 0; AS good passphrase can be used only once
@@ -48,6 +50,9 @@ class PostsForElection(models.Model):
 class ListOfSecretary(models.Model):
 	hostelsName = models.CharField(max_length = 30)
 	position = models.CharField(max_length = 50)
-	roolNoOfSecretary = models.CharField(max_length = 10)
+	rollNoOfSecretary = models.CharField(max_length = 10)
 	nameOfSecretary = models.CharField(max_length = 50)
+
+class ListOfHostel(models.Model):
+	hostelsName = models.CharField(max_length = 30)
 

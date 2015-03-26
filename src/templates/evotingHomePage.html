@@ -66,6 +66,41 @@ background: rgba(255,255,255,0.5);
 
 </style>
 </head>
+<!--<script>
+window.onload = function() {
+    countdown('countdown');
+}
+function countdown( elementName, minutes, seconds )
+{
+    var element, endTime, hours, mins, msLeft, time;
+
+    function twoDigits( n )
+    {
+        return (n <= 9 ? "0" + n : n);
+    }
+
+    function updateTimer()
+    {
+        msLeft = endTime - (+new Date);
+        if ( msLeft < 1000 ) {
+            element.innerHTML = "countdown's over!";
+        } else {
+            time = new Date( msLeft );
+            hours = time.getUTCHours();
+            mins = time.getUTCMinutes();
+            element.innerHTML = (hours ? hours + ':' + twoDigits( mins ) : mins) + ':' + twoDigits( time.getUTCSeconds() );
+            setTimeout( updateTimer, time.getUTCMilliseconds() + 500 );
+        }
+    }
+
+    element = document.getElementById( elementName );
+    endTime = (+new Date) + 1000 * (60*minutes + seconds) + 500;
+    updateTimer();
+}
+
+countdown( "countdown", 1, 5 );
+countdown( "countdown2", 100, 0 );
+</script>-->
 <body>
 <table class="titleTable" STYLE="position:absolute; top:1%; left:1%; width:98%; height:5% ">
   <tr> 
@@ -86,7 +121,8 @@ background: rgba(255,255,255,0.5);
 </table>
 
 
-
+<div id="countdown"></div>
+<div id="countdown2"></div>
 <table class='table' STYLE="position:absolute; top:15%; left:15%; width:70%; height:70% ">
   <tr><form action = "/EVoting/nominationForm/">
     <td align="center"><div class="buttonz"><input type="submit" value="Nomination Form"></div></td>
@@ -101,6 +137,14 @@ background: rgba(255,255,255,0.5);
   <tr>
     <form action="/EVoting/BallotPage/">
     <td align="center"><div class="buttonz"><input type="submit" value="Ballot Page"></div></td></form>
+  </tr>
+  <tr>
+    <form action="/EVoting/view/nominees/">
+    <td align="center"><div class="buttonz"><input type="submit" value="View List Of Nominee's"></div></td></form>
+  </tr>
+  <tr>
+    <form action="/EVoting/view/finalResult/">
+    <td align="center"><div class="buttonz"><input type="submit" value="List Of Secretaries"></div></td></form>
   </tr>
 </table>
 </body>
