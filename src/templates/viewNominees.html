@@ -4,7 +4,7 @@
   {% load staticfiles %}
  	<meta charset="UTF-8">
 
-<title>Menu</title>
+<title>List of Nominee's</title>
 <style>
 
 body {
@@ -67,34 +67,24 @@ background: rgba(255,255,255,0.5);
 </style>
 </head>
 <body>
-<table class="titleTable" STYLE="position:absolute; top:1%; left:1%; width:98%; height:5% ">
-  <tr> 
-    <td align="left" style="position:absolute; left:5%; top:10%;"> Home </td>
-    <td align="rignt" style="position:absolute; left:90%; top:9%;">  <a href="/admin/logout">Logout</a></td> 
-</table>
-
-<table class = "titleTable" style="position:absolute; top:7%; left:1%; width:98%; height:5%">
-	<tr>
-		<td align = "center"> 
-{% if errors %}
-	{% for error in errors %}
-		{{ error }}
-	{% endfor %}
-{% endif %}
-		</td>
-	</tr>
-</table>
-
-
-
-<table class='table' STYLE="position:absolute; top:15%; left:15%; width:70%; height:70% ">
-  <tr><form action = "/EVoting/admin/createFinalNomineesList/">
-    <td align="center"><div class="buttonz"><input type="submit" value="Create Final Nominees List"></div></td>
-    </form>
-  </tr>
-  <tr>
-      <form action = "/EVoting/admin/positions-for-election/"><td align="center"><div class="buttonz"><input type="submit" value="Fill Postions For Election"></div></td></form>		
-  </tr>
+  <h2 align="center">List of Nominee's</h2>
+<table cellspacing="1" cellpadding="2" border="1" align="center">
+    {%if nomineesList %}
+      <tr align="center">
+        <td>HOSTEL</td>
+        <td>POSITION</td>
+        <td>CANDIDATE'S NAME</td>
+        <td>CANDIDATE'S ROLL NO</td>
+      </tr>
+      {% for nominee in nomineesList %}
+        <tr align = "center">
+          <td>{{nominee.hostel}}</td>
+          <td>{{nominee.position}}</td>
+          <td>{{nominee.name}}</td>
+          <td>{{nominee.rollno}}</td>
+        </tr>
+      {%endfor%}
+    {%endif%}
 </table>
 </body>
 </html>
