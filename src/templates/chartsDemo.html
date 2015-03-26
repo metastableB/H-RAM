@@ -1,0 +1,95 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+     google.load("visualization", "1", {packages:["corechart"]});
+     google.setOnLoadCallback(drawChart);
+      function drawChart() {
+       /* var list1 = [
+          ['Task', 'Hours per Day'],
+          ['Work',     11],
+          ['Eat',      2],
+          ['Commute',  2],
+          ['Watch TV', 2],
+          ['Sleep',    7]
+        ];
+        var dataa = google.visualization.arrayToDataTable(list1
+          );
+
+var list1 = "[";
+        "{% if data1 %}"
+          "{% for d in data1 %}"
+            list1 = list1 + "{{d}}" + ",";
+          "{% endfor%}"
+        "{%endif%}"*/
+        var list1 = new Array("{{data1}}");
+        //var i=0;
+        //list1[0] = "hi";list1[1] = "hi1";list1[2] = "hi";
+        /*"{% if data1 %}"
+          "{% for d in data1 %}"
+            //list1.push("{{d}}");
+            list1[i] = "{{d}}";
+            i = i+1;
+          "{% endfor%}"
+        "{%endif%}"*/
+        /*var r=[]
+        r.push( ['Sleep1',    7]);
+        r.push( ['Sleep2',    7]);
+        r.push( ['Sleep3',    7]);
+        r.push( ['Sleep4',    7]);
+        var dataa = google.visualization.arrayToDataTable([]);*/
+        /*dataa.addColumn('work1',11);
+        dataa.addColumn('work2',11);
+        dataa.addColumn('work3',11);
+        dataa.addColumn('work4',11);*/
+        /*  ['Task', 'Hours per Day'],
+          ['Work',     11],
+          ['Eat',      2],
+          ['Commute',  2],
+          ['Watch TV', 2],
+          ['Sleep',    7]
+        ]);*/
+        document.getElementById("test").innerHTML  = list1;
+        //var djangoData = "{{ data }}";
+        //document.getElementById("test").innerHTML  = "{{data|length}}  " + djangoData;
+        //var dataa = google.visualization.arrayToDataTable(list1);
+        var dataa = google.visualization.DataTable();
+        dataa.addColumn('string','name');
+        dataa.addColumn('number','votes');
+        dataa.addRows(list1);
+        /*"{% if data1 %}"
+          "{% for d in data1 %}"
+            dataa.addRow("{{d}}")
+          "{% endfor%}"
+        "{%endif%}"
+        //var data = google.visualization.arrayToDataTable("{{data}}");
+        /*var dataa = google.visualization.arrayToDataTable([
+          "{%autoescape off%}"
+            "{% for d in data1%}"
+              "{{d}}" + ","
+            "{%endfor%}"
+          "{%endautoescape%}"
+          ]);*/
+
+        var options = {
+          title: 'Election results'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(dataa, options);
+      }
+    </script>
+  </head>
+  <body >
+    <div id="piechart" style="width: 900px; height: 500px;"></div>
+    
+
+    {% if data1 %}
+    {%for s in data1 %}
+      {{s}}
+    {%endfor%}
+    {%endif%}
+    <p id="test"></p>
+  </body>
+</html>

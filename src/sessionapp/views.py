@@ -242,6 +242,16 @@ def logout(request):
 	else :
 		return HttpResponseRedirect('/login')
 
+
+def adminLogout(request):
+	if 'adminUsername' in request.session:
+		try:
+			del request.session['adminUsername']
+		except keyError:
+			pass
+		return HttpResponseRedirect('/EVoting/admin')
+	else :
+		return HttpResponseRedirect('/EVoting/admin')
 	#return HttpResponse("You are looged out!!!")
 
 '''def checkIfloggedIn(request):

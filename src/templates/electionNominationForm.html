@@ -5,27 +5,66 @@
 	<link rel="stylesheet" href="{% static "src/forms.css" %}">
 </head>
 <script type="text/javascript">
-	var selectHostel = document.getElementById("hostel");
-	document.getElementById("test").innerHTML = e;
 	function callfunction()
 	{
 		var i=0;
-		var TotalNumberOfPositions = {{positions|length}};
 		var positions = []
-		var e = document.getElementById("hostel").value;
-		document.getElementById("test").innerHTML = e;
+		var hostel = document.getElementById("hostel").value;
+		var firstHostel = "{{hostels|first}}";
+		document.getElementById("position").innerHTML = ""; 
+		var temp = "";
+		"{% for position in positions %}"
+		"{% for p in position %}"
+			temp = "{{p.hostel}}";
+			if (temp == hostel)
+			{
+				document.getElementById("position").innerHTML = document.getElementById("position").innerHTML + ("<option value = \"{{p.position}}\"> {{p.position}}</option>")
+			}	
+		"{% endfor %}"
+		"{% endfor %}"
 
-		/*for(i=0;i<TotalNumberOfPositions;i++)
-		{
-			var temp = 
-		}*/
 	}
 	function emptyAllInputs()
 	{
-		document.getElementById("hostel").value = "";
-		document.getElementById("position").value = "";
+		document.getElementById("candidatesRollno").value = "";
+		document.getElementById("candidatesName").value = "";
+		document.getElementById("supporter1").value = "";
+		document.getElementById("supporter2").value = "";
+		document.getElementById("hostel").value = "{{hostels|first}}";
+		var hostel = "{{hostels|first}}";
+		var temp = "";
+		"{% for position in positions %}"
+		"{% for p in position %}"
+			temp = "{{p.hostel}}";
+			if (temp == hostel)
+			{
+				document.getElementById("position").innerHTML = document.getElementById("position").innerHTML + ("<option value = \"{{p.position}}\">{{p.position}}</option>");
+			}	
+		"{% endfor %}"
+		"{% endfor %}"
 	}
-	
+	function validateName()
+	{
+		var s = document.getElementById("candidatesName").value;
+		var regex = /^([A-Za-z ])*$/;
+		valid = regex.test(s);
+		if (!valid)
+		{
+			document.getElementById("errors").innerHTML = "Please enter a valid username";
+		}
+	}
+	function validateRoll()
+	{
+		var r = document.getElementById("candidatesRollno").value;
+		if(r != "{{roll}}")
+		{
+			document.getElementById("test").innerHTML = "Please enter your rollnumber";
+		}
+	}
+	function clearError()
+	{
+		document.getElementById("errors").innerHTML = "";
+	}
 </script>
 <body onload="emptyAllInputs()">
 	<!--{% if positions %}
@@ -37,46 +76,92 @@
 		{% for hostel in hostels %}
 		 	{{ hostel }} <br/>
 		{% endfor %}
-	{% endif %}-->
+	{% endif %}!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
 	<p id="test"> </p>
 	<form action="/EVoting/validateCandidate/" method="POST">
 		<fieldset>
 			<legend align = "center"><h2>Nomination Form</h2></legend>
 			<div id="errors">
 				{{errors|unordered_list}}
-			</div>
-			<lable><b>Candidate's RollNo : </b></lable><input type="text" name="candidatesRollno"><br><br>
-			<lable><b>Candidate's Name : </b></lable><input type="text" name="candidatesName"><br><br>
-			<!--<lable><b>Hostel : </b></lable>
+			</div><br>
+			<lable><b>Candidate's RollNo : </b></lable><input type="text" id = "candidatesRollno" onselect="clearError()" name="candidatesRollno" onchange="validateRoll()"><br><br>
+			<lable><b>Candidate's Name : </b></lable><input type="text" id = "candidatesName" name="candidatesName" onselect="clearError()" onchange="validateName()"><br><br>
+			<lable><b>Hostel : </b></lable>
 			{% if hostels %}
 			<select type="text" name = "hostel" onchange="callfunction()" id="hostel">
 				{% for hostel in hostels %}
-					<option value = "{{hostel}}" id = "7">	{{hostel}}
+					<option value = "{{hostel}}">	{{hostel}}
 					</option>
 				{% endfor %}
 			</select>
 			{% endif %}
 			<br><br>
 			<lable><b>Position : </b></lable>
-			{% if positions %}
+			<!--{% if positions %}
 				{% for position in positions %}
 					
 					<select type="text" id="{{forloop.counter}}">
 						{% for p in position %}
-						<option value={{p}}>{{p}}
+						
+						<option value="{{p.position}}">{{p.position}}
 						</option>
+						
 						{% endfor %}
 					</select><br><br>
 					
 				{% endfor %}
 			{% endif %}-->
-			<lable><b>Hostel : </b></lable><input type="text" name="hostel"><br><br>
-			<lable><b>Position : </b></lable><input type="text" name="position"><br><br>
-			<lable><b>First Supporter's Name : </b></lable><input type="text" name="supporter1"><br><br>
-			<lable><b>Second Supporter's Name : </b></lable><input type="text" name="supporter2"><br><br>
+			<select type="text" name = "position" id="position">
+
+			</select><br><br>
+			<lable><b>First Supporter's Name : </b></lable><input type="text" id = "supporter1" name="supporter1"><br><br>
+			<lable><b>Second Supporter's Name : </b></lable><input type="text" id = "supporter2" name="supporter2"><br><br>
 			<input type="submit" value="submit" name="submit">
 		</fieldset>
 	</form>
 
 </body>
+
+
+
+<!--<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript" src="http://yourjavascript.com/7174319415/script.js"></script>
+        <script>
+            $(document).ready(function(){
+                 $('select#selectcountries').change(function () {
+                     var optionSelected = $(this).find("option:selected");
+                     var valueSelected  = optionSelected.val();
+                     var hostelName   = optionSelected.text();
+
+
+                     data = {'cnt' : hostelName };
+                     ajax('/getdetails',data,function(result){
+
+                            console.log(result);
+                            $("#selectcities option").remove();
+                            for (var i = result.length - 1; i >= 0; i--) {
+                                $("#selectcities").append('<option>'+ result[i].name +'</option>');
+                            };
+
+
+                         });
+                 });
+            });
+      	</script>
+
+    <body>
+        <select name="selectcountries" id="selectcountries">
+        {% for item in countries %}
+            <option val="{{ item.name }}"> {{ item.name }} </option>    
+        {% endfor %}
+        </select>   
+
+
+        <select name ="selectcities" id="selectcities">
+
+
+        </select>
+
+    </body>
+-->
 </html>
