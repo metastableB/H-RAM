@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 
-from sessionapp.models import UserList,FriendsPreference,RoomPreference,StudentBioDataTable,AdminDetail
+from sessionapp.models import UserList,FriendsPreference,RoomPreference,StudentBioDataTable,AdminDetail,RoomList
 from evoting.models import CandidatesList,ListOfNominee,VotersList,Ballot,PostsForElection,ListOfSecretary,SupportersDetails,ListOfHostel
 
      

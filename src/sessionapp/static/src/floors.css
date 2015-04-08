@@ -5,23 +5,37 @@ body {
 
 table#title_box{
 	width:100%;
-	height:7%;
-	background: rgba(17, 12, 234, 0.5); /* Fall-back for browsers that don't
-                                    support rgba */
-    background: rgba(17, 12, 234, 0.5);
-	box-shadow: 1;
+	height: 10%;
+	font-family: "Helvetica Neue";
+	/*background: rgba(61, 57, 230, 0.4);*/
+	opacity: 0.5;
+	box-shadow: 7px 7px 10px #000;
+	font-size: 36px;
+	font-weight: 500;
+	border-radius: 15px;
 }
 td#buttons_vertical{
 	width:auto;
 	height:100%;
-	background: rgba(17, 12, 234,0.5);
-	border-style: solid;
+	background: rgba(61, 57, 230, 0.4);
+	border-radius: 20px;
+	overflow-y: scroll;
 }
 td#preferences_vertical{
 	width:auto;
 	height:100%;
-	background: rgba(17, 12, 234,0.5);
-	border-style: solid;
+	background: rgba(61, 57, 230, 0.4);
+	border-radius: 20px;
+	overflow-y: scroll;
+}
+#preferences{
+	float:right;
+	/*padding:1%;
+	width:33%;*/
+	color:#622815;
+	width:auto;
+	height:100%;
+	overflow-y:scroll;
 }
 /*table{
 	border:1px bold;
@@ -166,15 +180,7 @@ background-size: cover;
 	width:10%;
 	height:auto;
 }
-#preferences{
-	float:right;
-	/*padding:1%;
-	width:33%;*/
-	color:#622815;
-	width:auto;
-	height:100%;
-	overflow-y:scroll;
-}
+
 table#buttons{
 	padding:2%;
 	width:70%; 
