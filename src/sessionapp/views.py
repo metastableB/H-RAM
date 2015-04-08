@@ -63,6 +63,9 @@ def test(request):
 def floorPlan(request):
 	return render_to_response('floors.html')
 
+def messages(request):
+	return render_to_response('messages.html')
+
 '''def check(request):
 	if request.method=="POST":
 		errors=[]
@@ -182,16 +185,6 @@ def logout(request):
 	else :
 		return HttpResponseRedirect('/login')
 
-
-def adminLogout(request):
-	if 'adminUsername' in request.session:
-		try:
-			del request.session['adminUsername']
-		except keyError:
-			pass
-		return HttpResponseRedirect('/EVoting/admin')
-	else :
-		return HttpResponseRedirect('/EVoting/admin')
 	#return HttpResponse("You are looged out!!!")
 
 '''def checkIfloggedIn(request):

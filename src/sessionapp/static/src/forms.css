@@ -2,6 +2,7 @@ body {
   font: 13px/20px 'Lucida Grande', Tahoma, Verdana, sans-serif;
   color: #404040;
   background: #0ca3d2;
+  font-family: cambria;
 }
 form{
 	margin-left: 25%;
@@ -14,12 +15,18 @@ fieldset{
 	padding-top:2%;
 }
 select{
-	width:30%;
+	width:auto;
 	height:25px;
 	border-radius: 2px;
 	border:0;
 }
 input{
+	width:auto;
+	height:25px;
+	border-radius:2px;
+	border:0;
+}
+#submit{
 	width:30%;
 	height:25px;
 	border-radius:2px;
@@ -28,5 +35,7 @@ input{
 #errors{
 	color:red;
 	font-weight: bold;
+
 }
+
 

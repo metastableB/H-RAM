@@ -5,7 +5,20 @@
 	{% load staticfiles %}
 	<link rel="stylesheet" href="{% static "src/forms.css" %}">
 </head>
+<script language="JavaScript" src="{% static "src/test.js" %}"></script>
+<script language="JavaScript">
+TargetDate = "03/28/2015 9:14 PM";
+BackColor = "palegreen";
+ForeColor = "navy";
+CountActive = true;
+CountStepper = -1;
+LeadingZero = true;
+DisplayFormat = "%%D%% Days, %%H%% Hours, %%M%% Minutes, %%S%% Seconds.";
+FinishMessage = "dh";
+</script>
 <body>
+	
+	<div id="abc">
 	<form action = "/EVoting/recordVote/" method = "POST">
 		<fieldset>
 			<legend align = "center"><h2>Ballot Paper</h2></legend>
@@ -65,5 +78,6 @@
 			<input align="center" type="submit" name="submit" value="submit">
 		</fieldset>
 	</form>
+</div>
 </body>
 </html>

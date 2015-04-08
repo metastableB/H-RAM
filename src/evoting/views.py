@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404, render
 from django.shortcuts import render_to_response
-from django.http import HttpResponse, HttpResponseRedirect
+#from django.http import HttpResponse, HttpResponseRedirect
+from django.http import *
 from django.template import Context, loader
 from django.core.context_processors import csrf
 from django.core.mail import send_mail, BadHeaderError,EmailMultiAlternatives,EmailMessage
@@ -9,20 +10,57 @@ from django.contrib.auth.hashers import SHA1PasswordHasher,make_password
 from evoting.models import CandidatesList,ListOfNominee,VotersList,Ballot,PostsForElection,ListOfSecretary,SupportersDetails,ListOfHostel
 from sessionapp.models import RoomPreference,UserList,AdminDetail
 import json
+import random
+import datetime
+import time
+
+from django.template import Context
+from django.template.loader import get_template
+#from xhtml2pdf import pisa 
 #By default, Django uses the PBKDF2 algorithm with a SHA256 hash
 
+def generate_PDF(request):
+    data = {}
+
+    template = get_template('viewNominees.html')
+    html  = template.render(Context(data))
+
+    file = open('test.pdf', "w+b")
+    pisaStatus = pisa.CreatePDF(html.encode('utf-8'), dest=file,
+            encoding='utf-8')
+
+    file.seek(0)
+    pdf = file.read()
+    file.close()            
+    return HttpResponse(pdf, mimetype='application/pdf')
+
 def evotingHomePage(request):
-	return render_to_response('evotingHomePage.html')
+	if 'username' in request.session:
+		return render_to_response('evotingHomePage.html')
+	else:
+		return HttpResponseRedirect('/login')
 
 def charts(request):
 	listOfsecretary = []
 	#listOfsecretary =  [['X', 'Y', 'Z'], [1, 2, 3], [4, 5, 6]]
 	#listOfsecretary.append(['name','votes'])
-	listOfsecretary.append(['prateek', 45])
-	listOfsecretary.append(['rahul',20])
-	listOfsecretary.append(['harshit',10])
-	listOfsecretary.append(['don', 30])
+	listOfsecretary.append({'name':'prateek1','value':45})
+	listOfsecretary.append({'name':'prateek2','value':25})
+	listOfsecretary.append({'name':'prateek3','value':35})
+	listOfsecretary.append({'name':'prateek','value':15})
 	return render_to_response('chartsDemo.html',{'data1':listOfsecretary})
+	'''xdata = ["Apple", "Apricot", "Avocado", "Banana", "Boysenberries", "Blueberries", "Dates", "Grapefruit", "Kiwi", "Lemon"]
+	ydata = [52, 48, 160, 94, 75, 71, 490, 82, 46, 17]
+
+	extra_serie = {"tooltip": {"y_start": "", "y_end": " cal"}}
+	chartdata = {'x': xdata, 'y1': ydata, 'extra1': extra_serie}
+	charttype = "pieChart"
+
+	data = {
+	    'charttype': charttype,
+	    'chartdata': chartdata,
+	}
+	return render_to_response('chartsDemo.html', data)'''
 
 def nominationForm2(request,errors):
 	if 'username' in request.session:
@@ -58,25 +96,44 @@ def nominationForm1(request):
 		hostelCount = 0
 		hostel = ''
 		allPositions = PostsForElection.objects.all().filter().order_by('hostelsName')
-		for i in range(allPositions.count()):
-			if(len(temp) == 0):
-				hostelsList.append(allPositions[i].hostelsName)
-				hostel = allPositions[i].hostelsName
-				temp.append({'hostel' : hostel,'position' : allPositions[i].position})
-			elif (hostel == allPositions[i].hostelsName and len(temp)!=0):
-				temp.append({'hostel' : hostel,'position' : allPositions[i].position})
-			elif(hostel != allPositions[i].hostelsName):
-				hostelsList.append(allPositions[i].hostelsName)
-				hostel = allPositions[i].hostelsName
-				positionsList.append(temp)
-				temp = []
-				temp.append({'hostel' : hostel,'position' : allPositions[i].position})
-		positionsList.append(temp)
-		return render_to_response('electionNominationForm.html',{'positions':positionsList,'hostels':hostelsList,'roll':request.session['member_id']})
+		if(allPositions.count() != 0):
+			for i in range(allPositions.count()):
+				if(len(temp) == 0):
+					hostelsList.append(allPositions[i].hostelsName)
+					hostel = allPositions[i].hostelsName
+					temp.append({'hostel' : hostel,'position' : allPositions[i].position})
+				elif (hostel == allPositions[i].hostelsName and len(temp)!=0):
+					temp.append({'hostel' : hostel,'position' : allPositions[i].position})
+				elif(hostel != allPositions[i].hostelsName):
+					hostelsList.append(allPositions[i].hostelsName)
+					hostel = allPositions[i].hostelsName
+					positionsList.append(temp)
+					temp = []
+					temp.append({'hostel' : hostel,'position' : allPositions[i].position})
+			positionsList.append(temp)
+			return render_to_response('electionNominationForm.html',{'positions':positionsList,'hostels':hostelsList,'roll':request.session['member_id']})
+		else:
+			return render_to_response('messages.htlm',{'message':"The Election is closed.Please contact the administrator for more details.",'messageTitle':"E-Voting"})
 	else:
 		return HttpResponseRedirect('/login')
 
+def adminLogout(request):
+	if 'adminUsername' in request.session:
+		try:
+			del request.session['adminUsername']
+		except keyError:
+			pass
+		return HttpResponseRedirect('/administrator')
+	else :
+		return HttpResponseRedirect('/administrator')
+
 def adminLogin(request):
+	if 'adminUsername' in request.session:
+		return HttpResponseRedirect('/administrator/home')
+	else:
+		return render_to_response('adminLoginPage.html')
+
+def adminLoginCheck(request):
 	if request.method == 'POST':
 		incorrect = "Incorrect Password"
 		errors=[]
@@ -106,7 +163,7 @@ def adminLogin(request):
 
 				if(valid):
 					request.session['adminUsername'] = user.username
-					return HttpResponseRedirect('/EVoting/admin/home')
+					return HttpResponseRedirect('/administrator/home')
 				else:
 					errors.append("Password is incorrect.")
 					return render_to_response('adminLoginPage.html',{'errors':errors})
@@ -121,7 +178,7 @@ def adminHomePage(request):
 	if 'adminUsername' in request.session:
 		return render_to_response('adminHomePage.html')
 	else:
-		return HttpResponseRedirect('/EVoting/admin')
+		return HttpResponseRedirect('/administrator')
 
 
 #this function registers the valid candidates into db
@@ -129,7 +186,7 @@ def adminHomePage(request):
 def validateCandidate(request):
 	if 'username' in request.session:
 		errors = []
-		candidatesRollno = request.POST['candidatesRollno']
+		candidatesRollno = request.session['member_id']
 		candidatesName = request.POST['candidatesName']
 		position = request.POST['position']
 		hostel = request.POST['hostel']
@@ -138,20 +195,42 @@ def validateCandidate(request):
 		supporter2 = request.POST['supporter2']
 		sent_mail_to_supporter1 = False
 		sent_mail_to_supporter2 = False
-		if(len(candidatesRollno)!=0 and len(position)!=0 and len(supporter1)!=0 and len(supporter2)!=0):
+		# List of hostels and positions
+		hostelsList = []
+		positionsList = []
+		temp = []
+		hostelCount = 0
+		hostel = ''
+		allPositions = PostsForElection.objects.all().filter().order_by('hostelsName')
+		if(allPositions.count() != 0):
+			for i in range(allPositions.count()):
+				if(len(temp) == 0):
+					hostelsList.append(allPositions[i].hostelsName)
+					hostel = allPositions[i].hostelsName
+					temp.append({'hostel' : hostel,'position' : allPositions[i].position})
+				elif (hostel == allPositions[i].hostelsName and len(temp)!=0):
+					temp.append({'hostel' : hostel,'position' : allPositions[i].position})
+				elif(hostel != allPositions[i].hostelsName):
+					hostelsList.append(allPositions[i].hostelsName)
+					hostel = allPositions[i].hostelsName
+					positionsList.append(temp)
+					temp = []
+					temp.append({'hostel' : hostel,'position' : allPositions[i].position})
+			positionsList.append(temp)
+
+		if(len(candidatesRollno)!=0 and len(position)!=0 and len(supporter1)!=0 and len(supporter2)!=0 and len(candidatesName)):
 			#To check if the candidate already exists or not
 			try:
-				user = UserList.objects.get(username = request.session['username'],rollNumber = request.session['member_id'])
+				user = UserList.objects.get(rollNumber = request.session['member_id'])
 			except UserList.DoesNotExist:
 				user = None
 			if user:
 				if user.rollNumber != candidatesRollno:
 					errors.append("Please enter your roll number to fill the nomination form.YOU CAN FILL NOMINATION FORM ONLY FOR YOURSELF NOT FOR OTHERS!!!")
-					#return render_to_response('electionNominationForm.html',{'errors' : errors})
-					return HttpResponseRedirect('/EVoting/nominationForm/' + errors)
+					return render_to_response('electionNominationForm.html',{'positions':positionsList,'hostels':hostelsList,'errors' : errors,'roll':request.session['member_id']})
 				if user.hostelAlloted != hostel:
 					errors.append("The hostel doesn't match to the one alloted to you")
-					return render_to_response('electionNominationForm.html',{'errors' : errors})
+					return render_to_response('electionNominationForm.html',{'positions':positionsList,'hostels':hostelsList,'errors' : errors,'roll':request.session['member_id']})
 				try:
 					candidate = CandidatesList.objects.get(candidatesRollNo = candidatesRollno)
 				except CandidatesList.DoesNotExist:
@@ -159,7 +238,7 @@ def validateCandidate(request):
 				if not candidate:
 					if candidatesRollno == supporter1 or candidatesRollno == supporter2:
 						errors.append("You cannot give your roll number as a supporter")
-						return render_to_response('successfullNomination.html',{'name' : candidatesRollno})
+						return render_to_response('electionNominationForm.html',{'positions':positionsList,'hostels':hostelsList,'errors' : errors,'roll':request.session['member_id']})
 					else:
 						try:
 							supporter1Object = UserList.objects.get(rollNumber = supporter1)
@@ -167,7 +246,7 @@ def validateCandidate(request):
 							supporter1Object = None
 
 						if not supporter1Object:
-							errors.append("Enter a vaid roll number for First Supporter")
+							errors.append(supporter1+" doesn't exists.Please Enter a valid roll number")
 
 						try:
 							supporter2Object = UserList.objects.get(rollNumber = supporter2)
@@ -175,7 +254,7 @@ def validateCandidate(request):
 							supporter2Object = None
 
 						if not supporter2Object:
-							errors.append("Enter a vaid roll number for Second Supporter")
+							errors.append(supporter2+" doesn't exists.Please Enter a valid roll number")
 
 						if supporter2Object and supporter1Object:
 							email1 = supporter1Object.emailId;
@@ -200,26 +279,29 @@ def validateCandidate(request):
 								newCandidate.save()
 								return render_to_response('successfullNomination.html',{'name' : candidatesRollno})
 							else:
-								return render_to_response('electionNominationForm.html',{'errors' : errors})
+								return render_to_response('electionNominationForm.html',{'positions':positionsList,'hostels':hostelsList,'errors' : errors,'roll':request.session['member_id']})
 						else:
-							return render_to_response('electionNominationForm.html',{'errors' : errors})			
+							return render_to_response('electionNominationForm.html',{'positions':positionsList,'hostels':hostelsList,'errors' : errors,'roll':request.session['member_id']})
 				if candidate:
 					errors.append("Candidate has already registered")
-					return render_to_response('electionNominationForm.html',{'errors' : errors})
+					return render_to_response('electionNominationForm.html',{'positions':positionsList,'hostels':hostelsList,'errors' : errors,'roll':request.session['member_id']})
 			if not user:
-				return HttpResponse("some error occured!!!")			
-		elif(len(candidatesRollno) == 0):
+				return  render_to_response('messages.html',{'message': username+" ,You have already filled the nomination form.",'messageTitle':'E-Voting'})
+		elif(len(candidatesName) == 0):
 			errors.append("Please enter the name of the candidate")
-			return render_to_response('electionNominationForm.html',{'errors' : errors})
+			return render_to_response('electionNominationForm.html',{'positions':positionsList,'hostels':hostelsList,'errors' : errors,'roll':request.session['member_id']})			
+		elif(len(candidatesRollno) == 0):
+			errors.append("Please enter the roll number of the candidate")
+			return render_to_response('electionNominationForm.html',{'positions':positionsList,'hostels':hostelsList,'errors' : errors,'roll':request.session['member_id']})
 		elif(len(position) == 0):
 			errors.append("Please fill the position")
-			return render_to_response('electionNominationForm.html',{'errors' : errors})
+			return render_to_response('electionNominationForm.html',{'positions':positionsList,'hostels':hostelsList,'errors' : errors,'roll':request.session['member_id']})
 		elif(len(supporter1) == 0):
 			errors.append("Please enter the name of the first supporter")
-			return render_to_response('electionNominationForm.html',{'errors' : errors})
+			return render_to_response('electionNominationForm.html',{'positions':positionsList,'hostels':hostelsList,'errors' : errors,'roll':request.session['member_id']})
 		elif(len(supporter2) == 0):
 			errors.append("Please enter the name of the second supporter")
-			return render_to_response('electionNominationForm.html',{'errors' : errors})
+			return render_to_response('electionNominationForm.html',{'positions':positionsList,'hostels':hostelsList,'errors' : errors,'roll':request.session['member_id']})
 	else:
 		return HttpResponseRedirect('/login')
 
@@ -230,11 +312,12 @@ def createFinalNomineesList(request):
 		nominees =CandidatesList.objects.all().filter(eligibility = 1)
 		ListOfNominee.objects.all().delete()
 		for i in range(nominees.count()):
-			newCandidate = ListOfNominee(nomineesName = nominees[i].candidatesName,position = nominees[i].position,NumberOfVotes = 0)
-			newCandidate.save()
-		return HttpResponse("successfully created list of nominee's")
+			if (nominees[i].firstSupportersSupport == 1 and nominees[i].secondSupportersSupport == 1):
+				newCandidate = ListOfNominee(nomineesName = nominees[i].candidatesName,nomineesRollNo = nominees[i].candidatesRollNo,hostel = nominees[i].hostel,position = nominees[i].position,NumberOfVotes = 0)
+				newCandidate.save()
+		return render_to_response('messages.html',{'message':"Successfully created list of nominee's",'messageTitle':"E-Voting"})
 	else:
-		return HttpResponseRedirect('/EVoting/admin')
+		return HttpResponseRedirect('/administrator')
 
 
 #This function loads the Ballot page where the voter can go and caste his/her vote
@@ -266,7 +349,7 @@ def BallotPage(request):
 						differentPositions.append(nominee)
 					return render_to_response('Ballotpage.html',{'positionsList':differentPositions})
 				if not positionObject:
-					return HttpResponse("No positions for elections")
+					return render_to_response('messages.html',{'message':"The Election is closed.Please contact administrator for more details.",'messageTitle':"E-Voting"})
 					#TODO print the errors accordingly
 			if not voter:
 				errors = []
@@ -307,9 +390,9 @@ def createElectionPasswords(request):
 				if not voter:
 					user = VotersList(voterDetails = userobject,goodPassword = goodPassword,evilPassword = evilPassword)
 					user.save()
-					return HttpResponse("Successfully created Good and Evil Passphrases!!!")
+					return render_to_response('messages.html',{'message':"You have successfully created Good and Evil Passphrases!!!",'messageTitle':"E-Voting"})
 				if voter:
-					return HttpResponse("You already have created both passphrases!!!")
+					return render_to_response('messages.html',{'message':"You already have created both passphrases!!!",'messageTitle':"E-Voting"})
 			
 	else:
 		return HttpResponseRedirect('/login')
@@ -351,12 +434,12 @@ def recordVote(request):
 							vote - request.POST[positionList[i]]
 						recoredVoterBallot = Ballot(voter = voter,hostel = usersHostel,position = pos,nomineeSelected = vote,goodPasswordUsed = 1)
 						recoredVoterBallot.save()
-					return HttpResponse('success11')
+					return HttpResponseRedirect('/home')
 
 				else:
-					return HttpResponse('success2')
+					return HttpResponseRedirect('/home')
 			else:
-				return HttpResponse('success4')
+				return HttpResponseRedirect('/home')
 
 	else:
 		return HttpResponseRedirect('/login')
@@ -370,7 +453,7 @@ def FillElectionPositions(request):
 			hostels.append(listOfHostels[i].hostelsName)
 		return render_to_response('positionsForElection.html',{'hostels':hostels})
 	else:
-		return HttpResponseRedirect('/EVoting/admin')
+		return HttpResponseRedirect('/administrator')
 
 def RecordElectionPositions(request):
 	if 'adminUsername' in request.session:
@@ -403,33 +486,35 @@ def RecordElectionPositions(request):
 				return render_to_response('positionsForElection.html',{'errors':errors})'''
 		return render_to_response('successfullyRecordedPosts.html',{'positions':positions,'hostel' : hostel})
 	else:
-		return HttpResponseRedirect('/EVoting/admin')
+		return HttpResponseRedirect('/administrator')
 
 #This function is used to send mail to person to_username with the email id to_user_email to confirm  the support for person named for_username
 
 def verifySupport(request,hashedKey):
-	if 'username' in request.session:
+	try:
+		supporter1 = SupportersDetails.objects.get(firstSupporterHashKey = hashedKey)
+	except SupportersDetails.DoesNotExist:
+		supporter1 = None
+	if not supporter1:
 		try:
-			supporter1 = SupportersDetails.objects.get(firstSupporterHashKey = hashedKey)
+			supporter2 = SupportersDetails.objects.get(secondSupporterHashKey = hashedKey)
 		except SupportersDetails.DoesNotExist:
-			supporter1 = None
-		if not supporter1:
-			try:
-				supporter2 = SupportersDetails.objects.get(secondSupporterHashKey = hashedKey)
-			except SupportersDetails.DoesNotExist:
-				supporter2 = None
-			if supporter2:
-				candidatesRollno = supporter2.candidatesRollNo
-				candidate = CandidatesList.object.get(candidatesRollNo = candidatesRollno)
-				candidate.secondSupportersSupport = 1
-				candidate.save()
-				return render_to_response('thanksmesssage.html',{'candidatesName':candidate.candidatesName,'supportersName':candidate.secondSupporter,'position':candidate.position,'hostel':candidate.hostel})
-		if supporter1:
-			candidatesRollno = supporter1.candidatesRollNo
+			supporter2 = None
+		if supporter2:
+			candidatesRollno = supporter2.candidatesRollNo
 			candidate = CandidatesList.objects.get(candidatesRollNo = candidatesRollno)
-			candidate.firstSupportersSupport = 1
+			candidate.secondSupportersSupport = 1
 			candidate.save()
-			return HttpResponse("Thanks for supporting")
+			return render_to_response('thanksmessage.html',{'candidatesName':candidate.candidatesName,'supportersName':candidate.secondSupporter,'position':candidate.position,'hostel':candidate.hostel})
+		else:
+			return render_to_response('messages.html',{'message':"Sorry,some error occured.You are not a supporter of "+ candidate.candidatesName,'messageTitle':"E-Voting"})
+	if supporter1:
+		candidatesRollno = supporter1.candidatesRollNo
+		candidate = CandidatesList.objects.get(candidatesRollNo = candidatesRollno)
+		candidate.firstSupportersSupport = 1
+		candidate.save()
+		return render_to_response('thanksmessage.html',{'candidatesName':candidate.candidatesName,'supportersName':candidate.secondSupporter,'position':candidate.position,'hostel':candidate.hostel})
+
 		#return render_to_response('thanksmesssage.html',{'candidatesName':candidate.candidatesName,'supportersName':candidate.firstSupporter,'position':candidate.position,'hostel':candidate.hostel})
 
 
@@ -446,36 +531,50 @@ def sendmail(to_user_email,to_username,for_username,hashedKey):
 #take care for people with same names
 #this is to be linked with a timer
 def finalVoteCount(request):
-	#to be completed....
-	maxVotes = -1
-	allHostels = ListOfHostel.objects.all()
-	for hostel in allHostels:
-		listOfPositions = PostsForElection.objects.all().filter(hostelsName = hostel.hostelsName)
-		for position in listOfPositions:
-			listOfNominees = ListOfNominee.objects.all().filter(hostel = hostel.hostelsName,position = position.position)
-			for nominee in listOfNominees:
-				votes = Ballot.objects.all().filter(hostel = hostel.hostelsName,position = position.position,nomineeSelected = nominee.nomineesName)
-				noOfVotes = votes.count()
-				nominee.NumberOfVotes = noOfVotes
-				nominee.save()
-				if noOfVotes > maxVotes:
-					name = nominee.nomineesName
-					roll = nominee.nomineesRollNo
-					maxVotes = noOfVotes
-			try:
-				sec = ListOfSecretary(hostelsName = hostel.hostelsName,position = position.position,nameOfSecretary = name,rollNoOfSecretary = roll)
-			except ListOfSecretary.DoesNotExist:
-				sec = None
-			if not sec:
-				secretary = ListOfSecretary(hostelsName = hostel.hostelsName,position = position.position,nameOfSecretary = name,rollNoOfSecretary = roll)
-				secretary.save()
-	return HttpResponse('success')
+	if 'adminUsername' in request.session:
+		#to be completed....
+		maxVotes = -1
+		allHostels = ListOfHostel.objects.all()
+		#return HttpResponse(allHostels)
+		for hostel in allHostels:
+			listOfPositions = PostsForElection.objects.all().filter(hostelsName = hostel.hostelsName)
+			#return HttpResponse(listOfPositions)
+			for position in listOfPositions:
+				maxVotes = -1
+				listOfNominees = ListOfNominee.objects.all().filter(hostel = hostel.hostelsName,position = position.position)
+				#return HttpResponse(listOfNominees)
+				for nominee in listOfNominees:
+					try:
+						votes = Ballot.objects.all().filter(hostel = hostel.hostelsName,position = position.position,nomineeSelected = nominee.nomineesName)
+						#return HttpResponse(votes)
+					except Ballot.DoesNotExist:
+						votes = 0
+					noOfVotes = votes.count()
+					#return HttpResponse(noOfVotes)
+					nominee.NumberOfVotes = noOfVotes
+					nominee.save()
+					if noOfVotes > maxVotes:
+						name = nominee.nomineesName
+						roll = nominee.nomineesRollNo
+						maxVotes = noOfVotes
+				#return HttpResponse(maxVotes)
+				try:
+					sec = ListOfSecretary.objects.get(hostelsName = hostel.hostelsName,position = position.position,nameOfSecretary = name,rollNoOfSecretary = roll)
+				except ListOfSecretary.DoesNotExist:
+					sec = None
+				if not sec:
+					#return HttpResponse("hello")
+					secretary = ListOfSecretary(hostelsName = hostel.hostelsName,position = position.position,nameOfSecretary = name,rollNoOfSecretary = roll)
+					secretary.save()
+		return render_to_response('messages.html',{'message':'Successfully counted the votes!!!','messageTitle':"E-Voting"})
+	else:
+		return HttpResponseRedirect('EVoting/admin')
 
 def viewNominees(request):
 	if 'username' in request.session:
 		listOfNominees = ListOfNominee.objects.all()
 		if listOfNominees.count() == 0:
-			return HttpResponse("The final list of Nominee's is not yet prepared")
+			return render_to_response('messages.html',{'message':"The final list of Nominee's is not yet prepared",'messageTitle':"E-Voting"})
 		elif listOfNominees.count() != 0:
 			nomineesList = []
 			for nominee in listOfNominees:
@@ -489,7 +588,7 @@ def viewFinalResult(request):
 	if 'username' in request.session:
 		finalList = ListOfSecretary.objects.all()
 		if finalList.count() == 0:
-			return HttpResponse("The result is not yet decides")
+			return render_to_response('messages.html',{'message':"The votes are not yet counted",'messageTitle':"E-Voting"})
 		elif finalList.count() != 0:
 			List = []
 			for sec in finalList:
@@ -498,6 +597,38 @@ def viewFinalResult(request):
 
 	else:
 		return HttpResponseRedirect('/login')
+
+def aboutNominee(request,nomineesRollno):
+	if 'username' in request.session:
+		return HttpResponse("Hello " + nomineesRollno)
+		
+	else:
+		return HttpResponseRedirect('/login')
+
+
+def registerUsers(request):
+	if 'adminUsername' in request.session:
+		listOfHostels  = ListOfHostel.objects.all()
+		hostels = []
+		for i in range(listOfHostels.count()):
+			hostels.append(listOfHostels[i].hostelsName)
+		return render_to_response('usersRegistration.html',{'hostels':hostels})
+	else:
+		return HttpResponseRedirect('/administrator')
+
+def checkValidUsers(request):
+	if 'adminUsername' in request.session:
+		rollno = request.POST['rollno']
+		username = request.POST['username']
+		hostel = request.POST['hostel']
+		password = request.POST['password1']
+		email = request.POST['email']
+		user = UserList(rollNumber = rollno,username=username,password=password,hostelAlloted=hostel,emailId=email)
+		user.save()
+		return HttpResponse('messages.html',{'message':"The user's data has been stored",'messageTitle':"H-RAM"})
+
+	else:
+		return HttpResponseRedirect('/administrator')
 
 
 
