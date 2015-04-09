@@ -35,7 +35,7 @@ class RoomPreference(models.Model):
     uId = models.ForeignKey(UserList)
     rollNumber = models.CharField(max_length = 10)
     preferenceNumber = models.IntegerField(max_length = 3)
-    preferedRoom = models.IntegerField(max_length = 4)
+    preferedRoom = models.CharField(max_length = 4)
     valid = models.IntegerField(max_length = 1, default = 1)
 
     def  __unicode__ (self):
