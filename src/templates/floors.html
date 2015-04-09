@@ -2,16 +2,15 @@
 <head>
 	<title>Testing </title>
 	{% load staticfiles %}
-	<style>
+<style>
 body {
     background-image: url("{% static 'src/background.jpg'%}");
 }
 </style>
-	<link type="text/css" rel="stylesheet" href="{%  static 'src/floors.css' %}">
+<link type="text/css" rel="stylesheet" href="{%  static 'src/floors.css' %}">
 </head>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <script type = "text/javascript" src="{%  static 'src/jquery-1.4.2.min.js'%}"></script>
+
 <script type = "text/javascript">
 	var images = ["{% static 'src/whiteSquare.png' %}","{% static 'src/greenSquare.png' %}"]
 	var preferenceOrder = [];
@@ -19,14 +18,12 @@ body {
 	{
 		var number = no.toString();
 		var idold = document.getElementById(number).style.opacity;
-		//var id = idold.slice(25);
 		if(idold == "0.5")
 		{
 			document.getElementById(number).style.opacity = "1";
 			var index = preferenceOrder.indexOf(number);
 			preferenceOrder.splice(index,1);
 			printPreferenceOrder(preferenceOrder);
-			//document.getElementById("preferences").innerHTML = "<h3> Preference Order </h3><br>"  + preferenceOrder.toString() + "<br>";
 		}
 		else
 		{
@@ -34,25 +31,19 @@ body {
 			preferenceOrder.push(number);
 			var field = document.getElementsByName(number);
 			printPreferenceOrder(preferenceOrder);
-			//document.getElementById("preferences").innerHTML = "<h3>Preference Order </h3><br>" + preferenceOrder.toString() + "<br>";
-			//document.getElementById("hello").innerHTML = document.getElementById("hello").innerHTML + number + "   " + preferenceOrder.toString() + "<br>";
-			//preferenceOrder.append(number);
-		}//var idold = document.getElementById("first").style.background;
-		//var id = idold.slice(25);
+		}
 		
 	}
 	function toggle2(no,name_room)
 	{
 		var number = no.toString();
 		var idold = document.getElementById(number).style.opacity;
-		//var id = idold.slice(25);
 		if(idold == "0.5")
 		{
 			document.getElementById(number).style.opacity = "1";
 			var index = preferenceOrder.indexOf(number);
 			preferenceOrder.splice(index,1);
 			printPreferenceOrder(preferenceOrder);
-			//document.getElementById("preferences").innerHTML = "<h3> Preference Order </h3><br>"  + preferenceOrder.toString() + "<br>";
 		}
 		else
 		{
@@ -60,12 +51,7 @@ body {
 			preferenceOrder.push(name_room);
 			var field = document.getElementsByName(number);
 			printPreferenceOrder(preferenceOrder);
-			//document.getElementById("preferences").innerHTML = "<h3>Preference Order </h3><br>" + preferenceOrder.toString() + "<br>";
-			//document.getElementById("hello").innerHTML = document.getElementById("hello").innerHTML + number + "   " + preferenceOrder.toString() + "<br>";
-			//preferenceOrder.append(number);
-		}//var idold = document.getElementById("first").style.background;
-		//var id = idold.slice(25);
-		
+		}
 	}
 	function printPreferenceOrder(listOfPreferences)
 	{
@@ -77,98 +63,117 @@ body {
 			document.getElementById("preferences").innerHTML = document.getElementById("preferences").innerHTML + (i+1) + "." + listOfPreferences[i] + "<br>";
 		}
 	}
-	/*function appendPreferenceOrder()
-	{
-		//document.getElementById("preferences").innerHTML = document.getElementById("preferences").innerHTML + preferenceOrder[preferenceOrder.length-1] + "<br>";
-		document.getElementById("preferences").innerHTML = document.getElementById("preferences").innerHTML + preferenceOrder.toString() + "<br>";
-	}*/
+
 	function submitForm(){
-		//document.getElementById("preferences").innerHTML = document.getElementById("preferences").innerHTML + "In submit form() <br>";
-		//$.post("/bookRoom/",{'preferenceList' : preferenceOrder});
-		/*console.log("create post is working!");
-		$.ajax({
-		    url: "/bookRoom/",
-		    type: "POST", //this is the default though, you don't actually need to always mention it
-		    dataType: 'json',
-		    //data : {'preferenceList[]': preferenceOrder});
-		    success: function(data) {
-		        alert('success');
-		    },
-		    failure: function(data) { 
-		        alert('Got an error dude');
-		    }
-		});*/
 		document.getElementById("preference").value = preferenceOrder.toString();
 		document.getElementById("preferences").innerHTML = document.getElementById("preferences").innerHTML + preferenceOrder.toString() + "<br>";
 		document.getElementById("form1").submit();
-		//$('body').append("HI its working");
-		/*my_form=document.createElement('FORM');
-		my_form.name='myForm';
-		my_form.method='POST';
-		my_form.action='/bookRoom/';
-		my_tb=document.createElement('INPUT');
-		my_tb.type='TEXT';
-		my_tb.name='myInput';
-		my_tb.value=preferenceOrder.toString();
-		my_form.appendChild(my_tb);
-		//document.body.add(my_form,document.body.elements[0]);
-		document.my_form.submit();*/
 	}
-	/*function LoadAnotherPage()
-	{
-		$("#floor_plan").load("tables.html");
-	}*/
-	/*$(document).ready(function(){
-                 $("#load").click(function(){
-                     $("#floor_plan").load("tables.html");
-                 });
-            });
-
-	///document.getElementById("hello").innerHTML = document.getElementById("hello").innerHTML + document.getElementById("floor_choice").value;
-	$("#floor_choice").change(function())*/
-	/*$("#floor_choice").on("change",function(){
-		$("floor_plan").load("success.html");
-	});*/
-	/*$("#floor_choice").change(function(){
-		document.getElementById("hello").innerHTML = document.getElementById("hello").innerHTML + "hello guys!!!";
-		$("floor_plan").load("success.html");
-	});
-	document.getElementById("hello").innerHTML = document.getElementById("hello").innerHTML + $("#floor_choice option:selected").text() + $("#floor_choice").val();*/
-	
-
-
-	/*function load()
-	{	
-		var temp =  '<object type="text/html" data="../floor1" style="width:100%;height:100%"></object>'
-		document.getElementById("floor_plan").innerHTML = temp;	
-	}*/
 	function loadfloor1()
 	{
 		$("#floor1").show();
 		$("#floor2").hide();
 		$("#floor3").hide();
+		$("#floor4").hide();
+		$("#floor5").hide();
+		$("#floor6").hide();
+		$("#floor7").hide();
+		$("#floor8").hide();
 	}
+	
 	function loadfloor2()
 	{
-		$("#floor2").show();
 		$("#floor1").hide();
+		$("#floor2").show();
 		$("#floor3").hide();
+		$("#floor4").hide();
+		$("#floor5").hide();
+		$("#floor6").hide();
+		$("#floor7").hide();
+		$("#floor8").hide();
 	}
+
 	function loadfloor3()
 	{
-		$("#floor3").show();
-		$("#floor2").hide();
 		$("#floor1").hide();
+		$("#floor2").hide();
+		$("#floor3").show();
+		$("#floor4").hide();
+		$("#floor5").hide();
+		$("#floor6").hide();
+		$("#floor7").hide();
+		$("#floor8").hide();
+	}
+
+	function loadfloor4()
+	{
+		$("#floor1").hide();
+		$("#floor2").hide();
+		$("#floor3").hide();
+		$("#floor4").show();
+		$("#floor5").hide();
+		$("#floor6").hide();
+		$("#floor7").hide();
+		$("#floor8").hide();
+	}
+
+	function loadfloor5()
+	{
+		$("#floor1").hide();
+		$("#floor2").hide();
+		$("#floor3").hide();
+		$("#floor4").hide();
+		$("#floor5").show();
+		$("#floor6").hide();
+		$("#floor7").hide();
+		$("#floor8").hide();
+	}
+
+	function loadfloor6()
+	{
+		$("#floor1").hide();
+		$("#floor2").hide();
+		$("#floor3").hide();
+		$("#floor4").hide();
+		$("#floor5").hide();
+		$("#floor6").show();
+		$("#floor7").hide();
+		$("#floor8").hide();
+	}
+
+	function loadfloor7()
+	{
+		$("#floor1").hide();
+		$("#floor2").hide();
+		$("#floor3").hide();
+		$("#floor4").hide();
+		$("#floor5").hide();
+		$("#floor6").hide();
+		$("#floor7").show();
+		$("#floor8").hide();
+	}
+
+	function loadfloor8()
+	{
+		$("#floor1").hide();
+		$("#floor2").hide();
+		$("#floor3").hide();
+		$("#floor4").hide();
+		$("#floor5").hide();
+		$("#floor6").hide();
+		$("#floor7").hide();
+		$("#floor8").show();
 	}
 	function dothis()
 	{
 		$("#floor2").hide();
 		$("#floor3").hide();
+		$("#floor4").hide();
+		$("#floor5").hide();
+		$("#floor6").hide();
+		$("#floor7").hide();
+		$("#floor8").hide();
 	}
-	/*$( "#loading" ).click(function() {
-		$( "#floor2" ).hide();
-	});*/
-
 </script>
 
 <body onload="dothis()">
@@ -183,1367 +188,583 @@ body {
 		<tr>
 			<td id = "buttons_vertical">
 				<table >
-						<tr><td><button onclick="loadfloor1()">Floor 1</button></td></tr>
-						<tr><td><button onclick="loadfloor2()">Floor 2</button></td></tr>
+						<!--<tr><td><button onclick="loadfloor8()">Floor 8</button></td></tr>
+						<tr><td><button onclick="loadfloor7()">Floor 7</button></td></tr>
+						<tr><td><button onclick="loadfloor6()">Floor 6</button></td></tr>-->
+						<tr><td><button onclick="loadfloor5()">Floor 5</button></td></tr>
+						<tr><td><button onclick="loadfloor4()">Floor 4</button></td></tr>
 						<tr><td><button onclick="loadfloor3()">Floor 3</button></td></tr>
+						<tr><td><button onclick="loadfloor2()">Floor 2</button></td></tr>
+						<tr><td><button onclick="loadfloor1()">Floor 1</button></td></tr>
 				</table>
 			</td>
-			<td><div id = "floor1" ><table id="table1" cellspacing = "0" border="1" >
-			<tr>
-			<!-- Create the entire line dynamically-->
-				<td id = "101" class='clickable' onclick = "toggle2('101','A01')">A01</td>
-				<td id = "102" class='clickable' onclick = "toggle2('102','A02')">A02</td>
-				<td id = "103" class='clickable' onclick = "toggle('103','A03')">A03</td>
-				<td id = "104" class='clickable' onclick = "toggle('104','A04')">A04</td> 
-				<td id = "105" class='not_clickable_washroom'></td>
-				<td id = "106" class='not_clickable_vert_gallery'></td>
-				<td id = "107" class='not_clickable_washroom'></td>
-				<td id = "108" class='clickable' onclick = "toggle2('108','A05')">A05</td>
-				<td id = "109" class='clickable' onclick = "toggle2('109','A06')">A06</td>
-				<td id = "110" class='clickable' onclick = "toggle2('110','A07')">A07</td>
-				<td id = "111" class='clickable' onclick = "toggle2('111','A08')">A08</td>
-				<td id = "112" class='clickable' onclick = "toggle2('112','A09')">A09</td>
-				<td id = "113" class='clickable' onclick = "toggle2('113','A10')">A10</td>
-				<td id = "114" class='clickable' onclick = "toggle2('114','A11')">A11</td>
-				<td id = "115" class='clickable' onclick = "toggle2('115','A12')">A12</td> 
-				<td id = "116" class='not_clickable_washroom' ></td>
-				<td id = "117" class='not_clickable_vert_gallery' ></td>
-				<td id = "118" class='not_clickable_washroom' ></td>
-				<td id = "119" class='clickable' onclick = "toggle2('119','A13')">A13</td>
-				<td id = "120" class='clickable' onclick = "toggle2('120','A14')">A14</td>
-				<td id = "121" class='clickable' onclick = "toggle2('121','A15')">A15</td>
-				<td id = "122" class='clickable' onclick = "toggle2('122','A16')">A16</td>
-			</tr>
-			<tr>
-				<td class='not_clickable' id ='hori_gallery'></td>
-				<td class='not_clickable' id ='hori_gallery'></td>
-				<td class='not_clickable' id ='hori_gallery'></td>
-				<td class='not_clickable' id ='hori_gallery'></td>
-				<td class='not_clickable' id ='hori_gallery'></td>
-				<td class='not_clickable' id ='junct_gallery'></td>
-				<td class='not_clickable' id ='hori_gallery'></td>
-				<td class='not_clickable' id ='hori_gallery'></td>
-				<td class='not_clickable' id ='hori_gallery'></td>
-				<td class='not_clickable' id ='hori_gallery'></td>
-				<td class='not_clickable' id ='hori_gallery'></td>
-				<td class='not_clickable' id ='hori_gallery'></td>
-				<td class='not_clickable' id ='hori_gallery'></td>
-				<td class='not_clickable' id ='hori_gallery'></td>
-				<td class='not_clickable' id ='hori_gallery'></td>
-				<td class='not_clickable' id ='hori_gallery'></td>
-				<td class='not_clickable' id ='junct_gallery'></td>
-				<td class='not_clickable' id ='hori_gallery'></td>
-				<td class='not_clickable' id ='hori_gallery'></td>
-				<td class='not_clickable' id ='hori_gallery'></td>
-				<td class='not_clickable' id ='hori_gallery'></td>
-				<td class='not_clickable' id ='hori_gallery'></td>
+			<td>
+				<div id="floor1">
+					<img src="{% static 'src/plan/G_Floor_850w.jpg' %}" width="850" height="877" usemap="#G_Floor" border="0">
+						<map name="G_Floor">
+							<area id="A001" onclick="toggle('A001')" shape="rect" coords="776,257,808,278" nohref>
+							<area id="A002" onclick="toggle('A002')" shape="rect" coords="776,279,808,303" nohref>
+							<area id="A003" onclick="toggle('A003')" shape="rect" coords="776,304,807,327" nohref>
+							<area id="A004" onclick="toggle('A004')" shape="rect" coords="776,328,806,352" nohref>
+							<area id="A005" onclick="toggle('A005')" shape="rect" coords="776,352,807,377" nohref>
+							<area id="A006" onclick="toggle('A006')" shape="rect" coords="775,401,806,426" nohref>
+							<area id="A007" onclick="toggle('A007')" shape="rect" coords="776,426,808,448" nohref>
+							<area id="A008" onclick="toggle('A008')" shape="rect" coords="777,449,807,473" nohref>
+							<area id="A009" onclick="toggle('A009')" shape="rect" coords="776,474,808,499" nohref>
+							<area id="A010" onclick="toggle('A010')" shape="rect" coords="777,585,807,608" nohref>
+							<area id="A011" onclick="toggle('A011')" shape="rect" coords="776,608,806,632" nohref>
+							<area id="A012" onclick="toggle('A012')" shape="rect" coords="776,633,807,657" nohref>
+							<area id="A013" onclick="toggle('A013')" shape="rect" coords="777,657,807,682" nohref>
+							<area id="A014" onclick="toggle('A014')" shape="rect" coords="776,706,807,729" nohref>
+							<area id="A015" onclick="toggle('A015')" shape="rect" coords="776,730,807,754" nohref>
+							<area id="A016" onclick="toggle('A016')" shape="rect" coords="777,755,807,777" nohref>
+							<area id="A017" onclick="toggle('A017')" shape="rect" coords="777,778,808,802" nohref>
+							<area id="A018" onclick="toggle('A018')" shape="rect" coords="728,779,758,802" nohref>
+							<area id="A019" onclick="toggle('A019')" shape="rect" coords="728,755,757,778" nohref>
+							<area id="A020" onclick="toggle('A020')" shape="rect" coords="728,733,758,754" nohref>
+							<area id="A021" onclick="toggle('A021')" shape="rect" coords="727,706,757,732" nohref>
+							<area id="A022" onclick="toggle('A022')" shape="rect" coords="727,681,757,706" nohref>
+							<area id="A023" onclick="toggle('A023')" shape="rect" coords="728,634,758,658" nohref>
+							<area id="A024" onclick="toggle('A024')" shape="rect" coords="728,609,757,633" nohref>
+							<area id="A025" onclick="toggle('A025')" shape="rect" coords="728,585,758,608" nohref>
+							<area id="A026" onclick="toggle('A026')" shape="rect" coords="727,559,758,584" nohref>
+							<area id="A027" onclick="toggle('A027')" shape="rect" coords="727,498,758,523" nohref>
+							<area id="A028" onclick="toggle('A028')" shape="rect" coords="727,475,758,497" nohref>
+							<area id="A029" onclick="toggle('A029')" shape="rect" coords="727,450,757,473" nohref>
+							<area id="A030" onclick="toggle('A030')" shape="rect" coords="728,426,757,449" nohref>
+							<area id="A031" onclick="toggle('A031')" shape="rect" coords="728,402,757,425" nohref>
+							<area id="A032" onclick="toggle('A032')" shape="rect" coords="728,379,757,401" nohref>
+							<area id="A033" onclick="toggle('A033')" shape="rect" coords="727,354,757,378" nohref>
+							<area id="A034" onclick="toggle('A034')" shape="rect" coords="727,327,757,354" nohref>
+							<area id="A035" onclick="toggle('A035')" shape="rect" coords="728,280,757,304" nohref>
+							<area id="A036" onclick="toggle('A036')" shape="rect" coords="728,257,758,279" nohref>
+							<area id="A037" onclick="toggle('A037')" shape="rect" coords="91,257,122,279" nohref>
+							<area id="A038" onclick="toggle('A038')" shape="rect" coords="92,279,121,303" nohref>
+							<area id="A039" onclick="toggle('A039')" shape="rect" coords="91,328,121,351" nohref>
+							<area id="A040" onclick="toggle('A040')" shape="rect" coords="91,352,122,377" nohref>
+							<area id="A041" onclick="toggle('A041')" shape="rect" coords="91,377,122,400" nohref>
+							<area id="A042" onclick="toggle('A042')" shape="rect" coords="92,401,122,425" nohref>
+							<area id="A043" onclick="toggle('A043')" shape="rect" coords="91,426,122,450" nohref>
+							<area id="A044" onclick="toggle('A044')" shape="rect" coords="92,450,122,474" nohref>
+							<area id="A045" onclick="toggle('A045')" shape="rect" coords="92,474,121,497" nohref>
+							<area id="A046" onclick="toggle('A046')" shape="rect" coords="92,498,122,523" nohref>
+							<area id="A047" onclick="toggle('A047')" shape="rect" coords="92,560,122,585" nohref>
+							<area id="A048" onclick="toggle('A048')" shape="rect" coords="92,585,122,610" nohref>
+							<area id="A049" onclick="toggle('A049')" shape="rect" coords="91,609,122,633" nohref>
+							<area id="A050" onclick="toggle('A050')" shape="rect" coords="92,632,123,658" nohref>
+							<area id="A051" onclick="toggle('A051')" shape="rect" coords="92,681,122,706" nohref>
+							<area id="A052" onclick="toggle('A052')" shape="rect" coords="92,706,121,729" nohref>
+							<area id="A053" onclick="toggle('A053')" shape="rect" coords="92,730,122,754" nohref>
+							<area id="A054" onclick="toggle('A054')" shape="rect" coords="91,755,122,779" nohref>
+							<area id="A055" onclick="toggle('A055')" shape="rect" coords="91,779,122,803" nohref>
+							<area id="A056" onclick="toggle('A056')" shape="rect" coords="43,780,71,801" nohref>
+							<area id="A057" onclick="toggle('A057')" shape="rect" coords="42,756,73,779" nohref>
+							<area id="A058" onclick="toggle('A058')" shape="rect" coords="42,731,71,754" nohref>
+							<area id="A059" onclick="toggle('A059')" shape="rect" coords="42,705,72,731" nohref>
+							<area id="A060" onclick="toggle('A060')" shape="rect" coords="41,657,72,682" nohref>
+							<area id="A061" onclick="toggle('A061')" shape="rect" coords="42,633,72,657" nohref>
+							<area id="A062" onclick="toggle('A062')" shape="rect" coords="42,610,72,632" nohref>
+							<area id="A063" onclick="toggle('A063')" shape="rect" coords="43,584,71,609" nohref>
+							<area id="A064" onclick="toggle('A064')" shape="rect" coords="41,474,72,498" nohref>
+							<area id="A065" onclick="toggle('A065')" shape="rect" coords="42,451,71,473" nohref>
+							<area id="A066" onclick="toggle('A066')" shape="rect" coords="42,427,72,450" nohref>
+							<area id="A067" onclick="toggle('A067')" shape="rect" coords="42,401,72,426" nohref>
+							<area id="A068" onclick="toggle('A068')" shape="rect" coords="41,354,71,377" nohref>
+							<area id="A069" onclick="toggle('A069')" shape="rect" coords="42,330,73,353" nohref>
+							<area id="A070" onclick="toggle('A070')" shape="rect" coords="42,305,72,328" nohref>
+							<area id="A071" onclick="toggle('A071')" shape="rect" coords="42,282,71,305" nohref>
+							<area id="A072" onclick="toggle('A072')" shape="rect" coords="42,256,72,281" nohref>
+					</map>
+				</div>
+				<div id="floor2">
+					<img src="{% static 'src/plan/I_floor_850w.jpg' %}" width="850" height="849" border="0" usemap="#map" />
+						<map name="map">
+							<!-- #$-:Image map file created by GIMP Image Map plug-in -->
+							<!-- #$-:GIMP Image Map plug-in by Maurits Rijk -->
+							<!-- #$-:Please do not edit lines starting with "#$" -->
+							<!-- #$VERSION:2.3 -->
+							<!-- #$AUTHOR:SHEIK SAMEERUDDIN -->
+							<area id="B001" onclick="toggle('B001')" shape="rect" coords="39,251,66,274"  nohref="nohref" />
+							<area id="B002" onclick="toggle('B002')" shape="rect" coords="39,275,66,297"  href="nohref" />
+							<area id="B003" onclick="toggle('B003')" shape="rect" coords="38,298,67,322"  nohref="nohref" />
+							<area id="B004" onclick="toggle('B004')" shape="rect" coords="37,324,67,348"  nohref="nohref" />
+							<area id="B005" onclick="toggle('B005')" shape="rect" coords="38,348,67,371"  nohref="nohref" />
+							<area id="B006" onclick="toggle('B006')" shape="rect" coords="38,398,67,421"  nohref="nohref" />
+							<area id="B007" onclick="toggle('B007')" shape="rect" coords="37,421,67,445"  nohref="nohref" />
+							<area id="B008" onclick="toggle('B008')" shape="rect" coords="38,445,67,469"  nohref="nohref" />
+							<area id="B009" onclick="toggle('B009')" shape="rect" coords="38,469,67,493"  nohref="nohref" />
+							<area id="B010" onclick="toggle('B010')" shape="rect" coords="38,581,68,605"  nohref="nohref" />
+							<area id="B011" onclick="toggle('B011')" shape="rect" coords="38,605,68,629"  nohref="nohref" />
+							<area id="B012" onclick="toggle('B012')" shape="rect" coords="38,630,68,654"  nohref="nohref" />
+							<area id="B013" onclick="toggle('B013')" shape="rect" coords="38,653,68,679"  nohref="nohref" />
+							<area id="B014" onclick="toggle('B014')" shape="rect" coords="38,703,68,728"  nohref="nohref" />
+							<area id="B015" onclick="toggle('B015')" shape="rect" coords="38,729,68,752"  nohref="nohref" />
+							<area id="B016" onclick="toggle('B016')" shape="rect" coords="38,753,68,777"  nohref="nohref" />
+							<area id="B017" onclick="toggle('B017')" shape="rect" coords="38,778,68,801"  nohref="nohref" />
+							<area id="B018" onclick="toggle('B018')" shape="rect" coords="87,776,118,801"  nohref="nohref" />
+							<area id="B019" onclick="toggle('B019')" shape="rect" coords="88,753,118,775"  nohref="nohref" />
+							<area id="B020" onclick="toggle('B020')" shape="rect" coords="87,728,118,754"  nohref="nohref" />
+							<area id="B021" onclick="toggle('B021')" shape="rect" coords="87,703,118,728"  nohref="nohref" />
+							<area id="B022" onclick="toggle('B022')" shape="rect" coords="87,679,118,703"  nohref="nohref" />
+							<area id="B023" onclick="toggle('B023')" shape="rect" coords="86,630,117,654"  nohref="nohref" />
+							<area id="B024" onclick="toggle('B024')" shape="rect" coords="86,606,118,630"  nohref="nohref" />
+							<area id="B025" onclick="toggle('B025')" shape="rect" coords="87,581,118,605"  nohref="nohref" />
+							<area id="B026" onclick="toggle('B026')" shape="rect" coords="87,556,118,580"  nohref="nohref" />
+							<area id="B027" onclick="toggle('B027')" shape="rect" coords="87,494,117,518"  nohref="nohref" />
+							<area id="B028" onclick="toggle('B028')" shape="rect" coords="87,469,117,494"  nohref="nohref" />
+							<area id="B029" onclick="toggle('B029')" shape="rect" coords="87,445,118,470"  nohref="nohref" />
+							<area id="B030" onclick="toggle('B030')" shape="rect" coords="87,420,118,446"  nohref="nohref" />
+							<area id="B031" onclick="toggle('B031')" shape="rect" coords="87,396,118,420"  nohref="nohref" />
+							<area id="B032" onclick="toggle('B032')" shape="rect" coords="87,372,118,396"  nohref="nohref" />
+							<area id="B033" onclick="toggle('B033')" shape="rect" coords="87,347,118,372"  nohref="nohref" />
+							<area id="B034" onclick="toggle('B034')" shape="rect" coords="87,323,117,347"  nohref="nohref" />
+							<area id="B035" onclick="toggle('B035')" shape="rect" coords="87,274,117,298"  nohref="nohref" />
+							<area id="B036" onclick="toggle('B036')" shape="rect" coords="86,251,117,274"  nohref="nohref" />
+							<area id="B037" onclick="toggle('B037')" shape="rect" coords="267,373,297,396"  nohref="nohref" />
+							<area id="B038" onclick="toggle('B038')" shape="rect" coords="267,396,297,421"  nohref="nohref" />
+							<area id="B039" onclick="toggle('B039')" shape="rect" coords="267,422,297,445"  nohref="nohref" />
+							<area id="B040" onclick="toggle('B040')" shape="rect" coords="267,446,297,470"  nohref="nohref" />
+							<area id="B041" onclick="toggle('B041')" shape="rect" coords="266,470,297,494"  nohref="nohref" />
+							<area id="B042" onclick="toggle('B042')" shape="rect" coords="267,494,297,519"  nohref="nohref" />
+							<area id="B043" onclick="toggle('B043')" shape="rect" coords="268,557,297,580"  nohref="nohref" />
+							<area id="B044" onclick="toggle('B044')" shape="rect" coords="267,581,297,604"  nohref="nohref" />
+							<area id="B045" onclick="toggle('B045')" shape="rect" coords="267,605,297,630"  nohref="nohref" />
+							<area id="B046" onclick="toggle('B046')" shape="rect" coords="267,629,297,653"  nohref="nohref" />
+							<area id="B047" onclick="toggle('B047')" shape="rect" coords="267,653,297,677"  nohref="nohref" />
+							<area id="B048" onclick="toggle('B048')" shape="rect" coords="267,677,297,703"  nohref="nohref" />
+							<area id="B049" onclick="toggle('B049')" shape="rect" coords="316,678,347,704"  nohref="nohref" />
+							<area id="B050" onclick="toggle('B050')" shape="rect" coords="316,654,348,678"  nohref="nohref" />
+							<area id="B051" onclick="toggle('B051')" shape="rect" coords="317,605,347,629"  nohref="nohref" />
+							<area id="B052" onclick="toggle('B052')" shape="rect" coords="316,581,347,606"  nohref="nohref" />
+							<area id="B053" onclick="toggle('B053')" shape="rect" coords="317,494,347,519"  nohref="nohref" />
+							<area id="B054" onclick="toggle('B054')" shape="rect" coords="317,470,347,494"  nohref="nohref" />
+							<area id="B055" onclick="toggle('B055')" shape="rect" coords="316,555,347,582"  nohref="nohref" />
+							<area id="B056" onclick="toggle('B056')" shape="rect" coords="317,445,347,470"  nohref="nohref" />
+							<area id="B057" onclick="toggle('B057')" shape="rect" coords="316,397,348,420"  nohref="nohref" />
+							<area id="B058" onclick="toggle('B058')" shape="rect" coords="316,371,348,396"  nohref="nohref" />
+							<area id="B059" onclick="toggle('B059')" shape="rect" coords="498,373,528,396"  nohref="nohref" />
+							<area id="B060" onclick="toggle('B060')" shape="rect" coords="498,396,528,420"  nohref="nohref" />
+							<area id="B061" onclick="toggle('B061')" shape="rect" coords="499,447,528,470"  nohref="nohref" />
+							<area id="B062" onclick="toggle('B062')" shape="rect" coords="498,469,528,495"  nohref="nohref" />
+							<area id="B063" onclick="toggle('B063')" shape="rect" coords="498,495,528,518"  nohref="nohref" />
+							<area id="B064" onclick="toggle('B064')" shape="rect" coords="498,581,528,604"  nohref="nohref" />
+							<area id="B065" onclick="toggle('B065')" shape="rect" coords="498,605,528,629"  nohref="nohref" />
+							<area id="B066" onclick="toggle('B066')" shape="rect" coords="498,653,528,677"  nohref="nohref" />
+							<area id="B067" onclick="toggle('B067')" shape="rect" coords="497,677,528,699"  nohref="nohref" />
+							<area id="B068" onclick="toggle('B068')" shape="rect" coords="547,678,578,703"  nohref="nohref" />
+							<area id="B069" onclick="toggle('B069')" shape="rect" coords="548,655,578,677"  nohref="nohref" />
+							<area id="B070" onclick="toggle('B070')" shape="rect" coords="547,629,579,654"  nohref="nohref" />
+							<area id="B071" onclick="toggle('B071')" shape="rect" coords="548,606,579,629"  nohref="nohref" />
+							<area id="B072" onclick="toggle('B072')" shape="rect" coords="548,581,579,604"  nohref="nohref" />
+							<area id="B073" onclick="toggle('B073')" shape="rect" coords="548,557,578,580"  nohref="nohref" />
+							<area id="B074" onclick="toggle('B074')" shape="rect" coords="547,494,578,518"  nohref="nohref" />
+							<area id="B075" onclick="toggle('B075')" shape="rect" coords="548,470,578,494"  nohref="nohref" />
+							<area id="B076" onclick="toggle('B076')" shape="rect" coords="548,445,578,468"  nohref="nohref" />
+							<area id="B077" onclick="toggle('B077')" shape="rect" coords="548,420,578,445"  nohref="nohref" />
+							<area id="B078" onclick="toggle('B078')" shape="rect" coords="547,396,578,419"  nohref="nohref" />
+							<area id="B079" onclick="toggle('B079')" shape="rect" coords="548,372,578,395"  nohref="nohref" />
+							<area id="B080" onclick="toggle('B080')" shape="rect" coords="727,251,758,275"  nohref="nohref" />
+							<area id="B081" onclick="toggle('B081')" shape="rect" coords="727,276,758,298"  nohref="nohref" />
+							<area id="B082" onclick="toggle('B082')" shape="rect" coords="728,322,758,348"  nohref="nohref" />
+							<area id="B083" onclick="toggle('B083')" shape="rect" coords="728,349,758,372"  nohref="nohref" />
+							<area id="B084" onclick="toggle('B084')" shape="rect" coords="728,371,758,396"  nohref="nohref" />
+							<area id="B085" onclick="toggle('B085')" shape="rect" coords="728,397,757,420"  nohref="nohref" />
+							<area id="B086" onclick="toggle('B086')" shape="rect" coords="728,419,757,445"  nohref="nohref" />
+							<area id="B087" onclick="toggle('B087')" shape="rect" coords="728,445,757,470"  nohref="nohref" />
+							<area id="B088" onclick="toggle('B088')" shape="rect" coords="728,470,758,493"  nohref="nohref" />
+							<area id="B089" onclick="toggle('B089')" shape="rect" coords="728,494,758,519"  nohref="nohref" />
+							<area id="B090" onclick="toggle('B090')" shape="rect" coords="728,556,757,581"  nohref="nohref" />
+							<area id="B091" onclick="toggle('B091')" shape="rect" coords="728,581,757,604"  nohref="nohref" />
+							<area id="B092" onclick="toggle('B092')" shape="rect" coords="728,604,758,630"  nohref="nohref" />
+							<area id="B093" onclick="toggle('B093')" shape="rect" coords="728,630,757,654"  nohref="nohref" />
+							<area id="B094" onclick="toggle('B094')" shape="rect" coords="728,679,758,703"  nohref="nohref" />
+							<area id="B095" onclick="toggle('B095')" shape="rect" coords="728,703,758,727"  nohref="nohref" />
+							<area id="B096" onclick="toggle('B096')" shape="rect" coords="728,727,758,752"  nohref="nohref" />
+							<area id="B097" onclick="toggle('B097')" shape="rect" coords="728,752,758,776"  nohref="nohref" />
+							<area id="B098" onclick="toggle('B098')" shape="rect" coords="728,776,758,800"  nohref="nohref" />
+							<area id="B099" onclick="toggle('B099')" shape="rect" coords="777,775,807,800"  nohref="nohref" />
+							<area id="B100" onclick="toggle('B100')" shape="rect" coords="777,751,807,775"  nohref="nohref" />
+							<area id="B101" onclick="toggle('B101')" shape="rect" coords="777,727,807,752"  nohref="nohref" />
+							<area id="B102" onclick="toggle('B102')" shape="rect" coords="776,703,807,728"  nohref="nohref" />
+							<area id="B103" onclick="toggle('B103')" shape="rect" coords="776,654,807,679"  nohref="nohref" />
+							<area id="B104" onclick="toggle('B104')" shape="rect" coords="776,630,807,655"  nohref="nohref" />
+							<area id="B105" onclick="toggle('B105')" shape="rect" coords="776,605,807,629"  nohref="nohref" />
+							<area id="B106" onclick="toggle('B106')" shape="rect" coords="776,581,807,606"  nohref="nohref" />
+							<area id="B107" onclick="toggle('B107')" shape="rect" coords="777,469,807,494"  nohref="nohref" />
+							<area id="B108" onclick="toggle('B108')" shape="rect" coords="777,445,807,468"  nohref="nohref" />
+							<area id="B109" onclick="toggle('B109')" shape="rect" coords="776,421,807,444"  nohref="nohref" />
+							<area id="B110" onclick="toggle('B110')" shape="rect" coords="776,396,807,421"  nohref="nohref" />
+							<area id="B111" onclick="toggle('B111')" shape="rect" coords="777,347,808,371"  nohref="nohref" />
+							<area id="B112" onclick="toggle('B112')" shape="rect" coords="777,323,808,347"  nohref="nohref" />
+							<area id="B113" onclick="toggle('B113')" shape="rect" coords="777,299,808,323"  nohref="nohref" />
+							<area id="B114" onclick="toggle('B114')" shape="rect" coords="776,274,808,299"  nohref="nohref" />
+							<area id="B115" onclick="toggle('B115')" shape="rect" coords="777,249,808,273"  nohref="nohref" />
+						</map>
+				</div>
+				<div id = "floor3" >
+					<img src="{% static 'src/plan/GEN_Floor_850w.jpg' %}" width="850" height="846" usemap="#GEN_Floor3" border="0">
+					<map name="GEN_Floor3">
+						<area id="C001" onclick="toggle('C001')" shape="rect" coords="793,212,823,238" nohref>
+						<area id="C002" onclick="toggle('C002')" shape="rect" coords="792,238,823,262" nohref>
+						<area id="C003" onclick="toggle('C003')" shape="rect" coords="791,263,823,288" nohref>
+						<area id="C004" onclick="toggle('C004')" shape="rect" coords="791,287,823,311" nohref>
+						<area id="C005" onclick="toggle('C005')" shape="rect" coords="792,312,823,337" nohref>
+						<area id="C006" onclick="toggle('C006')" shape="rect" coords="792,362,823,386" nohref>
+						<area id="C007" onclick="toggle('C007')" shape="rect" coords="792,386,823,411" nohref>
+						<area id="C008" onclick="toggle('C008')" shape="rect" coords="792,411,823,435" nohref>
+						<area id="C009" onclick="toggle('C009')" shape="rect" coords="792,436,823,462" nohref>
+						<area id="C010" onclick="toggle('C010')" shape="rect" coords="792,549,823,574" nohref>
+						<area id="C011" onclick="toggle('C011')" shape="rect" coords="792,574,823,599" nohref>
+						<area id="C012" onclick="toggle('C012')" shape="rect" coords="792,600,823,623" nohref>
+						<area id="C013" onclick="toggle('C013')" shape="rect" coords="792,623,823,648" nohref>
+						<area id="C014" onclick="toggle('C014')" shape="rect" coords="792,673,823,698" nohref>
+						<area id="C015" onclick="toggle('C015')" shape="rect" coords="792,699,822,722" nohref>
+						<area id="C016" onclick="toggle('C016')" shape="rect" coords="793,723,822,747" nohref>
+						<area id="C017" onclick="toggle('C017')" shape="rect" coords="792,748,822,772" nohref>
+						<area id="C018" onclick="toggle('C018')" shape="rect" coords="741,748,772,772" nohref>
+						<area id="C019" onclick="toggle('C019')" shape="rect" coords="741,724,773,747" nohref>
+						<area id="C020" onclick="toggle('C020')" shape="rect" coords="741,699,772,722" nohref>
+						<area id="C021" onclick="toggle('C021')" shape="rect" coords="742,674,772,698" nohref>
+						<area id="C022" onclick="toggle('C022')" shape="rect" coords="741,649,772,673" nohref>
+						<area id="C023" onclick="toggle('C023')" shape="rect" coords="741,601,773,625" nohref>
+						<area id="C024" onclick="toggle('C024')" shape="rect" coords="741,575,772,599" nohref>
+						<area id="C025" onclick="toggle('C025')" shape="rect" coords="742,550,772,573" nohref>
+						<area id="C026" onclick="toggle('C026')" shape="rect" coords="741,525,772,548" nohref>
+						<area id="C027" onclick="toggle('C027')" shape="rect" coords="741,462,773,486" nohref>
+						<area id="C028" onclick="toggle('C028')" shape="rect" coords="741,436,772,461" nohref>
+						<area id="C029" onclick="toggle('C029')" shape="rect" coords="741,412,773,436" nohref>
+						<area id="C030" onclick="toggle('C030')" shape="rect" coords="741,387,772,411" nohref>
+						<area id="C031" onclick="toggle('C031')" shape="rect" coords="742,363,772,386" nohref>
+						<area id="C032" onclick="toggle('C032')" shape="rect" coords="742,337,772,361" nohref>
+						<area id="C033" onclick="toggle('C033')" shape="rect" coords="741,287,772,312" nohref>
+						<area id="C034" onclick="toggle('C034')" shape="rect" coords="741,262,772,287" nohref>
+						<area id="C035" onclick="toggle('C035')" shape="rect" coords="741,237,772,262" nohref>
+						<area id="C036" onclick="toggle('C036')" shape="rect" coords="741,212,772,236" nohref>
+						<area id="C037" onclick="toggle('C037')" shape="rect" coords="559,337,590,361" nohref>
+						<area id="C038" onclick="toggle('C038')" shape="rect" coords="559,361,591,388" nohref>
+						<area id="C039" onclick="toggle('C039')" shape="rect" coords="558,387,591,411" nohref>
+						<area id="C040" onclick="toggle('C040')" shape="rect" coords="558,412,590,436" nohref>
+						<area id="C041" onclick="toggle('C041')" shape="rect" coords="559,437,590,461" nohref>
+						<area id="C042" onclick="toggle('C042')" shape="rect" coords="559,461,590,487" nohref>
+						<area id="C043" onclick="toggle('C043')" shape="rect" coords="559,524,589,549" nohref>
+						<area id="C044" onclick="toggle('C044')" shape="rect" coords="558,550,590,574" nohref>
+						<area id="C045" onclick="toggle('C045')" shape="rect" coords="559,575,591,600" nohref>
+						<area id="C046" onclick="toggle('C046')" shape="rect" coords="558,600,590,623" nohref>
+						<area id="C047" onclick="toggle('C047')" shape="rect" coords="560,624,589,648" nohref>
+						<area id="C048" onclick="toggle('C048')" shape="rect" coords="559,649,589,674" nohref>
+						<area id="C049" onclick="toggle('C049')" shape="rect" coords="507,649,539,673" nohref>
+						<area id="C050" onclick="toggle('C050')" shape="rect" coords="507,624,539,648" nohref>
+						<area id="C051" onclick="toggle('C051')" shape="rect" coords="507,574,539,599" nohref>
+						<area id="C052" onclick="toggle('C052')" shape="rect" coords="508,548,538,573" nohref>
+						<area id="C053" onclick="toggle('C053')" shape="rect" coords="507,460,539,486" nohref>
+						<area id="C054" onclick="toggle('C054')" shape="rect" coords="508,437,539,461" nohref>
+						<area id="C055" onclick="toggle('C055')" shape="rect" coords="507,411,539,436" nohref>
+						<area id="C056" onclick="toggle('C056')" shape="rect" coords="508,364,539,386" nohref>
+						<area id="C057" onclick="toggle('C057')" shape="rect" coords="508,338,539,362" nohref>
+						<area id="C058" onclick="toggle('C058')" shape="rect" coords="322,337,354,362" nohref>
+						<area id="C059" onclick="toggle('C059')" shape="rect" coords="323,362,354,386" nohref>
+						<area id="C060" onclick="toggle('C060')" shape="rect" coords="323,412,355,436" nohref>
+						<area id="C061" onclick="toggle('C061')" shape="rect" coords="323,437,354,461" nohref>
+						<area id="C062" onclick="toggle('C062')" shape="rect" coords="323,461,354,486" nohref>
+						<area id="C063" onclick="toggle('C063')" shape="rect" coords="324,549,355,573" nohref>
+						<area id="C064" onclick="toggle('C064')" shape="rect" coords="323,574,355,598" nohref>
+						<area id="C065" onclick="toggle('C065')" shape="rect" coords="323,623,354,647" nohref>
+						<area id="C066" onclick="toggle('C066')" shape="rect" coords="323,649,355,673" nohref>
+						<area id="C067" onclick="toggle('C067')" shape="rect" coords="271,650,304,672" nohref>
+						<area id="C068" onclick="toggle('C068')" shape="rect" coords="272,625,303,649" nohref>
+						<area id="C069" onclick="toggle('C069')" shape="rect" coords="273,600,303,623" nohref>
+						<area id="C070" onclick="toggle('C070')" shape="rect" coords="273,576,303,599" nohref>
+						<area id="C071" onclick="toggle('C071')" shape="rect" coords="272,552,303,574" nohref>
+						<area id="C072" onclick="toggle('C072')" shape="rect" coords="273,526,303,550" nohref>
+						<area id="C073" onclick="toggle('C073')" shape="rect" coords="272,461,303,487" nohref>
+						<area id="C074" onclick="toggle('C074')" shape="rect" coords="272,439,304,461" nohref>
+						<area id="C075" onclick="toggle('C075')" shape="rect" coords="273,413,304,437" nohref>
+						<area id="C076" onclick="toggle('C076')" shape="rect" coords="273,387,304,410" nohref>
+						<area id="C077" onclick="toggle('C077')" shape="rect" coords="273,363,304,387" nohref>
+						<area id="C078" onclick="toggle('C078')" shape="rect" coords="275,338,302,362" nohref>
+						<area id="C079" onclick="toggle('C079')" shape="rect" coords="90,212,122,237" nohref>
+						<area id="C080" onclick="toggle('C080')" shape="rect" coords="90,237,122,262" nohref>
+						<area id="C081" onclick="toggle('C081')" shape="rect" coords="90,262,121,287" nohref>
+						<area id="C082" onclick="toggle('C082')" shape="rect" coords="90,287,122,312" nohref>
+						<area id="C083" onclick="toggle('C083')" shape="rect" coords="91,337,122,361" nohref>
+						<area id="C084" onclick="toggle('C084')" shape="rect" coords="90,361,121,386" nohref>
+						<area id="C085" onclick="toggle('C085')" shape="rect" coords="90,386,121,411" nohref>
+						<area id="C086" onclick="toggle('C086')" shape="rect" coords="89,411,121,436" nohref>
+						<area id="C087" onclick="toggle('C087')" shape="rect" coords="91,436,121,460" nohref>
+						<area id="C088" onclick="toggle('C088')" shape="rect" coords="90,461,121,486" nohref>
+						<area id="C089" onclick="toggle('C089')" shape="rect" coords="91,523,122,549" nohref>
+						<area id="C090" onclick="toggle('C090')" shape="rect" coords="90,550,122,574" nohref>
+						<area id="C091" onclick="toggle('C091')" shape="rect" coords="90,574,122,599" nohref>
+						<area id="C092" onclick="toggle('C092')" shape="rect" coords="90,599,121,624" nohref>
+						<area id="C093" onclick="toggle('C093')" shape="rect" coords="90,648,121,673" nohref>
+						<area id="C094" onclick="toggle('C094')" shape="rect" coords="90,674,121,698" nohref>
+						<area id="C095" onclick="toggle('C095')" shape="rect" coords="90,698,121,723" nohref>
+						<area id="C096" onclick="toggle('C096')" shape="rect" coords="90,723,121,748" nohref>
+						<area id="C097" onclick="toggle('C097')" shape="rect" coords="91,749,121,772" nohref>
+						<area id="C098" onclick="toggle('C098')" shape="rect" coords="38,749,70,773" nohref>
+						<area id="C099" onclick="toggle('C099')" shape="rect" coords="39,725,70,747" nohref>
+						<area id="C100" onclick="toggle('C100')" shape="rect" coords="39,700,71,723" nohref>
+						<area id="C101" onclick="toggle('C101')" shape="rect" coords="40,674,70,698" nohref>
+						<area id="C102" onclick="toggle('C102')" shape="rect" coords="38,625,70,650" nohref>
+						<area id="C103" onclick="toggle('C103')" shape="rect" coords="39,599,70,624" nohref>
+						<area id="C104" onclick="toggle('C104')" shape="rect" coords="39,574,69,599" nohref>
+						<area id="C105" onclick="toggle('C105')" shape="rect" coords="39,549,71,573" nohref>
+						<area id="C106" onclick="toggle('C106')" shape="rect" coords="38,437,71,462" nohref>
+						<area id="C107" onclick="toggle('C107')" shape="rect" coords="39,413,71,436" nohref>
+						<area id="C108" onclick="toggle('C108')" shape="rect" coords="40,388,70,411" nohref>
+						<area id="C109" onclick="toggle('C109')" shape="rect" coords="39,363,69,386" nohref>
+						<area id="C110" onclick="toggle('C110')" shape="rect" coords="40,312,70,337" nohref>
+						<area id="C111" onclick="toggle('C111')" shape="rect" coords="40,288,70,312" nohref>
+						<area id="C112" onclick="toggle('C112')" shape="rect" coords="40,264,71,287" nohref>
+						<area id="C113" onclick="toggle('C113')" shape="rect" coords="40,239,70,263" nohref>
+						<area id="C114" onclick="toggle('C114')" shape="rect" coords="39,212,70,237" nohref>
+					</map>
+				</div>
+				<div id = "floor4" >
+					<img src="{% static 'src/plan/GEN_Floor_850w.jpg' %}" width="850" height="846" usemap="#GEN_Floor4" border="0">
+						<map name="GEN_Floor4">
+							<area id="D001" onclick="toggle('D001')" shape="rect" coords="793,212,823,238" nohref>
+							<area id="D002" onclick="toggle('D002')" shape="rect" coords="792,238,823,262" nohref>
+							<area id="D003" onclick="toggle('D003')" shape="rect" coords="791,263,823,288" nohref>
+							<area id="D004" onclick="toggle('D004')" shape="rect" coords="791,287,823,311" nohref>
+							<area id="D005" onclick="toggle('D005')" shape="rect" coords="792,312,823,337" nohref>
+							<area id="D006" onclick="toggle('D006')" shape="rect" coords="792,362,823,386" nohref>
+							<area id="D007" onclick="toggle('D007')" shape="rect" coords="792,386,823,411" nohref>
+							<area id="D008" onclick="toggle('D008')" shape="rect" coords="792,411,823,435" nohref>
+							<area id="D009" onclick="toggle('D009')" shape="rect" coords="792,436,823,462" nohref>
+							<area id="D010" onclick="toggle('D010')" shape="rect" coords="792,549,823,574" nohref>
+							<area id="D011" onclick="toggle('D011')" shape="rect" coords="792,574,823,599" nohref>
+							<area id="D012" onclick="toggle('D012')" shape="rect" coords="792,600,823,623" nohref>
+							<area id="D013" onclick="toggle('D013')" shape="rect" coords="792,623,823,648" nohref>
+							<area id="D014" onclick="toggle('D014')" shape="rect" coords="792,673,823,698" nohref>
+							<area id="D015" onclick="toggle('D015')" shape="rect" coords="792,699,822,722" nohref>
+							<area id="D016" onclick="toggle('D016')" shape="rect" coords="793,723,822,747" nohref>
+							<area id="D017" onclick="toggle('D017')" shape="rect" coords="792,748,822,772" nohref>
+							<area id="D018" onclick="toggle('D018')" shape="rect" coords="741,748,772,772" nohref>
+							<area id="D019" onclick="toggle('D019')" shape="rect" coords="741,724,773,747" nohref>
+							<area id="D020" onclick="toggle('D020')" shape="rect" coords="741,699,772,722" nohref>
+							<area id="D021" onclick="toggle('D021')" shape="rect" coords="742,674,772,698" nohref>
+							<area id="D022" onclick="toggle('D022')" shape="rect" coords="741,649,772,673" nohref>
+							<area id="D023" onclick="toggle('D023')" shape="rect" coords="741,601,773,625" nohref>
+							<area id="D024" onclick="toggle('D024')" shape="rect" coords="741,575,772,599" nohref>
+							<area id="D025" onclick="toggle('D025')" shape="rect" coords="742,550,772,573" nohref>
+							<area id="D026" onclick="toggle('D026')" shape="rect" coords="741,525,772,548" nohref>
+							<area id="D027" onclick="toggle('D027')" shape="rect" coords="741,462,773,486" nohref>
+							<area id="D028" onclick="toggle('D028')" shape="rect" coords="741,436,772,461" nohref>
+							<area id="D029" onclick="toggle('D029')" shape="rect" coords="741,412,773,436" nohref>
+							<area id="D030" onclick="toggle('D030')" shape="rect" coords="741,387,772,411" nohref>
+							<area id="D031" onclick="toggle('D031')" shape="rect" coords="742,363,772,386" nohref>
+							<area id="D032" onclick="toggle('D032')" shape="rect" coords="742,337,772,361" nohref>
+							<area id="D033" onclick="toggle('D033')" shape="rect" coords="741,287,772,312" nohref>
+							<area id="D034" onclick="toggle('D034')" shape="rect" coords="741,262,772,287" nohref>
+							<area id="D035" onclick="toggle('D035')" shape="rect" coords="741,237,772,262" nohref>
+							<area id="D036" onclick="toggle('D036')" shape="rect" coords="741,212,772,236" nohref>
+							<area id="D037" onclick="toggle('D037')" shape="rect" coords="559,337,590,361" nohref>
+							<area id="D038" onclick="toggle('D038')" shape="rect" coords="559,361,591,388" nohref>
+							<area id="D039" onclick="toggle('D039')" shape="rect" coords="558,387,591,411" nohref>
+							<area id="D040" onclick="toggle('D040')" shape="rect" coords="558,412,590,436" nohref>
+							<area id="D041" onclick="toggle('D041')" shape="rect" coords="559,437,590,461" nohref>
+							<area id="D042" onclick="toggle('D042')" shape="rect" coords="559,461,590,487" nohref>
+							<area id="D043" onclick="toggle('D043')" shape="rect" coords="559,524,589,549" nohref>
+							<area id="D044" onclick="toggle('D044')" shape="rect" coords="558,550,590,574" nohref>
+							<area id="D045" onclick="toggle('D045')" shape="rect" coords="559,575,591,600" nohref>
+							<area id="D046" onclick="toggle('D046')" shape="rect" coords="558,600,590,623" nohref>
+							<area id="D047" onclick="toggle('D047')" shape="rect" coords="560,624,589,648" nohref>
+							<area id="D048" onclick="toggle('D048')" shape="rect" coords="559,649,589,674" nohref>
+							<area id="D049" onclick="toggle('D049')" shape="rect" coords="507,649,539,673" nohref>
+							<area id="D050" onclick="toggle('D050')" shape="rect" coords="507,624,539,648" nohref>
+							<area id="D051" onclick="toggle('D051')" shape="rect" coords="507,574,539,599" nohref>
+							<area id="D052" onclick="toggle('D052')" shape="rect" coords="508,548,538,573" nohref>
+							<area id="D053" onclick="toggle('D053')" shape="rect" coords="507,460,539,486" nohref>
+							<area id="D054" onclick="toggle('D054')" shape="rect" coords="508,437,539,461" nohref>
+							<area id="D055" onclick="toggle('D055')" shape="rect" coords="507,411,539,436" nohref>
+							<area id="D056" onclick="toggle('D056')" shape="rect" coords="508,364,539,386" nohref>
+							<area id="D057" onclick="toggle('D057')" shape="rect" coords="508,338,539,362" nohref>
+							<area id="D058" onclick="toggle('D058')" shape="rect" coords="322,337,354,362" nohref>
+							<area id="D059" onclick="toggle('D059')" shape="rect" coords="323,362,354,386" nohref>
+							<area id="D060" onclick="toggle('D060')" shape="rect" coords="323,412,355,436" nohref>
+							<area id="D061" onclick="toggle('D061')" shape="rect" coords="323,437,354,461" nohref>
+							<area id="D062" onclick="toggle('D062')" shape="rect" coords="323,461,354,486" nohref>
+							<area id="D063" onclick="toggle('D063')" shape="rect" coords="324,549,355,573" nohref>
+							<area id="D064" onclick="toggle('D064')" shape="rect" coords="323,574,355,598" nohref>
+							<area id="D065" onclick="toggle('D065')" shape="rect" coords="323,623,354,647" nohref>
+							<area id="D066" onclick="toggle('D066')" shape="rect" coords="323,649,355,673" nohref>
+							<area id="D067" onclick="toggle('D067')" shape="rect" coords="271,650,304,672" nohref>
+							<area id="D068" onclick="toggle('D068')" shape="rect" coords="272,625,303,649" nohref>
+							<area id="D069" onclick="toggle('D069')" shape="rect" coords="273,600,303,623" nohref>
+							<area id="D070" onclick="toggle('D070')" shape="rect" coords="273,576,303,599" nohref>
+							<area id="D071" onclick="toggle('D071')" shape="rect" coords="272,552,303,574" nohref>
+							<area id="D072" onclick="toggle('D072')" shape="rect" coords="273,526,303,550" nohref>
+							<area id="D073" onclick="toggle('D073')" shape="rect" coords="272,461,303,487" nohref>
+							<area id="D074" onclick="toggle('D074')" shape="rect" coords="272,439,304,461" nohref>
+							<area id="D075" onclick="toggle('D075')" shape="rect" coords="273,413,304,437" nohref>
+							<area id="D076" onclick="toggle('D076')" shape="rect" coords="273,387,304,410" nohref>
+							<area id="D077" onclick="toggle('D077')" shape="rect" coords="273,363,304,387" nohref>
+							<area id="D078" onclick="toggle('D078')" shape="rect" coords="275,338,302,362" nohref>
+							<area id="D079" onclick="toggle('D079')" shape="rect" coords="90,212,122,237" nohref>
+							<area id="D080" onclick="toggle('D080')" shape="rect" coords="90,237,122,262" nohref>
+							<area id="D081" onclick="toggle('D081')" shape="rect" coords="90,262,121,287" nohref>
+							<area id="D082" onclick="toggle('D082')" shape="rect" coords="90,287,122,312" nohref>
+							<area id="D083" onclick="toggle('D083')" shape="rect" coords="91,337,122,361" nohref>
+							<area id="D084" onclick="toggle('D084')" shape="rect" coords="90,361,121,386" nohref>
+							<area id="D085" onclick="toggle('D085')" shape="rect" coords="90,386,121,411" nohref>
+							<area id="D086" onclick="toggle('D086')" shape="rect" coords="89,411,121,436" nohref>
+							<area id="D087" onclick="toggle('D087')" shape="rect" coords="91,436,121,460" nohref>
+							<area id="D088" onclick="toggle('D088')" shape="rect" coords="90,461,121,486" nohref>
+							<area id="D089" onclick="toggle('D089')" shape="rect" coords="91,523,122,549" nohref>
+							<area id="D090" onclick="toggle('D090')" shape="rect" coords="90,550,122,574" nohref>
+							<area id="D091" onclick="toggle('D091')" shape="rect" coords="90,574,122,599" nohref>
+							<area id="D092" onclick="toggle('D092')" shape="rect" coords="90,599,121,624" nohref>
+							<area id="D093" onclick="toggle('D093')" shape="rect" coords="90,648,121,673" nohref>
+							<area id="D094" onclick="toggle('D094')" shape="rect" coords="90,674,121,698" nohref>
+							<area id="D095" onclick="toggle('D095')" shape="rect" coords="90,698,121,723" nohref>
+							<area id="D096" onclick="toggle('D096')" shape="rect" coords="90,723,121,748" nohref>
+							<area id="D097" onclick="toggle('D097')" shape="rect" coords="91,749,121,772" nohref>
+							<area id="D098" onclick="toggle('D098')" shape="rect" coords="38,749,70,773" nohref>
+							<area id="D099" onclick="toggle('D099')" shape="rect" coords="39,725,70,747" nohref>
+							<area id="D100" onclick="toggle('D100')" shape="rect" coords="39,700,71,723" nohref>
+							<area id="D101" onclick="toggle('D101')" shape="rect" coords="40,674,70,698" nohref>
+							<area id="D102" onclick="toggle('D102')" shape="rect" coords="38,625,70,650" nohref>
+							<area id="D103" onclick="toggle('D103')" shape="rect" coords="39,599,70,624" nohref>
+							<area id="D104" onclick="toggle('D104')" shape="rect" coords="39,574,69,599" nohref>
+							<area id="D105" onclick="toggle('D105')" shape="rect" coords="39,549,71,573" nohref>
+							<area id="D106" onclick="toggle('D106')" shape="rect" coords="38,437,71,462" nohref>
+							<area id="D107" onclick="toggle('D107')" shape="rect" coords="39,413,71,436" nohref>
+							<area id="D108" onclick="toggle('D108')" shape="rect" coords="40,388,70,411" nohref>
+							<area id="D109" onclick="toggle('D109')" shape="rect" coords="39,363,69,386" nohref>
+							<area id="D110" onclick="toggle('D110')" shape="rect" coords="40,312,70,337" nohref>
+							<area id="D111" onclick="toggle('D111')" shape="rect" coords="40,288,70,312" nohref>
+							<area id="D112" onclick="toggle('D112')" shape="rect" coords="40,264,71,287" nohref>
+							<area id="D113" onclick="toggle('D113')" shape="rect" coords="40,239,70,263" nohref>
+							<area id="D114" onclick="toggle('D114')" shape="rect" coords="39,212,70,237" nohref>
+						</map>
+				</div>
+				<div id="floor5">
+					<img src="{% static 'src/plan/GEN_Floor_850w.jpg' %}" width="850" height="846" usemap="#GEN_Floor5" border="0">
+						<map name="GEN_Floor5">
+						<area id="E001" onclick="toggle('E001')" shape="rect" coords="793,212,823,238" nohref>
+						<area id="E002" onclick="toggle('E002')" shape="rect" coords="792,238,823,262" nohref>
+						<area id="E003" onclick="toggle('E003')" shape="rect" coords="791,263,823,288" nohref>
+						<area id="E004" onclick="toggle('E004')" shape="rect" coords="791,287,823,311" nohref>
+						<area id="E005" onclick="toggle('E005')" shape="rect" coords="792,312,823,337" nohref>
+						<area id="E006" onclick="toggle('E006')" shape="rect" coords="792,362,823,386" nohref>
+						<area id="E007" onclick="toggle('E007')" shape="rect" coords="792,386,823,411" nohref>
+						<area id="E008" onclick="toggle('E008')" shape="rect" coords="792,411,823,435" nohref>
+						<area id="E009" onclick="toggle('E009')" shape="rect" coords="792,436,823,462" nohref>
+						<area id="E010" onclick="toggle('E010')" shape="rect" coords="792,549,823,574" nohref>
+						<area id="E011" onclick="toggle('E011')" shape="rect" coords="792,574,823,599" nohref>
+						<area id="E012" onclick="toggle('E012')" shape="rect" coords="792,600,823,623" nohref>
+						<area id="E013" onclick="toggle('E013')" shape="rect" coords="792,623,823,648" nohref>
+						<area id="E014" onclick="toggle('E014')" shape="rect" coords="792,673,823,698" nohref>
+						<area id="E015" onclick="toggle('E015')" shape="rect" coords="792,699,822,722" nohref>
+						<area id="E016" onclick="toggle('E016')" shape="rect" coords="793,723,822,747" nohref>
+						<area id="E017" onclick="toggle('E017')" shape="rect" coords="792,748,822,772" nohref>
+						<area id="E018" onclick="toggle('E018')" shape="rect" coords="741,748,772,772" nohref>
+						<area id="E019" onclick="toggle('E019')" shape="rect" coords="741,724,773,747" nohref>
+						<area id="E020" onclick="toggle('E020')" shape="rect" coords="741,699,772,722" nohref>
+						<area id="E021" onclick="toggle('E021')" shape="rect" coords="742,674,772,698" nohref>
+						<area id="E022" onclick="toggle('E022')" shape="rect" coords="741,649,772,673" nohref>
+						<area id="E023" onclick="toggle('E023')" shape="rect" coords="741,601,773,625" nohref>
+						<area id="E024" onclick="toggle('E024')" shape="rect" coords="741,575,772,599" nohref>
+						<area id="E025" onclick="toggle('E025')" shape="rect" coords="742,550,772,573" nohref>
+						<area id="E026" onclick="toggle('E026')" shape="rect" coords="741,525,772,548" nohref>
+						<area id="E027" onclick="toggle('E027')" shape="rect" coords="741,462,773,486" nohref>
+						<area id="E028" onclick="toggle('E028')" shape="rect" coords="741,436,772,461" nohref>
+						<area id="E029" onclick="toggle('E029')" shape="rect" coords="741,412,773,436" nohref>
+						<area id="E030" onclick="toggle('E030')" shape="rect" coords="741,387,772,411" nohref>
+						<area id="E031" onclick="toggle('E031')" shape="rect" coords="742,363,772,386" nohref>
+						<area id="E032" onclick="toggle('E032')" shape="rect" coords="742,337,772,361" nohref>
+						<area id="E033" onclick="toggle('E033')" shape="rect" coords="741,287,772,312" nohref>
+						<area id="E034" onclick="toggle('E034')" shape="rect" coords="741,262,772,287" nohref>
+						<area id="E035" onclick="toggle('E035')" shape="rect" coords="741,237,772,262" nohref>
+						<area id="E036" onclick="toggle('E036')" shape="rect" coords="741,212,772,236" nohref>
+						<area id="E037" onclick="toggle('E037')" shape="rect" coords="559,337,590,361" nohref>
+						<area id="E038" onclick="toggle('E038')" shape="rect" coords="559,361,591,388" nohref>
+						<area id="E039" onclick="toggle('E039')" shape="rect" coords="558,387,591,411" nohref>
+						<area id="E040" onclick="toggle('E040')" shape="rect" coords="558,412,590,436" nohref>
+						<area id="E041" onclick="toggle('E041')" shape="rect" coords="559,437,590,461" nohref>
+						<area id="E042" onclick="toggle('E042')" shape="rect" coords="559,461,590,487" nohref>
+						<area id="E043" onclick="toggle('E043')" shape="rect" coords="559,524,589,549" nohref>
+						<area id="E044" onclick="toggle('E044')" shape="rect" coords="558,550,590,574" nohref>
+						<area id="E045" onclick="toggle('E045')" shape="rect" coords="559,575,591,600" nohref>
+						<area id="E046" onclick="toggle('E046')" shape="rect" coords="558,600,590,623" nohref>
+						<area id="E047" onclick="toggle('E047')" shape="rect" coords="560,624,589,648" nohref>
+						<area id="E048" onclick="toggle('E048')" shape="rect" coords="559,649,589,674" nohref>
+						<area id="E049" onclick="toggle('E049')" shape="rect" coords="507,649,539,673" nohref>
+						<area id="E050" onclick="toggle('E050')" shape="rect" coords="507,624,539,648" nohref>
+						<area id="E051" onclick="toggle('E051')" shape="rect" coords="507,574,539,599" nohref>
+						<area id="E052" onclick="toggle('E052')" shape="rect" coords="508,548,538,573" nohref>
+						<area id="E053" onclick="toggle('E053')" shape="rect" coords="507,460,539,486" nohref>
+						<area id="E054" onclick="toggle('E054')" shape="rect" coords="508,437,539,461" nohref>
+						<area id="E055" onclick="toggle('E055')" shape="rect" coords="507,411,539,436" nohref>
+						<area id="E056" onclick="toggle('E056')" shape="rect" coords="508,364,539,386" nohref>
+						<area id="E057" onclick="toggle('E057')" shape="rect" coords="508,338,539,362" nohref>
+						<area id="E058" onclick="toggle('E058')" shape="rect" coords="322,337,354,362" nohref>
+						<area id="E059" onclick="toggle('E059')" shape="rect" coords="323,362,354,386" nohref>
+						<area id="E060" onclick="toggle('E060')" shape="rect" coords="323,412,355,436" nohref>
+						<area id="E061" onclick="toggle('E061')" shape="rect" coords="323,437,354,461" nohref>
+						<area id="E062" onclick="toggle('E062')" shape="rect" coords="323,461,354,486" nohref>
+						<area id="E063" onclick="toggle('E063')" shape="rect" coords="324,549,355,573" nohref>
+						<area id="E064" onclick="toggle('E064')" shape="rect" coords="323,574,355,598" nohref>
+						<area id="E065" onclick="toggle('E065')" shape="rect" coords="323,623,354,647" nohref>
+						<area id="E066" onclick="toggle('E066')" shape="rect" coords="323,649,355,673" nohref>
+						<area id="E067" onclick="toggle('E067')" shape="rect" coords="271,650,304,672" nohref>
+						<area id="E068" onclick="toggle('E068')" shape="rect" coords="272,625,303,649" nohref>
+						<area id="E069" onclick="toggle('E069')" shape="rect" coords="273,600,303,623" nohref>
+						<area id="E070" onclick="toggle('E070')" shape="rect" coords="273,576,303,599" nohref>
+						<area id="E071" onclick="toggle('E071')" shape="rect" coords="272,552,303,574" nohref>
+						<area id="E072" onclick="toggle('E072')" shape="rect" coords="273,526,303,550" nohref>
+						<area id="E073" onclick="toggle('E073')" shape="rect" coords="272,461,303,487" nohref>
+						<area id="E074" onclick="toggle('E074')" shape="rect" coords="272,439,304,461" nohref>
+						<area id="E075" onclick="toggle('E075')" shape="rect" coords="273,413,304,437" nohref>
+						<area id="E076" onclick="toggle('E076')" shape="rect" coords="273,387,304,410" nohref>
+						<area id="E077" onclick="toggle('E077')" shape="rect" coords="273,363,304,387" nohref>
+						<area id="E078" onclick="toggle('E078')" shape="rect" coords="275,338,302,362" nohref>
+						<area id="E079" onclick="toggle('E079')" shape="rect" coords="90,212,122,237" nohref>
+						<area id="E080" onclick="toggle('E080')" shape="rect" coords="90,237,122,262" nohref>
+						<area id="E081" onclick="toggle('E081')" shape="rect" coords="90,262,121,287" nohref>
+						<area id="E082" onclick="toggle('E082')" shape="rect" coords="90,287,122,312" nohref>
+						<area id="E083" onclick="toggle('E083')" shape="rect" coords="91,337,122,361" nohref>
+						<area id="E084" onclick="toggle('E084')" shape="rect" coords="90,361,121,386" nohref>
+						<area id="E085" onclick="toggle('E085')" shape="rect" coords="90,386,121,411" nohref>
+						<area id="E086" onclick="toggle('E086')" shape="rect" coords="89,411,121,436" nohref>
+						<area id="E087" onclick="toggle('E087')" shape="rect" coords="91,436,121,460" nohref>
+						<area id="E088" onclick="toggle('E088')" shape="rect" coords="90,461,121,486" nohref>
+						<area id="E089" onclick="toggle('E089')" shape="rect" coords="91,523,122,549" nohref>
+						<area id="E090" onclick="toggle('E090')" shape="rect" coords="90,550,122,574" nohref>
+						<area id="E091" onclick="toggle('E091')" shape="rect" coords="90,574,122,599" nohref>
+						<area id="E092" onclick="toggle('E092')" shape="rect" coords="90,599,121,624" nohref>
+						<area id="E093" onclick="toggle('E093')" shape="rect" coords="90,648,121,673" nohref>
+						<area id="E094" onclick="toggle('E094')" shape="rect" coords="90,674,121,698" nohref>
+						<area id="E095" onclick="toggle('E095')" shape="rect" coords="90,698,121,723" nohref>
+						<area id="E096" onclick="toggle('E096')" shape="rect" coords="90,723,121,748" nohref>
+						<area id="E097" onclick="toggle('E097')" shape="rect" coords="91,749,121,772" nohref>
+						<area id="E098" onclick="toggle('E098')" shape="rect" coords="38,749,70,773" nohref>
+						<area id="E099" onclick="toggle('E099')" shape="rect" coords="39,725,70,747" nohref>
+						<area id="E100" onclick="toggle('E100')" shape="rect" coords="39,700,71,723" nohref>
+						<area id="E101" onclick="toggle('E101')" shape="rect" coords="40,674,70,698" nohref>
+						<area id="E102" onclick="toggle('E102')" shape="rect" coords="38,625,70,650" nohref>
+						<area id="E103" onclick="toggle('E103')" shape="rect" coords="39,599,70,624" nohref>
+						<area id="E104" onclick="toggle('E104')" shape="rect" coords="39,574,69,599" nohref>
+						<area id="E105" onclick="toggle('E105')" shape="rect" coords="39,549,71,573" nohref>
+						<area id="E106" onclick="toggle('E106')" shape="rect" coords="38,437,71,462" nohref>
+						<area id="E107" onclick="toggle('E107')" shape="rect" coords="39,413,71,436" nohref>
+						<area id="E108" onclick="toggle('E108')" shape="rect" coords="40,388,70,411" nohref>
+						<area id="E109" onclick="toggle('E109')" shape="rect" coords="39,363,69,386" nohref>
+						<area id="E110" onclick="toggle('E110')" shape="rect" coords="40,312,70,337" nohref>
+						<area id="E111" onclick="toggle('E111')" shape="rect" coords="40,288,70,312" nohref>
+						<area id="E112" onclick="toggle('E112')" shape="rect" coords="40,264,71,287" nohref>
+						<area id="E113" onclick="toggle('E113')" shape="rect" coords="40,239,70,263" nohref>
+						<area id="E114" onclick="toggle('E114')" shape="rect" coords="39,212,70,237" nohref>
+					</map>
+				</div>
+				<div id="floor6">
+				</div>
+				<div id="floor7">
+				</div>
+				<div id="floor8">
+				</div>
 
-				
-			</tr>
-			<tr>
-					<td class='clickable' id = "123" onclick = "toggle2('123','A17')">A17</td>
-					<td id = "124" class='clickable' onclick = "toggle2('124','A19')">A18</td>
-					<td id = "125" class='clickable' onclick = "toggle2('125','A19')">A19</td>
-					<td id = "126" class='clickable' onclick = "toggle2('126','A20')">A20</td> 
-					<td id = "127" class='clickable' onclick = "toggle2('127','A21')">A21</td>
-					<td id = "128" class='not_clickable_vert_gallery'></td>
-					<td id = "129" class='clickable' onclick = "toggle2('129','A22')">A22</td>
-					<td id = "130" class='clickable' onclick = "toggle2('130','A23')">A23</td>
-					<td id = "131" class='clickable' onclick = "toggle2('131','A24')">A24</td>
-					<td id = "132" class='clickable' onclick = "toggle2('132','A25')">A25</td>
-					<td id = "133" class='clickable'  onclick ="toggle2('133','A26')">A26</td>
-					<td id = "134" class='clickable' onclick = "toggle2('134','A27')">A27</td>
-					<td id = "135" class='clickable' onclick = "toggle2('135','A28')">A28</td>
-					<td id = "136" class='clickable' onclick = "toggle2('136','A29')">A29</td> 
-					<td id = "137" class='clickable' onclick = "toggle2('137','A30')">A30</td>
-					<td id = "138" class='clickable' onclick = "toggle2('138','A31')">A31</td>
-					<td id = "139" class='not_clickable_vert_gallery' ></td>
-					<td id = "140" class='clickable' onclick = "toggle2('140','A32')">A32</td>
-					<td id = "141" class='clickable' onclick = "toggle2('141','A33')">A33</td>
-					<td id = "142" class='clickable' onclick = "toggle2('142','A34')">A34</td>
-					<td id = "143" class='clickable' onclick = "toggle2('143','A35')">A35</td>
-					<td id = "144" class='clickable' onclick = "toggle2('144','A36')">A36</td>
-					
-					
-					
-				
-				</tr>
-				<tr>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='junct_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='junct_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					
-				</tr>
-				<tr>
-					<td class='not_clickable' id ='sitout'></td>
-					<td class='not_clickable' id ='sitout'></td>
-					<td class='not_clickable' id ='sitout'></td>
-					<td id = "145" class='clickable' onclick = "toggle2('145','A37')">A37</td> 
-					<td id = "146" class='clickable' onclick = "toggle2('146','A38')">A38</td>
-					<td class='not_clickable' id ='vert_gallery'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td> 
-					<!--
-					<td id = "114" class='clickable' onclick = "toggle('114')">114</td>
-					<td id = "114" class='clickable' onclick = "toggle('114')">114</td>
-					<td id = "115" class='clickable' onclick = "toggle('115')">115</td>
-					<td id = "116" class='clickable' onclick = "toggle('116')">116</td>
-					<td class='clickable' id = "109" onclick = "toggle('109')">109</td>
-					<td id = "110" class='clickable' onclick = "toggle('110')">110</td>
-					<td id = "111" class='clickable' onclick = "toggle('111')">111</td>
-					<td id = "112" class='clickable' onclick = "toggle('112')">112</td> 
-					<td id = "113" class='clickable' onclick = "toggle('113')">113</td>
-					<td id = "114" class='clickable' onclick = "toggle('114')">114</td>-->
-					<td class='not_clickable' id ='vert_gallery'></td>
-					<td id = "147" class='clickable' onclick = "toggle2('147','A39')">A39</td>
-					<td id = "148" class='clickable' onclick = "toggle2('148','A40')">A40</td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-								
-				</tr>
-				<tr>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td> 
-					<td id = "149" class='clickable' onclick = "toggle2('149','A41')">A41</td> 
-					<td id = "150" class='clickable' onclick = "toggle2('150','A42')">A42</td>
-					<td class='not_clickable' id ='vert_gallery'></td>
-					<!--<td id = "121" class='clickable' onclick = "toggle('121')">121</td>
-					<td id = "122" class='clickable' onclick = "toggle('122')">122</td>
-					<td id = "123" class='clickable' onclick = "toggle('123')">123</td>
-					<td id = "124" class='clickable' onclick = "toggle('124')">124</td>
-					<td id = "117" class='clickable' onclick = "toggle('117')">117</td>
-					<td id = "118" class='clickable' onclick = "toggle('118')">118</td>
-					<td id = "119" class='clickable' onclick = "toggle('119')">119</td>
-					<td id = "120" class='clickable' onclick = "toggle('120')">120</td> 
-					<td id = "121" class='clickable' onclick = "toggle('121')">121</td>
-					<td id = "122" class='clickable' onclick = "toggle('122')">122</td>-->
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id ='vert_gallery'></td>
-					<td id = "151" class='clickable' onclick = "toggle2('151','A43')">A43</td>
-					<td id = "152" class='clickable' onclick = "toggle2('152'.'A44')">A44</td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-				</tr>
-				<tr>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='junct_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='junct_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-				</tr>
-				<tr>
-					<td id = "153" class='clickable' onclick = "toggle2('153','A45')">A45</td>
-					<td id = "154" class='clickable' onclick = "toggle2('154','A46')">A46</td>
-					<td id = "155" class='clickable' onclick = "toggle2('155','A47')">A47</td>
-					<td id = "156" class='clickable' onclick = "toggle2('156','A48')">A48</td>
-					<td class='not_clickable' id ='washroom'></td>
-					<td class='not_clickable' id ='vert_gallery'></td>
-					<!--<td class='not_clickable' id ='washroom'></td>
-					<td id = "129" class='clickable' onclick = "toggle('129')">128</td>
-					<td id = "130" class='clickable' onclick = "toggle('130')">129</td>
-					<td id = "131" class='clickable' onclick = "toggle('131')">131</td>
-					<td id = "132" class='clickable' onclick = "toggle('132')">132</td>
-					<td id = "125" class='clickable' onclick = "toggle('125')">125</td>
-					<td id = "126" class='clickable' onclick = "toggle('126')">126</td>
-					<td id = "127" class='clickable' onclick = "toggle('127')">127</td>
-					<td id = "128" class='clickable' onclick = "toggle('128')">128</td>
-					<td class='not_clickable' id ='washroom'></td>!-->
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id ='vert_gallery'></td>
-					<td class='not_clickable' id ='washroom'></td>
-					<td id = "157" class='clickable' onclick = "toggle2('157','A49')">A49</td>
-					<td id = "158" class='clickable' onclick = "toggle2('158','A50')">A50</td>
-					<td id = "159" class='clickable' onclick = "toggle2('159','A51')">A51</td>
-					<td id = "160" class='clickable' onclick = "toggle2('160','A52')">A52</td>
-				</tr>
-				<tr>
-					<td class='clickable' id = "161" onclick = "toggle2('161','A53')">A53</td>
-					<td id = "162" class='clickable' onclick = "toggle2('162','A54')">A54</td>
-					<td id = "163" class='clickable' onclick = "toggle2('163','A55')">A55</td>
-					<td id = "164" class='clickable' onclick = "toggle2('164','A56')">A56</td> 
-					<td class='not_clickable' id ='washroom'></td>
-					<td class='not_clickable' id ='vert_gallery'></td><!--
-					<td class='not_clickable' id ='washroom'></td>
-					<td id = "105" class='clickable' onclick = "toggle('105')">105</td>
-					<td id = "106" class='clickable' onclick = "toggle('106')">106</td>
-					<td id = "107" class='clickable' onclick = "toggle('107')">107</td>
-					<td id = "108" class='clickable' onclick = "toggle('108')">108</td>
-					<td class='clickable' id = "101" onclick = "toggle('101')">101</td>
-					<td id = "102" class='clickable' onclick = "toggle('102')">102</td>
-					<td id = "103" class='clickable' onclick = "toggle('103')">103</td>
-					<td id = "104" class='clickable' onclick = "toggle('104')">104</td> 
-					<td class='not_clickable' id ='washroom'></td>-->
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id ='vert_gallery'></td>
-					<td class='not_clickable' id ='washroom'></td>
-					<td id = "165" class='clickable' onclick = "toggle2('165','A57')">A57</td>
-					<td id = "166" class='clickable' onclick = "toggle2('166','A58')">A58</td>
-					<td id = "167" class='clickable' onclick = "toggle2('167','A59')">A59</td>
-					<td id = "168" class='clickable' onclick = "toggle2('168','A60')">A60</td>
-				</tr>
-				<tr>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='junct_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='junct_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-				</tr>
-				<tr>
-					<td class='clickable' id = "169" onclick = "toggle2('169','A61')">A61</td>
-					<td id = "170" class='clickable' onclick = "toggle2('170','A62')">A62</td>
-					<td id = "171" class='clickable' onclick = "toggle2('171','A63')">A63</td>
-					<td id = "172" class='clickable' onclick = "toggle2('172','A64')">A64</td> 
-					<td id = "173" class='clickable' onclick = "toggle2('173','A65')">A65</td>
-					<td class='not_clickable' id ='vert_gallery'></td>
-					<td id = "174" class='clickable' onclick = "toggle2('174','A66')">A66</td>
-					<td id = "175" class='clickable' onclick = "toggle2('175','A67')">A67</td>
-					<td id = "176" class='clickable' onclick = "toggle2('176','A68')">A68</td>
-					<td id = "177" class='clickable' onclick = "toggle2('177','A69')">A69</td>
-					<td class='clickable' id = "178" onclick = "toggle2('178','A70')">A70</td>
-					<td id = "179" class='clickable' onclick = "toggle2('179','A71')">A71</td>
-					<td id = "180" class='clickable' onclick = "toggle2('180','A72')">A72</td>
-					<td id = "181" class='clickable' onclick = "toggle2('181','A73')">A73</td> 
-					<td id = "182" class='clickable' onclick = "toggle2('182','A74')">A74</td>
-					<td id = "183" class='clickable' onclick = "toggle2('183','A75')">A75</td>
-					<td class='not_clickable' id ='vert_gallery'></td>
-					<td id = "184" class='clickable' onclick = "toggle2('184','A76')">A76</td>
-					<td id = "185" class='clickable' onclick = "toggle2('185','A77')">A77</td>
-					<td id = "186" class='clickable' onclick = "toggle2('186','A78')">A78</td>
-					<td id = "187" class='clickable' onclick = "toggle2('187','A79')">A79</td>
-					<td id = "188" class='clickable' onclick = "toggle2('188','A80')">A80</td>
-				
-				</tr>
-				<tr>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='junct_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='junct_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-				</tr>
-				<tr>
-					<td id = "189" class='clickable' onclick = "toggle2('189','A81')">A81</td>
-					<td id = "190" class='clickable' onclick = "toggle2('190','A82')">A82</td>
-					<td id = "191" class='clickable' onclick = "toggle2('191','A83')">A83</td>
-					<td id = "192" class='clickable' onclick = "toggle2('192','A84')">A84</td> 
-					<td id = "193" class='clickable' onclick = "toggle2('193','A85')">A85</td>
-					<td class='not_clickable' id ='vert_gallery'></td>
-					<td id = "194" class='clickable' onclick = "toggle2('194','A86')">A86</td>
-					<td id = "195" class='clickable' onclick = "toggle2('195','A87')">A87</td>
-					<td id = "196" class='clickable' onclick = "toggle2('196','A88')">A88</td>
-					<td id = "197" class='clickable' onclick = "toggle2('197','A89')">A89</td>
-					<td id = "198" class='clickable' onclick = "toggle2('198','A90')">A90</td>
-					<td id = "199" class='clickable' onclick = "toggle2('199','A91')">A91</td>
-					<td id = "200" class='clickable' onclick = "toggle2('200','A92')">A92</td>
-					<td id = "201" class='clickable' onclick = "toggle2('201','A93')">A93</td>
-					<td id = "202" class='clickable' onclick = "toggle2('202','A94')">A94</td>
-					<td id = "203" class='clickable' onclick = "toggle2('203','A95')">A95</td> 
-					<td class='not_clickable' id ='vert_gallery'></td>
-					<td id = "204" class='clickable' onclick = "toggle2('204','A96')">A96</td>
-					<td id = "205" class='clickable' onclick = "toggle2('205','A97')">A97</td>
-					<td id = "206" class='clickable' onclick = "toggle2('206','A98')">A98</td>
-					<td id = "207" class='clickable' onclick = "toggle2('207','A99')">A99</td>
-					<td id = "208" class='clickable' onclick = "toggle2('208','A100')">A100</td>
-				
-				</tr>
-				<tr>
-					<td id = "208" class='clickable' onclick = "toggle('117','A101')">A101</td>
-					<td id = "209" class='clickable' onclick = "toggle('118','A102')">A102</td>
-					<td id = "210" class='clickable' onclick = "toggle('119','A103')">A103</td>
-					<td id = "211" class='clickable' onclick = "toggle('120','A104')">A104</td> 
-					<td id = "212" class='clickable' onclick = "toggle('121','A105')">A105</td>
-					<td class='not_clickable' id ='vert_gallery'></td>
-					<td id = "213" class='clickable' onclick = "toggle('121','A106')">A106</td>
-					<td id = "214" class='clickable' onclick = "toggle('122','A107')">A107</td>
-					<td id = "215" class='clickable' onclick = "toggle('123','A108')">A108</td>
-					<td id = "216" class='clickable' onclick = "toggle('124','A109')">A109</td>
-					<td id = "217" class='clickable' onclick = "toggle('117','A110')">A110</td>
-					<td id = "218" class='clickable' onclick = "toggle('118','A111')">A111</td>
-					<td id = "219" class='clickable' onclick = "toggle('119','A112')">A112</td>
-					<td id = "220" class='clickable' onclick = "toggle('120','A113')">A113</td> 
-					<td id = "221" class='clickable' onclick = "toggle('121','A114')">A114</td>
-					<td id = "222" class='clickable' onclick = "toggle('122','A115')">A115</td>
-					<td class='not_clickable' id ='vert_gallery'></td>
-					<td id = "223" class='clickable' onclick = "toggle('123','A116')">A116</td>
-					<td id = "224" class='clickable' onclick = "toggle('124','A117')">A117</td>
-					<td id = "225" class='clickable' onclick = "toggle('131','A118')">A118</td>
-					<td id = "226" class='clickable' onclick = "toggle('132','A119')">A119</td>
-					<td id = "227" class='clickable' onclick = "toggle('122','A120')">A120</td>
-				</tr>
-				<tr>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='junct_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='junct_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-				</tr>
-				<tr>
-					<td id = "228" class='clickable' onclick = "toggle('125','A121')">A121</td>
-					<td id = "229" class='clickable' onclick = "toggle('126','A122')">A122</td>
-					<td id = "230" class='clickable' onclick = "toggle('127','A123')">A123</td>
-					<td id = "231" class='clickable' onclick = "toggle('128','A124')">A124</td>
-					<td class='not_clickable' id ='washroom'></td>
-					<td class='not_clickable' id ='vert_gallery'></td>
-					<!--<td class='not_clickable' id ='washroom'></td>
-					<td id = "129" class='clickable' onclick = "toggle('129')">128</td>
-					<td id = "130" class='clickable' onclick = "toggle('130')">129</td>
-					<td id = "131" class='clickable' onclick = "toggle('131')">131</td>
-					<td id = "132" class='clickable' onclick = "toggle('132')">132</td>
-					<td id = "125" class='clickable' onclick = "toggle('125')">125</td>
-					<td id = "126" class='clickable' onclick = "toggle('126')">126</td>
-					<td id = "127" class='clickable' onclick = "toggle('127')">127</td>
-					<td id = "128" class='clickable' onclick = "toggle('128')">128</td>
-					<td class='not_clickable' id ='washroom'></td>-->
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id ='vert_gallery'></td>
-					<td class='not_clickable' id ='washroom'></td>
-					<td id = "232" class='clickable' onclick = "toggle('129','A125')">A125</td>
-					<td id = "233" class='clickable' onclick = "toggle('130','A126')">A126</td>
-					<td id = "234" class='clickable' onclick = "toggle('131','A127')">A127</td>
-					<td id = "235" class='clickable' onclick = "toggle('132','A128')">A128</td>
-				</tr>
-			</table>
-		</div>
-<div id = "floor2" >
-		<table id="table1" cellspacing = "0" border="1" >
-			<tr>
-				<td id = "201" class='clickable' onclick = "toggle('201')">B01</td>
-				<td id = "202" class='clickable' onclick = "toggle('202')">B02</td>
-				<td id = "203" class='clickable' onclick = "toggle('203')">B03</td>
-				<td id = "204" class='clickable' onclick = "toggle('204')">B04</td> 
-				<td id = "205" class='not_clickable_washroom'></td>
-				<td id = "206" class='not_clickable_vert_gallery'></td>
-				<!--<td id = "207" class='not_clickable_washroom'></td>
-				<td id = "208" class='clickable' onclick = "toggle('208')">B08</td>
-				<td id = "209" class='clickable' onclick = "toggle('209')">B09</td>
-				<td id = "210" class='clickable' onclick = "toggle('210')">B10</td>
-				<td id = "211" class='clickable' onclick = "toggle('211')">B11</td>
-				<td id = "212" class='clickable' onclick = "toggle('212')">B12</td>
-				<td id = "213" class='clickable' onclick = "toggle('213')">B13</td>
-				<td id = "214" class='clickable' onclick = "toggle('214')">B14</td>
-				<td id = "215" class='clickable' onclick = "toggle('215')">B15</td> 
-				<td id = "216" class='not_clickable_washroom' ></td>-->
-					<td class='not_clickable_greenery'></td>
-					<td class='not_clickable_greenery'></td>
-					<td class='not_clickable_greenery'></td>
-					<td class='not_clickable_greenery'></td>
-					<td class='not_clickable_greenery'></td>
-					<td class='not_clickable_greenery'></td>
-					<td class='not_clickable_greenery'></td>
-					<td class='not_clickable_greenery'></td>
-					<td class='not_clickable_greenery'></td>
-					<td class='not_clickable_greenery'></td>
-				<td id = "217" class='not_clickable_vert_gallery' ></td>
-				<td id = "218" class='not_clickable_washroom' ></td>
-				<td id = "219" class='clickable' onclick = "toggle('219')">B19</td>
-				<td id = "220" class='clickable' onclick = "toggle('220')">B20</td>
-				<td id = "221" class='clickable' onclick = "toggle('221')">B21</td>
-				<td id = "222" class='clickable' onclick = "toggle('222')">B22</td>
-			</tr><tr>
-				<td class='not_clickable' id ='hori_gallery'></td>
-				<td class='not_clickable' id ='hori_gallery'></td>
-				<td class='not_clickable' id ='hori_gallery'></td>
-				<td class='not_clickable' id ='hori_gallery'></td>
-				<td class='not_clickable' id ='hori_gallery'></td>
-				<td class='not_clickable' id ='junct_gallery'></td>
-				<td class='not_clickable' id ='hori_gallery'></td>
-				<td class='not_clickable' id ='hori_gallery'></td>
-				<td class='not_clickable' id ='hori_gallery'></td>
-				<td class='not_clickable' id ='hori_gallery'></td>
-				<td class='not_clickable' id ='hori_gallery'></td>
-				<td class='not_clickable' id ='hori_gallery'></td>
-				<td class='not_clickable' id ='hori_gallery'></td>
-				<td class='not_clickable' id ='hori_gallery'></td>
-				<td class='not_clickable' id ='hori_gallery'></td>
-				<td class='not_clickable' id ='hori_gallery'></td>
-				<td class='not_clickable' id ='junct_gallery'></td>
-				<td class='not_clickable' id ='hori_gallery'></td>
-				<td class='not_clickable' id ='hori_gallery'></td>
-				<td class='not_clickable' id ='hori_gallery'></td>
-				<td class='not_clickable' id ='hori_gallery'></td>
-				<td class='not_clickable' id ='hori_gallery'></td>
-
-				
-			</tr>
-			<tr>
-				<td class='clickable' id = "109" onclick = "toggle('109')">109</td>
-				<td id = "210" class='clickable' onclick = "toggle('210')">210</td>
-					<td id = "111" class='clickable' onclick = "toggle('111')">111</td>
-					<td id = "112" class='clickable' onclick = "toggle('112')">112</td> 
-					<td id = "113" class='clickable' onclick = "toggle('113')">113</td>
-					<td class='not_clickable' id ='vert_gallery'></td>
-					<td id = "114" class='clickable' onclick = "toggle('114')">114</td>
-					<td id = "114" class='clickable' onclick = "toggle('114')">114</td>
-					<td id = "115" class='clickable' onclick = "toggle('115')">115</td>
-					<td id = "116" class='clickable' onclick = "toggle('116')">116</td>
-					<td class='clickable' id = "109" onclick = "toggle('109')">109</td>
-					<td id = "110" class='clickable' onclick = "toggle('110')">110</td>
-					<td id = "111" class='clickable' onclick = "toggle('111')">111</td>
-					<td id = "112" class='clickable' onclick = "toggle('112')">112</td> 
-					<td id = "113" class='clickable' onclick = "toggle('113')">113</td>
-					<td id = "114" class='clickable' onclick = "toggle('114')">114</td>
-					<td class='not_clickable' id ='vert_gallery'></td>
-					<td id = "114" class='clickable' onclick = "toggle('114')">114</td>
-					<td id = "115" class='clickable' onclick = "toggle('115')">115</td>
-					<td id = "114" class='clickable' onclick = "toggle('114')">114</td>
-					<td id = "115" class='clickable' onclick = "toggle('115')">115</td>
-					<td id = "114" class='clickable' onclick = "toggle('114')">114</td>
-					
-					
-					
-				
-				</tr>
-				<tr>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='junct_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='junct_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					
-				</tr>
-				<tr>
-					<td class='not_clickable' id ='sitout'></td>
-					<td class='not_clickable' id ='sitout'></td>
-					<td class='not_clickable' id ='sitout'></td>
-					<td id = "112" class='clickable' onclick = "toggle('112')">112</td> 
-					<td id = "113" class='clickable' onclick = "toggle('113')">113</td>
-					<td class='not_clickable' id ='vert_gallery'></td>
-					<td class='not_clickable_greenery' ></td>
-					<td class='not_clickable_greenery' ></td>
-					<td class='not_clickable_greenery' ></td>
-					<td class='not_clickable_greenery' ></td>
-					<td class='not_clickable_greenery' ></td>
-					<td class='not_clickable_greenery' ></td>
-					<td class='not_clickable_greenery' ></td>
-					<td class='not_clickable_greenery' ></td>
-					<td class='not_clickable_greenery' ></td>
-					<td class='not_clickable_greenery' ></td> 
-					<!--
-					<td id = "114" class='clickable' onclick = "toggle('114')">114</td>
-					<td id = "114" class='clickable' onclick = "toggle('114')">114</td>
-					<td id = "115" class='clickable' onclick = "toggle('115')">115</td>
-					<td id = "116" class='clickable' onclick = "toggle('116')">116</td>
-					<td class='clickable' id = "109" onclick = "toggle('109')">109</td>
-					<td id = "110" class='clickable' onclick = "toggle('110')">110</td>
-					<td id = "111" class='clickable' onclick = "toggle('111')">111</td>
-					<td id = "112" class='clickable' onclick = "toggle('112')">112</td> 
-					<td id = "113" class='clickable' onclick = "toggle('113')">113</td>
-					<td id = "114" class='clickable' onclick = "toggle('114')">114</td>-->
-					<td class='not_clickable' id ='vert_gallery'></td>
-					<td id = "114" class='clickable' onclick = "toggle('114')">114</td>
-					<td id = "115" class='clickable' onclick = "toggle('115')">115</td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-								
-				</tr>
-				<tr>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td> 
-					<td id = "120" class='clickable' onclick = "toggle('120')">120</td> 
-					<td id = "121" class='clickable' onclick = "toggle('121')">121</td>
-					<td class='not_clickable' id ='vert_gallery'></td>
-					<!--<td id = "121" class='clickable' onclick = "toggle('121')">121</td>
-					<td id = "122" class='clickable' onclick = "toggle('122')">122</td>
-					<td id = "123" class='clickable' onclick = "toggle('123')">123</td>
-					<td id = "124" class='clickable' onclick = "toggle('124')">124</td>
-					<td id = "117" class='clickable' onclick = "toggle('117')">117</td>
-					<td id = "118" class='clickable' onclick = "toggle('118')">118</td>
-					<td id = "119" class='clickable' onclick = "toggle('119')">119</td>
-					<td id = "120" class='clickable' onclick = "toggle('120')">120</td> 
-					<td id = "121" class='clickable' onclick = "toggle('121')">121</td>
-					<td id = "122" class='clickable' onclick = "toggle('122')">122</td>-->
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id ='vert_gallery'></td>
-					<td id = "122" class='clickable' onclick = "toggle('122')">122</td>
-					<td id = "123" class='clickable' onclick = "toggle('123')">123</td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-				</tr>
-				<tr>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='junct_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='junct_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-				</tr>
-				<tr>
-					<td id = "125" class='clickable' onclick = "toggle('125')">125</td>
-					<td id = "126" class='clickable' onclick = "toggle('126')">126</td>
-					<td id = "127" class='clickable' onclick = "toggle('127')">127</td>
-					<td id = "128" class='clickable' onclick = "toggle('128')">128</td>
-					<td class='not_clickable' id ='washroom'></td>
-					<td class='not_clickable' id ='vert_gallery'></td>
-					<!--<td class='not_clickable' id ='washroom'></td>
-					<td id = "129" class='clickable' onclick = "toggle('129')">128</td>
-					<td id = "130" class='clickable' onclick = "toggle('130')">129</td>
-					<td id = "131" class='clickable' onclick = "toggle('131')">131</td>
-					<td id = "132" class='clickable' onclick = "toggle('132')">132</td>
-					<td id = "125" class='clickable' onclick = "toggle('125')">125</td>
-					<td id = "126" class='clickable' onclick = "toggle('126')">126</td>
-					<td id = "127" class='clickable' onclick = "toggle('127')">127</td>
-					<td id = "128" class='clickable' onclick = "toggle('128')">128</td>
-					<td class='not_clickable' id ='washroom'></td>!-->
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id ='vert_gallery'></td>
-					<td class='not_clickable' id ='washroom'></td>
-					<td id = "129" class='clickable' onclick = "toggle('129')">128</td>
-					<td id = "130" class='clickable' onclick = "toggle('130')">129</td>
-					<td id = "131" class='clickable' onclick = "toggle('131')">131</td>
-					<td id = "132" class='clickable' onclick = "toggle('132')">132</td>
-				</tr>
-				<tr>
-					<td class='clickable' id = "101" onclick = "toggle('101')">101</td>
-					<td id = "102" class='clickable' onclick = "toggle('102')">102</td>
-					<td id = "103" class='clickable' onclick = "toggle('103')">103</td>
-					<td id = "104" class='clickable' onclick = "toggle('104')">104</td> 
-					<td class='not_clickable' id ='washroom'></td>
-					<td class='not_clickable' id ='vert_gallery'></td><!--
-					<td class='not_clickable' id ='washroom'></td>
-					<td id = "105" class='clickable' onclick = "toggle('105')">105</td>
-					<td id = "106" class='clickable' onclick = "toggle('106')">106</td>
-					<td id = "107" class='clickable' onclick = "toggle('107')">107</td>
-					<td id = "108" class='clickable' onclick = "toggle('108')">108</td>
-					<td class='clickable' id = "101" onclick = "toggle('101')">101</td>
-					<td id = "102" class='clickable' onclick = "toggle('102')">102</td>
-					<td id = "103" class='clickable' onclick = "toggle('103')">103</td>
-					<td id = "104" class='clickable' onclick = "toggle('104')">104</td> 
-					<td class='not_clickable' id ='washroom'></td>-->
-					<td class='not_clickable_greenery'></td>
-					<td class='not_clickable_greenery'></td>
-					<td class='not_clickable_greenery'></td>
-					<td class='not_clickable_greenery'></td>
-					<td class='not_clickable_greenery'></td>
-					<td class='not_clickable_greenery'></td>
-					<td class='not_clickable_greenery'></td>
-					<td class='not_clickable_greenery'></td>
-					<td class='not_clickable_greenery'></td>
-					<td class='not_clickable_greenery'></td>
-					<td class='not_clickable' id ='vert_gallery'></td>
-					<td class='not_clickable' id ='washroom'></td>
-					<td id = "105" class='clickable' onclick = "toggle('105')">105</td>
-					<td id = "106" class='clickable' onclick = "toggle('106')">106</td>
-					<td id = "107" class='clickable' onclick = "toggle('107')">107</td>
-					<td id = "108" class='clickable' onclick = "toggle('108')">108</td>
-				</tr>
-				<tr>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='junct_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='junct_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-				</tr>
-				<tr>
-					<td class='clickable' id = "109" onclick = "toggle('109')">109</td>
-					<td id = "110" class='clickable' onclick = "toggle('110')">110</td>
-					<td id = "111" class='clickable' onclick = "toggle('111')">111</td>
-					<td id = "112" class='clickable' onclick = "toggle('112')">112</td> 
-					<td id = "113" class='clickable' onclick = "toggle('113')">113</td>
-					<td class='not_clickable' id ='vert_gallery'></td>
-					<td id = "114" class='clickable' onclick = "toggle('114')">114</td>
-					<td id = "114" class='clickable' onclick = "toggle('114')">114</td>
-					<td id = "115" class='clickable' onclick = "toggle('115')">115</td>
-					<td id = "116" class='clickable' onclick = "toggle('116')">116</td>
-					<td class='clickable' id = "109" onclick = "toggle('109')">109</td>
-					<td id = "110" class='clickable' onclick = "toggle('110')">110</td>
-					<td id = "111" class='clickable' onclick = "toggle('111')">111</td>
-					<td id = "112" class='clickable' onclick = "toggle('112')">112</td> 
-					<td id = "113" class='clickable' onclick = "toggle('113')">113</td>
-					<td id = "114" class='clickable' onclick = "toggle('114')">114</td>
-					<td class='not_clickable' id ='vert_gallery'></td>
-					<td id = "114" class='clickable' onclick = "toggle('114')">114</td>
-					<td id = "115" class='clickable' onclick = "toggle('115')">115</td>
-					<td id = "116" class='clickable' onclick = "toggle('116')">116</td>
-					<td id = "131" class='clickable' onclick = "toggle('131')">131</td>
-					<td id = "132" class='clickable' onclick = "toggle('132')">132</td>
-				
-				</tr>
-				<tr>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='junct_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='junct_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-				</tr>
-				<tr>
-					<td class='clickable' id = "109" onclick = "toggle('109')">109</td>
-					<td id = "110" class='clickable' onclick = "toggle('110')">110</td>
-					<td id = "111" class='clickable' onclick = "toggle('111')">111</td>
-					<td id = "112" class='clickable' onclick = "toggle('112')">112</td> 
-					<td id = "113" class='clickable' onclick = "toggle('113')">113</td>
-					<td class='not_clickable' id ='vert_gallery'></td>
-					<td id = "114" class='clickable' onclick = "toggle('114')">114</td>
-					<td id = "114" class='clickable' onclick = "toggle('114')">114</td>
-					<td id = "115" class='clickable' onclick = "toggle('115')">115</td>
-					<td id = "116" class='clickable' onclick = "toggle('116')">116</td>
-					<td class='clickable' id = "109" onclick = "toggle('109')">109</td>
-					<td id = "110" class='clickable' onclick = "toggle('110')">110</td>
-					<td id = "111" class='clickable' onclick = "toggle('111')">111</td>
-					<td id = "112" class='clickable' onclick = "toggle('112')">112</td> 
-					<td id = "113" class='clickable' onclick = "toggle('113')">113</td>
-					<td id = "114" class='clickable' onclick = "toggle('114')">114</td>
-					<td class='not_clickable' id ='vert_gallery'></td>
-					<td id = "114" class='clickable' onclick = "toggle('114')">114</td>
-					<td id = "115" class='clickable' onclick = "toggle('115')">115</td>
-					<td id = "116" class='clickable' onclick = "toggle('116')">116</td>
-					<td id = "131" class='clickable' onclick = "toggle('131')">131</td>
-					<td id = "132" class='clickable' onclick = "toggle('132')">132</td>
-				
-				</tr>
-				<tr>
-					<td id = "117" class='clickable' onclick = "toggle('117')">117</td>
-					<td id = "118" class='clickable' onclick = "toggle('118')">118</td>
-					<td id = "119" class='clickable' onclick = "toggle('119')">119</td>
-					<td id = "120" class='clickable' onclick = "toggle('120')">120</td> 
-					<td id = "121" class='clickable' onclick = "toggle('121')">121</td>
-					<td class='not_clickable' id ='vert_gallery'></td>
-					<td id = "121" class='clickable' onclick = "toggle('121')">121</td>
-					<td id = "122" class='clickable' onclick = "toggle('122')">122</td>
-					<td id = "123" class='clickable' onclick = "toggle('123')">123</td>
-					<td id = "124" class='clickable' onclick = "toggle('124')">124</td>
-					<td id = "117" class='clickable' onclick = "toggle('117')">117</td>
-					<td id = "118" class='clickable' onclick = "toggle('118')">118</td>
-					<td id = "119" class='clickable' onclick = "toggle('119')">119</td>
-					<td id = "120" class='clickable' onclick = "toggle('120')">120</td> 
-					<td id = "121" class='clickable' onclick = "toggle('121')">121</td>
-					<td id = "122" class='clickable' onclick = "toggle('122')">122</td>
-					<td class='not_clickable' id ='vert_gallery'></td>
-					<td id = "122" class='clickable' onclick = "toggle('122')">122</td>
-					<td id = "123" class='clickable' onclick = "toggle('123')">123</td>
-					<td id = "124" class='clickable' onclick = "toggle('124')">124</td>
-					<td id = "131" class='clickable' onclick = "toggle('131')">131</td>
-					<td id = "132" class='clickable' onclick = "toggle('132')">132</td>
-				</tr>
-				<tr>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='junct_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='junct_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-				</tr>
-				<tr>
-					<td id = "125" class='clickable' onclick = "toggle('125')">125</td>
-					<td id = "126" class='clickable' onclick = "toggle('126')">126</td>
-					<td id = "127" class='clickable' onclick = "toggle('127')">127</td>
-					<td id = "128" class='clickable' onclick = "toggle('128')">128</td>
-					<td class='not_clickable' id ='washroom'></td>
-					<td class='not_clickable' id ='vert_gallery'></td>
-					<!--<td class='not_clickable' id ='washroom'></td>
-					<td id = "129" class='clickable' onclick = "toggle('129')">128</td>
-					<td id = "130" class='clickable' onclick = "toggle('130')">129</td>
-					<td id = "131" class='clickable' onclick = "toggle('131')">131</td>
-					<td id = "132" class='clickable' onclick = "toggle('132')">132</td>
-					<td id = "125" class='clickable' onclick = "toggle('125')">125</td>
-					<td id = "126" class='clickable' onclick = "toggle('126')">126</td>
-					<td id = "127" class='clickable' onclick = "toggle('127')">127</td>
-					<td id = "128" class='clickable' onclick = "toggle('128')">128</td>
-					<td class='not_clickable' id ='washroom'></td>-->
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id ='vert_gallery'></td>
-					<td class='not_clickable' id ='washroom'></td>
-					<td id = "129" class='clickable' onclick = "toggle('129')">128</td>
-					<td id = "130" class='clickable' onclick = "toggle('130')">129</td>
-					<td id = "131" class='clickable' onclick = "toggle('131')">131</td>
-					<td id = "132" class='clickable' onclick = "toggle('132')">132</td>
-				</tr>
-			</table>
-		</div>
-		<div id = "floor3">
-			<div id = "floor1" >
-		<table id="table1" cellspacing = "0" border="1" >
-			<tr>
-				<td id = "101" class='clickable'  onclick = "toggle('101')">C01</td>
-				<td id = "102" class='clickable' onclick = "toggle('102')">C02</td>
-				<td id = "103" class='clickable' onclick = "toggle('103')">C03</td>
-				<td id = "104" class='clickable' onclick = "toggle('104')">C04</td> 
-				<td id = "105" class='not_clickable_washroom'></td>
-				<td id = "106" class='not_clickable_vert_gallery'></td>
-				<td id = "107" class='not_clickable_washroom'></td>
-				<td id = "108" class='clickable' onclick = "toggle('108')">C08</td>
-				<td id = "109" class='clickable' onclick = "toggle('109')">C09</td>
-				<td id = "110" class='clickable' onclick = "toggle('110')">C00</td>
-				<td id = "111" class='clickable' onclick = "toggle('111')">C11</td>
-				<td id = "112" class='clickable' onclick = "toggle('112')">C12</td>
-				<td id = "113" class='clickable' onclick = "toggle('113')">C13</td>
-				<td id = "114" class='clickable' onclick = "toggle('114')">C14</td>
-				<td id = "115" class='clickable' onclick = "toggle('115')">C15</td> 
-				<td id = "116" class='not_clickable_washroom' ></td>
-				<td id = "117" class='not_clickable_vert_gallery' ></td>
-				<td id = "118" class='not_clickable_washroom' ></td>
-				<td id = "119" class='clickable' onclick = "toggle('119')">A19</td>
-				<td id = "120" class='clickable' onclick = "toggle('120')">A20</td>
-				<td id = "121" class='clickable' onclick = "toggle('121')">A21</td>
-				<td id = "122" class='clickable' onclick = "toggle('122')">A22</td>
-			</tr>
-			<tr>
-				<td class='not_clickable' id ='hori_gallery'></td>
-				<td class='not_clickable' id ='hori_gallery'></td>
-				<td class='not_clickable' id ='hori_gallery'></td>
-				<td class='not_clickable' id ='hori_gallery'></td>
-				<td class='not_clickable' id ='hori_gallery'></td>
-				<td class='not_clickable' id ='junct_gallery'></td>
-				<td class='not_clickable' id ='hori_gallery'></td>
-				<td class='not_clickable' id ='hori_gallery'></td>
-				<td class='not_clickable' id ='hori_gallery'></td>
-				<td class='not_clickable' id ='hori_gallery'></td>
-				<td class='not_clickable' id ='hori_gallery'></td>
-				<td class='not_clickable' id ='hori_gallery'></td>
-				<td class='not_clickable' id ='hori_gallery'></td>
-				<td class='not_clickable' id ='hori_gallery'></td>
-				<td class='not_clickable' id ='hori_gallery'></td>
-				<td class='not_clickable' id ='hori_gallery'></td>
-				<td class='not_clickable' id ='junct_gallery'></td>
-				<td class='not_clickable' id ='hori_gallery'></td>
-				<td class='not_clickable' id ='hori_gallery'></td>
-				<td class='not_clickable' id ='hori_gallery'></td>
-				<td class='not_clickable' id ='hori_gallery'></td>
-				<td class='not_clickable' id ='hori_gallery'></td>
-
-				
-			</tr>
-			<tr>
-				<td class='clickable' id = "109" onclick = "toggle('109')">109</td>
-				<td id = "110" class='clickable' onclick = "toggle('110')">110</td>
-					<td id = "111" class='clickable' onclick = "toggle('111')">111</td>
-					<td id = "112" class='clickable' onclick = "toggle('112')">112</td> 
-					<td id = "113" class='clickable' onclick = "toggle('113')">113</td>
-					<td class='not_clickable' id ='vert_gallery'></td>
-					<td id = "114" class='clickable' onclick = "toggle('114')">114</td>
-					<td id = "114" class='clickable' onclick = "toggle('114')">114</td>
-					<td id = "115" class='clickable' onclick = "toggle('115')">115</td>
-					<td id = "116" class='clickable' onclick = "toggle('116')">116</td>
-					<td class='clickable' id = "109" onclick = "toggle('109')">109</td>
-					<td id = "110" class='clickable' onclick = "toggle('110')">110</td>
-					<td id = "111" class='clickable' onclick = "toggle('111')">111</td>
-					<td id = "112" class='clickable' onclick = "toggle('112')">112</td> 
-					<td id = "113" class='clickable' onclick = "toggle('113')">113</td>
-					<td id = "114" class='clickable' onclick = "toggle('114')">114</td>
-					<td class='not_clickable' id ='vert_gallery'></td>
-					<td id = "114" class='clickable' onclick = "toggle('114')">114</td>
-					<td id = "115" class='clickable' onclick = "toggle('115')">115</td>
-					<td id = "114" class='clickable' onclick = "toggle('114')">114</td>
-					<td id = "115" class='clickable' onclick = "toggle('115')">115</td>
-					<td id = "114" class='clickable' onclick = "toggle('114')">114</td>
-					
-					
-					
-				
-				</tr>
-				<tr>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='junct_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='junct_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					
-				</tr>
-				<tr>
-					<td class='not_clickable' id ='sitout'></td>
-					<td class='not_clickable' id ='sitout'></td>
-					<td class='not_clickable' id ='sitout'></td>
-					<td id = "112" class='clickable' onclick = "toggle('112')">112</td> 
-					<td id = "113" class='clickable' onclick = "toggle('113')">113</td>
-					<td class='not_clickable' id ='vert_gallery'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td> 
-					<!--
-					<td id = "114" class='clickable' onclick = "toggle('114')">114</td>
-					<td id = "114" class='clickable' onclick = "toggle('114')">114</td>
-					<td id = "115" class='clickable' onclick = "toggle('115')">115</td>
-					<td id = "116" class='clickable' onclick = "toggle('116')">116</td>
-					<td class='clickable' id = "109" onclick = "toggle('109')">109</td>
-					<td id = "110" class='clickable' onclick = "toggle('110')">110</td>
-					<td id = "111" class='clickable' onclick = "toggle('111')">111</td>
-					<td id = "112" class='clickable' onclick = "toggle('112')">112</td> 
-					<td id = "113" class='clickable' onclick = "toggle('113')">113</td>
-					<td id = "114" class='clickable' onclick = "toggle('114')">114</td>-->
-					<td class='not_clickable' id ='vert_gallery'></td>
-					<td id = "114" class='clickable' onclick = "toggle('114')">114</td>
-					<td id = "115" class='clickable' onclick = "toggle('115')">115</td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-								
-				</tr>
-				<tr>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td> 
-					<td id = "120" class='clickable' onclick = "toggle('120')">120</td> 
-					<td id = "121" class='clickable' onclick = "toggle('121')">121</td>
-					<td class='not_clickable' id ='vert_gallery'></td>
-					<!--<td id = "121" class='clickable' onclick = "toggle('121')">121</td>
-					<td id = "122" class='clickable' onclick = "toggle('122')">122</td>
-					<td id = "123" class='clickable' onclick = "toggle('123')">123</td>
-					<td id = "124" class='clickable' onclick = "toggle('124')">124</td>
-					<td id = "117" class='clickable' onclick = "toggle('117')">117</td>
-					<td id = "118" class='clickable' onclick = "toggle('118')">118</td>
-					<td id = "119" class='clickable' onclick = "toggle('119')">119</td>
-					<td id = "120" class='clickable' onclick = "toggle('120')">120</td> 
-					<td id = "121" class='clickable' onclick = "toggle('121')">121</td>
-					<td id = "122" class='clickable' onclick = "toggle('122')">122</td>-->
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id ='vert_gallery'></td>
-					<td id = "122" class='clickable' onclick = "toggle('122')">122</td>
-					<td id = "123" class='clickable' onclick = "toggle('123')">123</td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-				</tr>
-				<tr>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='junct_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='junct_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-				</tr>
-				<tr>
-					<td id = "125" class='clickable' onclick = "toggle('125')">125</td>
-					<td id = "126" class='clickable' onclick = "toggle('126')">126</td>
-					<td id = "127" class='clickable' onclick = "toggle('127')">127</td>
-					<td id = "128" class='clickable' onclick = "toggle('128')">128</td>
-					<td class='not_clickable' id ='washroom'></td>
-					<td class='not_clickable' id ='vert_gallery'></td>
-					<!--<td class='not_clickable' id ='washroom'></td>
-					<td id = "129" class='clickable' onclick = "toggle('129')">128</td>
-					<td id = "130" class='clickable' onclick = "toggle('130')">129</td>
-					<td id = "131" class='clickable' onclick = "toggle('131')">131</td>
-					<td id = "132" class='clickable' onclick = "toggle('132')">132</td>
-					<td id = "125" class='clickable' onclick = "toggle('125')">125</td>
-					<td id = "126" class='clickable' onclick = "toggle('126')">126</td>
-					<td id = "127" class='clickable' onclick = "toggle('127')">127</td>
-					<td id = "128" class='clickable' onclick = "toggle('128')">128</td>
-					<td class='not_clickable' id ='washroom'></td>!-->
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id ='vert_gallery'></td>
-					<td class='not_clickable' id ='washroom'></td>
-					<td id = "129" class='clickable' onclick = "toggle('129')">128</td>
-					<td id = "130" class='clickable' onclick = "toggle('130')">129</td>
-					<td id = "131" class='clickable' onclick = "toggle('131')">131</td>
-					<td id = "132" class='clickable' onclick = "toggle('132')">132</td>
-				</tr>
-				<tr>
-					<td class='clickable' id = "101" onclick = "toggle('101')">101</td>
-					<td id = "102" class='clickable' onclick = "toggle('102')">102</td>
-					<td id = "103" class='clickable' onclick = "toggle('103')">103</td>
-					<td id = "104" class='clickable' onclick = "toggle('104')">104</td> 
-					<td class='not_clickable' id ='washroom'></td>
-					<td class='not_clickable' id ='vert_gallery'></td><!--
-					<td class='not_clickable' id ='washroom'></td>
-					<td id = "105" class='clickable' onclick = "toggle('105')">105</td>
-					<td id = "106" class='clickable' onclick = "toggle('106')">106</td>
-					<td id = "107" class='clickable' onclick = "toggle('107')">107</td>
-					<td id = "108" class='clickable' onclick = "toggle('108')">108</td>
-					<td class='clickable' id = "101" onclick = "toggle('101')">101</td>
-					<td id = "102" class='clickable' onclick = "toggle('102')">102</td>
-					<td id = "103" class='clickable' onclick = "toggle('103')">103</td>
-					<td id = "104" class='clickable' onclick = "toggle('104')">104</td> 
-					<td class='not_clickable' id ='washroom'></td>-->
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id ='vert_gallery'></td>
-					<td class='not_clickable' id ='washroom'></td>
-					<td id = "105" class='clickable' onclick = "toggle('105')">105</td>
-					<td id = "106" class='clickable' onclick = "toggle('106')">106</td>
-					<td id = "107" class='clickable' onclick = "toggle('107')">107</td>
-					<td id = "108" class='clickable' onclick = "toggle('108')">108</td>
-				</tr>
-				<tr>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='junct_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='junct_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-				</tr>
-				<tr>
-					<td class='clickable' id = "109" onclick = "toggle('109')">109</td>
-					<td id = "110" class='clickable' onclick = "toggle('110')">110</td>
-					<td id = "111" class='clickable' onclick = "toggle('111')">111</td>
-					<td id = "112" class='clickable' onclick = "toggle('112')">112</td> 
-					<td id = "113" class='clickable' onclick = "toggle('113')">113</td>
-					<td class='not_clickable' id ='vert_gallery'></td>
-					<td id = "114" class='clickable' onclick = "toggle('114')">114</td>
-					<td id = "114" class='clickable' onclick = "toggle('114')">114</td>
-					<td id = "115" class='clickable' onclick = "toggle('115')">115</td>
-					<td id = "116" class='clickable' onclick = "toggle('116')">116</td>
-					<td class='clickable' id = "109" onclick = "toggle('109')">109</td>
-					<td id = "110" class='clickable' onclick = "toggle('110')">110</td>
-					<td id = "111" class='clickable' onclick = "toggle('111')">111</td>
-					<td id = "112" class='clickable' onclick = "toggle('112')">112</td> 
-					<td id = "113" class='clickable' onclick = "toggle('113')">113</td>
-					<td id = "114" class='clickable' onclick = "toggle('114')">114</td>
-					<td class='not_clickable' id ='vert_gallery'></td>
-					<td id = "114" class='clickable' onclick = "toggle('114')">114</td>
-					<td id = "115" class='clickable' onclick = "toggle('115')">115</td>
-					<td id = "116" class='clickable' onclick = "toggle('116')">116</td>
-					<td id = "131" class='clickable' onclick = "toggle('131')">131</td>
-					<td id = "132" class='clickable' onclick = "toggle('132')">132</td>
-				
-				</tr>
-				<tr>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='junct_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='junct_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-				</tr>
-				<tr>
-					<td class='clickable' id = "109" onclick = "toggle('109')">109</td>
-					<td id = "110" class='clickable' onclick = "toggle('110')">110</td>
-					<td id = "111" class='clickable' onclick = "toggle('111')">111</td>
-					<td id = "112" class='clickable' onclick = "toggle('112')">112</td> 
-					<td id = "113" class='clickable' onclick = "toggle('113')">113</td>
-					<td class='not_clickable' id ='vert_gallery'></td>
-					<td id = "114" class='clickable' onclick = "toggle('114')">114</td>
-					<td id = "114" class='clickable' onclick = "toggle('114')">114</td>
-					<td id = "115" class='clickable' onclick = "toggle('115')">115</td>
-					<td id = "116" class='clickable' onclick = "toggle('116')">116</td>
-					<td class='clickable' id = "109" onclick = "toggle('109')">109</td>
-					<td id = "110" class='clickable' onclick = "toggle('110')">110</td>
-					<td id = "111" class='clickable' onclick = "toggle('111')">111</td>
-					<td id = "112" class='clickable' onclick = "toggle('112')">112</td> 
-					<td id = "113" class='clickable' onclick = "toggle('113')">113</td>
-					<td id = "114" class='clickable' onclick = "toggle('114')">114</td>
-					<td class='not_clickable' id ='vert_gallery'></td>
-					<td id = "114" class='clickable' onclick = "toggle('114')">114</td>
-					<td id = "115" class='clickable' onclick = "toggle('115')">115</td>
-					<td id = "116" class='clickable' onclick = "toggle('116')">116</td>
-					<td id = "131" class='clickable' onclick = "toggle('131')">131</td>
-					<td id = "132" class='clickable' onclick = "toggle('132')">132</td>
-				
-				</tr>
-				<tr>
-					<td id = "117" class='clickable' onclick = "toggle('117')">117</td>
-					<td id = "118" class='clickable' onclick = "toggle('118')">118</td>
-					<td id = "119" class='clickable' onclick = "toggle('119')">119</td>
-					<td id = "120" class='clickable' onclick = "toggle('120')">120</td> 
-					<td id = "121" class='clickable' onclick = "toggle('121')">121</td>
-					<td class='not_clickable' id ='vert_gallery'></td>
-					<td id = "121" class='clickable' onclick = "toggle('121')">121</td>
-					<td id = "122" class='clickable' onclick = "toggle('122')">122</td>
-					<td id = "123" class='clickable' onclick = "toggle('123')">123</td>
-					<td id = "124" class='clickable' onclick = "toggle('124')">124</td>
-					<td id = "117" class='clickable' onclick = "toggle('117')">117</td>
-					<td id = "118" class='clickable' onclick = "toggle('118')">118</td>
-					<td id = "119" class='clickable' onclick = "toggle('119')">119</td>
-					<td id = "120" class='clickable' onclick = "toggle('120')">120</td> 
-					<td id = "121" class='clickable' onclick = "toggle('121')">121</td>
-					<td id = "122" class='clickable' onclick = "toggle('122')">122</td>
-					<td class='not_clickable' id ='vert_gallery'></td>
-					<td id = "122" class='clickable' onclick = "toggle('122')">122</td>
-					<td id = "123" class='clickable' onclick = "toggle('123')">123</td>
-					<td id = "124" class='clickable' onclick = "toggle('124')">124</td>
-					<td id = "131" class='clickable' onclick = "toggle('131')">131</td>
-					<td id = "132" class='clickable' onclick = "toggle('132')">132</td>
-				</tr>
-				<tr>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='junct_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='junct_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-					<td class='not_clickable' id ='hori_gallery'></td>
-				</tr>
-				<tr>
-					<td id = "125" class='clickable' onclick = "toggle('125')">125</td>
-					<td id = "126" class='clickable' onclick = "toggle('126')">126</td>
-					<td id = "127" class='clickable' onclick = "toggle('127')">127</td>
-					<td id = "128" class='clickable' onclick = "toggle('128')">128</td>
-					<td class='not_clickable' id ='washroom'></td>
-					<td class='not_clickable' id ='vert_gallery'></td>
-					<!--<td class='not_clickable' id ='washroom'></td>
-					<td id = "129" class='clickable' onclick = "toggle('129')">128</td>
-					<td id = "130" class='clickable' onclick = "toggle('130')">129</td>
-					<td id = "131" class='clickable' onclick = "toggle('131')">131</td>
-					<td id = "132" class='clickable' onclick = "toggle('132')">132</td>
-					<td id = "125" class='clickable' onclick = "toggle('125')">125</td>
-					<td id = "126" class='clickable' onclick = "toggle('126')">126</td>
-					<td id = "127" class='clickable' onclick = "toggle('127')">127</td>
-					<td id = "128" class='clickable' onclick = "toggle('128')">128</td>
-					<td class='not_clickable' id ='washroom'></td>-->
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id='sitout'></td>
-					<td class='not_clickable' id ='vert_gallery'></td>
-					<td class='not_clickable' id ='washroom'></td>
-					<td id = "129" class='clickable' onclick = "toggle('129')">128</td>
-					<td id = "130" class='clickable' onclick = "toggle('130')">129</td>
-					<td id = "131" class='clickable' onclick = "toggle('131')">131</td>
-					<td id = "132" class='clickable' onclick = "toggle('132')">132</td>
-				</tr>
-				</table>
 			</td>
 			<td id="preferences_vertical"><div id = "preferences">
 				<p style="color:white" >Preferences</p>
