@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  {% load staticfiles %}
+  <meta charset="UTF-8">
+
+<title>{{messageTitle}}</title>
+<style>
+
+body {
+    background-image: url("{% static 'src/background.jpg'%}");
+    background-color: #00f;
+}
+
+.table {
+background: rgba(255,255,255,0.5);
+box-shadow: 7px 7px 10px #000;
+}
+.titleTable {
+  background-color: #fff;
+  opacity: 0.5;
+}
+
+</style>
+</head>
+<body>
+<table class="titleTable" STYLE="position:absolute; top:1%; left:1%; width:98%; height:5% ">
+  <tr> 
+    <td align="left" style="position:absolute; left:5%; top:10%;"> <a href = "/home">Home </a></td>
+    <td align="rignt" style="position:absolute; left:90%; top:9%;">  <a href="/logout">Logout</a></td> 
+</table>
+
+
+
+
+<table class='table' STYLE="position:absolute; top:25%; left:25%; width:50%; height:50% ">
+<tr><td align="center" style="font-size:24px;">{{message}}</td></tr>
+  
+</table>
+</body>
+</html>

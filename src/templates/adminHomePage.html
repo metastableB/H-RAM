@@ -88,12 +88,19 @@ background: rgba(255,255,255,0.5);
 
 
 <table class='table' STYLE="position:absolute; top:15%; left:15%; width:70%; height:70% ">
-  <tr><form action = "/EVoting/admin/createFinalNomineesList/">
+  <tr><form action = "/administrator/register_users/">
+    <td align="center"><div class="buttonz"><input type="submit" value="Users Registration"></div></td>
+    </form>
+  </tr>
+  <tr><form action = "/administrator/createFinalNomineesList/">
     <td align="center"><div class="buttonz"><input type="submit" value="Create Final Nominees List"></div></td>
     </form>
   </tr>
   <tr>
-      <form action = "/EVoting/admin/positions-for-election/"><td align="center"><div class="buttonz"><input type="submit" value="Fill Postions For Election"></div></td></form>		
+      <form action = "/administrator/positions-for-election/"><td align="center"><div class="buttonz"><input type="submit" value="Fill Postions For Election"></div></td></form>		
+  </tr>
+  <tr>
+      <form action = "/EVoting/results/"><td align="center"><div class="buttonz"><input type="submit" value="Count votes"></div></td></form>    
   </tr>
   <tr>
       <form action = "/allocate"><td align="center"><div class="buttonz"><input type="submit" value="Room Allocation"></div></td></form>		
