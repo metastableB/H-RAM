@@ -114,7 +114,7 @@ def bookRoom(request):
 
 		return render_to_response('home.html',{'errors' : preferenceOrder})
 	else:
-		return render_to_response('success.html')
+		return HttpResponseRedirect('/login')
 
 def test(request):
 	return render_to_response('testing.html')
