@@ -21,21 +21,23 @@ border-radius: 5px;
 }
 
 .buttonz input[type=submit]{
-	width: 65%	;
-	height: 80%;
-	background: #0df;
-	border: 1px solid #fff;
-	cursor: pointer;
-	border-radius: 2px;
-	color: #000;
-	font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
-	font-size: 16px;
-	font-weight: 400;
-	padding: 20px;
+  width: 65%  ;
+  height: 80%;
+  background: #0df;
+  border: 1px solid #fff;
+  cursor: pointer;
+  border-radius: 2px;
+  color: #000;
+  font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 20px;
 }
 
 .buttonz input[type=submit]:hover {
+
 	background: #0ef;
+
 }
 
 .buttonz input[type=submit]:active {
@@ -94,6 +96,7 @@ a:hover, a:active {
 }
 
 </style>
+      <link type="text/css" rel="stylesheet" href="{%  static 'src/bootstrap.min.css' %}">
 </head>
 <body>
   <div STYLE="position:absolute; top:1%; left:30%; ">
@@ -104,6 +107,7 @@ a:hover, a:active {
       <li><a href="/logout">Logout</a></li>
     </ul>
   </div>
+
 
   <table class='table' STYLE="position:absolute; top:15%; left:15%; width:70%; height:70% ">
   <tr>
@@ -119,6 +123,7 @@ a:hover, a:active {
   <tr>
     <td align="center"><div class="buttonz"><input type="button" onClick="window.open('https://172.16.1.6/facilities/html/','_blank')" value="Library"></div></td>
     <form action = "/EVoting"><td align="center"><div class="buttonz"><input type="submit" value="Evoting"></div></td></form>		
+
   </tr>
 </table>
 </body>
