@@ -4,7 +4,7 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import Context, loader
 from django.core.context_processors import csrf
-from sessionapp.models import RoomPreference,UserList,RoomList,FriendsPreference
+from sessionapp.models import RoomPreference,UserList,RoomList,FriendsPreference,StudentBioDataTable
 from django.db.models import Max
 import random
 import allocation
@@ -17,6 +17,39 @@ def friendsprefrence(request):
 	#for friends prefrence list
 	if 'username' in request.session:
 		return render_to_response('friendspref.html')
+	else :
+		return HttpResponseRedirect('/login')
+
+def myprofile(request):
+	#for friends prefrence list
+	if 'username' in request.session:
+		username = request.session['username']
+		rollNumber = request.session['member_id']
+		biodata = StudentBioDataTable.objects.get(rollNumber = rollNumber)
+		jeeAIR = biodata.jeeAIR
+		name = biodata.name
+		roll = biodata.rollNumber
+		dept = biodata.courseAdmitted
+		sex = biodata.gender
+		hostel = biodata.hostelAlloted
+		dob = biodata.dateOfBirth
+		category = biodata.category
+		fname = biodata.fathersName
+		income = biodata.parentsOrGuardiansAnnualIncom
+		mailingAddress = biodata.mailingAddress
+		permanentAddress = biodata.permanentAddress
+		motherTongue = biodata.motherTongue
+		nationality = biodata.nationality
+		nativeState = biodata.nativeState
+
+		return render_to_response('myprofile.html',{'roll':roll,'jeeAIR':jeeAIR,'name':name,'dept':dept,'sex':sex,'hostel':hostel,'dob':dob,'category':category,'fname':fname,'income':income,'mailingAddress':mailingAddress,'permanentAddress':permanentAddress,'motherTongue':motherTongue,'nationality':nationality,'nativeState':nativeState})
+
+	else :
+		return HttpResponseRedirect('/login')
+
+def changepassword(request):
+	if 'username' in request.session:
+		return render_to_response('changepassword.html')
 	else :
 		return HttpResponseRedirect('/login')
 
