@@ -1,34 +1,121 @@
+
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="utf-8">
- <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
- {% load staticfiles %}
- <link rel="stylesheet" href="{% static "src/login.css" %}">
-<title>H-RAM</title>
-<style>
+
+  {% load staticfiles %}
+  <meta charset="UTF-8">
+  <title>log in</title>
+
+  <style>
+
 body {
     background-image: url("{% static 'src/background.jpg'%}");
+    background-color: #00f;
 }
+
+.table {
+background: rgba(255,255,255,0.5);
+box-shadow: 7px 7px 10px #000;
+}
+
+.buttonz input[type=submit]{
+  position: absolute;
+  left: 55%;
+  top: 75%;
+  width: 35%;
+  height: 7%;
+  background: #0df;
+  border: 1px solid #fff;
+  cursor: pointer;
+  border-radius: 2px;
+  color: #000;
+  font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
+  font-size: 100%;
+  font-weight: 400;
+  padding: 10px;
+}
+
+.buttonz input[type=submit]:hover{
+  opacity: 0.8;
+}
+
+.buttonz input[type=submit]:active{
+  opacity: 0.6;
+}
+
+.title{
+  position: absolute;
+  left: 15%;
+  top: 70%;
+  width: 30%;
+  height: 7%;
+  color: #000;
+  text-shadow: #EEEE00 0 0 17px;
+  font-family: Papyrus, fantasy;
+  font-size: 200%;
+  font-weight: 200;
+}
+
+.login input[type=text]{
+  position: absolute;
+  left: 55%;
+  top: 30%;
+  width: 35%;
+  height: 7%;
+  background: transparent;
+  border: 1px solid rgba(0,0,255,0.6);
+  border-radius: 2px;
+  color: #000;
+  font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 4px;
+}
+
+.login input[type=password]{
+  position: absolute;
+  left: 55%;
+  top: 43%;
+  width: 35%;
+  height: 7%;
+  background: transparent;
+  border: 1px solid rgba(0,0,255,0.6);
+  border-radius: 2px;
+  color: #000;
+  font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 4px;
+  margin-top: 10px;
+}
+
 </style>
 </head>
+
 <body>
 
-  <section class="container">
-    <div class="login">
-      <h1 align = "center">Login</h1>
-      <p align='center' style="color:red">  {% if errors %}
+  <table class='table' STYLE="position:absolute; TOP:15%; LEFT:15%; WIDTH:70%; HEIGHT:70% ">
+  <tr>
+    <td align="center"><img src="{% static 'src/iitplogo.png'%}" alt="IITP_Logo" STYLE="position:absolute; TOP:20%; LEFT:15%; WIDTH:30%; HEIGHT:50%"><div class="title">IITP &nbsp; H-RAM</div></td>
+    <td align="center"><form action="/checkSignin/" method="POST">
+        <div class="login">
+        <input type="text" name="username" value="" placeholder="Username">
+        <input type="password" name="paswrd" value="" placeholder="Password"><br>
+        </div>
+        <div class="buttonz"><input type="submit" name="submit" value="Login" id="login"></div>
+    </form></td>  
+  </tr>
+  <tr>
+    <td align="center" style="position:absolute; TOP:60%; LEFT:53%;">
+      {% if errors %}
       {% for error in errors %}
         {{ error }}<br/>
       {% endfor %}
-    {% endif %} </p>
-      <form action = "/checkSignin/" method="post">
-        <p align = "center"><input type="text" name="username" value="" placeholder="Username"></p>
-        <p align = "center"><input type="password" name="paswrd" value="" placeholder="Password"></p>
-        <p align = "center" class="submit"><input type="submit" name="submit" value="Login" id="login"></p>
-      </form>
-    </div>
+    {% endif %}</td></tr>
+</table>
 
-    </section>
 </body>
+
 </html>

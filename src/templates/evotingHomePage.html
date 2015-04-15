@@ -14,10 +14,9 @@ body {
 
 .table {
 background: rgba(255,255,255,0.5);
-}
-.titleTable {
-  background-color: #fff;
-  opacity: 0.5;
+border: 1px solid white;
+border-radius: 5px;
+ -moz-border-radius:5px; 
 }
 
 .buttonz input[type=submit]{
@@ -35,11 +34,11 @@ background: rgba(255,255,255,0.5);
 }
 
 .buttonz input[type=submit]:hover {
-	opacity: 0.8;
+	background: #0ef;
 }
 
 .buttonz input[type=submit]:active {
-	opacity: 0.6;
+	background: #0ef;
 }
 
 .buttonz input[type=button]{
@@ -57,11 +56,46 @@ background: rgba(255,255,255,0.5);
 }
 
 .buttonz input[type=button]:hover {
-  opacity: 0.8;
+  background: #0ef;
 }
 
 .buttonz input[type=button]:active {
-  opacity: 0.6;
+  background: #0ef;
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+li {
+    float: left;
+}
+
+a:link, a:visited {
+    display: block;
+    width: 120px;
+    font-family: 'Arial Rounded MT Bold', 'Helvetica Rounded', Arial, sans-serif;
+    font-weight: bold;
+    color: #000;
+    background-color: #0df;
+    text-align: center;
+    padding: 4px;
+    text-decoration: none;
+    text-transform: uppercase;
+    border: 1px solid white;
+}
+
+a:hover, a:active {
+    background-color: #0ef;
+}
+
+.naavigation {
+  position:absolute;
+  top:1%;
+  left:30%;
+  width:auto; 
 }
 
 </style>
@@ -102,23 +136,14 @@ countdown( "countdown", 1, 5 );
 countdown( "countdown2", 100, 0 );
 </script>-->
 <body>
-<table class="titleTable" STYLE="position:absolute; top:1%; left:1%; width:98%; height:5% ">
-  <tr> 
-    <td align="left" style="position:absolute; left:5%; top:10%;"> Home </td>
-    <td align="rignt" style="position:absolute; left:90%; top:9%;">  <a href="/logout">Logout</a></td> 
-</table>
-
-<table class = "titleTable" style="position:absolute; top:7%; left:1%; width:98%; height:5%">
-	<tr>
-		<td align = "center"> 
-{% if errors %}
-	{% for error in errors %}
-		{{ error }}
-	{% endfor %}
-{% endif %}
-		</td>
-	</tr>
-</table>
+<div class="naavigation">
+<ul>
+  <li><a href="/home">Home</a></li>
+  <li><a href="#about">About</a></li>
+  <li><a href="#contact">Contact</a></li>
+  <li><a href="/logout">Logout</a></li>
+</ul>
+</div>
 
 
 <div id="countdown"></div>

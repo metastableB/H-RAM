@@ -20,19 +20,22 @@ from django.template.loader import get_template
 #By default, Django uses the PBKDF2 algorithm with a SHA256 hash
 
 def generate_PDF(request):
-    data = {}
+	if 'username' in request.session:
+	    data = {}
 
-    template = get_template('viewNominees.html')
-    html  = template.render(Context(data))
+	    template = get_template('viewNominees.html')
+	    html  = template.render(Context(data))
 
-    file = open('test.pdf', "w+b")
-    pisaStatus = pisa.CreatePDF(html.encode('utf-8'), dest=file,
-            encoding='utf-8')
+	    file = open('test.pdf', "w+b")
+	    pisaStatus = pisa.CreatePDF(html.encode('utf-8'), dest=file,
+	            encoding='utf-8')
 
-    file.seek(0)
-    pdf = file.read()
-    file.close()            
-    return HttpResponse(pdf, mimetype='application/pdf')
+	    file.seek(0)
+	    pdf = file.read()
+	    file.close()            
+	    return HttpResponse(pdf, mimetype='application/pdf')
+	else :
+		return HttpResponseRedirect('/login')
 
 def evotingHomePage(request):
 	if 'username' in request.session:
@@ -41,26 +44,29 @@ def evotingHomePage(request):
 		return HttpResponseRedirect('/login')
 
 def charts(request):
-	listOfsecretary = []
-	#listOfsecretary =  [['X', 'Y', 'Z'], [1, 2, 3], [4, 5, 6]]
-	#listOfsecretary.append(['name','votes'])
-	listOfsecretary.append({'name':'prateek1','value':45})
-	listOfsecretary.append({'name':'prateek2','value':25})
-	listOfsecretary.append({'name':'prateek3','value':35})
-	listOfsecretary.append({'name':'prateek','value':15})
-	return render_to_response('chartsDemo.html',{'data1':listOfsecretary})
-	'''xdata = ["Apple", "Apricot", "Avocado", "Banana", "Boysenberries", "Blueberries", "Dates", "Grapefruit", "Kiwi", "Lemon"]
-	ydata = [52, 48, 160, 94, 75, 71, 490, 82, 46, 17]
+	if 'username' in request.session:
+		listOfsecretary = []
+		#listOfsecretary =  [['X', 'Y', 'Z'], [1, 2, 3], [4, 5, 6]]
+		#listOfsecretary.append(['name','votes'])
+		listOfsecretary.append({'name':'prateek1','value':45})
+		listOfsecretary.append({'name':'prateek2','value':25})
+		listOfsecretary.append({'name':'prateek3','value':35})
+		listOfsecretary.append({'name':'prateek','value':15})
+		return render_to_response('chartsDemo.html',{'data1':listOfsecretary})
+		'''xdata = ["Apple", "Apricot", "Avocado", "Banana", "Boysenberries", "Blueberries", "Dates", "Grapefruit", "Kiwi", "Lemon"]
+		ydata = [52, 48, 160, 94, 75, 71, 490, 82, 46, 17]
 
-	extra_serie = {"tooltip": {"y_start": "", "y_end": " cal"}}
-	chartdata = {'x': xdata, 'y1': ydata, 'extra1': extra_serie}
-	charttype = "pieChart"
+		extra_serie = {"tooltip": {"y_start": "", "y_end": " cal"}}
+		chartdata = {'x': xdata, 'y1': ydata, 'extra1': extra_serie}
+		charttype = "pieChart"
 
-	data = {
-	    'charttype': charttype,
-	    'chartdata': chartdata,
-	}
-	return render_to_response('chartsDemo.html', data)'''
+		data = {
+		    'charttype': charttype,
+		    'chartdata': chartdata,
+		}
+		return render_to_response('chartsDemo.html', data)'''
+	else:
+		return HttpResponseRedirect('/login')
 
 def nominationForm2(request,errors):
 	if 'username' in request.session:
@@ -113,7 +119,7 @@ def nominationForm1(request):
 			positionsList.append(temp)
 			return render_to_response('electionNominationForm.html',{'positions':positionsList,'hostels':hostelsList,'roll':request.session['member_id']})
 		else:
-			return render_to_response('messages.htlm',{'message':"The Election is closed.Please contact the administrator for more details.",'messageTitle':"E-Voting"})
+			return render_to_response('messages.html',{'message':"The Election is closed.Please contact the administrator for more details.",'messageTitle':"E-Voting"})
 	else:
 		return HttpResponseRedirect('/login')
 

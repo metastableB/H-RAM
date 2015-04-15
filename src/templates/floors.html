@@ -1,10 +1,10 @@
 <html>
 <head>
-	<title>Testing </title>
+	<title> Room Prefrences </title>
 	{% load staticfiles %}
 <style>
 body {
-    background-image: url("{% static 'src/background.jpg'%}");
+	background-image: url("{% static 'src/background.jpg'%}");
 }
 </style>
 <link type="text/css" rel="stylesheet" href="{%  static 'src/floors.css' %}">
@@ -21,6 +21,7 @@ body {
 		if(idold == "0.5")
 		{
 			document.getElementById(number).style.opacity = "1";
+			document.getElementById(number).style.background = "none";
 			var index = preferenceOrder.indexOf(number);
 			preferenceOrder.splice(index,1);
 			printPreferenceOrder(preferenceOrder);
@@ -28,6 +29,7 @@ body {
 		else
 		{
 			document.getElementById(number).style.opacity = "0.5";
+			document.getElementById(number).style.background = "#af0";
 			preferenceOrder.push(number);
 			var field = document.getElementsByName(number);
 			printPreferenceOrder(preferenceOrder);
@@ -60,10 +62,9 @@ body {
 		document.getElementById("preferences").innerHTML = "<font color=\"white\">Preferences<br></font>";
 		for(i=0;i<listOfPreferences.length;i++)
 		{
-			document.getElementById("preferences").innerHTML = document.getElementById("preferences").innerHTML + (i+1) + "." + listOfPreferences[i] + "<br>";
+			document.getElementById("preferences").innerHTML = document.getElementById("preferences").innerHTML + (i+1) + ". " + listOfPreferences[i] + "<br>";
 		}
 	}
-
 	function submitForm(){
 		document.getElementById("preference").value = preferenceOrder.toString();
 		document.getElementById("preferences").innerHTML = document.getElementById("preferences").innerHTML + preferenceOrder.toString() + "<br>";
@@ -914,7 +915,6 @@ $(document).ready(function ()
 				</div>
 			</td>
 </div>
-<!--	-->
 
 		<table id="submitButton" align="center">
 			<tr>
