@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+ {% load staticfiles %}
+ <link type="text/css" rel="stylesheet" href="{%  static 'src/bootstrap.min.css' %}">
+<title>My Profile</title>
+<style>
+  body {
+    background-image: url("{% static 'src/background.jpg'%}");
+}
+.buttonz input[type=submit]{
+  width: auto;
+  height: auto;
+  background: #0df;
+  border: 1px solid #fff;
+  cursor: pointer;
+  border-radius: 2px;
+  color: #000;
+  font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
+  font-size: 100%;
+  font-weight: 400;
+  padding: 0.5%;
+}
+
+.buttonz input[type=submit]:hover {
+  background: #0ef;
+}
+
+.buttonz input[type=submit]:active {
+  background: #0ef;
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+li {
+    float: left;
+}
+
+a:link, a:visited {
+    display: block;
+    width: 120px;
+    font-family: 'Arial Rounded MT Bold', 'Helvetica Rounded', Arial, sans-serif;
+    font-weight: bold;
+    color: #000;
+    background-color: #0df;
+    text-align: center;
+    padding: 4px;
+    text-decoration: none;
+    text-transform: uppercase;
+    border: 1px solid white;
+}
+
+a:hover, a:active {
+    background-color: #0ef;
+}
+</style>
+</head>
+<body>
+  
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <ul>
+        <li><a href="/home">Home</a></li>
+      </ul>
+    </div>
+    <div class="col-md-6">
+    </div>
+    <div class="col-md-2 text-right">
+      <ul>
+        <li><a href="/logout">Logout</a></li>
+      </ul>
+    </div>
+  </div>
+    <!--<div STYLE="position:absolute; top:1%; left:30%; ">
+      <ul>
+        <li><a href="/home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="/logout">Logout</a></li>
+      </ul>
+  </div>-->
+      
+      
+      <div class="row">
+        <div class="col-md-12">
+          <h1 class="text-center">My Profile</h1>
+        </div>
+      </div>
+      <hr>
+
+      <div class="row">
+        <div class="col-md-12 text-center"><h4>NAME : {{name}}</h4></div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12 text-center"><h5>GENDER : {{sex}}</h5></div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12 text-center"><h5>DOB : {{dob}}</h5></div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12 text-center"><h5>CATEGORY : {{category}}</h5></div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12 text-center"><h5>ROLL NO : {{roll}}</h5></div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12 text-center"><h5>JEE AIR : {{jeeAIR}}</h5></div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12 text-center"><h5>COURSE ADMITTED : {{dept}}</h5></div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12 text-center"><h5>HOSTEL : {{hostel}}</h5></div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12 text-center"><h5>MOTHER TOUNGE : {{motherTongue}}</h5></div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12 text-center"><h5>NATIONALITY: {{nationality}}</h5></div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12 text-center"><h5>NATIVE STATE : {{nativeState}}</h5></div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12 text-center"><h5>FATHERS NAME : {{fname}}</h5></div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12 text-center"><h5>FATHERS INCOME : {{income}}</h5></div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12 text-center"><h5>MAILING ADDRESS : {{mailingAddress}}</h5></div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12 text-center"><h5>PERMANENT ADDRESS : {{permanentAddress}}</h5></div>
+      </div>
+
+      <!--<div class="row">
+        <div class="col-md-12 text-center col-xs-12" >
+          <div class="buttonz"><input type="submit" name="submit" value="happy"></div>
+        </div>
+      </div>-->
+  </div>
+</body>
+</html>
