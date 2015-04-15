@@ -209,13 +209,13 @@ def validate(request):
 		if (len(username)!=0):
 			validuser=True
 		else:
-			errors.append("Please enter a username.")
+			errors.append("Please enter  username.")
 			
 		password = request.POST['paswrd']
 		if (len(password)!=0):
 			validpassword=True
 		else:
-			errors.append("Please enter a password.")
+			errors.append("Please enter  password.")
 		if(validpassword & validuser):			
 			try:
 				user = UserList.objects.get(username=username)
@@ -231,10 +231,10 @@ def validate(request):
 					request.session['username'] = user.username
 					return HttpResponseRedirect('/home')
 				else:
-					errors.append("Password is incorrect.")
+					errors.append("Incorrect password. Please try again.")
 					return render_to_response('login.html',{'errors':errors})
 			if not user:
- 				errors.append("Please Enter the correct credentials.")
+ 				errors.append("Please enter correct credentials")
 				return render_to_response('login.html',{'errors':errors})
 		else:
 			return render_to_response('login.html',{'errors':errors})
@@ -248,15 +248,19 @@ def profile(request):
 	return HttpResponseRedirect('/login')
 
 def logout(request):
+	errors =[]
 	if 'username' in request.session:
 		try:
 			del request.session['member_id']
 			del request.session['username']
 		except keyError:
 			pass
-		return HttpResponseRedirect('/login')
+		#return HttpResponseRedirect('/login')
+		errors.append("You have sucessfully logged out.")
+		return render_to_response('login.html',{'errors':errors})
 	else :
-		return HttpResponseRedirect('/login')
+		errors.append("You are not logged in.")
+		return render_to_response('login.html',{'errors':errors})
 
 	#return HttpResponse("You are looged out!!!")
 
@@ -266,6 +270,8 @@ def logout(request):
 	return False'''
 
 def login(request):
+	if 'username' in request.session:
+		return HttpResponseRedirect('/home')
 	return render_to_response('login.html')
 
 def allocationMethod(request):
