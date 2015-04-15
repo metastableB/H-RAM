@@ -4,22 +4,165 @@
 <meta charset="utf-8">
  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
  {% load staticfiles %}
- <link rel="stylesheet" href="{% static "src/login.css" %}">
+ <link type="text/css" rel="stylesheet" href="{%  static 'src/bootstrap.min.css' %}">
 <title>Friends Prefrences</title>
 <style>
-body {
+  body {
     background-image: url("{% static 'src/background.jpg'%}");
+}
+.buttonz input[type=submit]{
+  width: auto;
+  height: auto;
+  background: #0df;
+  border: 1px solid #fff;
+  cursor: pointer;
+  border-radius: 2px;
+  color: #000;
+  font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
+  font-size: 100%;
+  font-weight: 400;
+  padding: 0.5%;
+}
+
+.buttonz input[type=submit]:hover {
+  background: #0ef;
+}
+
+.buttonz input[type=submit]:active {
+  background: #0ef;
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+li {
+    float: left;
+}
+
+a:link, a:visited {
+    display: block;
+    width: 120px;
+    font-family: 'Arial Rounded MT Bold', 'Helvetica Rounded', Arial, sans-serif;
+    font-weight: bold;
+    color: #000;
+    background-color: #0df;
+    text-align: center;
+    padding: 4px;
+    text-decoration: none;
+    text-transform: uppercase;
+    border: 1px solid white;
+}
+
+a:hover, a:active {
+    background-color: #0ef;
 }
 </style>
 </head>
 <body>
-<div id="error">
-		{% if errors %}
-			{% for error in errors %}
-				{{ error }}<br/>
-			{% endfor %}
-		{% endif %}
-</div>
+  
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <ul>
+        <li><a href="/home">Home</a></li>
+      </ul>
+    </div>
+    <div class="col-md-6">
+    </div>
+    <div class="col-md-2 text-right">
+      <ul>
+        <li><a href="/logout">Logout</a></li>
+      </ul>
+    </div>
+  </div>
+    <!--<div STYLE="position:absolute; top:1%; left:30%; ">
+      <ul>
+        <li><a href="/home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="/logout">Logout</a></li>
+      </ul>
+  </div>-->
+  
+    <form action="/EVoting/createElectionPasswords/" method="POST" id="form">
+      
+      <div class="row">
+        <div class="col-md-12">
+          <h1 class="text-center">Friends Prefrences</h1>
+        </div>
+      </div>
+      
+      <hr>
+
+      <div class="row">
+        <div class="col-md-12 text-center" style="color:red; height:10%;">
+          <div id="error">
+            {% if errors %}
+              {% for error in errors %}
+                {{ error }}<br/>
+              {% endfor %}
+            {% endif %}
+        </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 col-xs-8">
+          <h4 class="text-right">Priority #1</h4>
+        </div>
+        <div class="col-md-6 col-xs-8 text-left">
+          <input type="text" name="friend1" value="" placeholder="Roll No 1">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 col-xs-8">
+          <h4 class="text-right">Priority #2</h4>
+        </div>
+        <div class="col-md-6 col-xs-8 text-left">
+          <input type="text" name="friend1" value="" placeholder="Roll No 2">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 col-xs-8">
+          <h4 class="text-right">Priority #3</h4>
+        </div>
+        <div class="col-md-6 col-xs-8 text-left">
+          <input type="text" name="friend1" value="" placeholder="Roll No 5">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 col-xs-8">
+          <h4 class="text-right">Priority #4</h4>
+        </div>
+        <div class="col-md-6 col-xs-8 text-left">
+          <input type="text" name="friend1" value="" placeholder="Roll No 5">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 col-xs-8">
+          <h4 class="text-right">Priority #5</h4>
+        </div>
+        <div class="col-md-6 col-xs-8 text-left">
+          <input type="text" name="friend1" value="" placeholder="Roll No 5">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12 text-center col-xs-12" >
+          <div class="buttonz"><input type="submit" name="submit" value="Submit"></div>
+        </div>
+      </div>
+    </form>
+  </div>
+<!--
+
   <section class="container">
     <div class="login">
       <h1 align = "center">Fill in the Friends Prefrences</h1>
@@ -33,6 +176,6 @@ body {
       </form>
     </div>
 
-    </section>
+    </section>-->
 </body>
 </html>

@@ -26,7 +26,8 @@ body {
   margin: 0 auto;
   padding: 20px 20px 20px;
   width: 310px;
-  background: white;
+  background: rgba(255,255,255,0.8);
+  box-shadow: 7px 7px 10px #000;
   border-radius: 3px;
   @include box-shadow(0 0 200px rgba(white, .5), 0 1px 2px rgba(black, .3));
 
@@ -131,7 +132,7 @@ input[type=text], input[type=password] {
   }
 }
 
-input[type=submit] {
+input[type=submit] {  
   padding: 0 18px;
   height: 29px;
   font-size: 12px;
@@ -157,3 +158,4 @@ input[type=submit] {
 .lt-ie9 {
   input[type=text], input[type=password] { line-height: 34px; }
 }
+

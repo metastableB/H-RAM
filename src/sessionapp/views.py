@@ -79,10 +79,16 @@ def recordFriendsPreference(request):
 		return HttpResponseRedirect('/login')
 
 def access(request):
-	return render_to_response('access.html')
+	if 'username' in request.session:
+		return render_to_response('access.html')
+	else :
+		return HttpResponseRedirect('/login')
 
 def openGrid(request):
-	return render_to_response('tables.html')
+	if 'username' in request.session:
+		return render_to_response('tables.html')
+	else :
+		return HttpResponseRedirect('/login')
 
 def bookRoom(request):
 	if 'username' in request.session:
@@ -120,10 +126,17 @@ def test(request):
 	return render_to_response('testing.html')
 
 def floorPlan(request):
-	return render_to_response('floors.html')
+	if 'username' in request.session:
+		return render_to_response('floors.html')
+	else :
+		return HttpResponseRedirect('/login')
 
 def messages(request):
-	return render_to_response('messages.html')
+	if 'username' in request.session:
+		return render_to_response('messages.html')
+	else :
+		return HttpResponseRedirect('/login')
+	
 
 '''def check(request):
 	if request.method=="POST":
