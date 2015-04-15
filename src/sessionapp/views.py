@@ -6,6 +6,8 @@ from django.template import Context, loader
 from django.core.context_processors import csrf
 from sessionapp.models import RoomPreference,UserList,RoomList,FriendsPreference
 from django.db.models import Max
+
+from .forms import FriendsPreferenceForm
 import random
 import allocation
 
@@ -16,6 +18,18 @@ def register(request):
 def friendsprefrence(request):
 	#for friends prefrence list
 	if 'username' in request.session:
+		rollNumber = request.session['member_id']
+		try :
+			friendsList = FriendsPreference.objects.get(rollNumber = rollNumber)
+		except FriendsPreference.DoesNotExist:
+			friendsList = None
+		if friendsList :
+			friend1 = friendsList.preferedfriendUId1
+			friend2 = friendsList.preferedfriendUId2
+			friend3 = friendsList.preferedfriendUId3
+			friend4 = friendsList.preferedfriendUId4 
+			friend5 = friendsList.preferedfriendUId5
+			return render_to_response('friendspref.html',{'friend1':friend1,'friend2':friend2,'friend3':friend3,'friend4':friend4,'friend5':friend5})
 		return render_to_response('friendspref.html')
 	else :
 		return HttpResponseRedirect('/login')
@@ -27,6 +41,21 @@ def home(request):
 	else :
 		return HttpResponseRedirect('/login')
 
+#---------------------------------
+#def friendsprefrence(request):
+    # if this is a POST request we need to process the form data
+ #   if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+  #      form = FriendsPreferenceForm(request.POST)
+   #     return HttpResponseRedirect('/thanks/')
+
+    # if a GET (or any other method) we'll create a blank form
+  #  else:
+   #     form = FriendsPreferenceForm()
+
+    #return render(request, 'friendspref.html', {'form': form})
+  #--------------------------------------------		
+
 def recordFriendsPreference(request):
 	if 'username' in request.session:
 		errors = []
@@ -34,46 +63,91 @@ def recordFriendsPreference(request):
 		rollNumber = request.session['member_id']
 		userDetails = UserList.objects.get(username = username)
 		#user = FriendsPreference(uId = userDetails)
+	
 		friend1 = request.POST['friend1']
-		checkFriend1 = UserList.objects.get(rollNumber = friend1)
+		try :
+			checkFriend1 = UserList.objects.get(rollNumber = friend1)
+		except UserList.DoesNotExist:
+			checkFriend1 = None 
 		if not checkFriend1:
 			errors.append("Enter a valid first friend")
 			return render_to_response('friendspref.html',{'errors':errors})
+	
 		friend2 = request.POST['friend2']
-		checkFriend2 = UserList.objects.get(rollNumber = friend2)
+		try :
+			checkFriend2 = UserList.objects.get(rollNumber = friend2)
+		except UserList.DoesNotExist:
+			checkFriend2 = None 
 		if not checkFriend2:
 			errors.append("Enter a valid second friend")
 			return render_to_response('friendspref.html',{'errors':errors})
+		elif friend1 == friend2 :
+			errors.append("You cannot enter duplicate values. Try again.")
+			return render_to_response('friendspref.html',{'errors':errors})
 
 		friend3 = request.POST['friend3']
-		checkFriend3 = UserList.objects.get(rollNumber = friend3)
+		try :
+			checkFriend3 = UserList.objects.get(rollNumber = friend3)
+		except UserList.DoesNotExist:
+			checkFriend3 = None 
 		if not checkFriend3:
 			errors.append("Enter a valid third friend")
 			return render_to_response('friendspref.html',{'errors':errors})
+		elif friend1 == friend3 or friend2 == friend3:
+			errors.append("You cannot enter duplicate values. Try again.")
+			return render_to_response('friendspref.html',{'errors':errors})
 
 		friend4 = request.POST['friend4']
-		checkFriend4 = UserList.objects.get(rollNumber = friend4)
+		try :
+			checkFriend4 = UserList.objects.get(rollNumber = friend4)
+		except UserList.DoesNotExist:
+			checkFriend4 = None 
 		if not checkFriend4:
 			errors.append("Enter a valid fourth friend")
 			return render_to_response('friendspref.html',{'errors':errors})
+		elif friend1 == friend4 or friend2 == friend4 or friend3 == friend4:
+			errors.append("You cannot enter duplicate values. Try again.")
+			return render_to_response('friendspref.html',{'errors':errors})
 
 		friend5 = request.POST['friend5']
-		checkFriend5 = UserList.objects.get(rollNumber = friend5)
+		try :
+			checkFriend5 = UserList.objects.get(rollNumber = friend5)
+		except UserList.DoesNotExist:
+			checkFriend5 = None 
 		if not checkFriend5:
 			errors.append("Enter a valid fifth friend")
 			return render_to_response('friendspref.html',{'errors':errors})
-		newuser = FriendsPreference(uId = userDetails,rollNumber = rollNumber ,preferedfriendUId1 = friend1,preferedfriendUId2 = friend2,preferedfriendUId3 = friend3,preferedfriendUId4 = friend4,preferedfriendUId5 = friend5)
-		newuser.save()
-		errors = []
-		errors.append("Your preferences have been saved")
+		elif friend1 == friend5 or friend2 == friend5 or friend3 == friend5 or friend4 == friend5:
+			errors.append("You cannot enter duplicate values. Try again.")
+			return render_to_response('friendspref.html',{'errors':errors})
+
+		if friend1 == rollNumber or friend2 == rollNumber or friend3 == rollNumber or friend4 == rollNumber or friend5 == rollNumber :
+			errors.append("You cannot enter your own roll-number. Try again.")
+			return render_to_response('friendspref.html',{'errors':errors})
+
+		try:
+			userObject = FriendsPreference.objects.get(rollNumber = rollNumber)
+		except FriendsPreference.DoesNotExist:
+			userObject = None
+		if not userObject:
+			newuser = FriendsPreference(uId = userDetails,rollNumber = rollNumber ,preferedfriendUId1 = friend1,preferedfriendUId2 = friend2,preferedfriendUId3 = friend3,preferedfriendUId4 = friend4,preferedfriendUId5 = friend5)
+			newuser.save()
+			errors = []
+			errors.append("Your preferences have been saved")
+		if userObject:
+			#newuser = FriendsPreference(uId = userDetails,rollNumber = rollNumber ,preferedfriendUId1 = friend1,preferedfriendUId2 = friend2,preferedfriendUId3 = friend3,preferedfriendUId4 = friend4,preferedfriendUId5 = friend5)
+			#newuser.save()
+			userObject.uId = userDetails
+			userObject.rollNumber = rollNumber
+			userObject.preferedfriendUId1 = friend1
+			userObject.preferedfriendUId2 = friend2
+			userObject.preferedfriendUId3 = friend3
+			userObject.preferedfriendUId4 = friend4
+			userObject.preferedfriendUId5 = friend5
+			userObject.save()
+			errors = []
+			errors.append("Your preferences have been saved")
 		return render_to_response('home.html',{'errors' : errors})
-
-		'''user.preferedfriendUId1 = friend1
-		user.preferedfriendUId2 = friend2
-		user.preferedfriendUId3 = friend3
-		user.preferedfriendUId4 = friend4
-		user.preferedfriendUId4 = friend5'''
-
 
 	else:
 		return HttpResponseRedirect('/login')

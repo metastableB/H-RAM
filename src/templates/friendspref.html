@@ -87,7 +87,7 @@ a:hover, a:active {
       </ul>
   </div>-->
   
-    <form action="/EVoting/createElectionPasswords/" method="POST" id="form">
+    <form action="/recordFriendsPreference/" method="post" id="form">
       
       <div class="row">
         <div class="col-md-12">
@@ -108,13 +108,13 @@ a:hover, a:active {
         </div>
         </div>
       </div>
-
+     
       <div class="row">
         <div class="col-md-6 col-xs-8">
           <h4 class="text-right">Priority #1</h4>
         </div>
         <div class="col-md-6 col-xs-8 text-left">
-          <input type="text" name="friend1" value="" placeholder="Roll No 1">
+          <input type="text" name="friend1" value="{{friend1}}" placeholder="{{friend1}}">
         </div>
       </div>
 
@@ -123,7 +123,7 @@ a:hover, a:active {
           <h4 class="text-right">Priority #2</h4>
         </div>
         <div class="col-md-6 col-xs-8 text-left">
-          <input type="text" name="friend1" value="" placeholder="Roll No 2">
+          <input type="text" name="friend2" value="{{friend2}}" placeholder="{{friend2}}">
         </div>
       </div>
 
@@ -132,7 +132,7 @@ a:hover, a:active {
           <h4 class="text-right">Priority #3</h4>
         </div>
         <div class="col-md-6 col-xs-8 text-left">
-          <input type="text" name="friend1" value="" placeholder="Roll No 5">
+          <input type="text" name="friend3" value="{{friend3}}" placeholder="{{friend3}}">
         </div>
       </div>
 
@@ -141,7 +141,7 @@ a:hover, a:active {
           <h4 class="text-right">Priority #4</h4>
         </div>
         <div class="col-md-6 col-xs-8 text-left">
-          <input type="text" name="friend1" value="" placeholder="Roll No 5">
+          <input type="text" name="friend4" value="{{friend4}}" placeholder="{{friend4}}">
         </div>
       </div>
 
@@ -150,7 +150,7 @@ a:hover, a:active {
           <h4 class="text-right">Priority #5</h4>
         </div>
         <div class="col-md-6 col-xs-8 text-left">
-          <input type="text" name="friend1" value="" placeholder="Roll No 5">
+          <input type="text" name="friend5" value="{{friend5}}" placeholder="{{friend5}}">
         </div>
       </div>
 

@@ -20,11 +20,11 @@ class FriendsPreference(models.Model):
     uId = models.ForeignKey(UserList)
     rollNumber = models.CharField(max_length = 10)
     # TODO : whether to store userId or rollnumber of the friend
-    preferedfriendUId1 = models.CharField(max_length = 10)
-    preferedfriendUId2 = models.CharField(max_length = 10)
-    preferedfriendUId3 = models.CharField(max_length = 10)
-    preferedfriendUId4 = models.CharField(max_length = 10)
-    preferedfriendUId5 = models.CharField(max_length = 10)
+    preferedfriendUId1 = models.CharField(max_length = 10 , default = "Roll Number")
+    preferedfriendUId2 = models.CharField(max_length = 10 , default = "Roll Number")
+    preferedfriendUId3 = models.CharField(max_length = 10 , default = "Roll Number")
+    preferedfriendUId4 = models.CharField(max_length = 10 , default = "Roll Number")
+    preferedfriendUId5 = models.CharField(max_length = 10 , default = "Roll Number")
     def  __unicode__ (self):
     	return u'%s' %(self.uId)
 

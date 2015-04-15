@@ -13,7 +13,7 @@ body {
     background-color: #0df;
 }
 
-.table {
+.tables {
 background: rgba(255,255,255,0.5);
 border: 1px solid white;
 border-radius: 5px;
@@ -95,21 +95,32 @@ a:hover, a:active {
     background-color: #0ef;
 }
 
+#clicked {
+  color: #AE5252;
+}
+
 </style>
       <link type="text/css" rel="stylesheet" href="{%  static 'src/bootstrap.min.css' %}">
 </head>
 <body>
   <div STYLE="position:absolute; top:1%; left:30%; ">
     <ul>
-      <li><a href="/home">Home</a></li>
+      <li><a id="clicked" href="/home">Home</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#contact">Contact</a></li>
       <li><a href="/logout">Logout</a></li>
     </ul>
   </div>
-
-
-  <table class='table' STYLE="position:absolute; top:15%; left:15%; width:70%; height:70% ">
+  
+  <table class='tables' STYLE="position:absolute; top:15%; left:15%; width:70%; height:70% ">
+  <tr>
+   {% if errors %}
+              {% for error in errors %}
+                {{ error }}<br/>
+              {% endfor %}
+            {% endif %} </p>
+    
+  </tr>
   <tr>
     <td align="center"><form action = "/test"><div class="buttonz"><input type="submit" value="Room Preference"></div></td></form>
     <td align="center"><form action = "/fpref"><div class="buttonz"><input type="submit" value="Friends Preference"></div></td></form>
