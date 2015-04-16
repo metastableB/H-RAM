@@ -56,3 +56,16 @@ class ListOfSecretary(models.Model):
 class ListOfHostel(models.Model):
 	hostelsName = models.CharField(max_length = 30)
 
+	# Contains control flags global to session app and evoting
+class EVotingGlobalFlag(models.Model):
+	uId = models.ForeignKey(UserList)
+	rollNumber = models.CharField(max_length = 10)
+	# Access Flags
+	voted = models.IntegerField(max_length = 1 , default = 0)
+	def  __unicode__ (self):
+		return self.rollNumber
+
+# Contains control flags global to all users and apps
+class EvotingSuperGlobalFlag(models.Model):
+	votingCompleted = models.IntegerField(max_length = 1 , default = 0)
+
