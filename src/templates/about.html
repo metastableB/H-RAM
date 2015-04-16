@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+  {% load staticfiles %}
+ 	<meta charset="UTF-8">
+
+<title>Contact</title>
+<style>
+
+body {
+    background-image: url("{% static 'src/background.jpg'%}");
+    background-color: #00f;
+}
+
+.table {
+background: rgba(255,255,255,0.5);
+border: 1px solid white;
+border-radius: 5px;
+ -moz-border-radius:5px; 
+}
+
+.buttonz input[type=submit]{
+	width: 65%	;
+	height: 80%;
+	background: #0df;
+	border: 1px solid #fff;
+	cursor: pointer;
+	border-radius: 2px;
+	color: #000;
+	font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
+	font-size: 16px;
+	font-weight: 400;
+	padding: 20px;
+}
+
+.buttonz input[type=submit]:hover {
+	background: #0ef;
+}
+
+.buttonz input[type=submit]:active {
+	background: #0ef;
+}
+
+.buttonz input[type=button]{
+  width: 65%  ;
+  height: 80%;
+  background: #0df;
+  border: 1px solid #fff;
+  cursor: pointer;
+  border-radius: 2px;
+  color: #000;
+  font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 20px;
+}
+
+.buttonz input[type=button]:hover {
+  background: #0ef;
+}
+
+.buttonz input[type=button]:active {
+  background: #0ef;
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+li {
+    float: left;
+}
+
+a:link, a:visited {
+    display: block;
+    width: 120px;
+    font-family: 'Arial Rounded MT Bold', 'Helvetica Rounded', Arial, sans-serif;
+    font-weight: bold;
+    color: #000;
+    background-color: #0df;
+    text-align: center;
+    padding: 4px;
+    text-decoration: none;
+    text-transform: uppercase;
+    border: 1px solid white;
+}
+
+a:hover, a:active {
+    background-color: #0ef;
+}
+
+.naavigation {
+  position:absolute;
+  top:1%;
+  left:30%;
+  width:auto; 
+}
+
+</style>
+</head>
+<body>
+<div class="naavigation">
+<ul>
+  <li><a href="/home">Home</a></li>
+  <li><a href="#about">About</a></li>
+  <li><a href="#contact">Contact</a></li>
+  <li><a href="/logout">Logout</a></li>
+</ul>
+</div>
+
+
+<div id="countdown"></div>
+<div id="countdown2"></div>
+<table class='table' STYLE="position:absolute; top:15%; left:15%; width:70%; height:70% ">
+  <tr>
+    <td align="center">
+      <a>H-RAM</a><br><br>
+      The memories of hostel life form an integral part of any student’s college life. Bonds are forged not only through fun and activities, but through projects undertaken and executed together. The concept of “wingmates” speaks of it all. However, the current room allocation system at IIT Patna does not take into consideration these issue. A group of students may prefer to stay together; or stay further from a particular student; or even prefer a room on a particular side of the hostel. Currently, he/she does not have the freedom to choose that. The Hostel Room Allocation and Management Service aims to bridge that gap, where a student can choose a room for himself, as well as his preferred neighbours. Moreover, it is also necessary to implement a strong concurrency control mechanism in case multiple students prefer to select a particular room.<br><br><br>
+      E-Voting<br><br>
+      The E-Voting scheme is a solution to several problems faced by traditional voting schemes based on paper. The most obvious of these issues is the cumbersome process involving manual counting, and the unavoidable human errors that come with it. Moreover, paradigms worldwide are moving towards online solutions because they are more reliable, cost-effective and above all, convenient.
+      
+    </td>
+    
+  </tr>
+</table>
+</body>
+</html>
