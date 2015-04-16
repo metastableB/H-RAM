@@ -1,0 +1,305 @@
+<html>
+<head>
+<title> Nomination Form </title>
+{% load staticfiles %}
+	<link type="text/css" rel="stylesheet" href="{%  static 'src/bootstrap.min.css' %}">
+<style>
+	body {
+    background-image: url("{% static 'src/background.jpg'%}");
+}
+.buttonz input[type=submit]{
+  width: 10%;
+  height: auto;
+  background: #0df;
+  border: 1px solid #fff;
+  cursor: pointer;
+  border-radius: 2px;
+  color: #000;
+  font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
+  font-size: 100%;
+  font-weight: 400;
+  padding: 0.5%;
+}
+input{
+	width:auto;
+	height:auto;
+}
+
+.buttonz input[type=submit]:hover {
+	text-shadow: 0 0 10px rgba(255,255,255,1) , 0 0 20px rgba(255,255,255,1) , 0 0 30px rgba(255,255,255,1) , 0 0 40px #0000ff , 0 0 70px #0000ff , 0 0 80px #0000ff , 0 0 100px #00f ;
+}
+
+.buttonz input[type=submit]:active {
+	opacity: 0.6;
+}
+</style>
+</head>
+<script type="text/javascript">
+	function callfunction()
+	{
+		var i=0;
+		var positions = []
+		var hostel = document.getElementById("hostel").value;
+		var firstHostel = "{{hostels|first}}";
+		document.getElementById("position").innerHTML = ""; 
+		var temp = "";
+		"{% for position in positions %}"
+		"{% for p in position %}"
+			temp = "{{p.hostel}}";
+			if (temp == hostel)
+			{
+				document.getElementById("position").innerHTML = document.getElementById("position").innerHTML + ("<option value = \"{{p.position}}\"> {{p.position}}</option>")
+			}	
+		"{% endfor %}"
+		"{% endfor %}"
+
+	}
+	function emptyAllInputs()
+	{
+		document.getElementById("candidatesName").value = "";
+		document.getElementById("supporter1").value = "";
+		document.getElementById("supporter2").value = "";
+		document.getElementById("errorSupporter1").innerHTML = "";
+		document.getElementById("errorName").innerHTML = "";
+		document.getElementById("errorSupporter2").innerHTML = "";
+		document.getElementById("hostel").value = "{{hostels|first}}";
+		var hostel = "{{hostels|first}}";
+		var temp = "";
+		"{% for position in positions %}"
+		"{% for p in position %}"
+			temp = "{{p.hostel}}";
+			if (temp == hostel)
+			{
+				document.getElementById("position").innerHTML = document.getElementById("position").innerHTML + ("<option value = \"{{p.position}}\">{{p.position}}</option>");
+			}	
+		"{% endfor %}"
+		"{% endfor %}"
+	}
+	
+	/*function validateRoll()
+	{
+		var r = document.getElementById("candidatesRollno").value;
+		var regexp = /^([A-Za-z0-9])*$/;
+		validroll = regexp.test(r);
+		if(!validroll)
+		{
+			document.getElementById("errorRoll").innerHTML = "Please enter a valid rollnumber";
+			return false;
+		}
+		document.getElementById("errorRoll").innerHTML = "";
+		return true;
+	}*/
+	function checkName()
+	{
+		var s = document.getElementById("candidatesName").value;
+		var regex = /^([A-Za-z ])*$/;
+		valid = regex.test(s);
+		if (!valid)
+		{
+			document.getElementById("errorName").innerHTML = "Please enter a valid username";
+		}
+		else
+		{
+			document.getElementById("errorName").innerHTML = "";
+		}
+		
+	}
+	function validateName()
+	{
+		var s = document.getElementById("candidatesName").value;
+		var regex = /^([A-Za-z ])*$/;
+		valid = regex.test(s);
+		if (!valid)
+		{
+			document.getElementById("errorName").innerHTML = "Please enter a valid username";
+			return false;
+		}
+		if(s.length == 0)
+		{
+			document.getElementById("errorName").innerHTML = "This field is required";
+			return false;
+		}
+		document.getElementById("errorName").innerHTML = "";
+		return true;
+	}
+	function validateSupporter1()
+	{
+		var s = document.getElementById("supporter1").value;
+		var regex = /^([0-9]{4}[A-Za-z]{2}[0-9]{2,3})$/;
+		valid = regex.test(s);
+		if (!valid)
+		{
+			document.getElementById("errorSupporter1").innerHTML = "Please enter a valid Supporter1's Roll no";
+			return false;
+		}
+		if(s.length == 0)
+		{
+			document.getElementById("errorSupporter1").innerHTML = "This field is required";
+			return false;
+		}
+		document.getElementById("errorSupporter1").innerHTML = "";
+		return true;
+	}
+	function validateSupporter2()
+	{
+		var s = document.getElementById("supporter2").value;
+		var regex = /^([0-9]{4}[A-Za-z]{2}[0-9]{2,3})$/;
+		valid = regex.test(s);
+		if (!valid)
+		{
+			document.getElementById("errorSupporter2").innerHTML = "Please enter a valid Supporter2's Roll no";
+			return false;
+		}
+		if(s.length == 0)
+		{
+			document.getElementById("errorSupporter2").innerHTML = "This field is required";
+			return false;
+		}
+		document.getElementById("errorSupporter2").innerHTML = "";
+		return true;
+	}
+	
+	function checkSupporter1()
+	{
+		var s = document.getElementById("supporter1").value;
+		var regex = /^([A-Za-z0-9])*$/;
+		valid = regex.test(s);
+		if(!valid)
+		{
+			document.getElementById("errorSupporter1").innerHTML = "Please enter a valid Supporter1 Roll no.";
+		//	return false;
+		}
+		else
+		{
+			document.getElementById("errorSupporter1").innerHTML = "";	
+		}
+		//return true;
+	}
+	function checkSupporter2()
+	{
+		var s = document.getElementById("supporter2").value;
+		var regex = /^([A-Za-z0-9])*$/;
+		valid = regex.test(s);
+		if(!valid)
+		{
+			document.getElementById("errorSupporter2").innerHTML = "Please enter a valid Supporter2 Roll no.";
+		}	
+		else
+		{
+			document.getElementById("errorSupporter2").innerHTML = "";
+		}
+	}
+	function clearError()
+	{
+		document.getElementById("errors").innerHTML = "";
+	}
+	function submitForm()
+	{
+		if(validateName() && validateSupporter1() && validateSupporter2())
+		{
+			document.getElementById("form").submit();
+		}
+		else{
+			document.getElementById("errors").innerHTML = "Please correct the errors and then submit";
+		}
+	}
+</script>
+<body onload="emptyAllInputs()">
+	<p id="test"></p>
+	<div class="container">
+
+		<div class="row">
+			<div class="col-md-12">
+				<h1 class="text-center">Nomination Form</h1>
+			</div>
+		</div>
+
+		<hr>
+
+		<div class="row">
+			<div class="col-md-12 text-center" style="color:red; height:10%;">
+				<div id="errors">
+				{{errors|unordered_list}}
+				</div>
+			</div>
+		</div>
+
+		<form action="/EVoting/validateCandidate/" method="POST" id="form">
+			<div class="row">
+				<div class="col-md-4 col-xs-4">
+					<h4 class="text-right">Candidate's Name</h4>
+				</div>
+				<div class="col-md-3 col-xs-3 text-left">
+					<input type="text" id = "candidatesName" name="candidatesName" onblur="validateName()" onkeyup="checkName()">
+				</div>
+				<div class="col-md-3 col-xs-3 text-left" id="errorName" style="color:red;">
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-4 col-xs-4">
+					<h4 class="text-right">Candidate's RollNo</h4>
+				</div>
+				<div class="col-md-3 col-xs-3 text-left">
+					<input disabled type="text" placeholder="{{roll}}">
+				</div>
+				<div class="col-md-3 col-xs-3 text-left" id="errorRoll">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4 col-xs-4">
+					<h4 class="text-right">Hostel</h4>
+				</div>
+				<div class="col-md-3 col-xs-3 text-left">
+					{% if hostels %}
+				<select type="text" name = "hostel" onchange="callfunction()" id="hostel">
+					{% for hostel in hostels %}
+						<option value = "{{hostel}}">	{{hostel}}
+						</option>
+					{% endfor %}
+				</select>
+				{% endif %}
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-4 col-xs-4">
+					<h4 class="text-right">Position</h4>
+				</div>
+				<div class="col-md-3 col-xs-3 text-left">
+					<select type="text" name = "position" id="position"></select>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-4 col-xs-4">
+					<h4 class="text-right">First Supporter's Roll</h4>
+				</div>
+				<div class="col-md-3 col-xs-3 text-left">
+					<input type="text" id = "supporter1" onselect="clearError()" onblur="validateSupporter1()" onkeyup="checkSupporter1()" name="supporter1">
+				</div>
+				<div class="col-md-3 col-xs-3 text-left" id="errorSupporter1" style="color:red;">
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-4 col-xs-4">
+					<h4 class="text-right">Second Supporter's Roll</h4>
+				</div>
+				<div class="col-md-3 col-xs-3 text-left">
+					<input type="text" id = "supporter2" onselect="clearError()" onblur="validateSupporter2()" onkeyup="checkSupporter2()" name="supporter2">
+				</div>
+				<div class="col-md-3 col-xs-3 text-left" id="errorSupporter2" style="color:red;">
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-8 text-center col-xs-8" >
+					<div class="buttonz"><input type="button" onclick="submitForm()" value="submit"></div>
+				</div>
+			</div>
+			
+		</form>
+	</div>
+</body>
+</html>

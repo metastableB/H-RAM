@@ -1,0 +1,929 @@
+<html>
+<head>
+	<title> Room Prefrences </title>
+	{% load staticfiles %}
+<style>
+body {
+	background-image: url("{% static 'src/background.jpg'%}");
+}
+</style>
+<link type="text/css" rel="stylesheet" href="{%  static 'src/floors.css' %}">
+</head>
+<script type = "text/javascript" src="{%  static 'src/jquery-1.6.2.min.js'%}"></script>
+<script src="{%  static 'src/jquery.imagemapster.min.js' %}"></script>
+<script type = "text/javascript">
+	var images = ["{% static 'src/whiteSquare.png' %}","{% static 'src/greenSquare.png' %}"]
+	var preferenceOrder = [];
+	function toggle(no)
+	{
+		var number = no.toString();
+		var idold = document.getElementById(number).style.opacity;
+		if(idold == "0.5")
+		{
+			document.getElementById(number).style.opacity = "1";
+			document.getElementById(number).style.background = "none";
+			var index = preferenceOrder.indexOf(number);
+			preferenceOrder.splice(index,1);
+			printPreferenceOrder(preferenceOrder);
+		}
+		else
+		{
+			document.getElementById(number).style.opacity = "0.5";
+			document.getElementById(number).style.background = "#af0";
+			preferenceOrder.push(number);
+			var field = document.getElementsByName(number);
+			printPreferenceOrder(preferenceOrder);
+		}
+		
+	}
+	function toggle2(no,name_room)
+	{
+		var number = no.toString();
+		var idold = document.getElementById(number).style.opacity;
+		if(idold == "0.5")
+		{
+			document.getElementById(number).style.opacity = "1";
+			var index = preferenceOrder.indexOf(number);
+			preferenceOrder.splice(index,1);
+			printPreferenceOrder(preferenceOrder);
+		}
+		else
+		{
+			document.getElementById(number).style.opacity = "0.5";
+			preferenceOrder.push(name_room);
+			var field = document.getElementsByName(number);
+			printPreferenceOrder(preferenceOrder);
+		}
+	}
+	function printPreferenceOrder(listOfPreferences)
+	{
+		var i = 0;
+		var temp;
+		document.getElementById("preferences").innerHTML = "<font color=\"white\">Preferences<br></font>";
+		for(i=0;i<listOfPreferences.length;i++)
+		{
+			document.getElementById("preferences").innerHTML = document.getElementById("preferences").innerHTML + (i+1) + ". " + listOfPreferences[i] + "<br>";
+		}
+	}
+	function submitForm(){
+		document.getElementById("preference").value = preferenceOrder.toString();
+		document.getElementById("preferences").innerHTML = document.getElementById("preferences").innerHTML + preferenceOrder.toString() + "<br>";
+		document.getElementById("form1").submit();
+	}
+	function loadfloor1()
+	{
+		$("#floor1").show();
+		$("#floor2").hide();
+		$("#floor3").hide();
+		$("#floor4").hide();
+		$("#floor5").hide();
+		$("#floor6").hide();
+		$("#floor7").hide();
+		$("#floor8").hide();
+	}
+	
+	function loadfloor2()
+	{
+		$("#floor1").hide();
+		$("#floor2").show();
+		$("#floor3").hide();
+		$("#floor4").hide();
+		$("#floor5").hide();
+		$("#floor6").hide();
+		$("#floor7").hide();
+		$("#floor8").hide();
+	}
+
+	function loadfloor3()
+	{
+		$("#floor1").hide();
+		$("#floor2").hide();
+		$("#floor3").show();
+		$("#floor4").hide();
+		$("#floor5").hide();
+		$("#floor6").hide();
+		$("#floor7").hide();
+		$("#floor8").hide();
+	}
+
+	function loadfloor4()
+	{
+		$("#floor1").hide();
+		$("#floor2").hide();
+		$("#floor3").hide();
+		$("#floor4").show();
+		$("#floor5").hide();
+		$("#floor6").hide();
+		$("#floor7").hide();
+		$("#floor8").hide();
+	}
+
+	function loadfloor5()
+	{
+		$("#floor1").hide();
+		$("#floor2").hide();
+		$("#floor3").hide();
+		$("#floor4").hide();
+		$("#floor5").show();
+		$("#floor6").hide();
+		$("#floor7").hide();
+		$("#floor8").hide();
+	}
+
+	function loadfloor6()
+	{
+		$("#floor1").hide();
+		$("#floor2").hide();
+		$("#floor3").hide();
+		$("#floor4").hide();
+		$("#floor5").hide();
+		$("#floor6").show();
+		$("#floor7").hide();
+		$("#floor8").hide();
+	}
+
+	function loadfloor7()
+	{
+		$("#floor1").hide();
+		$("#floor2").hide();
+		$("#floor3").hide();
+		$("#floor4").hide();
+		$("#floor5").hide();
+		$("#floor6").hide();
+		$("#floor7").show();
+		$("#floor8").hide();
+	}
+
+	function loadfloor8()
+	{
+		$("#floor1").hide();
+		$("#floor2").hide();
+		$("#floor3").hide();
+		$("#floor4").hide();
+		$("#floor5").hide();
+		$("#floor6").hide();
+		$("#floor7").hide();
+		$("#floor8").show();
+	}
+	function dothis()
+	{
+		$("#floor2").hide();
+		$("#floor3").hide();
+		$("#floor4").hide();
+		$("#floor5").hide();
+		$("#floor6").hide();
+		$("#floor7").hide();
+		$("#floor8").hide();
+	}
+$(document).ready(function ()
+{
+	//console.log.out("yolo");
+	$('img').mapster({
+	highlight : true,
+    mapKey: 'id',
+    fillColor:'0000ff',
+    scaleMap: true,
+	/*fill : true, altImage : 'images/shape3.gif',
+	fillOpacity : 1,
+	fillColor: '00FF00',*/
+    fillOpacity: 0.6,
+    stroke: true,
+    strokeColor:'004400',
+    strokeWidth:3,
+        render_highlight: {
+            strokeWidth: 2,
+            fillColor: '000099',
+            fadeDuration:200,	
+            strokeColor : '003300',
+        },
+    
+});
+});
+</script>
+</script>
+
+<body onload="dothis()">
+<table id="title_box" >
+	<tr>
+		<td align="center">Hotel Room Allocation</td>
+	</tr>
+</table>
+
+<div class = "floor_plan">
+	<table id="master_table" align="center">
+		<tr>
+			<td id = "buttons_vertical">
+				<table >
+						<!--<tr><td><button onclick="loadfloor8()">Floor 8</button></td></tr>
+						<tr><td><button onclick="loadfloor7()">Floor 7</button></td></tr>-->	
+						<tr><td><button onclick="loadfloor6()">Floor 6</button></td></tr>
+						<tr><td><button onclick="loadfloor5()">Floor 5</button></td></tr>
+						<tr><td><button onclick="loadfloor4()">Floor 4</button></td></tr>
+						<tr><td><button onclick="loadfloor3()">Floor 3</button></td></tr>
+						<tr><td><button onclick="loadfloor2()">Floor 2</button></td></tr>
+						<tr><td><button onclick="loadfloor1()">Floor 1</button></td></tr>
+				</table>
+			</td>
+			<td>
+				<div id="floor1">
+					<img src="{% static 'src/plan/G_Floor_850w.jpg' %}" width="850" height="877" usemap="#G_Floor" border="0" >
+						<map name="G_Floor">
+							<area id="A001" onclick="toggle('A001')" shape="rect" coords="776,257,808,278" href="#">
+							<area id="A002" onclick="toggle('A002')" shape="rect" coords="776,279,808,303" href="#">
+							<area id="A003" onclick="toggle('A003')" shape="rect" coords="776,304,807,327" href="#">
+							<area id="A004" onclick="toggle('A004')" shape="rect" coords="776,328,806,352" href="#">
+							<area id="A005" onclick="toggle('A005')" shape="rect" coords="776,352,807,377" href="#">
+							<area id="A006" onclick="toggle('A006')" shape="rect" coords="775,401,806,426" href="#">
+							<area id="A007" onclick="toggle('A007')" shape="rect" coords="776,426,808,448" href="#">
+							<area id="A008" onclick="toggle('A008')" shape="rect" coords="777,449,807,473" href="#">
+							<area id="A009" onclick="toggle('A009')" shape="rect" coords="776,474,808,499" href="#">
+							<area id="A010" onclick="toggle('A010')" shape="rect" coords="777,585,807,608" href="#">
+							<area id="A011" onclick="toggle('A011')" shape="rect" coords="776,608,806,632" href="#">
+							<area id="A012" onclick="toggle('A012')" shape="rect" coords="776,633,807,657" href="#">
+							<area id="A013" onclick="toggle('A013')" shape="rect" coords="777,657,807,682" href="#">
+							<area id="A014" onclick="toggle('A014')" shape="rect" coords="776,706,807,729" href="#">
+							<area id="A015" onclick="toggle('A015')" shape="rect" coords="776,730,807,754" href="#">
+							<area id="A016" onclick="toggle('A016')" shape="rect" coords="777,755,807,777" href="#">
+							<area id="A017" onclick="toggle('A017')" shape="rect" coords="777,778,808,802" href="#">
+							<area id="A018" onclick="toggle('A018')" shape="rect" coords="728,779,758,802" href="#">
+							<area id="A019" onclick="toggle('A019')" shape="rect" coords="728,755,757,778" href="#">
+							<area id="A020" onclick="toggle('A020')" shape="rect" coords="728,733,758,754" href="#">
+							<area id="A021" onclick="toggle('A021')" shape="rect" coords="727,706,757,732" href="#">
+							<area id="A022" onclick="toggle('A022')" shape="rect" coords="727,681,757,706" href="#">
+							<area id="A023" onclick="toggle('A023')" shape="rect" coords="728,634,758,658" href="#">
+							<area id="A024" onclick="toggle('A024')" shape="rect" coords="728,609,757,633" href="#">
+							<area id="A025" onclick="toggle('A025')" shape="rect" coords="728,585,758,608" href="#">
+							<area id="A026" onclick="toggle('A026')" shape="rect" coords="727,559,758,584" href="#">
+							<area id="A027" onclick="toggle('A027')" shape="rect" coords="727,498,758,523" href="#">
+							<area id="A028" onclick="toggle('A028')" shape="rect" coords="727,475,758,497" href="#">
+							<area id="A029" onclick="toggle('A029')" shape="rect" coords="727,450,757,473" href="#">
+							<area id="A030" onclick="toggle('A030')" shape="rect" coords="728,426,757,449" href="#">
+							<area id="A031" onclick="toggle('A031')" shape="rect" coords="728,402,757,425" href="#">
+							<area id="A032" onclick="toggle('A032')" shape="rect" coords="728,379,757,401" href="#">
+							<area id="A033" onclick="toggle('A033')" shape="rect" coords="727,354,757,378" href="#">
+							<area id="A034" onclick="toggle('A034')" shape="rect" coords="727,327,757,354" href="#">
+							<area id="A035" onclick="toggle('A035')" shape="rect" coords="728,280,757,304" href="#">
+							<area id="A036" onclick="toggle('A036')" shape="rect" coords="728,257,758,279" href="#">
+							<area id="A037" onclick="toggle('A037')" shape="rect" coords="91,257,122,279" href="#">
+							<area id="A038" onclick="toggle('A038')" shape="rect" coords="92,279,121,303" href="#">
+							<area id="A039" onclick="toggle('A039')" shape="rect" coords="91,328,121,351" href="#">
+							<area id="A040" onclick="toggle('A040')" shape="rect" coords="91,352,122,377" href="#">
+							<area id="A041" onclick="toggle('A041')" shape="rect" coords="91,377,122,400" href="#">
+							<area id="A042" onclick="toggle('A042')" shape="rect" coords="92,401,122,425" href="#">
+							<area id="A043" onclick="toggle('A043')" shape="rect" coords="91,426,122,450" href="#">
+							<area id="A044" onclick="toggle('A044')" shape="rect" coords="92,450,122,474" href="#">
+							<area id="A045" onclick="toggle('A045')" shape="rect" coords="92,474,121,497" href="#">
+							<area id="A046" onclick="toggle('A046')" shape="rect" coords="92,498,122,523" href="#">
+							<area id="A047" onclick="toggle('A047')" shape="rect" coords="92,560,122,585" href="#">
+							<area id="A048" onclick="toggle('A048')" shape="rect" coords="92,585,122,610" href="#">
+							<area id="A049" onclick="toggle('A049')" shape="rect" coords="91,609,122,633" href="#">
+							<area id="A050" onclick="toggle('A050')" shape="rect" coords="92,632,123,658" href="#">
+							<area id="A051" onclick="toggle('A051')" shape="rect" coords="92,681,122,706" href="#">
+							<area id="A052" onclick="toggle('A052')" shape="rect" coords="92,706,121,729" href="#">
+							<area id="A053" onclick="toggle('A053')" shape="rect" coords="92,730,122,754" href="#">
+							<area id="A054" onclick="toggle('A054')" shape="rect" coords="91,755,122,779" href="#">
+							<area id="A055" onclick="toggle('A055')" shape="rect" coords="91,779,122,803" href="#">
+							<area id="A056" onclick="toggle('A056')" shape="rect" coords="43,780,71,801" href="#">
+							<area id="A057" onclick="toggle('A057')" shape="rect" coords="42,756,73,779" href="#">
+							<area id="A058" onclick="toggle('A058')" shape="rect" coords="42,731,71,754" href="#">
+							<area id="A059" onclick="toggle('A059')" shape="rect" coords="42,705,72,731" href="#">
+							<area id="A060" onclick="toggle('A060')" shape="rect" coords="41,657,72,682" href="#">
+							<area id="A061" onclick="toggle('A061')" shape="rect" coords="42,633,72,657" href="#">
+							<area id="A062" onclick="toggle('A062')" shape="rect" coords="42,610,72,632" href="#">
+							<area id="A063" onclick="toggle('A063')" shape="rect" coords="43,584,71,609" href="#">
+							<area id="A064" onclick="toggle('A064')" shape="rect" coords="41,474,72,498" href="#">
+							<area id="A065" onclick="toggle('A065')" shape="rect" coords="42,451,71,473" href="#">
+							<area id="A066" onclick="toggle('A066')" shape="rect" coords="42,427,72,450" href="#">
+							<area id="A067" onclick="toggle('A067')" shape="rect" coords="42,401,72,426" href="#">
+							<area id="A068" onclick="toggle('A068')" shape="rect" coords="41,354,71,377" href="#">
+							<area id="A069" onclick="toggle('A069')" shape="rect" coords="42,330,73,353" href="#">
+							<area id="A070" onclick="toggle('A070')" shape="rect" coords="42,305,72,328" href="#">
+							<area id="A071" onclick="toggle('A071')" shape="rect" coords="42,282,71,305" href="#">
+							<area id="A072" onclick="toggle('A072')" shape="rect" coords="42,256,72,281" href="#">
+					</map>
+				</div>
+				<div id="floor2">
+					<img src="{% static 'src/plan/I_floor_850w.jpg' %}" width="850" height="849" border="0" usemap="#map" />
+						<map name="map">
+							<!-- #$-:Image map file created by GIMP Image Map plug-in -->
+							<!-- #$-:GIMP Image Map plug-in by Maurits Rijk -->
+							<!-- #$-:Please do not edit lines starting with "#$" -->
+							<!-- #$VERSION:2.3 -->
+							<!-- #$AUTHOR:SHEIK SAMEERUDDIN -->
+							<area id="B001" onclick="toggle('B001')" shape="rect" coords="39,251,66,274"  href="#" />
+							<area id="B002" onclick="toggle('B002')" shape="rect" coords="39,275,66,297"  href="#" />
+							<area id="B003" onclick="toggle('B003')" shape="rect" coords="38,298,67,322"  href="#" />
+							<area id="B004" onclick="toggle('B004')" shape="rect" coords="37,324,67,348"  href="#" />
+							<area id="B005" onclick="toggle('B005')" shape="rect" coords="38,348,67,371"  href="#" />
+							<area id="B006" onclick="toggle('B006')" shape="rect" coords="38,398,67,421"  href="#" />
+							<area id="B007" onclick="toggle('B007')" shape="rect" coords="37,421,67,445"  href="#" />
+							<area id="B008" onclick="toggle('B008')" shape="rect" coords="38,445,67,469"  href="#" />
+							<area id="B009" onclick="toggle('B009')" shape="rect" coords="38,469,67,493"  href="#" />
+							<area id="B010" onclick="toggle('B010')" shape="rect" coords="38,581,68,605"  href="#" />
+							<area id="B011" onclick="toggle('B011')" shape="rect" coords="38,605,68,629"  href="#" />
+							<area id="B012" onclick="toggle('B012')" shape="rect" coords="38,630,68,654"  href="#" />
+							<area id="B013" onclick="toggle('B013')" shape="rect" coords="38,653,68,679"  href="#" />
+							<area id="B014" onclick="toggle('B014')" shape="rect" coords="38,703,68,728"  href="#" />
+							<area id="B015" onclick="toggle('B015')" shape="rect" coords="38,729,68,752"  href="#" />
+							<area id="B016" onclick="toggle('B016')" shape="rect" coords="38,753,68,777"  href="#" />
+							<area id="B017" onclick="toggle('B017')" shape="rect" coords="38,778,68,801"  href="#" />
+							<area id="B018" onclick="toggle('B018')" shape="rect" coords="87,776,118,801"  href="#" />
+							<area id="B019" onclick="toggle('B019')" shape="rect" coords="88,753,118,775"  href="#" />
+							<area id="B020" onclick="toggle('B020')" shape="rect" coords="87,728,118,754"  href="#" />
+							<area id="B021" onclick="toggle('B021')" shape="rect" coords="87,703,118,728"  href="#" />
+							<area id="B022" onclick="toggle('B022')" shape="rect" coords="87,679,118,703"  href="#" />
+							<area id="B023" onclick="toggle('B023')" shape="rect" coords="86,630,117,654"  href="#" />
+							<area id="B024" onclick="toggle('B024')" shape="rect" coords="86,606,118,630"  href="#" />
+							<area id="B025" onclick="toggle('B025')" shape="rect" coords="87,581,118,605"  href="#" />
+							<area id="B026" onclick="toggle('B026')" shape="rect" coords="87,556,118,580"  href="#" />
+							<area id="B027" onclick="toggle('B027')" shape="rect" coords="87,494,117,518"  href="#" />
+							<area id="B028" onclick="toggle('B028')" shape="rect" coords="87,469,117,494"  href="#" />
+							<area id="B029" onclick="toggle('B029')" shape="rect" coords="87,445,118,470"  href="#" />
+							<area id="B030" onclick="toggle('B030')" shape="rect" coords="87,420,118,446"  href="#" />
+							<area id="B031" onclick="toggle('B031')" shape="rect" coords="87,396,118,420"  href="#" />
+							<area id="B032" onclick="toggle('B032')" shape="rect" coords="87,372,118,396"  href="#" />
+							<area id="B033" onclick="toggle('B033')" shape="rect" coords="87,347,118,372"  href="#" />
+							<area id="B034" onclick="toggle('B034')" shape="rect" coords="87,323,117,347"  href="#" />
+							<area id="B035" onclick="toggle('B035')" shape="rect" coords="87,274,117,298"  href="#" />
+							<area id="B036" onclick="toggle('B036')" shape="rect" coords="86,251,117,274"  href="#" />
+							<area id="B037" onclick="toggle('B037')" shape="rect" coords="267,373,297,396"  href="#" />
+							<area id="B038" onclick="toggle('B038')" shape="rect" coords="267,396,297,421"  href="#" />
+							<area id="B039" onclick="toggle('B039')" shape="rect" coords="267,422,297,445"  href="#" />
+							<area id="B040" onclick="toggle('B040')" shape="rect" coords="267,446,297,470"  href="#" />
+							<area id="B041" onclick="toggle('B041')" shape="rect" coords="266,470,297,494"  href="#" />
+							<area id="B042" onclick="toggle('B042')" shape="rect" coords="267,494,297,519"  href="#" />
+							<area id="B043" onclick="toggle('B043')" shape="rect" coords="268,557,297,580"  href="#" />
+							<area id="B044" onclick="toggle('B044')" shape="rect" coords="267,581,297,604"  href="#" />
+							<area id="B045" onclick="toggle('B045')" shape="rect" coords="267,605,297,630"  href="#" />
+							<area id="B046" onclick="toggle('B046')" shape="rect" coords="267,629,297,653"  href="#" />
+							<area id="B047" onclick="toggle('B047')" shape="rect" coords="267,653,297,677"  href="#" />
+							<area id="B048" onclick="toggle('B048')" shape="rect" coords="267,677,297,703"  href="#" />
+							<area id="B049" onclick="toggle('B049')" shape="rect" coords="316,678,347,704"  href="#" />
+							<area id="B050" onclick="toggle('B050')" shape="rect" coords="316,654,348,678"  href="#" />
+							<area id="B051" onclick="toggle('B051')" shape="rect" coords="317,605,347,629"  href="#" />
+							<area id="B052" onclick="toggle('B052')" shape="rect" coords="316,581,347,606"  href="#" />
+							<area id="B053" onclick="toggle('B053')" shape="rect" coords="317,494,347,519"  href="#" />
+							<area id="B054" onclick="toggle('B054')" shape="rect" coords="317,470,347,494"  href="#" />
+							<area id="B055" onclick="toggle('B055')" shape="rect" coords="316,555,347,582"  href="#" />
+							<area id="B056" onclick="toggle('B056')" shape="rect" coords="317,445,347,470"  href="#" />
+							<area id="B057" onclick="toggle('B057')" shape="rect" coords="316,397,348,420"  href="#" />
+							<area id="B058" onclick="toggle('B058')" shape="rect" coords="316,371,348,396"  href="#" />
+							<area id="B059" onclick="toggle('B059')" shape="rect" coords="498,373,528,396"  href="#" />
+							<area id="B060" onclick="toggle('B060')" shape="rect" coords="498,396,528,420"  href="#" />
+							<area id="B061" onclick="toggle('B061')" shape="rect" coords="499,447,528,470"  href="#" />
+							<area id="B062" onclick="toggle('B062')" shape="rect" coords="498,469,528,495"  href="#" />
+							<area id="B063" onclick="toggle('B063')" shape="rect" coords="498,495,528,518"  href="#" />
+							<area id="B064" onclick="toggle('B064')" shape="rect" coords="498,581,528,604"  href="#" />
+							<area id="B065" onclick="toggle('B065')" shape="rect" coords="498,605,528,629"  href="#" />
+							<area id="B066" onclick="toggle('B066')" shape="rect" coords="498,653,528,677"  href="#" />
+							<area id="B067" onclick="toggle('B067')" shape="rect" coords="497,677,528,699"  href="#" />
+							<area id="B068" onclick="toggle('B068')" shape="rect" coords="547,678,578,703"  href="#" />
+							<area id="B069" onclick="toggle('B069')" shape="rect" coords="548,655,578,677"  href="#" />
+							<area id="B070" onclick="toggle('B070')" shape="rect" coords="547,629,579,654"  href="#" />
+							<area id="B071" onclick="toggle('B071')" shape="rect" coords="548,606,579,629"  href="#" />
+							<area id="B072" onclick="toggle('B072')" shape="rect" coords="548,581,579,604"  href="#" />
+							<area id="B073" onclick="toggle('B073')" shape="rect" coords="548,557,578,580"  href="#" />
+							<area id="B074" onclick="toggle('B074')" shape="rect" coords="547,494,578,518"  href="#" />
+							<area id="B075" onclick="toggle('B075')" shape="rect" coords="548,470,578,494"  href="#" />
+							<area id="B076" onclick="toggle('B076')" shape="rect" coords="548,445,578,468"  href="#" />
+							<area id="B077" onclick="toggle('B077')" shape="rect" coords="548,420,578,445"  href="#" />
+							<area id="B078" onclick="toggle('B078')" shape="rect" coords="547,396,578,419"  href="#" />
+							<area id="B079" onclick="toggle('B079')" shape="rect" coords="548,372,578,395"  href="#" />
+							<area id="B080" onclick="toggle('B080')" shape="rect" coords="727,251,758,275"  href="#" />
+							<area id="B081" onclick="toggle('B081')" shape="rect" coords="727,276,758,298"  href="#" />
+							<area id="B082" onclick="toggle('B082')" shape="rect" coords="728,322,758,348"  href="#" />
+							<area id="B083" onclick="toggle('B083')" shape="rect" coords="728,349,758,372"  href="#" />
+							<area id="B084" onclick="toggle('B084')" shape="rect" coords="728,371,758,396"  href="#" />
+							<area id="B085" onclick="toggle('B085')" shape="rect" coords="728,397,757,420"  href="#" />
+							<area id="B086" onclick="toggle('B086')" shape="rect" coords="728,419,757,445"  href="#" />
+							<area id="B087" onclick="toggle('B087')" shape="rect" coords="728,445,757,470"  href="#" />
+							<area id="B088" onclick="toggle('B088')" shape="rect" coords="728,470,758,493"  href="#" />
+							<area id="B089" onclick="toggle('B089')" shape="rect" coords="728,494,758,519"  href="#" />
+							<area id="B090" onclick="toggle('B090')" shape="rect" coords="728,556,757,581"  href="#" />
+							<area id="B091" onclick="toggle('B091')" shape="rect" coords="728,581,757,604"  href="#" />
+							<area id="B092" onclick="toggle('B092')" shape="rect" coords="728,604,758,630"  href="#" />
+							<area id="B093" onclick="toggle('B093')" shape="rect" coords="728,630,757,654"  href="#" />
+							<area id="B094" onclick="toggle('B094')" shape="rect" coords="728,679,758,703"  href="#" />
+							<area id="B095" onclick="toggle('B095')" shape="rect" coords="728,703,758,727"  href="#" />
+							<area id="B096" onclick="toggle('B096')" shape="rect" coords="728,727,758,752"  href="#" />
+							<area id="B097" onclick="toggle('B097')" shape="rect" coords="728,752,758,776"  href="#" />
+							<area id="B098" onclick="toggle('B098')" shape="rect" coords="728,776,758,800"  href="#" />
+							<area id="B099" onclick="toggle('B099')" shape="rect" coords="777,775,807,800"  href="#" />
+							<area id="B100" onclick="toggle('B100')" shape="rect" coords="777,751,807,775"  href="#" />
+							<area id="B101" onclick="toggle('B101')" shape="rect" coords="777,727,807,752"  href="#" />
+							<area id="B102" onclick="toggle('B102')" shape="rect" coords="776,703,807,728"  href="#" />
+							<area id="B103" onclick="toggle('B103')" shape="rect" coords="776,654,807,679"  href="#" />
+							<area id="B104" onclick="toggle('B104')" shape="rect" coords="776,630,807,655"  href="#" />
+							<area id="B105" onclick="toggle('B105')" shape="rect" coords="776,605,807,629"  href="#" />
+							<area id="B106" onclick="toggle('B106')" shape="rect" coords="776,581,807,606"  href="#" />
+							<area id="B107" onclick="toggle('B107')" shape="rect" coords="777,469,807,494"  href="#" />
+							<area id="B108" onclick="toggle('B108')" shape="rect" coords="777,445,807,468"  href="#" />
+							<area id="B109" onclick="toggle('B109')" shape="rect" coords="776,421,807,444"  href="#" />
+							<area id="B110" onclick="toggle('B110')" shape="rect" coords="776,396,807,421"  href="#" />
+							<area id="B111" onclick="toggle('B111')" shape="rect" coords="777,347,808,371"  href="#" />
+							<area id="B112" onclick="toggle('B112')" shape="rect" coords="777,323,808,347"  href="#" />
+							<area id="B113" onclick="toggle('B113')" shape="rect" coords="777,299,808,323"  href="#" />
+							<area id="B114" onclick="toggle('B114')" shape="rect" coords="776,274,808,299"  href="#" />
+							<area id="B115" onclick="toggle('B115')" shape="rect" coords="777,249,808,273"  href="#" />
+						</map>
+				</div>
+				<div id = "floor3" >
+					<img src="{% static 'src/plan/GEN_Floor_850w.jpg' %}" width="850" height="846" usemap="#GEN_Floor3" border="0">
+					<map name="GEN_Floor3">
+						<area id="C001" onclick="toggle('C001')" shape="rect" coords="793,212,823,238" href="#">
+						<area id="C002" onclick="toggle('C002')" shape="rect" coords="792,238,823,262" href="#">
+						<area id="C003" onclick="toggle('C003')" shape="rect" coords="791,263,823,288" href="#">
+						<area id="C004" onclick="toggle('C004')" shape="rect" coords="791,287,823,311" href="#">
+						<area id="C005" onclick="toggle('C005')" shape="rect" coords="792,312,823,337" href="#">
+						<area id="C006" onclick="toggle('C006')" shape="rect" coords="792,362,823,386" href="#">
+						<area id="C007" onclick="toggle('C007')" shape="rect" coords="792,386,823,411" href="#">
+						<area id="C008" onclick="toggle('C008')" shape="rect" coords="792,411,823,435" href="#">
+						<area id="C009" onclick="toggle('C009')" shape="rect" coords="792,436,823,462" href="#">
+						<area id="C010" onclick="toggle('C010')" shape="rect" coords="792,549,823,574" href="#">
+						<area id="C011" onclick="toggle('C011')" shape="rect" coords="792,574,823,599" href="#">
+						<area id="C012" onclick="toggle('C012')" shape="rect" coords="792,600,823,623" href="#">
+						<area id="C013" onclick="toggle('C013')" shape="rect" coords="792,623,823,648" href="#">
+						<area id="C014" onclick="toggle('C014')" shape="rect" coords="792,673,823,698" href="#">
+						<area id="C015" onclick="toggle('C015')" shape="rect" coords="792,699,822,722" href="#">
+						<area id="C016" onclick="toggle('C016')" shape="rect" coords="793,723,822,747" href="#">
+						<area id="C017" onclick="toggle('C017')" shape="rect" coords="792,748,822,772" href="#">
+						<area id="C018" onclick="toggle('C018')" shape="rect" coords="741,748,772,772" href="#">
+						<area id="C019" onclick="toggle('C019')" shape="rect" coords="741,724,773,747" href="#">
+						<area id="C020" onclick="toggle('C020')" shape="rect" coords="741,699,772,722" href="#">
+						<area id="C021" onclick="toggle('C021')" shape="rect" coords="742,674,772,698" href="#">
+						<area id="C022" onclick="toggle('C022')" shape="rect" coords="741,649,772,673" href="#">
+						<area id="C023" onclick="toggle('C023')" shape="rect" coords="741,601,773,625" href="#">
+						<area id="C024" onclick="toggle('C024')" shape="rect" coords="741,575,772,599" href="#">
+						<area id="C025" onclick="toggle('C025')" shape="rect" coords="742,550,772,573" href="#">
+						<area id="C026" onclick="toggle('C026')" shape="rect" coords="741,525,772,548" href="#">
+						<area id="C027" onclick="toggle('C027')" shape="rect" coords="741,462,773,486" href="#">
+						<area id="C028" onclick="toggle('C028')" shape="rect" coords="741,436,772,461" href="#">
+						<area id="C029" onclick="toggle('C029')" shape="rect" coords="741,412,773,436" href="#">
+						<area id="C030" onclick="toggle('C030')" shape="rect" coords="741,387,772,411" href="#">
+						<area id="C031" onclick="toggle('C031')" shape="rect" coords="742,363,772,386" href="#">
+						<area id="C032" onclick="toggle('C032')" shape="rect" coords="742,337,772,361" href="#">
+						<area id="C033" onclick="toggle('C033')" shape="rect" coords="741,287,772,312" href="#">
+						<area id="C034" onclick="toggle('C034')" shape="rect" coords="741,262,772,287" href="#">
+						<area id="C035" onclick="toggle('C035')" shape="rect" coords="741,237,772,262" href="#">
+						<area id="C036" onclick="toggle('C036')" shape="rect" coords="741,212,772,236" href="#">
+						<area id="C037" onclick="toggle('C037')" shape="rect" coords="559,337,590,361" href="#">
+						<area id="C038" onclick="toggle('C038')" shape="rect" coords="559,361,591,388" href="#">
+						<area id="C039" onclick="toggle('C039')" shape="rect" coords="558,387,591,411" href="#">
+						<area id="C040" onclick="toggle('C040')" shape="rect" coords="558,412,590,436" href="#">
+						<area id="C041" onclick="toggle('C041')" shape="rect" coords="559,437,590,461" href="#">
+						<area id="C042" onclick="toggle('C042')" shape="rect" coords="559,461,590,487" href="#">
+						<area id="C043" onclick="toggle('C043')" shape="rect" coords="559,524,589,549" href="#">
+						<area id="C044" onclick="toggle('C044')" shape="rect" coords="558,550,590,574" href="#">
+						<area id="C045" onclick="toggle('C045')" shape="rect" coords="559,575,591,600" href="#">
+						<area id="C046" onclick="toggle('C046')" shape="rect" coords="558,600,590,623" href="#">
+						<area id="C047" onclick="toggle('C047')" shape="rect" coords="560,624,589,648" href="#">
+						<area id="C048" onclick="toggle('C048')" shape="rect" coords="559,649,589,674" href="#">
+						<area id="C049" onclick="toggle('C049')" shape="rect" coords="507,649,539,673" href="#">
+						<area id="C050" onclick="toggle('C050')" shape="rect" coords="507,624,539,648" href="#">
+						<area id="C051" onclick="toggle('C051')" shape="rect" coords="507,574,539,599" href="#">
+						<area id="C052" onclick="toggle('C052')" shape="rect" coords="508,548,538,573" href="#">
+						<area id="C053" onclick="toggle('C053')" shape="rect" coords="507,460,539,486" href="#">
+						<area id="C054" onclick="toggle('C054')" shape="rect" coords="508,437,539,461" href="#">
+						<area id="C055" onclick="toggle('C055')" shape="rect" coords="507,411,539,436" href="#">
+						<area id="C056" onclick="toggle('C056')" shape="rect" coords="508,364,539,386" href="#">
+						<area id="C057" onclick="toggle('C057')" shape="rect" coords="508,338,539,362" href="#">
+						<area id="C058" onclick="toggle('C058')" shape="rect" coords="322,337,354,362" href="#">
+						<area id="C059" onclick="toggle('C059')" shape="rect" coords="323,362,354,386" href="#">
+						<area id="C060" onclick="toggle('C060')" shape="rect" coords="323,412,355,436" href="#">
+						<area id="C061" onclick="toggle('C061')" shape="rect" coords="323,437,354,461" href="#">
+						<area id="C062" onclick="toggle('C062')" shape="rect" coords="323,461,354,486" href="#">
+						<area id="C063" onclick="toggle('C063')" shape="rect" coords="324,549,355,573" href="#">
+						<area id="C064" onclick="toggle('C064')" shape="rect" coords="323,574,355,598" href="#">
+						<area id="C065" onclick="toggle('C065')" shape="rect" coords="323,623,354,647" href="#">
+						<area id="C066" onclick="toggle('C066')" shape="rect" coords="323,649,355,673" href="#">
+						<area id="C067" onclick="toggle('C067')" shape="rect" coords="271,650,304,672" href="#">
+						<area id="C068" onclick="toggle('C068')" shape="rect" coords="272,625,303,649" href="#">
+						<area id="C069" onclick="toggle('C069')" shape="rect" coords="273,600,303,623" href="#">
+						<area id="C070" onclick="toggle('C070')" shape="rect" coords="273,576,303,599" href="#">
+						<area id="C071" onclick="toggle('C071')" shape="rect" coords="272,552,303,574" href="#">
+						<area id="C072" onclick="toggle('C072')" shape="rect" coords="273,526,303,550" href="#">
+						<area id="C073" onclick="toggle('C073')" shape="rect" coords="272,461,303,487" href="#">
+						<area id="C074" onclick="toggle('C074')" shape="rect" coords="272,439,304,461" href="#">
+						<area id="C075" onclick="toggle('C075')" shape="rect" coords="273,413,304,437" href="#">
+						<area id="C076" onclick="toggle('C076')" shape="rect" coords="273,387,304,410" href="#">
+						<area id="C077" onclick="toggle('C077')" shape="rect" coords="273,363,304,387" href="#">
+						<area id="C078" onclick="toggle('C078')" shape="rect" coords="275,338,302,362" href="#">
+						<area id="C079" onclick="toggle('C079')" shape="rect" coords="90,212,122,237" href="#">
+						<area id="C080" onclick="toggle('C080')" shape="rect" coords="90,237,122,262" href="#">
+						<area id="C081" onclick="toggle('C081')" shape="rect" coords="90,262,121,287" href="#">
+						<area id="C082" onclick="toggle('C082')" shape="rect" coords="90,287,122,312" href="#">
+						<area id="C083" onclick="toggle('C083')" shape="rect" coords="91,337,122,361" href="#">
+						<area id="C084" onclick="toggle('C084')" shape="rect" coords="90,361,121,386" href="#">
+						<area id="C085" onclick="toggle('C085')" shape="rect" coords="90,386,121,411" href="#">
+						<area id="C086" onclick="toggle('C086')" shape="rect" coords="89,411,121,436" href="#">
+						<area id="C087" onclick="toggle('C087')" shape="rect" coords="91,436,121,460" href="#">
+						<area id="C088" onclick="toggle('C088')" shape="rect" coords="90,461,121,486" href="#">
+						<area id="C089" onclick="toggle('C089')" shape="rect" coords="91,523,122,549" href="#">
+						<area id="C090" onclick="toggle('C090')" shape="rect" coords="90,550,122,574" href="#">
+						<area id="C091" onclick="toggle('C091')" shape="rect" coords="90,574,122,599" href="#">
+						<area id="C092" onclick="toggle('C092')" shape="rect" coords="90,599,121,624" href="#">
+						<area id="C093" onclick="toggle('C093')" shape="rect" coords="90,648,121,673" href="#">
+						<area id="C094" onclick="toggle('C094')" shape="rect" coords="90,674,121,698" href="#">
+						<area id="C095" onclick="toggle('C095')" shape="rect" coords="90,698,121,723" href="#">
+						<area id="C096" onclick="toggle('C096')" shape="rect" coords="90,723,121,748" href="#">
+						<area id="C097" onclick="toggle('C097')" shape="rect" coords="91,749,121,772" href="#">
+						<area id="C098" onclick="toggle('C098')" shape="rect" coords="38,749,70,773" href="#">
+						<area id="C099" onclick="toggle('C099')" shape="rect" coords="39,725,70,747" href="#">
+						<area id="C100" onclick="toggle('C100')" shape="rect" coords="39,700,71,723" href="#">
+						<area id="C101" onclick="toggle('C101')" shape="rect" coords="40,674,70,698" href="#">
+						<area id="C102" onclick="toggle('C102')" shape="rect" coords="38,625,70,650" href="#">
+						<area id="C103" onclick="toggle('C103')" shape="rect" coords="39,599,70,624" href="#">
+						<area id="C104" onclick="toggle('C104')" shape="rect" coords="39,574,69,599" href="#">
+						<area id="C105" onclick="toggle('C105')" shape="rect" coords="39,549,71,573" href="#">
+						<area id="C106" onclick="toggle('C106')" shape="rect" coords="38,437,71,462" href="#">
+						<area id="C107" onclick="toggle('C107')" shape="rect" coords="39,413,71,436" href="#">
+						<area id="C108" onclick="toggle('C108')" shape="rect" coords="40,388,70,411" href="#">
+						<area id="C109" onclick="toggle('C109')" shape="rect" coords="39,363,69,386" href="#">
+						<area id="C110" onclick="toggle('C110')" shape="rect" coords="40,312,70,337" href="#">
+						<area id="C111" onclick="toggle('C111')" shape="rect" coords="40,288,70,312" href="#">
+						<area id="C112" onclick="toggle('C112')" shape="rect" coords="40,264,71,287" href="#">
+						<area id="C113" onclick="toggle('C113')" shape="rect" coords="40,239,70,263" href="#">
+						<area id="C114" onclick="toggle('C114')" shape="rect" coords="39,212,70,237" href="#">
+					</map>
+				</div>
+				<div id = "floor4" >
+					<img src="{% static 'src/plan/GEN_Floor_850w.jpg' %}" width="850" height="846" usemap="#GEN_Floor4" border="0">
+						<map name="GEN_Floor4">
+							<area id="D001" onclick="toggle('D001')" shape="rect" coords="793,212,823,238" href="#">
+							<area id="D002" onclick="toggle('D002')" shape="rect" coords="792,238,823,262" href="#">
+							<area id="D003" onclick="toggle('D003')" shape="rect" coords="791,263,823,288" href="#">
+							<area id="D004" onclick="toggle('D004')" shape="rect" coords="791,287,823,311" href="#">
+							<area id="D005" onclick="toggle('D005')" shape="rect" coords="792,312,823,337" href="#">
+							<area id="D006" onclick="toggle('D006')" shape="rect" coords="792,362,823,386" href="#">
+							<area id="D007" onclick="toggle('D007')" shape="rect" coords="792,386,823,411" href="#">
+							<area id="D008" onclick="toggle('D008')" shape="rect" coords="792,411,823,435" href="#">
+							<area id="D009" onclick="toggle('D009')" shape="rect" coords="792,436,823,462" href="#">
+							<area id="D010" onclick="toggle('D010')" shape="rect" coords="792,549,823,574" href="#">
+							<area id="D011" onclick="toggle('D011')" shape="rect" coords="792,574,823,599" href="#">
+							<area id="D012" onclick="toggle('D012')" shape="rect" coords="792,600,823,623" href="#">
+							<area id="D013" onclick="toggle('D013')" shape="rect" coords="792,623,823,648" href="#">
+							<area id="D014" onclick="toggle('D014')" shape="rect" coords="792,673,823,698" href="#">
+							<area id="D015" onclick="toggle('D015')" shape="rect" coords="792,699,822,722" href="#">
+							<area id="D016" onclick="toggle('D016')" shape="rect" coords="793,723,822,747" href="#">
+							<area id="D017" onclick="toggle('D017')" shape="rect" coords="792,748,822,772" href="#">
+							<area id="D018" onclick="toggle('D018')" shape="rect" coords="741,748,772,772" href="#">
+							<area id="D019" onclick="toggle('D019')" shape="rect" coords="741,724,773,747" href="#">
+							<area id="D020" onclick="toggle('D020')" shape="rect" coords="741,699,772,722" href="#">
+							<area id="D021" onclick="toggle('D021')" shape="rect" coords="742,674,772,698" href="#">
+							<area id="D022" onclick="toggle('D022')" shape="rect" coords="741,649,772,673" href="#">
+							<area id="D023" onclick="toggle('D023')" shape="rect" coords="741,601,773,625" href="#">
+							<area id="D024" onclick="toggle('D024')" shape="rect" coords="741,575,772,599" href="#">
+							<area id="D025" onclick="toggle('D025')" shape="rect" coords="742,550,772,573" href="#">
+							<area id="D026" onclick="toggle('D026')" shape="rect" coords="741,525,772,548" href="#">
+							<area id="D027" onclick="toggle('D027')" shape="rect" coords="741,462,773,486" href="#">
+							<area id="D028" onclick="toggle('D028')" shape="rect" coords="741,436,772,461" href="#">
+							<area id="D029" onclick="toggle('D029')" shape="rect" coords="741,412,773,436" href="#">
+							<area id="D030" onclick="toggle('D030')" shape="rect" coords="741,387,772,411" href="#">
+							<area id="D031" onclick="toggle('D031')" shape="rect" coords="742,363,772,386" href="#">
+							<area id="D032" onclick="toggle('D032')" shape="rect" coords="742,337,772,361" href="#">
+							<area id="D033" onclick="toggle('D033')" shape="rect" coords="741,287,772,312" href="#">
+							<area id="D034" onclick="toggle('D034')" shape="rect" coords="741,262,772,287" href="#">
+							<area id="D035" onclick="toggle('D035')" shape="rect" coords="741,237,772,262" href="#">
+							<area id="D036" onclick="toggle('D036')" shape="rect" coords="741,212,772,236" href="#">
+							<area id="D037" onclick="toggle('D037')" shape="rect" coords="559,337,590,361" href="#">
+							<area id="D038" onclick="toggle('D038')" shape="rect" coords="559,361,591,388" href="#">
+							<area id="D039" onclick="toggle('D039')" shape="rect" coords="558,387,591,411" href="#">
+							<area id="D040" onclick="toggle('D040')" shape="rect" coords="558,412,590,436" href="#">
+							<area id="D041" onclick="toggle('D041')" shape="rect" coords="559,437,590,461" href="#">
+							<area id="D042" onclick="toggle('D042')" shape="rect" coords="559,461,590,487" href="#">
+							<area id="D043" onclick="toggle('D043')" shape="rect" coords="559,524,589,549" href="#">
+							<area id="D044" onclick="toggle('D044')" shape="rect" coords="558,550,590,574" href="#">
+							<area id="D045" onclick="toggle('D045')" shape="rect" coords="559,575,591,600" href="#">
+							<area id="D046" onclick="toggle('D046')" shape="rect" coords="558,600,590,623" href="#">
+							<area id="D047" onclick="toggle('D047')" shape="rect" coords="560,624,589,648" href="#">
+							<area id="D048" onclick="toggle('D048')" shape="rect" coords="559,649,589,674" href="#">
+							<area id="D049" onclick="toggle('D049')" shape="rect" coords="507,649,539,673" href="#">
+							<area id="D050" onclick="toggle('D050')" shape="rect" coords="507,624,539,648" href="#">
+							<area id="D051" onclick="toggle('D051')" shape="rect" coords="507,574,539,599" href="#">
+							<area id="D052" onclick="toggle('D052')" shape="rect" coords="508,548,538,573" href="#">
+							<area id="D053" onclick="toggle('D053')" shape="rect" coords="507,460,539,486" href="#">
+							<area id="D054" onclick="toggle('D054')" shape="rect" coords="508,437,539,461" href="#">
+							<area id="D055" onclick="toggle('D055')" shape="rect" coords="507,411,539,436" href="#">
+							<area id="D056" onclick="toggle('D056')" shape="rect" coords="508,364,539,386" href="#">
+							<area id="D057" onclick="toggle('D057')" shape="rect" coords="508,338,539,362" href="#">
+							<area id="D058" onclick="toggle('D058')" shape="rect" coords="322,337,354,362" href="#">
+							<area id="D059" onclick="toggle('D059')" shape="rect" coords="323,362,354,386" href="#">
+							<area id="D060" onclick="toggle('D060')" shape="rect" coords="323,412,355,436" href="#">
+							<area id="D061" onclick="toggle('D061')" shape="rect" coords="323,437,354,461" href="#">
+							<area id="D062" onclick="toggle('D062')" shape="rect" coords="323,461,354,486" href="#">
+							<area id="D063" onclick="toggle('D063')" shape="rect" coords="324,549,355,573" href="#">
+							<area id="D064" onclick="toggle('D064')" shape="rect" coords="323,574,355,598" href="#">
+							<area id="D065" onclick="toggle('D065')" shape="rect" coords="323,623,354,647" href="#">
+							<area id="D066" onclick="toggle('D066')" shape="rect" coords="323,649,355,673" href="#">
+							<area id="D067" onclick="toggle('D067')" shape="rect" coords="271,650,304,672" href="#">
+							<area id="D068" onclick="toggle('D068')" shape="rect" coords="272,625,303,649" href="#">
+							<area id="D069" onclick="toggle('D069')" shape="rect" coords="273,600,303,623" href="#">
+							<area id="D070" onclick="toggle('D070')" shape="rect" coords="273,576,303,599" href="#">
+							<area id="D071" onclick="toggle('D071')" shape="rect" coords="272,552,303,574" href="#">
+							<area id="D072" onclick="toggle('D072')" shape="rect" coords="273,526,303,550" href="#">
+							<area id="D073" onclick="toggle('D073')" shape="rect" coords="272,461,303,487" href="#">
+							<area id="D074" onclick="toggle('D074')" shape="rect" coords="272,439,304,461" href="#">
+							<area id="D075" onclick="toggle('D075')" shape="rect" coords="273,413,304,437" href="#">
+							<area id="D076" onclick="toggle('D076')" shape="rect" coords="273,387,304,410" href="#">
+							<area id="D077" onclick="toggle('D077')" shape="rect" coords="273,363,304,387" href="#">
+							<area id="D078" onclick="toggle('D078')" shape="rect" coords="275,338,302,362" href="#">
+							<area id="D079" onclick="toggle('D079')" shape="rect" coords="90,212,122,237" href="#">
+							<area id="D080" onclick="toggle('D080')" shape="rect" coords="90,237,122,262" href="#">
+							<area id="D081" onclick="toggle('D081')" shape="rect" coords="90,262,121,287" href="#">
+							<area id="D082" onclick="toggle('D082')" shape="rect" coords="90,287,122,312" href="#">
+							<area id="D083" onclick="toggle('D083')" shape="rect" coords="91,337,122,361" href="#">
+							<area id="D084" onclick="toggle('D084')" shape="rect" coords="90,361,121,386" href="#">
+							<area id="D085" onclick="toggle('D085')" shape="rect" coords="90,386,121,411" href="#">
+							<area id="D086" onclick="toggle('D086')" shape="rect" coords="89,411,121,436" href="#">
+							<area id="D087" onclick="toggle('D087')" shape="rect" coords="91,436,121,460" href="#">
+							<area id="D088" onclick="toggle('D088')" shape="rect" coords="90,461,121,486" href="#">
+							<area id="D089" onclick="toggle('D089')" shape="rect" coords="91,523,122,549" href="#">
+							<area id="D090" onclick="toggle('D090')" shape="rect" coords="90,550,122,574" href="#">
+							<area id="D091" onclick="toggle('D091')" shape="rect" coords="90,574,122,599" href="#">
+							<area id="D092" onclick="toggle('D092')" shape="rect" coords="90,599,121,624" href="#">
+							<area id="D093" onclick="toggle('D093')" shape="rect" coords="90,648,121,673" href="#">
+							<area id="D094" onclick="toggle('D094')" shape="rect" coords="90,674,121,698" href="#">
+							<area id="D095" onclick="toggle('D095')" shape="rect" coords="90,698,121,723" href="#">
+							<area id="D096" onclick="toggle('D096')" shape="rect" coords="90,723,121,748" href="#">
+							<area id="D097" onclick="toggle('D097')" shape="rect" coords="91,749,121,772" href="#">
+							<area id="D098" onclick="toggle('D098')" shape="rect" coords="38,749,70,773" href="#">
+							<area id="D099" onclick="toggle('D099')" shape="rect" coords="39,725,70,747" href="#">
+							<area id="D100" onclick="toggle('D100')" shape="rect" coords="39,700,71,723" href="#">
+							<area id="D101" onclick="toggle('D101')" shape="rect" coords="40,674,70,698" href="#">
+							<area id="D102" onclick="toggle('D102')" shape="rect" coords="38,625,70,650" href="#">
+							<area id="D103" onclick="toggle('D103')" shape="rect" coords="39,599,70,624" href="#">
+							<area id="D104" onclick="toggle('D104')" shape="rect" coords="39,574,69,599" href="#">
+							<area id="D105" onclick="toggle('D105')" shape="rect" coords="39,549,71,573" href="#">
+							<area id="D106" onclick="toggle('D106')" shape="rect" coords="38,437,71,462" href="#">
+							<area id="D107" onclick="toggle('D107')" shape="rect" coords="39,413,71,436" href="#">
+							<area id="D108" onclick="toggle('D108')" shape="rect" coords="40,388,70,411" href="#">
+							<area id="D109" onclick="toggle('D109')" shape="rect" coords="39,363,69,386" href="#">
+							<area id="D110" onclick="toggle('D110')" shape="rect" coords="40,312,70,337" href="#">
+							<area id="D111" onclick="toggle('D111')" shape="rect" coords="40,288,70,312" href="#">
+							<area id="D112" onclick="toggle('D112')" shape="rect" coords="40,264,71,287" href="#">
+							<area id="D113" onclick="toggle('D113')" shape="rect" coords="40,239,70,263" href="#">
+							<area id="D114" onclick="toggle('D114')" shape="rect" coords="39,212,70,237" href="#">
+						</map>
+				</div>
+				<div id="floor5">
+					<img src="{% static 'src/plan/GEN_Floor_850w.jpg' %}" width="850" height="846" usemap="#GEN_Floor5" border="0">
+						<map name="GEN_Floor5">
+						<area id="E001" onclick="toggle('E001')" shape="rect" coords="793,212,823,238" href="#">
+						<area id="E002" onclick="toggle('E002')" shape="rect" coords="792,238,823,262" href="#">
+						<area id="E003" onclick="toggle('E003')" shape="rect" coords="791,263,823,288" href="#">
+						<area id="E004" onclick="toggle('E004')" shape="rect" coords="791,287,823,311" href="#">
+						<area id="E005" onclick="toggle('E005')" shape="rect" coords="792,312,823,337" href="#">
+						<area id="E006" onclick="toggle('E006')" shape="rect" coords="792,362,823,386" href="#">
+						<area id="E007" onclick="toggle('E007')" shape="rect" coords="792,386,823,411" href="#">
+						<area id="E008" onclick="toggle('E008')" shape="rect" coords="792,411,823,435" href="#">
+						<area id="E009" onclick="toggle('E009')" shape="rect" coords="792,436,823,462" href="#">
+						<area id="E010" onclick="toggle('E010')" shape="rect" coords="792,549,823,574" href="#">
+						<area id="E011" onclick="toggle('E011')" shape="rect" coords="792,574,823,599" href="#">
+						<area id="E012" onclick="toggle('E012')" shape="rect" coords="792,600,823,623" href="#">
+						<area id="E013" onclick="toggle('E013')" shape="rect" coords="792,623,823,648" href="#">
+						<area id="E014" onclick="toggle('E014')" shape="rect" coords="792,673,823,698" href="#">
+						<area id="E015" onclick="toggle('E015')" shape="rect" coords="792,699,822,722" href="#">
+						<area id="E016" onclick="toggle('E016')" shape="rect" coords="793,723,822,747" href="#">
+						<area id="E017" onclick="toggle('E017')" shape="rect" coords="792,748,822,772" href="#">
+						<area id="E018" onclick="toggle('E018')" shape="rect" coords="741,748,772,772" href="#">
+						<area id="E019" onclick="toggle('E019')" shape="rect" coords="741,724,773,747" href="#">
+						<area id="E020" onclick="toggle('E020')" shape="rect" coords="741,699,772,722" href="#">
+						<area id="E021" onclick="toggle('E021')" shape="rect" coords="742,674,772,698" href="#">
+						<area id="E022" onclick="toggle('E022')" shape="rect" coords="741,649,772,673" href="#">
+						<area id="E023" onclick="toggle('E023')" shape="rect" coords="741,601,773,625" href="#">
+						<area id="E024" onclick="toggle('E024')" shape="rect" coords="741,575,772,599" href="#">
+						<area id="E025" onclick="toggle('E025')" shape="rect" coords="742,550,772,573" href="#">
+						<area id="E026" onclick="toggle('E026')" shape="rect" coords="741,525,772,548" href="#">
+						<area id="E027" onclick="toggle('E027')" shape="rect" coords="741,462,773,486" href="#">
+						<area id="E028" onclick="toggle('E028')" shape="rect" coords="741,436,772,461" href="#">
+						<area id="E029" onclick="toggle('E029')" shape="rect" coords="741,412,773,436" href="#">
+						<area id="E030" onclick="toggle('E030')" shape="rect" coords="741,387,772,411" href="#">
+						<area id="E031" onclick="toggle('E031')" shape="rect" coords="742,363,772,386" href="#">
+						<area id="E032" onclick="toggle('E032')" shape="rect" coords="742,337,772,361" href="#">
+						<area id="E033" onclick="toggle('E033')" shape="rect" coords="741,287,772,312" href="#">
+						<area id="E034" onclick="toggle('E034')" shape="rect" coords="741,262,772,287" href="#">
+						<area id="E035" onclick="toggle('E035')" shape="rect" coords="741,237,772,262" href="#">
+						<area id="E036" onclick="toggle('E036')" shape="rect" coords="741,212,772,236" href="#">
+						<area id="E037" onclick="toggle('E037')" shape="rect" coords="559,337,590,361" href="#">
+						<area id="E038" onclick="toggle('E038')" shape="rect" coords="559,361,591,388" href="#">
+						<area id="E039" onclick="toggle('E039')" shape="rect" coords="558,387,591,411" href="#">
+						<area id="E040" onclick="toggle('E040')" shape="rect" coords="558,412,590,436" href="#">
+						<area id="E041" onclick="toggle('E041')" shape="rect" coords="559,437,590,461" href="#">
+						<area id="E042" onclick="toggle('E042')" shape="rect" coords="559,461,590,487" href="#">
+						<area id="E043" onclick="toggle('E043')" shape="rect" coords="559,524,589,549" href="#">
+						<area id="E044" onclick="toggle('E044')" shape="rect" coords="558,550,590,574" href="#">
+						<area id="E045" onclick="toggle('E045')" shape="rect" coords="559,575,591,600" href="#">
+						<area id="E046" onclick="toggle('E046')" shape="rect" coords="558,600,590,623" href="#">
+						<area id="E047" onclick="toggle('E047')" shape="rect" coords="560,624,589,648" href="#">
+						<area id="E048" onclick="toggle('E048')" shape="rect" coords="559,649,589,674" href="#">
+						<area id="E049" onclick="toggle('E049')" shape="rect" coords="507,649,539,673" href="#">
+						<area id="E050" onclick="toggle('E050')" shape="rect" coords="507,624,539,648" href="#">
+						<area id="E051" onclick="toggle('E051')" shape="rect" coords="507,574,539,599" href="#">
+						<area id="E052" onclick="toggle('E052')" shape="rect" coords="508,548,538,573" href="#">
+						<area id="E053" onclick="toggle('E053')" shape="rect" coords="507,460,539,486" href="#">
+						<area id="E054" onclick="toggle('E054')" shape="rect" coords="508,437,539,461" href="#">
+						<area id="E055" onclick="toggle('E055')" shape="rect" coords="507,411,539,436" href="#">
+						<area id="E056" onclick="toggle('E056')" shape="rect" coords="508,364,539,386" href="#">
+						<area id="E057" onclick="toggle('E057')" shape="rect" coords="508,338,539,362" href="#">
+						<area id="E058" onclick="toggle('E058')" shape="rect" coords="322,337,354,362" href="#">
+						<area id="E059" onclick="toggle('E059')" shape="rect" coords="323,362,354,386" href="#">
+						<area id="E060" onclick="toggle('E060')" shape="rect" coords="323,412,355,436" href="#">
+						<area id="E061" onclick="toggle('E061')" shape="rect" coords="323,437,354,461" href="#">
+						<area id="E062" onclick="toggle('E062')" shape="rect" coords="323,461,354,486" href="#">
+						<area id="E063" onclick="toggle('E063')" shape="rect" coords="324,549,355,573" href="#">
+						<area id="E064" onclick="toggle('E064')" shape="rect" coords="323,574,355,598" href="#">
+						<area id="E065" onclick="toggle('E065')" shape="rect" coords="323,623,354,647" href="#">
+						<area id="E066" onclick="toggle('E066')" shape="rect" coords="323,649,355,673" href="#">
+						<area id="E067" onclick="toggle('E067')" shape="rect" coords="271,650,304,672" href="#">
+						<area id="E068" onclick="toggle('E068')" shape="rect" coords="272,625,303,649" href="#">
+						<area id="E069" onclick="toggle('E069')" shape="rect" coords="273,600,303,623" href="#">
+						<area id="E070" onclick="toggle('E070')" shape="rect" coords="273,576,303,599" href="#">
+						<area id="E071" onclick="toggle('E071')" shape="rect" coords="272,552,303,574" href="#">
+						<area id="E072" onclick="toggle('E072')" shape="rect" coords="273,526,303,550" href="#">
+						<area id="E073" onclick="toggle('E073')" shape="rect" coords="272,461,303,487" href="#">
+						<area id="E074" onclick="toggle('E074')" shape="rect" coords="272,439,304,461" href="#">
+						<area id="E075" onclick="toggle('E075')" shape="rect" coords="273,413,304,437" href="#">
+						<area id="E076" onclick="toggle('E076')" shape="rect" coords="273,387,304,410" href="#">
+						<area id="E077" onclick="toggle('E077')" shape="rect" coords="273,363,304,387" href="#">
+						<area id="E078" onclick="toggle('E078')" shape="rect" coords="275,338,302,362" href="#">
+						<area id="E079" onclick="toggle('E079')" shape="rect" coords="90,212,122,237" href="#">
+						<area id="E080" onclick="toggle('E080')" shape="rect" coords="90,237,122,262" href="#">
+						<area id="E081" onclick="toggle('E081')" shape="rect" coords="90,262,121,287" href="#">
+						<area id="E082" onclick="toggle('E082')" shape="rect" coords="90,287,122,312" href="#">
+						<area id="E083" onclick="toggle('E083')" shape="rect" coords="91,337,122,361" href="#">
+						<area id="E084" onclick="toggle('E084')" shape="rect" coords="90,361,121,386" href="#">
+						<area id="E085" onclick="toggle('E085')" shape="rect" coords="90,386,121,411" href="#">
+						<area id="E086" onclick="toggle('E086')" shape="rect" coords="89,411,121,436" href="#">
+						<area id="E087" onclick="toggle('E087')" shape="rect" coords="91,436,121,460" href="#">
+						<area id="E088" onclick="toggle('E088')" shape="rect" coords="90,461,121,486" href="#">
+						<area id="E089" onclick="toggle('E089')" shape="rect" coords="91,523,122,549" href="#">
+						<area id="E090" onclick="toggle('E090')" shape="rect" coords="90,550,122,574" href="#">
+						<area id="E091" onclick="toggle('E091')" shape="rect" coords="90,574,122,599" href="#">
+						<area id="E092" onclick="toggle('E092')" shape="rect" coords="90,599,121,624" href="#">
+						<area id="E093" onclick="toggle('E093')" shape="rect" coords="90,648,121,673" href="#">
+						<area id="E094" onclick="toggle('E094')" shape="rect" coords="90,674,121,698" href="#">
+						<area id="E095" onclick="toggle('E095')" shape="rect" coords="90,698,121,723" href="#">
+						<area id="E096" onclick="toggle('E096')" shape="rect" coords="90,723,121,748" href="#">
+						<area id="E097" onclick="toggle('E097')" shape="rect" coords="91,749,121,772" href="#">
+						<area id="E098" onclick="toggle('E098')" shape="rect" coords="38,749,70,773" href="#">
+						<area id="E099" onclick="toggle('E099')" shape="rect" coords="39,725,70,747" href="#">
+						<area id="E100" onclick="toggle('E100')" shape="rect" coords="39,700,71,723" href="#">
+						<area id="E101" onclick="toggle('E101')" shape="rect" coords="40,674,70,698" href="#">
+						<area id="E102" onclick="toggle('E102')" shape="rect" coords="38,625,70,650" href="#">
+						<area id="E103" onclick="toggle('E103')" shape="rect" coords="39,599,70,624" href="#">
+						<area id="E104" onclick="toggle('E104')" shape="rect" coords="39,574,69,599" href="#">
+						<area id="E105" onclick="toggle('E105')" shape="rect" coords="39,549,71,573" href="#">
+						<area id="E106" onclick="toggle('E106')" shape="rect" coords="38,437,71,462" href="#">
+						<area id="E107" onclick="toggle('E107')" shape="rect" coords="39,413,71,436" href="#">
+						<area id="E108" onclick="toggle('E108')" shape="rect" coords="40,388,70,411" href="#">
+						<area id="E109" onclick="toggle('E109')" shape="rect" coords="39,363,69,386" href="#">
+						<area id="E110" onclick="toggle('E110')" shape="rect" coords="40,312,70,337" href="#">
+						<area id="E111" onclick="toggle('E111')" shape="rect" coords="40,288,70,312" href="#">
+						<area id="E112" onclick="toggle('E112')" shape="rect" coords="40,264,71,287" href="#">
+						<area id="E113" onclick="toggle('E113')" shape="rect" coords="40,239,70,263" href="#">
+						<area id="E114" onclick="toggle('E114')" shape="rect" coords="39,212,70,237" href="#">
+					</map>
+				</div>
+				<div id="floor6">
+					<img src="{% static 'src/plan/GEN_Floor_850w.jpg' %}" width="850" height="846" usemap="#GEN_Floor6" border="0">
+					<!-- add your floors here-->
+						<map name="GEN_Floor6">
+							<area id="F001" onclick="toggle('F001')" shape="rect" coords="793,212,823,238" href="#">
+							<area id="F002" onclick="toggle('F002')" shape="rect" coords="792,238,823,262" href="#">
+							<area id="F003" onclick="toggle('F003')" shape="rect" coords="791,263,823,288" href="#">
+							<area id="F004" onclick="toggle('F004')" shape="rect" coords="791,287,823,311" href="#">
+							<area id="F005" onclick="toggle('F005')" shape="rect" coords="792,312,823,337" href="#">
+							<area id="F006" onclick="toggle('F006')" shape="rect" coords="792,362,823,386" href="#">
+							<area id="F007" onclick="toggle('F007')" shape="rect" coords="792,386,823,411" href="#">
+							<area id="F008" onclick="toggle('F008')" shape="rect" coords="792,411,823,435" href="#">
+							<area id="F009" onclick="toggle('F009')" shape="rect" coords="792,436,823,462" href="#">
+							<area id="F010" onclick="toggle('F010')" shape="rect" coords="792,549,823,574" href="#">
+							<area id="F011" onclick="toggle('F011')" shape="rect" coords="792,574,823,599" href="#">
+							<area id="F012" onclick="toggle('F012')" shape="rect" coords="792,600,823,623" href="#">
+							<area id="F013" onclick="toggle('F013')" shape="rect" coords="792,623,823,648" href="#">
+							<area id="F014" onclick="toggle('F014')" shape="rect" coords="792,673,823,698" href="#">
+							<area id="F015" onclick="toggle('F015')" shape="rect" coords="792,699,822,722" href="#">
+							<area id="F016" onclick="toggle('F016')" shape="rect" coords="793,723,822,747" href="#">
+							<area id="F017" onclick="toggle('F017')" shape="rect" coords="792,748,822,772" href="#">
+							<area id="F018" onclick="toggle('F018')" shape="rect" coords="741,748,772,772" href="#">
+							<area id="F019" onclick="toggle('F019')" shape="rect" coords="741,724,773,747" href="#">
+							<area id="F020" onclick="toggle('F020')" shape="rect" coords="741,699,772,722" href="#">
+							<area id="F021" onclick="toggle('F021')" shape="rect" coords="742,674,772,698" href="#">
+							<area id="F022" onclick="toggle('F022')" shape="rect" coords="741,649,772,673" href="#">
+							<area id="F023" onclick="toggle('F023')" shape="rect" coords="741,601,773,625" href="#">
+							<area id="F024" onclick="toggle('F024')" shape="rect" coords="741,575,772,599" href="#">
+							<area id="F025" onclick="toggle('F025')" shape="rect" coords="742,550,772,573" href="#">
+							<area id="F026" onclick="toggle('F026')" shape="rect" coords="741,525,772,548" href="#">
+							<area id="F027" onclick="toggle('F027')" shape="rect" coords="741,462,773,486" href="#">
+							<area id="F028" onclick="toggle('F028')" shape="rect" coords="741,436,772,461" href="#">
+							<area id="F029" onclick="toggle('F029')" shape="rect" coords="741,412,773,436" href="#">
+							<area id="F030" onclick="toggle('F030')" shape="rect" coords="741,387,772,411" href="#">
+							<area id="F031" onclick="toggle('F031')" shape="rect" coords="742,363,772,386" href="#">
+							<area id="F032" onclick="toggle('F032')" shape="rect" coords="742,337,772,361" href="#">
+							<area id="F033" onclick="toggle('F033')" shape="rect" coords="741,287,772,312" href="#">
+							<area id="F034" onclick="toggle('F034')" shape="rect" coords="741,262,772,287" href="#">
+							<area id="F035" onclick="toggle('F035')" shape="rect" coords="741,237,772,262" href="#">
+							<area id="F036" onclick="toggle('F036')" shape="rect" coords="741,212,772,236" href="#">
+							<area id="F037" onclick="toggle('F037')" shape="rect" coords="559,337,590,361" href="#">
+							<area id="F038" onclick="toggle('F038')" shape="rect" coords="559,361,591,388" href="#">
+							<area id="F039" onclick="toggle('F039')" shape="rect" coords="558,387,591,411" href="#">
+							<area id="F040" onclick="toggle('F040')" shape="rect" coords="558,412,590,436" href="#">
+							<area id="F041" onclick="toggle('F041')" shape="rect" coords="559,437,590,461" href="#">
+							<area id="F042" onclick="toggle('F042')" shape="rect" coords="559,461,590,487" href="#">
+							<area id="F043" onclick="toggle('F043')" shape="rect" coords="559,524,589,549" href="#">
+							<area id="F044" onclick="toggle('F044')" shape="rect" coords="558,550,590,574" href="#">
+							<area id="F045" onclick="toggle('F045')" shape="rect" coords="559,575,591,600" href="#">
+							<area id="F046" onclick="toggle('F046')" shape="rect" coords="558,600,590,623" href="#">
+							<area id="F047" onclick="toggle('F047')" shape="rect" coords="560,624,589,648" href="#">
+							<area id="F048" onclick="toggle('F048')" shape="rect" coords="559,649,589,674" href="#">
+							<area id="F049" onclick="toggle('F049')" shape="rect" coords="507,649,539,673" href="#">
+							<area id="F050" onclick="toggle('F050')" shape="rect" coords="507,624,539,648" href="#">
+							<area id="F051" onclick="toggle('F051')" shape="rect" coords="507,574,539,599" href="#">
+							<area id="F052" onclick="toggle('F052')" shape="rect" coords="508,548,538,573" href="#">
+							<area id="F053" onclick="toggle('F053')" shape="rect" coords="507,460,539,486" href="#">
+							<area id="F054" onclick="toggle('F054')" shape="rect" coords="508,437,539,461" href="#">
+							<area id="F055" onclick="toggle('F055')" shape="rect" coords="507,411,539,436" href="#">
+							<area id="F056" onclick="toggle('F056')" shape="rect" coords="508,364,539,386" href="#">
+							<area id="F057" onclick="toggle('F057')" shape="rect" coords="508,338,539,362" href="#">
+							<area id="F058" onclick="toggle('F058')" shape="rect" coords="322,337,354,362" href="#">
+							<area id="F059" onclick="toggle('F059')" shape="rect" coords="323,362,354,386" href="#">
+							<area id="F060" onclick="toggle('F060')" shape="rect" coords="323,412,355,436" href="#">
+							<area id="F061" onclick="toggle('F061')" shape="rect" coords="323,437,354,461" href="#">
+							<area id="F062" onclick="toggle('F062')" shape="rect" coords="323,461,354,486" href="#">
+							<area id="F063" onclick="toggle('F063')" shape="rect" coords="324,549,355,573" href="#">
+							<area id="F064" onclick="toggle('F064')" shape="rect" coords="323,574,355,598" href="#">
+							<area id="F065" onclick="toggle('F065')" shape="rect" coords="323,623,354,647" href="#">
+							<area id="F066" onclick="toggle('F066')" shape="rect" coords="323,649,355,673" href="#">
+							<area id="F067" onclick="toggle('F067')" shape="rect" coords="271,650,304,672" href="#">
+							<area id="F068" onclick="toggle('F068')" shape="rect" coords="272,625,303,649" href="#">
+							<area id="F069" onclick="toggle('F069')" shape="rect" coords="273,600,303,623" href="#">
+							<area id="F070" onclick="toggle('F070')" shape="rect" coords="273,576,303,599" href="#">
+							<area id="F071" onclick="toggle('F071')" shape="rect" coords="272,552,303,574" href="#">
+							<area id="F072" onclick="toggle('F072')" shape="rect" coords="273,526,303,550" href="#">
+							<area id="F073" onclick="toggle('F073')" shape="rect" coords="272,461,303,487" href="#">
+							<area id="F074" onclick="toggle('F074')" shape="rect" coords="272,439,304,461" href="#">
+							<area id="F075" onclick="toggle('F075')" shape="rect" coords="273,413,304,437" href="#">
+							<area id="F076" onclick="toggle('F076')" shape="rect" coords="273,387,304,410" href="#">
+							<area id="F077" onclick="toggle('F077')" shape="rect" coords="273,363,304,387" href="#">
+							<area id="F078" onclick="toggle('F078')" shape="rect" coords="275,338,302,362" href="#">
+							<area id="F079" onclick="toggle('F079')" shape="rect" coords="90,212,122,237" href="#">
+							<area id="F080" onclick="toggle('F080')" shape="rect" coords="90,237,122,262" href="#">
+							<area id="F081" onclick="toggle('F081')" shape="rect" coords="90,262,121,287" href="#">
+							<area id="F082" onclick="toggle('F082')" shape="rect" coords="90,287,122,312" href="#">
+							<area id="F083" onclick="toggle('F083')" shape="rect" coords="91,337,122,361" href="#">
+							<area id="F084" onclick="toggle('F084')" shape="rect" coords="90,361,121,386" href="#">
+							<area id="F085" onclick="toggle('F085')" shape="rect" coords="90,386,121,411" href="#">
+							<area id="F086" onclick="toggle('F086')" shape="rect" coords="89,411,121,436" href="#">
+							<area id="F087" onclick="toggle('F087')" shape="rect" coords="91,436,121,460" href="#">
+							<area id="F088" onclick="toggle('F088')" shape="rect" coords="90,461,121,486" href="#">
+							<area id="F089" onclick="toggle('F089')" shape="rect" coords="91,523,122,549" href="#">
+							<area id="F090" onclick="toggle('F090')" shape="rect" coords="90,550,122,574" href="#">
+							<area id="F091" onclick="toggle('F091')" shape="rect" coords="90,574,122,599" href="#">
+							<area id="F092" onclick="toggle('F092')" shape="rect" coords="90,599,121,624" href="#">
+							<area id="F093" onclick="toggle('F093')" shape="rect" coords="90,648,121,673" href="#">
+							<area id="F094" onclick="toggle('F094')" shape="rect" coords="90,674,121,698" href="#">
+							<area id="F095" onclick="toggle('F095')" shape="rect" coords="90,698,121,723" href="#">
+							<area id="F096" onclick="toggle('F096')" shape="rect" coords="90,723,121,748" href="#">
+							<area id="F097" onclick="toggle('F097')" shape="rect" coords="91,749,121,772" href="#">
+							<area id="F098" onclick="toggle('F098')" shape="rect" coords="38,749,70,773" href="#">
+							<area id="F099" onclick="toggle('F099')" shape="rect" coords="39,725,70,747" href="#">
+							<area id="F100" onclick="toggle('F100')" shape="rect" coords="39,700,71,723" href="#">
+							<area id="F101" onclick="toggle('F101')" shape="rect" coords="40,674,70,698" href="#">
+							<area id="F102" onclick="toggle('F102')" shape="rect" coords="38,625,70,650" href="#">
+							<area id="F103" onclick="toggle('F103')" shape="rect" coords="39,599,70,624" href="#">
+							<area id="F104" onclick="toggle('F104')" shape="rect" coords="39,574,69,599" href="#">
+							<area id="F105" onclick="toggle('F105')" shape="rect" coords="39,549,71,573" href="#">
+							<area id="F106" onclick="toggle('F106')" shape="rect" coords="38,437,71,462" href="#">
+							<area id="F107" onclick="toggle('F107')" shape="rect" coords="39,413,71,436" href="#">
+							<area id="F108" onclick="toggle('F108')" shape="rect" coords="40,388,70,411" href="#">
+							<area id="F109" onclick="toggle('F109')" shape="rect" coords="39,363,69,386" href="#">
+							<area id="F110" onclick="toggle('F110')" shape="rect" coords="40,312,70,337" href="#">
+							<area id="F111" onclick="toggle('F111')" shape="rect" coords="40,288,70,312" href="#">
+							<area id="F112" onclick="toggle('F112')" shape="rect" coords="40,264,71,287" href="#">
+							<area id="F113" onclick="toggle('F113')" shape="rect" coords="40,239,70,263" href="#">
+							<area id="F114" onclick="toggle('F114')" shape="rect" coords="39,212,70,237" href="#">
+						</map>
+				</div>
+				<div id="floor7">
+				</div>
+				<div id="floor8">
+				</div>
+
+			</td>
+			<td id="preferences_vertical"><div id = "preferences">
+				<p style="color:white" >Preferences</p>
+				</div>
+			</td>
+</div>
+
+		<table id="submitButton" align="center">
+			<tr>
+				<td align="center"><form action = "/bookRoom/" method = "POST" id = "form1">
+					<input type="hidden" name ="preference" id ="preference" value="">
+					<button align="center"onclick = "submitForm()">Submit</button>
+					</form>
+				</td>
+			</tr>
+		</table>	
+</body>
+</html>

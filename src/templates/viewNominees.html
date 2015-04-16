@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+  {% load staticfiles %}
+  <meta charset="UTF-8">
+
+<title>List of Nominee's</title>
+<link type="text/css" rel="stylesheet" href="{%  static 'src/bootstrap.min.css' %}">
+<style>
+
+body {
+    background-image: url("{% static 'src/background.jpg'%}");
+    background-color: #00f;
+}
+
+.table {
+background: rgba(255,255,255,0.5);
+}
+.titleTable {
+  background-color: #fff;
+  opacity: 0.5;
+}
+
+.buttonz input[type=submit]{
+  width: 65%  ;
+  height: 80%;
+  background: #0df;
+  border: 1px solid #fff;
+  cursor: pointer;
+  border-radius: 2px;
+  color: #000;
+  font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 20px;
+}
+
+.buttonz input[type=submit]:hover {
+  opacity: 0.8;
+}
+
+.buttonz input[type=submit]:active {
+  opacity: 0.6;
+}
+
+.buttonz input[type=button]{
+  width: 65%  ;
+  height: 80%;
+  background: #0df;
+  border: 1px solid #fff;
+  cursor: pointer;
+  border-radius: 2px;
+  color: #000;
+  font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 20px;
+}
+
+.buttonz input[type=button]:hover {
+  opacity: 0.8;
+}
+
+.buttonz input[type=button]:active {
+  opacity: 0.6;
+}
+
+</style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="row">
+      <div class="col-md-12">
+        <h1 class="text-center">List of Nominee's</h1>
+      </div>
+    </div>
+
+    <hr>
+<div class="row">
+<table cellspacing="1" cellpadding="2" border="1" align="center">
+    {%if nomineesList %}
+      <tr align="center">
+        <td><h4>HOSTEL </h4></td>
+        <td><h4>POSITION </h4></td>
+        <td><h4>CANDIDATE'S NAME </h4></td>
+        <td><h4>CANDIDATE'S ROLL NO.</h4></td>
+      </tr>
+      {% for nominee in nomineesList %}
+        <tr align = "center">
+          <td>{{nominee.hostel}}</td>
+          <td>{{nominee.position}}</td>
+          <td>{{nominee.name}}</td>
+          <td><a href ="/EVoting/nominee/{{nominee.rollno}}/">{{nominee.rollno}}</a></td>
+        </tr>
+      {%endfor%}
+    {%endif%}
+</table>
+</div>
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+  {% load staticfiles %}
+ 	<meta charset="UTF-8">
+
+<title>Home</title>
+<link rel="shortcut icon" href="http://icons.iconarchive.com/icons/alecive/flatwoken/512/Apps-Home-icon.png">
+<style>
+
+body {
+    background-image: url("{% static 'src/background.jpg'%}");
+    background-color: #0df;
+}
+
+
+.tables {
+background: rgba(255,255,255,0.5);
+border: 1px solid white;
+border-radius: 5px;
+ -moz-border-radius:5px;
+}
+
+.buttonz input[type=submit]{
+  width: 65%  ;
+  height: 80%;
+  background: #0df;
+  border: 1px solid #fff;
+  cursor: pointer;
+  border-radius: 2px;
+  color: #000;
+  font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 20px;
+}
+
+.buttonz input[type=submit]:hover {
+
+	background: #0ef;
+
+}
+
+.buttonz input[type=submit]:active {
+	background: #0ef;
+}
+
+.buttonz input[type=button]{
+  width: 65%  ;
+  height: 80%;
+  background: #0df;
+  border: 1px solid #fff;
+  cursor: pointer;
+  border-radius: 2px;
+  color: #000;
+  font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 20px;
+}
+
+.buttonz input[type=button]:hover {
+  background: #0ef;
+}
+
+.buttonz input[type=button]:active {
+  background: #0ef;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+li {
+    float: left;
+}
+
+a:link, a:visited {
+    display: block;
+    width: 120px;
+    font-family: 'Arial Rounded MT Bold', 'Helvetica Rounded', Arial, sans-serif;
+    font-weight: bold;
+    color: #000;
+    background-color: #0df;
+    text-align: center;
+    padding: 4px;
+    text-decoration: none;
+    text-transform: uppercase;
+    border: 1px solid white;
+}
+
+a:hover, a:active {
+    background-color: #0ef;
+}
+
+#clicked {
+  color: #AE5252;
+}
+
+</style>
+      <link type="text/css" rel="stylesheet" href="{%  static 'src/bootstrap.min.css' %}">
+</head>
+<body>
+  <div STYLE="position:absolute; top:1%; left:28%; ">
+    <ul>
+      <li><a id="clicked" href="/home">Home</a></li>
+      <li><a href="/myprofile">My Profile</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="/logout">Logout</a></li>
+    </ul>
+  </div>
+  
+  <table class='tables' STYLE="position:absolute; top:15%; left:15%; width:70%; height:70% ">
+  <tr>
+   {% if errors %}
+              {% for error in errors %}
+                {{ error }}<br/>
+              {% endfor %}
+            {% endif %} </p>
+    
+  </tr>
+
+
+
+  <table class='tablez' STYLE="position:absolute; top:15%; left:15%; width:70%; height:70% ">
+  <tr>
+    <td align="center"><form action = "/test"><div class="buttonz"><input type="submit" value="Room Preference"></div></td></form>
+    <td align="center"><form action = "/fpref"><div class="buttonz"><input type="submit" value="Friends Preference"></div></td></form>
+  </tr>
+
+  <tr>
+    <td align="center"><div class="buttonz"><input type="submit" onClick="window.open('https://172.16.1.11/src/login.php?secure_login=yes','_blank')" value="webmail"></div></td>
+    <td align="center"><div class="buttonz"><input type="button" onClick="window.open('https://172.16.1.6','_blank')" value="Intranet"></div></td>
+  </tr>
+  
+  <tr>
+    <td align="center"><div class="buttonz"><input type="button" onClick="window.open('https://172.16.1.6/facilities/html/','_blank')" value="Library"></div></td>
+    <form action = "/EVoting"><td align="center"><div class="buttonz"><input type="submit" value="Evoting"></div></td></form>		
+
+  </tr>
+</table>
+</body>
+</html>

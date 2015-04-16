@@ -1,0 +1,75 @@
+<html>
+<head>
+<title> Election Positions Form </title>
+{% load staticfiles %}
+	<link rel="stylesheet" href="{% static "src/forms.css" %}">
+</head>
+<script type="text/javascript">
+	var positionsList = [] 
+	function addPosition(hostel,position)
+	{
+		document.getElementById("hostelName").value = hostel;
+		document.getElementById("positionName").value = "";
+		var index = positionsList.indexOf(position);
+		if (index == -1)
+		{
+			positionsList.push(position);
+		}
+	}
+	function submitForm()
+	{
+		document.getElementById("positionsList").value = positionsList.toString();
+		document.getElementById("form").submit();
+	}
+	function validatePosition()
+	{
+		var s = document.getElementById("positionName").value;
+		var regex = /^([A-Za-z ])*$/;
+		valid = regex.test(s);
+		if (!valid)
+		{
+			document.getElementById("errors").innerHTML = "Please enter a valid position";
+		}
+	}
+	function clearError()
+	{
+		document.getElementById("errors").innerHTML = "";
+	}
+	function clearall()
+	{
+		document.getElementById("positionName").value = "";
+	}
+
+</script>
+
+<body onload="clearall()">
+	<p id="test"></p>
+	<form action="/EVoting/admin/record-positions-for-election/" method="POST" id="form">
+		<fieldset>
+			<legend align = "center"><h2></h2></legend>
+			<div id="errors">
+				{% if errors %}
+					{% for error in errors %}
+					 	{{ error }} <br/>
+					{% endfor %}
+				{% endif %}
+			</div><br><br>
+			<lable><b>Hostel's Name : </b></lable>
+			<select type="text" name = "hostelName" id = "hostelName">
+				{% if hostels %}
+					{% for hostel in hostels %}
+						<option value = "{{hostel}}">{{hostel}}</option>
+					{% endfor %}
+				{% endif %}
+			</select>
+			<br><br>
+			<lable><b>Name of the Position : </b></lable><input type="text" name ="positionName" id="positionName" onchange="validatePosition()" onselect="clearError()"><br><br>
+			<input type="button" onclick="addPosition(document.getElementById('hostelName').value,document.getElementById('positionName').value)" value="Add Position to the list"><br><br>
+			<input type="hidden" name="positionsList" id="positionsList" value=""><br>
+			<button onclick = "submitForm()">Submit</button>
+		</fieldset>
+	</form>
+	<p id="test"></p>
+
+</body>
+</html>

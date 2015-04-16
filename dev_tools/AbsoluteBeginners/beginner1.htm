@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ImageMapster Beginner 1</title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script src="scripts/jquery.imagemapster.js"></script>
+<style>
+#container {
+	width : 100%;
+	margin : auto;
+	}
+#text {
+	width : 60%;
+	float : left;
+	font-family : verdana, arial, sans-serif;
+	font-size : 12pt;
+	margin-top : 20px;
+	margin-left : 20px;
+	}
+#image { float : right; }
+</style>
+</head>
+
+<body>
+<div id="container">
+ <div id="text">Step-by-Step Notes for Absolute Beginners who don't write JavaScript
+<ol type="1" style="line-height:1.5;">
+ <li>Extract the folder called scripts from this zip archive, it includes the file jquery.imagemapster.js and this folder must reside in your website root directory.</li>
+ <li>Create two or more graphics <em>(original and rollover version)</em> and put them in a folder called images. Currently there are 3 images in this zip archive image folder called: shape1.gif, shape2.gif, shape3.gif <em>(see the examples on the right).</em></li>
+ <li>Create an HTML5 document and in the HEAD section add:</li>
+ <img style="width:700px;height:30px;border:0;" src="images/text1.gif" alt="HTML code">
+ <li>Add your image and image-map it <em>(visit <a href="http://www.image-mapper.com/" target="_blank">www.image-mapper.com/</a> or download an image-mapping editor).</em></li>
+ <li>Establish a key <em>(in this example the mapKey is "color" so the key is "green", "blue", etc..)</em> and add this to your map area code: color="green" href="#".</li>
+ <li>Add the following script before the end BODY tag:</li>
+ <img style="width:360px;height:175px;border:0;" src="images/text2.gif" alt="HTML code"><br>
+<strong>#shape1</strong> is the name of the image-map<br>
+<strong>singleSelect</strong> determines if you can click to highlight more than one section at a time<br>
+<strong>render_highlight</strong> is mouse rollover state, if it's removed the fill instruction is the default<br>
+<strong>mapKey</strong> mentioned in #5<br>
+<strong>fill</strong> is mouse click state, in this case an image but it could be a color</li>
+ <li>Open your page in Chrome (for easy debugging) and test by mouse rollovers and mouse clicks to see sections highlight. If the script isn't working click the browser's Tools button and open "JavaScript Console" to find the syntax error to fix. Then you can start customizing:
+	<ul>
+	 <li>practise with the above code to make changes such as fillOpacity : 0.25,</li>
+Study the enclosed beginner HTML files to see the underlying code for these examples:<br>
+	 <li><a href="beginner2.htm">example</a> with one section permanently highlighted</li>
+	 <li><a href="beginner3.htm">example</a> using a color instead of an image</li>
+	 <li><a href="beginner4.htm">example</a> adding a border around the selection</li>
+	 <li><a href="beginner5.htm">example</a> linking to an external page/website</li>
+	</ul>
+Now continue practising with the <a href="http://www.outsharked.com/imagemapster/" target="_blank">example code and demos</a></li>
+</ol>
+ </div>
+ <div id="image">
+<img style="width:400px;height:400px;border:0;" id="shape1" src="images/shape1.gif" alt="shape1" usemap="#shape1">
+<p style="text-align:center;">small version of shape2 for reference:<br>
+<img style="width:200px;height:200px;border:0;" src="images/smallshape2.gif" alt="small shape2">
+<br><br>
+small version of shape3 for reference:<br>
+<img style="width:200px;height:200px;border:0;" src="images/smallshape3.gif" alt="small shape3"></p>
+ </div>
+</div>
+<script>
+$(document).ready(function ()
+{
+	$('#shape1').mapster({
+	singleSelect : true,
+	render_highlight : { altImage : 'images/shape2.gif' },
+     mapKey: 'color',
+	fill : true, altImage : 'images/shape3.gif',
+	fillOpacity : 1,
+});
+});
+</script>
+
+<map name="shape1">
+<area href="#" color="blue" shape="poly" coords="210,40,196,28,171,23,145,24,112,29,106,43,105,54,98,56,58,52,44,54,33,83,29,107,45,144,46,148,165,192,175,205,197,140,206,84,207,36" alt="">
+<area href="#" color="purple" shape="poly" coords="30,162,50,163,153,201,173,219,138,352,129,373,102,377,37,375,28,357,21,307,33,290,56,286,63,284,61,277,30,254,22,231,24,185,31,161" alt="">
+<area href="#" color="red" shape="poly" coords="216,97,203,161,188,204,185,233,165,292,159,327,144,372,156,379,191,386,228,385,241,376,232,322,229,278,227,223,223,171,223,132,217,96" alt="">
+<area href="#" color="orange" shape="poly" coords="238,213,260,208,282,195,296,188,323,185,360,194,368,203,376,227,376,272,375,286,370,289,358,289,357,294,365,305,368,329,365,357,361,370,351,379,331,383,310,382,251,364,249,344,241,307,239,210" alt="">
+<area href="#" color="green" shape="poly" coords="288,176,256,195,239,201,236,135,221,53,221,46,242,32,292,32,297,44,300,59,302,64,342,64,361,73,370,90,370,124,370,124,363,146,351,163,329,172,289,176" alt="">
+</map>
+</body>
+</html>

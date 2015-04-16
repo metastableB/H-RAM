@@ -1,0 +1,16 @@
+<html>
+<head>
+	<title>Failure</title>
+	{% load staticfiles %}
+	<link type="text/css" rel="stylesheet" href="{% static 'src/failure.css' %}">
+</head>
+<body>
+	<div id="message"> 
+		{{msg}}
+	</div><br/>
+	<form action="/login/" id="register">
+		Please try again! &nbsp;&nbsp;&nbsp;&nbsp;
+		<input type="submit" value="Login" id="button">
+	</form> 
+</body>
+</html>

@@ -1,0 +1,34 @@
+body{
+	background: #A0A0A0;
+	font-family: cambria;
+}
+input{
+	height : 40px;
+	width : 300px;
+	border-radius: 5px;
+	border:0;
+	font-family: comic sans ms;
+	font-size: 20px;
+}
+form{
+	margin-left:25%;
+	margin-top:6%;
+	margin-right:25%;
+	font-size: 18px;
+}
+legend{
+	font-family: comic sans ms;
+}
+#login{
+	background:#0099FF;
+	color:white;
+	width:200px;
+	cursor:pointer;
+}
+#login:hover{
+	background:#0066FF;
+}
+#error{
+	color:red;
+	padding-bottom: 20px;
+}

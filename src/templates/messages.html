@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  {% load staticfiles %}
+  <meta charset="UTF-8">
+
+<title>{{messageTitle}}</title>
+<style>
+
+body {
+    background-image: url("{% static 'src/background.jpg'%}");
+    background-color: #00f;
+}
+
+.table {
+background: rgba(255,255,255,0.5);
+border: 1px solid white;
+border-radius: 5px;
+ -moz-border-radius:5px;
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+li {
+    float: left;
+}
+
+a:link, a:visited {
+    display: block;
+    width: 120px;
+    font-family: 'Arial Rounded MT Bold', 'Helvetica Rounded', Arial, sans-serif;
+    font-weight: bold;
+    color: #000;
+    background-color: #0df;
+    text-align: center;
+    padding: 4px;
+    text-decoration: none;
+    text-transform: uppercase;
+    border: 1px solid white;
+}
+
+a:hover, a:active {
+    background-color: #0ef;
+}
+
+</style>
+</head>
+<body>
+<div STYLE="position:absolute; top:1%; left:30%; ">
+    <ul>
+      <li><a href="/home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="/logout">Logout</a></li>
+    </ul>
+  </div>
+
+
+
+
+<table class='table' STYLE="position:absolute; top:25%; left:25%; width:50%; height:50% ">
+<tr><td align="center" style="font-size:24px;">{{message}}</td></tr>
+  
+</table>
+</body>
+</html>

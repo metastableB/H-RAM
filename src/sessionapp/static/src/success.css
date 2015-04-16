@@ -1,0 +1,32 @@
+body{
+	background: #A0A0A0;
+	font-family: cambria;
+	color: #0033FF;
+}
+#congoMsg{
+	margin-left:30%;
+	margin-top:10%;
+	font-size: 30px;
+}
+form{
+	font-size: 18px;
+	margin-left:33%;
+}
+input{
+	height : 40px;
+	width : 300px;
+	border-radius: 5px;
+	border:0;
+	font-family: comic sans ms;
+	font-size: 20px;
+}
+#button{
+	color:white;
+	font-size: 16px;
+	background:#0099FF;
+	width:200px;
+	cursor:pointer;
+}
+#button:hover{
+	background:#0066FF;
+}

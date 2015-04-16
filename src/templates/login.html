@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+ {% load staticfiles %}
+ <link rel="stylesheet" href="{% static "src/login.css" %}">
+<title>Login</title>
+</head>
+<body>
+<section class="container">
+
+    <div class="login">
+     <table align="center">
+    <tr align="center">
+      <td> <img src = "{% static "src/iitplogo.png" %}" style="height:50%;width:50%;align:center;" alt="IITP LOGO">
+      </td>
+      </tr>
+   </table>
+      <h1 align = "center" style="font-size: 25px;">H-RAM</h1>
+      <h2 align = "center" style="color: rgb(150, 165, 150);font-size: 15px;">Login</h2>
+      
+       <form action = "/checkSignin/" method="post">
+        <p align = "center"><input type="text" name="username" value="" placeholder="Username"></p>
+        <p align = "center"><input type="password" name="paswrd" value="" placeholder="Password"></p>
+        <p align = "center" style="color: rgb(107, 125, 204); font-size: 15px;"> {% if errors %}
+      {% for error in errors %}
+        {{ error }}<br/>
+      {% endfor %}
+    {% endif %} </p>
+        <p align = "center" class="submit"><input type="submit" name="submit" value="Login" id="login"></p>
+      </form>
+    </div>
+    </section>
+    </body>
+</html>

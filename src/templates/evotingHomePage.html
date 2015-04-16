@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+  {% load staticfiles %}
+ 	<meta charset="UTF-8">
+
+<title>EVoting</title>
+<style>
+
+body {
+    background-image: url("{% static 'src/background.jpg'%}");
+    background-color: #00f;
+}
+
+.table {
+background: rgba(255,255,255,0.5);
+border: 1px solid white;
+border-radius: 5px;
+ -moz-border-radius:5px; 
+}
+
+.buttonz input[type=submit]{
+	width: 65%	;
+	height: 80%;
+	background: #0df;
+	border: 1px solid #fff;
+	cursor: pointer;
+	border-radius: 2px;
+	color: #000;
+	font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
+	font-size: 16px;
+	font-weight: 400;
+	padding: 20px;
+}
+
+.buttonz input[type=submit]:hover {
+	background: #0ef;
+}
+
+.buttonz input[type=submit]:active {
+	background: #0ef;
+}
+
+.buttonz input[type=button]{
+  width: 65%  ;
+  height: 80%;
+  background: #0df;
+  border: 1px solid #fff;
+  cursor: pointer;
+  border-radius: 2px;
+  color: #000;
+  font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 20px;
+}
+
+.buttonz input[type=button]:hover {
+  background: #0ef;
+}
+
+.buttonz input[type=button]:active {
+  background: #0ef;
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+li {
+    float: left;
+}
+
+a:link, a:visited {
+    display: block;
+    width: 120px;
+    font-family: 'Arial Rounded MT Bold', 'Helvetica Rounded', Arial, sans-serif;
+    font-weight: bold;
+    color: #000;
+    background-color: #0df;
+    text-align: center;
+    padding: 4px;
+    text-decoration: none;
+    text-transform: uppercase;
+    border: 1px solid white;
+}
+
+a:hover, a:active {
+    background-color: #0ef;
+}
+
+.naavigation {
+  position:absolute;
+  top:1%;
+  left:30%;
+  width:auto; 
+}
+
+</style>
+</head>
+<!--<script>
+window.onload = function() {
+    countdown('countdown');
+}
+function countdown( elementName, minutes, seconds )
+{
+    var element, endTime, hours, mins, msLeft, time;
+
+    function twoDigits( n )
+    {
+        return (n <= 9 ? "0" + n : n);
+    }
+
+    function updateTimer()
+    {
+        msLeft = endTime - (+new Date);
+        if ( msLeft < 1000 ) {
+            element.innerHTML = "countdown's over!";
+        } else {
+            time = new Date( msLeft );
+            hours = time.getUTCHours();
+            mins = time.getUTCMinutes();
+            element.innerHTML = (hours ? hours + ':' + twoDigits( mins ) : mins) + ':' + twoDigits( time.getUTCSeconds() );
+            setTimeout( updateTimer, time.getUTCMilliseconds() + 500 );
+        }
+    }
+
+    element = document.getElementById( elementName );
+    endTime = (+new Date) + 1000 * (60*minutes + seconds) + 500;
+    updateTimer();
+}
+
+countdown( "countdown", 1, 5 );
+countdown( "countdown2", 100, 0 );
+</script>-->
+<body>
+<div class="naavigation">
+<ul>
+  <li><a href="/home">Home</a></li>
+  <li><a href="#about">About</a></li>
+  <li><a href="#contact">Contact</a></li>
+  <li><a href="/logout">Logout</a></li>
+</ul>
+</div>
+
+
+<div id="countdown"></div>
+<div id="countdown2"></div>
+<table class='table' STYLE="position:absolute; top:15%; left:15%; width:70%; height:70% ">
+  <tr><form action = "/EVoting/nominationForm/">
+    <td align="center"><div class="buttonz"><input type="submit" value="Nomination Form"></div></td>
+    </form>
+  </tr>
+
+  <tr>
+     <form action="/EVoting/electionPasswordForm/">
+    <td align="center"><div class="buttonz"><input type="submit" value="Create Passwords"></div></td> </form>
+  </tr>
+  
+  <tr>
+    <form action="/EVoting/BallotPage/">
+    <td align="center"><div class="buttonz"><input type="submit" value="Ballot Page"></div></td></form>
+  </tr>
+  <tr>
+    <form action="/EVoting/view/nominees/">
+    <td align="center"><div class="buttonz"><input type="submit" value="View List Of Nominee's"></div></td></form>
+  </tr>
+  <tr>
+    <form action="/EVoting/view/finalResult/">
+    <td align="center"><div class="buttonz"><input type="submit" value="List Of Secretaries"></div></td></form>
+  </tr>
+</table>
+</body>
+</html>

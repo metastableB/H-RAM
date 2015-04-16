@@ -1,0 +1,16 @@
+<html>
+<head>
+	<title>Profile Page</title>
+	{% load staticfiles %}
+	<link rel="stylesheet" type="text/css" href="{% static 'src/profile.css' %}">
+</head>
+<body>
+	<div id="msg">
+		WELCOME {{username}}!!!<br/>
+			
+	</div><br/><br/><br/>
+	<form action="/logout/" id="logout">
+		<input type="submit" value="Log Out" id="button">
+	</form> 
+</body>
+</html>

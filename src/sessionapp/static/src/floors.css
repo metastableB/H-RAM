@@ -1,0 +1,201 @@
+body {
+	height: 100%;
+	width: 100%;
+}
+/*take standard height = 10px and width = 10px
+ Ignore printing room numbers, just allow selection
+  */
+
+<<<<<<< HEAD
+table#title_box{
+	width:100%;
+	height: 10%;
+	font-family: "Helvetica Neue";
+	/*background: rgba(61, 57, 230, 0.4);*/
+	opacity: 0.5;
+	box-shadow: 7px 7px 10px #000;
+	font-size: 36px;
+	font-weight: 500;
+	border-radius: 15px;
+}
+td#buttons_vertical{
+	width:auto;
+	height:100%;
+	background: rgba(61, 57, 230, 0.4);
+	border-radius: 20px;
+	overflow-y: scroll;
+}
+td#preferences_vertical{
+	width:auto;
+	height:100%;
+	background: rgba(61, 57, 230, 0.4);
+	border-radius: 20px;
+	overflow-y: scroll;
+}
+#preferences{
+	float:right;
+	/*padding:1%;
+	width:33%;*/
+	color:#622815;
+	width:auto;
+	height:100%;
+	overflow-y:scroll;
+}
+/*table{
+	border:1px bold;
+	width:80%;
+	height:80%;
+	vertical-align: center;
+	align:center;
+}*/
+
+
+.floor_plan {
+padding-top: 2%;
+width:100%; 
+margin:0%;
+}
+table#table1 {
+text-align:center; 
+margin-left:auto; 
+margin-right:auto; 
+background: #e2e2e2; /* Old browsers */
+background: -moz-linear-gradient(top,  #e2e2e2 0%, #dbdbdb 50%, #d1d1d1 51%, #fefefe 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e2e2e2), color-stop(50%,#dbdbdb), color-stop(51%,#d1d1d1), color-stop(100%,#fefefe)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2e2e2', endColorstr='#fefefe',GradientType=0 ); /* IE6-9 */
+
+/*width:1000px;
+height:400px;*/
+}
+/*td{
+
+cursor: pointer;
+}*/
+ 
+
+.clickable{
+cursor: pointer;
+background: rgba(39,62,84,1);
+color: green;
+overflow: hidden;
+height: 100%;
+z-index: 2;
+}
+
+ /*
+=======
+#floor_plan {
+	float:left;
+	width:60%;
+	height:80%;
+	margin-left:1%;
+}
+#image_arrows {
+	float:left;
+	padding:2%;
+	width:10%;
+	height:auto;
+}
+.plan {
+	opacity: 0.4;
+	position: absolute;
+	width: 70%;
+	height: 80%;
+	left: 2%;
+	top: 17%;
+	box-shadow: 7px 7px 10px #000;
+}
+.grid {
+	opacity: 1;
+	position: absolute;
+	width: 70%;
+	height: 80%;
+	left: 2%;
+	top: 17%;
+	z-index: 2;
+	color: #fff;
+	background: none;
+}
+.pref {
+	position: absolute;
+	width: 20%;
+	height: 70%;
+	left: 75%;
+	top: 10%;
+	padding: 0px 0px 10px 20px;
+	border-radius: 20px;
+	box-shadow: 7px 7px 10px #000;
+	overflow-y:scroll;
+	font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
+  	font-size: 20px;
+  	color:white;
+>>>>>>> origin/master
+}
+.submitbutton {
+	position: absolute;
+	width: 20%;
+	height: 10%;
+	left: 75%;
+	top: 85%;
+	background: none;
+	padding: 0px 0px 0px 0px;
+	border-radius: 20px;
+	box-shadow: 7px 7px 10px #000;
+}
+.floornav {
+	position: absolute;
+	width: 70%;
+	height: 8%;
+	left: 2%;
+	top: 6%;
+	background: none;
+	padding: 0px 0px 10px 20px;
+	border-radius: 20px;
+	border-color: #000;
+	box-shadow: 7px 7px 10px #000;
+}
+
+td{
+height:auto;
+cursor: pointer;
+
+}
+
+button {
+	padding: 0 18px;
+ 	height: 100%;
+  	font-size: 70%;
+  	font-weight: bold;
+ 	color: #000;
+ 	text-shadow: 0 1px #e3f1f1;
+	background: #0df;
+	border: 1px solid;
+  	border-color: #b4ccce #b3c0c8 #9eb9c2;
+  	border-radius: 6px;
+  	outline: 0;
+  	@include box-sizing(content-box); // Firefox sets this to border-box by default
+  	@include linear-gradient(top, #edf5f8, #cde5ef);
+  	@include box-shadow(inset 0 1px white, 0 1px 2px rgba(black, .15));
+
+  	&:active {
+    	background: #cde5ef;
+    	border-color: #9eb9c2 #b3c0c8 #b4ccce;
+    	@include box-shadow(inset 0 0 3px rgba(black, .2));
+  	}
+}
+form { 
+	padding:2%;
+}
+<<<<<<< HEAD
+*/
+
+=======
+.titleTable {
+  background-color: #fff;
+  opacity: 0.5;
+}
+>>>>>>> origin/master
