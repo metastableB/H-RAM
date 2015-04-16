@@ -66,7 +66,7 @@ ROOT_URLCONF = 'src.urls'
 
 WSGI_APPLICATION = 'src.wsgi.application'
 
-SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
+
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 

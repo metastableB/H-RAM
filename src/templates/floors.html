@@ -67,7 +67,7 @@ body {
 	}
 	function submitForm(){
 		document.getElementById("preference").value = preferenceOrder.toString();
-		document.getElementById("preferences").innerHTML = document.getElementById("preferences").innerHTML + preferenceOrder.toString() + "<br>";
+		//document.getElementById("preferences").innerHTML = document.getElementById("preferences").innerHTML + preferenceOrder.toString() + "<br>";
 		document.getElementById("form1").submit();
 	}
 	function loadfloor1()
@@ -920,7 +920,7 @@ $(document).ready(function ()
 			<tr>
 				<td align="center"><form action = "/bookRoom/" method = "POST" id = "form1">
 					<input type="hidden" name ="preference" id ="preference" value="">
-					<button align="center"onclick = "submitForm()">Submit</button>
+					<button align="center" onclick = "submitForm()">Submit</button>
 					</form>
 				</td>
 			</tr>

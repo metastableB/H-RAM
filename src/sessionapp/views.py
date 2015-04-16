@@ -58,7 +58,13 @@ def myprofile(request):
 	if 'username' in request.session:
 		username = request.session['username']
 		rollNumber = request.session['member_id']
-		biodata = StudentBioDataTable.objects.get(rollNumber = rollNumber)
+		try :
+			biodata = StudentBioDataTable.objects.get(rollNumber = rollNumber)
+		except StudentBioDataTable.DoesNotExist:
+			biodata = None
+		if biodata == None :
+			return render_to_response('home.html',{'errors' : 'NO DATA FOUND'})
+
 		jeeAIR = biodata.jeeAIR
 		name = biodata.name
 		roll = biodata.rollNumber
@@ -240,14 +246,20 @@ def bookRoom(request):
 				i += 1
 		preferenceOrder.append(temp)						#As the last room in the preference was not getting into the array.
 		j=0
+		saved = 0
+		if len(preferenceList) == 0 :
+			errors = []
+			errors.append("Please select atleast one room. No rooms will be alloted otherwise.")
+			return render_to_response('home.html',{'errors':errors})
 		for j in range(len(preferenceOrder)) :
 			newroom = RoomPreference(uId = userDetails ,rollNumber = userDetails.rollNumber ,preferenceNumber=j+lastPreference+1,preferedRoom=preferenceOrder[j])
 			newroom.save()
-		if j != 0 :
+			saved = 1
+		if saved == 1 	:
 			userFlag = GlobalFlag(uId = userDetails ,rollNumber = userDetails.rollNumber,roomPreferencesSelected = 1)
 			userFlag.save()
 
-		return render_to_response('home.html',{'errors' : preferenceOrder})
+		return render_to_response('home.html')
 	else:
 		return HttpResponseRedirect('/login')
 

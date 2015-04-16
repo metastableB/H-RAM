@@ -8,7 +8,7 @@ urlpatterns = patterns('',
 
     url(r'^$','sessionapp.views.validate'),
     url(r'^profilePage/$','sessionapp.views.profile'),
-    url(r'^myprofile/$','sessionapp.views.profile'),
+    url(r'^myprofile/$','sessionapp.views.myprofile'),
     url(r'^login/$','sessionapp.views.login'),
     url(r'^checkSignin/$','sessionapp.views.validate'),
     url(r'^logout/$','sessionapp.views.logout'),
