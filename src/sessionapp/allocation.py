@@ -13,13 +13,15 @@ def sortAllocate(preference):
 	roomList = RoomList.objects.all().exclude(counter = 0 ).exclude(counter = -1).order_by('counter')
 		
 	for room in roomList:
-		tosave = RoomList.objects.get(roomNumber = room.roomNumber)
+		tosave = room #RoomList.objects.get(roomNumber = room.roomNumber)
+		
 		if room.counter == 1 :
-			user = RoomPreference.objects.all().filter(preferedRoom = room.roomNumber , preferenceNumber = preference)
-			if user.count() == 1:
-				userRoll = user[0].rollNumber
-			else :
-				userRoll = allocate(room)
+			user = RoomPreference.objects.get(preferedRoom = room.roomNumber , preferenceNumber = preference,valid = 1)
+			#.all.filter(preferedRoom = room.roomNumber , preferenceNumber = preference)
+			#if user.count() == 1:
+			userRoll = user.rollNumber
+		#	else :
+		#		userRoll = allocate(room)
 		else :
 			userRoll = allocate(room)
 		setFlags(userRoll , tosave)
@@ -31,6 +33,8 @@ def allocate(room):
 	V = 0
 	candidateId = -1
 	candidates = RoomPreference.objects.all().filter(preferedRoom = room.roomNumber, valid = 1)
+	if candidates.count() == 0:
+		return "LAGGYE"
 	
 	for eachCandidate in candidates:
 		tempV = euclidianV(eachCandidate , room)
@@ -41,7 +45,7 @@ def allocate(room):
 		return candidateId
 	else :
 		return random.choice(candidates).rollNumber
-
+		
 def euclidianV(candidate,room):
 	# V = (no of friends / average weighted distance)
 	# Weighted distance = distance/weight
@@ -50,17 +54,18 @@ def euclidianV(candidate,room):
 	x = room.x
 	y = room.y
 	tempcount = 0
+	distance = 0
+	individualDistance = 0
 	for eachFriend in friendList:
 		try:
 			friendsRoom = RoomList.objects.get(rollNumber = eachFriend.rollNumber)	 		
 		except RoomList.DoesNotExist:
 			friendsRoom = None
-		distance = 0
 		if friendsRoom != None:
 			tempcount += 1
-			distance += math.sqrt((friendsRoom.x - x)*(friendsRoom.x - x) + (friendsRoom.y - y)*(friendsRoom.y - y))
+			individualDistance = math.sqrt((friendsRoom.x - x)*(friendsRoom.x - x) + (friendsRoom.y - y)*(friendsRoom.y - y))
 			weight = PreferenceTable.objects.get(rollNumber = eachFriend.rollNumber , preferedRoom = friendsRoom.roomNumber)
-			distance = distance /(6-weight)
+			distance = distance + (individualDistance /(6-weight))
 
 	if tempcount == 0 :
 		return 0

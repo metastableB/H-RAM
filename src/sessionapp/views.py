@@ -4,7 +4,7 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import Context, loader
 from django.core.context_processors import csrf
-from sessionapp.models import RoomPreference,UserList,RoomList,FriendsPreference,StudentBioDataTable
+from sessionapp.models import RoomPreference,UserList,RoomList,FriendsPreference,StudentBioDataTable,GlobalFlag,SuperGlobalFlag
 from django.db.models import Max
 
 from .forms import FriendsPreferenceForm
@@ -19,6 +19,25 @@ def friendsprefrence(request):
 	#for friends prefrence list
 	if 'username' in request.session:
 		rollNumber = request.session['member_id']
+		try :
+			allocationDone = SuperGlobalFlag.objects.get()
+		except SuperGlobalFlag.DoesNotExist:
+			allocationDone = None
+		if allocationDone and allocationDone.allocationFinished == 1 :
+			friendsList = FriendsPreference.objects.get(rollNumber = rollNumber)
+			results = []
+			friend1 = friendsList.preferedfriendUId1
+			friend2 = friendsList.preferedfriendUId2
+			friend3 = friendsList.preferedfriendUId3
+			friend4 = friendsList.preferedfriendUId4 
+			friend5 = friendsList.preferedfriendUId5
+			results.append("#1 " + friend1)
+			results.append("#2 " + friend2)
+			results.append("#3 " + friend3)
+			results.append("#4 " + friend4)
+			results.append("#5 " + friend5)
+			return render_to_response('friendPreferenceList.html',{'results' : results})
+
 		try :
 			friendsList = FriendsPreference.objects.get(rollNumber = rollNumber)
 		except FriendsPreference.DoesNotExist:
@@ -224,6 +243,9 @@ def bookRoom(request):
 		for j in range(len(preferenceOrder)) :
 			newroom = RoomPreference(uId = userDetails ,rollNumber = userDetails.rollNumber ,preferenceNumber=j+lastPreference+1,preferedRoom=preferenceOrder[j])
 			newroom.save()
+		if j != 0 :
+			userFlag = GlobalFlag(uId = userDetails ,rollNumber = userDetails.rollNumber,roomPreferencesSelected = 1)
+			userFlag.save()
 
 		return render_to_response('home.html',{'errors' : preferenceOrder})
 	else:
@@ -234,7 +256,21 @@ def test(request):
 
 def floorPlan(request):
 	if 'username' in request.session:
-		return render_to_response('floors.html')
+		username = request.session['username']
+		rollNumber = request.session['member_id']
+		userDetails = UserList.objects.get(username = username)
+		try:
+			userFlag = GlobalFlag.objects.get(rollNumber = rollNumber)
+		except GlobalFlag.DoesNotExist:
+			userFlag = None
+		if not userFlag:
+			return render_to_response('floors.html')
+		else :
+			roomPreferenceList = RoomPreference.objects.all().filter(rollNumber = rollNumber)
+			results = []
+			for i in range(roomPreferenceList.count()):
+				results.append(roomPreferenceList[i].rollNumber + "  " + roomPreferenceList[i].preferedRoom) 
+			return render_to_response('roomPreferenceList.html',{'results' : results})
 	else :
 		return HttpResponseRedirect('/login')
 
@@ -381,43 +417,51 @@ def login(request):
 		return HttpResponseRedirect('/home')
 	return render_to_response('login.html')
 
+### Allocation Algorithm
+# RoomPreference table holds objects of each room preference by each users
+# For each preference number starting from 1
+# Update the room count to indicate no of people who has that room in the current
+# preference 
+# After all the rooms for the current preference number has been updated allocate rooms
+
 def allocationMethod(request):
+	errors = []
 	preference = 1
 	maxPreference =  RoomPreference.objects.all().aggregate(Max('preferenceNumber'))
 	for preference in range(1,10):
 		iThPreferences = RoomPreference.objects.all().filter(preferenceNumber = preference, valid = 1)
 		# updating counter
+		#return HttpResponse("incrementing2")
 		for tempPreference in iThPreferences:
+			#return HttpResponse("incrementing1")
 			roomNo = tempPreference.preferedRoom
 			allocFlag = RoomList.objects.get(roomNumber = roomNo)
-			if allocFlag.counter != -1 :
+			#errors.append(allocFlag.rollNumber)
+			#return render_to_response('login.html',{'errors':errors})
+			if allocFlag.rollNumber == "-1" :
 				temp = allocFlag.counter 
-				temp += 1
-				toSave = RoomList.objects.get(roomNumber = roomNo)
-				toSave.counter = temp
-				toSave.save()
-		allocation.sortAllocate(preference)
+				temp = temp + 1
+				allocFlag.counter = temp
 
+				allocFlag.save()
+				
+		allocation.sortAllocate(preference)		
+
+	# Create a DB table and not a dynamic shit
 	results = []	
 	resultList = RoomList.objects.all().filter(counter = -1)
 	for i in range(resultList.count()):
 		results.append(resultList[i].rollNumber + "  " + resultList[i].roomNumber) 
+	try :	
+		sGFlag = SuperGlobalFlag.objects.get()
+	except SuperGlobalFlag.DoesNotExist:
+		sGFlag = None
 
+	if sGFlag:
+		sGFlag.allocationFinished = 1
+	else :
+		sGFlag = SuperGlobalFlag(allocationFinished = 1)
+	sGFlag.save()
 	return render_to_response('allocationResults.html',{'results' : results})
-	#return render_to_response('home.html')
-'''
-def makeRoomList(request):
-	roomno =1;
-	for roomno in range(32):
-		newRoom1 = RoomList(roomNumber = roomno+100 ,)
-
-		newroom = RoomPreference(uId = userDetails ,rollNumber = userDetails.rollNumber ,preferenceNumber=j+lastPreference+1,preferedRoom=preferenceOrder[j])
-			newroom.save()	
-	floor = models.CharField(max_length = 5)
-	#wing = models.CharField(max_length = 5)
-	uId = models.ForeignKey(UserList)
-	count = models.IntegerField(max_length = 4 , default = 0)
-	x = models.IntegerField(max_length = 3)
-	y = models.IntegerField(max_length = 3)
-'''
+	#return HttpResponse("success")
 

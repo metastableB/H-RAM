@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class UserList(models.Model):
     uniqueId = models.AutoField(primary_key = True)
     rollNumber = models.CharField(max_length = 10)
@@ -116,3 +117,16 @@ class StudentBioDataTable(models.Model):
 	#qualifyingPercentageMarks =  models.IntegerField(max_length = 7)
 	def  __unicode__ (self):
 		return u'%s' %(self.uId)
+
+# Contains control flags global to session app and evoting
+class GlobalFlag(models.Model):
+	uId = models.ForeignKey(UserList)
+	rollNumber = models.CharField(max_length = 10)
+	# Access Flags
+	roomPreferencesSelected = models.IntegerField(max_length = 1 , default = 0)
+	def  __unicode__ (self):
+		return self.rollNumber
+
+# Contains control flags global to all users and apps
+class SuperGlobalFlag(models.Model):
+	allocationFinished = models.IntegerField(max_length = 1 , default = 0)

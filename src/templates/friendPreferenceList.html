@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+ {% load staticfiles %}
+ <link rel="stylesheet" href="{% static "src/login.css" %}">
+<title>H-RAM</title>
+<style>
+body {
+    background-image: url("{% static 'src/background.jpg'%}");
+}
+</style>
+</head>
+<body>
+
+  <section class="container">
+    <div class="login">
+      <h1 align = "center">Your Friends Preferences (LOCKED)</h1>
+      <p align='center' style="color:red"> 
+      {% if results %}
+	      {% for result in results %}
+	        {{ result }} <br>
+	      {% endfor %}
+    {% endif %} </p>
+    <form action = "/home/" method = "POST"><p align = "center" class="submit"><input type =  "submit" name = "submit" value = "Home"></p></form>
+      
+    </div>
+
+    </section>
+</body>
+</html>
