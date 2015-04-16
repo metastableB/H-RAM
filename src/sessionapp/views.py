@@ -507,16 +507,24 @@ def allocationMethod(request):
 	#return render_to_response('allocationResults.html',{'results' : results})
 	#return HttpResponse("success")
 
-def fetchAllocationResults():
-	
-	roomAllocationList = RoomAllocationResults.objects.all()
-	results = []
-	
-	return render_to_response('allocationResults.html',{'results' : results})
-	for room in roomAllocationList:
-		results.append(room.rollNumber + "      " + room.roomNumber) 
+def fetchAllocationResults(request):
+	if 'username' in request.session:
+		results = []
+		try :	
+			sGFlag = SuperGlobalFlag.objects.get()
+		except SuperGlobalFlag.DoesNotExist:
+			sGFlag = None
+		if  sGFlag and sGFlag.allocationFinished == 1 :
+			roomAllocationList = RoomAllocationResults.objects.all()
+			for room in roomAllocationList:
+				results.append(room.rollNumber + "      " + room.roomNumber) 
+			return render_to_response('allocationResults.html',{'results' : results})
+		else:
+			results.append("Sorry! Room allocation not yet commenced")
+			return render_to_response('home.html',{'errors' : results})
+	else:
+		return HttpResponseRedirect('/login')
 
-	return render_to_response('allocationResults.html',{'results' : results})
 
 def about(request):
 	return render_to_response('about.html')
