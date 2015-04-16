@@ -63,7 +63,9 @@ def myprofile(request):
 		except StudentBioDataTable.DoesNotExist:
 			biodata = None
 		if biodata == None :
-			return render_to_response('home.html',{'errors' : 'NO DATA FOUND'})
+			errors = []
+			errors.append("No data found")
+			return render_to_response('home.html',{'errors' : errors })
 
 		jeeAIR = biodata.jeeAIR
 		name = biodata.name

@@ -1,8 +1,9 @@
+
 <!DOCTYPE html>
 <html>
 <head>
   {% load staticfiles %}
- 	<meta charset="UTF-8">
+         <meta charset="UTF-8">
 
 <title>Home</title>
 <link rel="icon" href="{% static 'src/iitplogo.png'%}" type="image">
@@ -13,8 +14,7 @@ body {
     background-color: #0df;
 }
 
-
-.tables {
+.tablez {
 background: rgba(255,255,255,0.5);
 border: 1px solid white;
 border-radius: 5px;
@@ -37,12 +37,12 @@ border-radius: 5px;
 
 .buttonz input[type=submit]:hover {
 
-	background: #0ef;
+        background: #0ef;
 
 }
 
 .buttonz input[type=submit]:active {
-	background: #0ef;
+        background: #0ef;
 }
 
 .buttonz input[type=button]{
@@ -81,7 +81,8 @@ li {
 a:link, a:visited {
     display: block;
     width: 120px;
-    font-family: 'Arial Rounded MT Bold', 'Helvetica Rounded', Arial, sans-serif;
+    font-family: 'Arial Rounded MT Bold', 'Helvetica Rounded', Arial,
+sans-serif;
     font-weight: bold;
     color: #000;
     background-color: #0df;
@@ -91,42 +92,25 @@ a:link, a:visited {
     text-transform: uppercase;
     border: 1px solid white;
 }
-
-a:hover, a:active {
-    background-color: #0ef;
-}
-
-
 #clicked {
   color: #AE5252;
 }
-
+a:hover, a:active {
+    background-color: #0ef;
+}
 </style>
-      <link type="text/css" rel="stylesheet" href="{%  static 'src/bootstrap.min.css' %}">
+      <link type="text/css" rel="stylesheet" href="{%  static
+'src/bootstrap.min.css' %}">
 </head>
 <body>
   <div style="position:absolute; top:1%; left:30%;">
     <ul>
-
       <li><a id="clicked" href="/home">Home</a></li>
-      <li><a href="/myprofile">My Profile</a></li>
       <li><a href="/about">About</a></li>
       <li><a href="/contact">Contact</a></li>
-
       <li><a href="/logout">Logout</a></li>
     </ul>
   </div>
-  
-  <table class='tables' STYLE="position:absolute; top:15%; left:15%; width:70%; height:70% ">
-  <tr>
-   {% if errors %}
-              {% for error in errors %}
-                {{ error }}<br/>
-              {% endfor %}
-            {% endif %} </p>
-    
-  </tr>
-
 
 <table style="position:absolute; top:1%; left:1%;">
 <tr>
@@ -136,35 +120,49 @@ a:hover, a:active {
 
 <table style="position:absolute; top:1%; right:1%;">
 <tr>
-<td><img src="{% static 'src/studenticon.png' %}" alt="thumbnail" style=" width:30px;"></td>
+<td><img src="{% static 'src/studenticon.png' %}" alt="thumbnail" style="
+width:30px;"></td>
 <td><a href="/myprofile">My Profile</a></td>
 </tr>
 </table>
   {% if errors %}
-  <table class='tablez' STYLE="position:absolute; top:10%; left:15%; width:70%; ">
+  <table class='tablez' STYLE="position:absolute; top:10%; left:15%;
+width:70%; ">
     <tr><td align="center">
       {% for error in errors %}
-        {{ error }}<br/>
+        {{ error }}<br>
       {% endfor %}
     {% endif %}</td></tr>
   </table>
 
-  <table class='tablez' STYLE="position:absolute; top:17%; left:15%; width:70%; height:70% ">
+  <table class='tablez' STYLE="position:absolute; top:17%; left:15%;
+width:70%; height:70% ">
   <tr>
-    <td align="center"><form action = "/test"><div class="buttonz"><input type="submit" value="Room Preference"></div></td></form>
-    <td align="center"><form action = "/fpref"><div class="buttonz"><input type="submit" value="Friends Preference"></div></td></form>
+    <td align="center"><form action = "/test"><div class="buttonz"><input
+type="submit" value="Room Preference"></div></td></form>
+    <td align="center"><form action = "/fpref"><div class="buttonz"><input
+type="submit" value="Friends Preference"></div></td></form>
   </tr>
 
   <tr>
-    <td align="center"><div class="buttonz"><input type="submit" onClick="window.open('https://172.16.1.11/src/login.php?secure_login=yes','_blank')" value="webmail"></div></td>
-    <td align="center"><div class="buttonz"><input type="button" onClick="window.open('https://172.16.1.6','_blank')" value="Intranet"></div></td>
+    <td align="center"><div class="buttonz"><input type="submit"
+onClick="window.open('https://172.16.1.11/src/login.php?secure_login=yes','_blank')"
+value="webmail"></div></td>
+    <td align="center"><div class="buttonz"><input type="button"
+onClick="window.open('https://172.16.1.6','_blank')"
+value="Intranet"></div></td>
   </tr>
-  
+
   <tr>
-    <td align="center"><div class="buttonz"><input type="button" onClick="window.open('https://172.16.1.6/facilities/html/','_blank')" value="Library"></div></td>
-    <form action = "/EVoting"><td align="center"><div class="buttonz"><input type="submit" value="Evoting"></div></td></form>		
+    <td align="center"><div class="buttonz"><input type="button"
+onClick="window.open('https://172.16.1.6/facilities/html/','_blank')"
+value="Library"></div></td>
+    <form action = "/EVoting"><td align="center"><div
+class="buttonz"><input type="submit"
+value="Evoting"></div></td></form>
   </tr>
 </table>
 
 </body>
 </html>
+
