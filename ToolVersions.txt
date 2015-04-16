@@ -1,6 +1,6 @@
 /* Created on 8th Jan 2015 
  * metastableBarrett
- * Lol Lol Lol
+ * 
  * This document contains the versiond and other details of tools used for this project
  */
 
