@@ -96,6 +96,12 @@ def home(request):
 	#return render_to_response('home.html')
 	if 'username' in request.session:
 		rollNumber = request.session['member_id']
+		try :
+			biodata = StudentBioDataTable.objects.get(rollNumber = rollNumber)
+		except StudentBioDataTable.DoesNotExist:
+			biodata = None
+		if biodata == None :
+			return render_to_response('home.html',{'name' : rollNumber})
 		biodata = StudentBioDataTable.objects.get(rollNumber = rollNumber)
 		name = biodata.name
 		return render_to_response('home.html',{'name':name})
@@ -452,8 +458,8 @@ def allocationMethod(request):
 		return render_to_response('allocationResults.html',{'results' : results})
 	errors = []
 	preference = 1
-	maxPreference =  RoomPreference.objects.all().aggregate(Max('preferenceNumber'))
-	for preference in range(1,10):
+	#maxPreference =  RoomPreference.objects.all().aggregate(Max('preferenceNumber'))
+	for preference in range(1,20):
 		iThPreferences = RoomPreference.objects.all().filter(preferenceNumber = preference, valid = 1)
 		# updating counter
 		#return HttpResponse("incrementing2")
@@ -463,13 +469,12 @@ def allocationMethod(request):
 			allocFlag = RoomList.objects.get(roomNumber = roomNo)
 			#errors.append(allocFlag.rollNumber)
 			#return render_to_response('login.html',{'errors':errors})
-			if allocFlag.rollNumber == "-1" :
+			if allocFlag.counter != -1:
 				temp = allocFlag.counter 
 				temp = temp + 1
-				allocFlag.counter = temp
-
-				allocFlag.save()
-				
+				toSave = RoomList.objects.get(roomNumber = roomNo)
+				toSave.counter = temp
+				toSave.save()
 		allocation.sortAllocate(preference)		
 
 	# Create a DB table and not a dynamic shit
