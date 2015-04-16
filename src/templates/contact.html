@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+  {% load staticfiles %}
+ 	<meta charset="UTF-8">
+
+<title>Contact</title>
+<style>
+
+body {
+    background-image: url("{% static 'src/background.jpg'%}");
+    background-color: #00f;
+}
+
+.table {
+background: rgba(255,255,255,0.5);
+border: 1px solid white;
+border-radius: 5px;
+ -moz-border-radius:5px; 
+}
+
+.buttonz input[type=submit]{
+	width: 65%	;
+	height: 80%;
+	background: #0df;
+	border: 1px solid #fff;
+	cursor: pointer;
+	border-radius: 2px;
+	color: #000;
+	font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
+	font-size: 16px;
+	font-weight: 400;
+	padding: 20px;
+}
+
+.buttonz input[type=submit]:hover {
+	background: #0ef;
+}
+
+.buttonz input[type=submit]:active {
+	background: #0ef;
+}
+
+.buttonz input[type=button]{
+  width: 65%  ;
+  height: 80%;
+  background: #0df;
+  border: 1px solid #fff;
+  cursor: pointer;
+  border-radius: 2px;
+  color: #000;
+  font-family: Copperplate, 'Copperplate Gothic Light', fantasy;
+  font-size: 16px;
+  font-weight: 400;
+  padding: 20px;
+}
+
+.buttonz input[type=button]:hover {
+  background: #0ef;
+}
+
+.buttonz input[type=button]:active {
+  background: #0ef;
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+li {
+    float: left;
+}
+
+a:link, a:visited {
+    display: block;
+    width: 120px;
+    font-family: 'Arial Rounded MT Bold', 'Helvetica Rounded', Arial, sans-serif;
+    font-weight: bold;
+    color: #000;
+    background-color: #0df;
+    text-align: center;
+    padding: 4px;
+    text-decoration: none;
+    text-transform: uppercase;
+    border: 1px solid white;
+}
+
+a:hover, a:active {
+    background-color: #0ef;
+}
+
+.naavigation {
+  position:absolute;
+  top:1%;
+  left:30%;
+  width:auto; 
+}
+
+</style>
+</head>
+<body>
+<div class="naavigation">
+<ul>
+  <li><a href="/home">Home</a></li>
+  <li><a href="#about">About</a></li>
+  <li><a href="#contact">Contact</a></li>
+  <li><a href="/logout">Logout</a></li>
+</ul>
+</div>
+
+
+<div id="countdown"></div>
+<div id="countdown2"></div>
+<table class='table' STYLE="position:absolute; top:15%; left:15%; width:70%; height:70% ">
+  <tr>
+    <td align="center">
+      <a>Contact the development team for bugs and hugs. We would love to hear from you!</a><br><br><br>
+      <a href="mailto:prateek.cs13@iitp.ac.in"> Prateek </a>
+      <a href="mailto:don.cs13@iitp.ac.in"> Don </a>
+      <a href="mailto:ritik.cs13@iitp.ac.in"> Ritik </a>
+      <a href="mailto:sheik.cs13@iitp.ac.in"> Sheik </a>
+      <a href="mailto:ritobroto.ee13@iitp.ac.in"> Ritobroto </a>
+    </td>
+    
+  </tr>
+</table>
+</body>
+</html>

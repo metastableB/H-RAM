@@ -62,11 +62,13 @@ def euclidianV(candidate,room):
 		except RoomList.DoesNotExist:
 			friendsRoom = None
 		if friendsRoom != None:
+			# Do not use if not friendsRoom - gives unknown error!
+			# Unknown reason, though..
+			# Alternative - check if friendsRoom IS None, and then return 0 directly (since tempcount will be zero in any case)
 			tempcount += 1
 			individualDistance = math.sqrt((friendsRoom.x - x)*(friendsRoom.x - x) + (friendsRoom.y - y)*(friendsRoom.y - y))
 			weight = PreferenceTable.objects.get(rollNumber = eachFriend.rollNumber , preferedRoom = friendsRoom.roomNumber)
 			distance = distance + (individualDistance /(6-weight))
-
 	if tempcount == 0 :
 		return 0
 	else :
