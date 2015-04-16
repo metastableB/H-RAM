@@ -26,7 +26,8 @@ function putspan(backcolor, forecolor) {
 }
 function hide(id1)
 {
-  document.getElementById(id1).innerHTML = "OOPS TIME UP";
+  alert("The voting has been closed.");
+  window.location = "/EVoting";
 }
 
 if (typeof(BackColor)=="undefined")
@@ -34,7 +35,7 @@ if (typeof(BackColor)=="undefined")
 if (typeof(ForeColor)=="undefined")
   ForeColor= "black";
 if (typeof(TargetDate)=="undefined")
-  TargetDate = "03/28/2015 9:17 PM";
+  TargetDate = "04/16/2015 3:12 PM";
 if (typeof(DisplayFormat)=="undefined")
   DisplayFormat = "%%D%% Days, %%H%% Hours, %%M%% Minutes, %%S%% Seconds.";
 if (typeof(CountActive)=="undefined")
