@@ -626,8 +626,23 @@ def viewFinalResult(request):
 
 def aboutNominee(request,nomineesRollno):
 	if 'username' in request.session:
-		about = nomineesRollno
-		return render_to_response('messages.html',{'message':"Roll no. of nominee : " + about})
+		nomineesRollNo = nomineesRollno
+		try :
+			biodata = ListOfNominee.objects.get(nomineesRollNo = nomineesRollNo)
+		except ListOfNominee.DoesNotExist:
+			biodata = None
+		if biodata == None :
+			errors = []
+			errors.append("No data found")
+			return render_to_response('home.html',{'errors' : errors })
+		
+		
+		name = biodata.nomineesName
+		roll = biodata.nomineesRollNo
+		pos = biodata.position
+		hostel = biodata.hostel
+
+		return render_to_response('nomineedetails.html',{'name':name,'roll':roll,'pos':pos,'hostel':hostel})
 		#return HttpResponse("Hello " + nomineesRollno)
 		
 	else:
