@@ -495,3 +495,9 @@ def fetchAllocationResults():
 
 	return render_to_response('allocationResults.html',{'results' : results})
 
+def about(request):
+	return render_to_response('about.html')
+
+
+def contact(request):
+	return render_to_response('contact.html')
