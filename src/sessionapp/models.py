@@ -10,7 +10,7 @@ class UserList(models.Model):
     # for temporary purpose created hostel in userlist
     hostelAlloted = models.CharField(max_length = 30)
     def  __unicode__ (self):
-    	return self.username
+    	return self.usernameƒglob
 
 class AdminDetail(models.Model):
 	username = models.CharField(max_length = 50)
