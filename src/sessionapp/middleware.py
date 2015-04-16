@@ -2,7 +2,6 @@ from datetime import datetime, timedelta
 from django.conf import settings
 from django.contrib import auth
 
-
 class AutoLogout:
   def process_request(self, request):
     if not request.user.is_authenticated() :

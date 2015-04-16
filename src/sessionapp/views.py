@@ -336,6 +336,7 @@ def validate(request):
 				if(valid):
 					request.session['member_id'] = user.rollNumber
 					request.session['username'] = user.username
+					request.session.set_expiry(1500)
 					return HttpResponseRedirect('/home')
 				else:
 					errors.append("Incorrect password. Please try again.")
