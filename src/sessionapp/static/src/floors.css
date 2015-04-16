@@ -10,12 +10,19 @@ table#title_box{
 	width:100%;
 	height: 10%;
 	font-family: "Helvetica Neue";
-	/*background: rgba(61, 57, 230, 0.4);*/
+	/*background: rgba(61, 57, 230, 0.4);
+	box-shadow: 7px 7px 10px #000;*/
 	opacity: 0.5;
-	box-shadow: 7px 7px 10px #000;
 	font-size: 36px;
 	font-weight: 500;
 	border-radius: 10px;
+}
+table#instructions {
+	width:100%;
+	text-align: center;
+	font-style: red;
+	font-family: Tahoma;
+	color: #ff0000;
 }
 td#buttons_vertical{
 	width:auto;
@@ -65,7 +72,35 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2e2e2', end
 
 }
  
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    text-align: center;
+}
 
+li {
+    float: left;
+}
+
+a:link, a:visited {
+    display: block;
+    width: 120px;
+    font-family: 'Arial Rounded MT Bold', 'Helvetica Rounded', Arial, sans-serif;
+    font-weight: bold;
+    color: #000;
+    background-color: #0df;
+    text-align: center;
+    padding: 4px;
+    text-decoration: none;
+    text-transform: uppercase;
+    border: 1px solid white;
+}
+
+a:hover, a:active {
+    background-color: #0ef;
+}
 .clickable{
 cursor: pointer;
 background: rgba(39,62,84,1);

@@ -1,6 +1,6 @@
 <html>
 <head>
-	<title> Room Prefrences </title>
+	<title> Room Preferences </title>
 	{% load staticfiles %}
 <style>
 body {
@@ -8,6 +8,7 @@ body {
 }
 </style>
 <link type="text/css" rel="stylesheet" href="{%  static 'src/floors.css' %}">
+<link rel="icon" href="{% static 'src/iitplogo.png'%}" type="image">
 </head>
 <script type = "text/javascript" src="{%  static 'src/jquery-1.6.2.min.js'%}"></script>
 <script src="{%  static 'src/jquery.imagemapster.min.js' %}"></script>
@@ -70,8 +71,13 @@ body {
 		//document.getElementById("preferences").innerHTML = document.getElementById("preferences").innerHTML + preferenceOrder.toString() + "<br>";
 		document.getElementById("form1").submit();
 	}
+	function printFloorName (floorprint) {
+		// body...
+		document.getElementById("floorname").innerHTML = "<br>" + floorprint;
+	}
 	function loadfloor1()
 	{
+		printFloorName("Floor 1");
 		$("#floor1").show();
 		$("#floor2").hide();
 		$("#floor3").hide();
@@ -84,6 +90,7 @@ body {
 	
 	function loadfloor2()
 	{
+		printFloorName("Floor 2");
 		$("#floor1").hide();
 		$("#floor2").show();
 		$("#floor3").hide();
@@ -96,6 +103,7 @@ body {
 
 	function loadfloor3()
 	{
+		printFloorName("Floor 3");
 		$("#floor1").hide();
 		$("#floor2").hide();
 		$("#floor3").show();
@@ -108,6 +116,7 @@ body {
 
 	function loadfloor4()
 	{
+		printFloorName("Floor 4");
 		$("#floor1").hide();
 		$("#floor2").hide();
 		$("#floor3").hide();
@@ -120,6 +129,7 @@ body {
 
 	function loadfloor5()
 	{
+		printFloorName("Floor 5");
 		$("#floor1").hide();
 		$("#floor2").hide();
 		$("#floor3").hide();
@@ -132,6 +142,7 @@ body {
 
 	function loadfloor6()
 	{
+		printFloorName("Floor 6");
 		$("#floor1").hide();
 		$("#floor2").hide();
 		$("#floor3").hide();
@@ -144,6 +155,7 @@ body {
 
 	function loadfloor7()
 	{
+		printFloorName("Floor 7");
 		$("#floor1").hide();
 		$("#floor2").hide();
 		$("#floor3").hide();
@@ -156,6 +168,7 @@ body {
 
 	function loadfloor8()
 	{
+		printFloorName("Floor 8");
 		$("#floor1").hide();
 		$("#floor2").hide();
 		$("#floor3").hide();
@@ -167,6 +180,7 @@ body {
 	}
 	function dothis()
 	{
+		printFloorName("Floor 1");
 		$("#floor2").hide();
 		$("#floor3").hide();
 		$("#floor4").hide();
@@ -205,7 +219,36 @@ $(document).ready(function ()
 <body onload="dothis()">
 <table id="title_box" >
 	<tr>
-		<td align="center">Hotel Room Allocation</td>
+		<div style="position:absolute; top:1%; left:30%;">
+			<ul>
+		      <li><a href="/home">Home</a></li>
+		      <li><a href="#about">About</a></li>
+		      <li><a href="#contact">Contact</a></li>
+		      <li><a href="/logout">Logout</a></li>
+		    </ul>
+		</div>
+	</tr>
+	<br>
+	<tr>
+		<td align="center">Hostel Room Allocation</td>
+	</tr>
+
+</table>
+<table id="instructions">
+	<tr>
+		<td> : Instructions : </td>
+	</tr>
+	<tr>
+		<td>You must select atleast one room.</td>
+	</tr>
+	<tr>
+		<td>Preference once submitted cannot be modified.</td>
+	</tr>
+</table>
+
+<table style="width:100%; text-align: center;">
+	<tr>
+		<td><p id="floorname" style="font-weight: 500; font-weight:bold;"></p></td>
 	</tr>
 </table>
 
