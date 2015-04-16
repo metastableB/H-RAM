@@ -13,6 +13,12 @@ class UserList(models.Model):
     def  __unicode__ (self):
     	return self.username
 
+class AcademicDetails(models.Model):
+	rollNumber = models.CharField(max_length=10)
+	cpi = models.DecimalField(max_digits=4,decimal_places=2)
+	year = models.IntegerField(max_length=2,default=1)
+	program = models.CharField(max_length=10,default="BTech.")
+
 class AdminDetail(models.Model):
 	username = models.CharField(max_length = 50)
 	password = models.CharField(max_length = 64)
