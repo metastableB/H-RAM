@@ -130,3 +130,11 @@ class GlobalFlag(models.Model):
 # Contains control flags global to all users and apps
 class SuperGlobalFlag(models.Model):
 	allocationFinished = models.IntegerField(max_length = 1 , default = 0)
+
+
+class RoomAllocationResults(models.Model):
+	rollNumber = models.CharField(max_length = 10)
+	roomNumber = models.CharField(max_length = 5)
+	def __unicode__ (self):
+		return self.rollNumber
+		

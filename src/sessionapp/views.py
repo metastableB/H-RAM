@@ -4,7 +4,7 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import Context, loader
 from django.core.context_processors import csrf
-from sessionapp.models import RoomPreference,UserList,RoomList,FriendsPreference,StudentBioDataTable,GlobalFlag,SuperGlobalFlag
+from sessionapp.models import RoomPreference,UserList,RoomList,FriendsPreference,StudentBioDataTable,GlobalFlag,SuperGlobalFlag,RoomAllocationResults
 from django.db.models import Max
 
 from .forms import FriendsPreferenceForm
@@ -425,6 +425,16 @@ def login(request):
 # After all the rooms for the current preference number has been updated allocate rooms
 
 def allocationMethod(request):
+	try :	
+		sGFlag = SuperGlobalFlag.objects.get()
+	except SuperGlobalFlag.DoesNotExist:
+		sGFlag = None
+	if  sGFlag and sGFlag.allocationFinished == 1 :
+		roomAllocationList = RoomAllocationResults.objects.all()
+		results = []
+		for room in roomAllocationList:
+			results.append(room.rollNumber + "      " + room.roomNumber) 
+		return render_to_response('allocationResults.html',{'results' : results})
 	errors = []
 	preference = 1
 	maxPreference =  RoomPreference.objects.all().aggregate(Max('preferenceNumber'))
@@ -451,7 +461,9 @@ def allocationMethod(request):
 	results = []	
 	resultList = RoomList.objects.all().filter(counter = -1)
 	for i in range(resultList.count()):
-		results.append(resultList[i].rollNumber + "  " + resultList[i].roomNumber) 
+		tempResult = RoomAllocationResults(roomNumber = resultList[i].roomNumber , rollNumber = resultList[i].rollNumber)
+		tempResult.save()
+
 	try :	
 		sGFlag = SuperGlobalFlag.objects.get()
 	except SuperGlobalFlag.DoesNotExist:
@@ -462,6 +474,24 @@ def allocationMethod(request):
 	else :
 		sGFlag = SuperGlobalFlag(allocationFinished = 1)
 	sGFlag.save()
+	
+	roomAllocationList = RoomAllocationResults.objects.all()
+	results = []
+	for room in roomAllocationList:
+		results.append(room.rollNumber + "      " + room.roomNumber) 
+	
 	return render_to_response('allocationResults.html',{'results' : results})
+	#return render_to_response('allocationResults.html',{'results' : results})
 	#return HttpResponse("success")
+
+def fetchAllocationResults():
+	
+	roomAllocationList = RoomAllocationResults.objects.all()
+	results = []
+	
+	return render_to_response('allocationResults.html',{'results' : results})
+	for room in roomAllocationList:
+		results.append(room.rollNumber + "      " + room.roomNumber) 
+
+	return render_to_response('allocationResults.html',{'results' : results})
 
