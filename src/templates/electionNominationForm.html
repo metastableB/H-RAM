@@ -3,6 +3,16 @@
 <title> Nomination Form </title>
 {% load staticfiles %}
 	<link type="text/css" rel="stylesheet" href="{%  static 'src/bootstrap.min.css' %}">
+	<script language="JavaScript" src="{% static "src/nominationtimer.js" %}"></script>
+<script language="JavaScript">
+BackColor = "palegreen";
+ForeColor = "navy";
+CountActive = true;
+CountStepper = -1;
+LeadingZero = true;
+DisplayFormat = "%%D%% Days, %%H%% Hours, %%M%% Minutes, %%S%% Seconds.";
+FinishMessage = "dh";
+</script>
 <style>
 	body {
     background-image: url("{% static 'src/background.jpg'%}");

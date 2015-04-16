@@ -626,7 +626,9 @@ def viewFinalResult(request):
 
 def aboutNominee(request,nomineesRollno):
 	if 'username' in request.session:
-		return HttpResponse("Hello " + nomineesRollno)
+		about = nomineesRollno
+		return render_to_response('messages.html',{'message':"Roll no. of nominee : " + about})
+		#return HttpResponse("Hello " + nomineesRollno)
 		
 	else:
 		return HttpResponseRedirect('/login')
