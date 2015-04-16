@@ -19,6 +19,8 @@ urlpatterns = patterns('',
     url(r'^openGrid/$','sessionapp.views.openGrid'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^home/','sessionapp.views.home'),
+    url(r'^myprofile/','sessionapp.views.myprofile'),
+    url(r'^changepassword/','sessionapp.views.changepassword'),
 
     url(r'^allocate/','sessionapp.views.allocationMethod'),
     url(r'^fpref/','sessionapp.views.friendsprefrence'),

@@ -56,7 +56,10 @@ def changepassword(request):
 def home(request):
 	#return render_to_response('home.html')
 	if 'username' in request.session:
-		return render_to_response('home.html')
+		rollNumber = request.session['member_id']
+		biodata = StudentBioDataTable.objects.get(rollNumber = rollNumber)
+		name = biodata.name
+		return render_to_response('home.html',{'name':name})
 	else :
 		return HttpResponseRedirect('/login')
 
