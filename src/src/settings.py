@@ -52,23 +52,23 @@ MIDDLEWARE_CLASSES = (
 )
 
 PASSWORD_HASHERS = (
-    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
     'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
     'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
     'django.contrib.auth.hashers.BCryptPasswordHasher',
     'django.contrib.auth.hashers.SHA1PasswordHasher',
     'django.contrib.auth.hashers.MD5PasswordHasher',
     'django.contrib.auth.hashers.CryptPasswordHasher',
 )
-AUTO_LOGOUT_DELAY = 1
+AUTO_LOGOUT_DELAY = 25
 
 ROOT_URLCONF = 'src.urls'
 
 WSGI_APPLICATION = 'src.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 
 DATABASES = {
     'default': {
