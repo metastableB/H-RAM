@@ -59,7 +59,7 @@ body {
 	{
 		var i = 0;
 		var temp;
-		document.getElementById("preferences").innerHTML = "<font color=\"white\">Preferences<br></font>";
+		document.getElementById("preferences").innerHTML = "<font color=\"white\"><br>Preferences<br><br></font>";
 		for(i=0;i<listOfPreferences.length;i++)
 		{
 			document.getElementById("preferences").innerHTML = document.getElementById("preferences").innerHTML + (i+1) + ". " + listOfPreferences[i] + "<br>";
@@ -67,7 +67,7 @@ body {
 	}
 	function submitForm(){
 		document.getElementById("preference").value = preferenceOrder.toString();
-		document.getElementById("preferences").innerHTML = document.getElementById("preferences").innerHTML + preferenceOrder.toString() + "<br>";
+		//document.getElementById("preferences").innerHTML = document.getElementById("preferences").innerHTML + preferenceOrder.toString() + "<br>";
 		document.getElementById("form1").submit();
 	}
 	function loadfloor1()
@@ -181,7 +181,7 @@ $(document).ready(function ()
 	$('img').mapster({
 	highlight : true,
     mapKey: 'id',
-    fillColor:'0000ff',
+    fillColor:'00ff00',
     scaleMap: true,
 	/*fill : true, altImage : 'images/shape3.gif',
 	fillOpacity : 1,
@@ -192,7 +192,7 @@ $(document).ready(function ()
     strokeWidth:3,
         render_highlight: {
             strokeWidth: 2,
-            fillColor: '000099',
+            fillColor: '009900',
             fadeDuration:200,	
             strokeColor : '003300',
         },
@@ -213,7 +213,7 @@ $(document).ready(function ()
 	<table id="master_table" align="center">
 		<tr>
 			<td id = "buttons_vertical">
-				<table >
+				<table>
 						<!--<tr><td><button onclick="loadfloor8()">Floor 8</button></td></tr>
 						<tr><td><button onclick="loadfloor7()">Floor 7</button></td></tr>-->	
 						<tr><td><button onclick="loadfloor6()">Floor 6</button></td></tr>
@@ -915,12 +915,13 @@ $(document).ready(function ()
 				</div>
 			</td>
 </div>
+</table>
 
 		<table id="submitButton" align="center">
 			<tr>
 				<td align="center"><form action = "/bookRoom/" method = "POST" id = "form1">
 					<input type="hidden" name ="preference" id ="preference" value="">
-					<button align="center"onclick = "submitForm()">Submit</button>
+					<button align="center" onclick = "submitForm()">Submit</button>
 					</form>
 				</td>
 			</tr>
