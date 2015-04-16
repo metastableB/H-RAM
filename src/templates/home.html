@@ -96,6 +96,7 @@ a:hover, a:active {
     background-color: #0ef;
 }
 
+
 #clicked {
   color: #AE5252;
 }
@@ -104,12 +105,14 @@ a:hover, a:active {
       <link type="text/css" rel="stylesheet" href="{%  static 'src/bootstrap.min.css' %}">
 </head>
 <body>
-  <div STYLE="position:absolute; top:1%; left:28%; ">
+  <div style="position:absolute; top:1%; left:28%; ">
     <ul>
+
       <li><a id="clicked" href="/home">Home</a></li>
       <li><a href="/myprofile">My Profile</a></li>
       <li><a href="/about">About</a></li>
       <li><a href="/contact">Contact</a></li>
+
       <li><a href="/logout">Logout</a></li>
     </ul>
   </div>
@@ -125,6 +128,26 @@ a:hover, a:active {
   </tr>
 
 
+<table style="position:absolute; top:1%; left:1%;">
+<tr>
+<td><a href="#">Hello {{name}}</a></td>
+</tr>
+</table>
+
+<table style="position:absolute; top:1%; right:1%;">
+<tr>
+<td><img src="{% static 'src/studenticon.png' %}" alt="thumbnail" style=" width:30px;"></td>
+<td><a href="/myprofile">My Profile</a></td>
+</tr>
+</table>
+  {% if errors %}
+  <table class='tablez' STYLE="position:absolute; top:10%; left:15%; width:70%; ">
+    <tr><td align="center">
+      {% for error in errors %}
+        {{ error }}<br/>
+      {% endfor %}
+    {% endif %}</td></tr>
+  </table>
 
   <table class='tablez' STYLE="position:absolute; top:15%; left:15%; width:70%; height:70% ">
   <tr>
@@ -140,8 +163,8 @@ a:hover, a:active {
   <tr>
     <td align="center"><div class="buttonz"><input type="button" onClick="window.open('https://172.16.1.6/facilities/html/','_blank')" value="Library"></div></td>
     <form action = "/EVoting"><td align="center"><div class="buttonz"><input type="submit" value="Evoting"></div></td></form>		
-
   </tr>
 </table>
+
 </body>
 </html>
