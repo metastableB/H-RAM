@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 
-from sessionapp.models import UserList,FriendsPreference,RoomPreference,StudentBioDataTable,AdminDetail,RoomList,GlobalFlag,SuperGlobalFlag,RoomAllocationResults
+from sessionapp.models import UserList,FriendsPreference,RoomPreference,StudentBioDataTable,AdminDetail,RoomList,AcademicDetails,GlobalFlag,SuperGlobalFlag,RoomAllocationResults
 from evoting.models import CandidatesList,ListOfNominee,VotersList,Ballot,PostsForElection,ListOfSecretary,SupportersDetails,ListOfHostel
 
      
@@ -22,6 +22,6 @@ admin.site.register(SupportersDetails)
 admin.site.register(GlobalFlag)
 admin.site.register(SuperGlobalFlag)
 admin.site.register(RoomAllocationResults)
-
+admin.site.register(AcademicDetails)
 admin.site.register(ListOfHostel)
 

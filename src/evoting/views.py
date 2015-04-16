@@ -8,7 +8,7 @@ from django.core.context_processors import csrf
 from django.core.mail import send_mail, BadHeaderError,EmailMultiAlternatives,EmailMessage
 from django.contrib.auth.hashers import SHA1PasswordHasher,make_password
 from evoting.models import CandidatesList,ListOfNominee,VotersList,Ballot,PostsForElection,ListOfSecretary,SupportersDetails,ListOfHostel
-from sessionapp.models import RoomPreference,UserList,AdminDetail
+from sessionapp.models import RoomPreference,UserList,AdminDetail,AcademicDetails
 import json
 import random
 import datetime
@@ -188,14 +188,13 @@ def adminHomePage(request):
 
 
 #this function registers the valid candidates into db
-#TODO : use regex to find if the inputs are valid or not
 def validateCandidate(request):
 	if 'username' in request.session:
 		errors = []
 		candidatesRollno = request.session['member_id']
 		candidatesName = request.POST['candidatesName']
 		position = request.POST['position']
-		hostel = request.POST['hostel']
+		hostel1 = request.POST['hostel']
 		#supporter1 and supporter2 are the rollno of the two supporters
 		supporter1 = request.POST['supporter1']
 		supporter2 = request.POST['supporter2']
@@ -231,10 +230,14 @@ def validateCandidate(request):
 			except UserList.DoesNotExist:
 				user = None
 			if user:
+				try:
+					userAcademicDetails = AcademicDetails.objects.get(rollNumber = request.session['member_id'])
+				except AcademicDetails.DoesNotExist:
+					userAcademicDetails = None
 				if user.rollNumber != candidatesRollno:
 					errors.append("Please enter your roll number to fill the nomination form.YOU CAN FILL NOMINATION FORM ONLY FOR YOURSELF NOT FOR OTHERS!!!")
 					return render_to_response('electionNominationForm.html',{'positions':positionsList,'hostels':hostelsList,'errors' : errors,'roll':request.session['member_id']})
-				if user.hostelAlloted != hostel:
+				if user.hostelAlloted != hostel1:
 					errors.append("The hostel doesn't match to the one alloted to you")
 					return render_to_response('electionNominationForm.html',{'positions':positionsList,'hostels':hostelsList,'errors' : errors,'roll':request.session['member_id']})
 				try:
@@ -263,28 +266,40 @@ def validateCandidate(request):
 							errors.append(supporter2+" doesn't exists.Please Enter a valid roll number")
 
 						if supporter2Object and supporter1Object:
-							email1 = supporter1Object.emailId;
-							email2 = supporter2Object.emailId;
-							string1 = candidatesRollno + supporter1
-							string2 = candidatesRollno + supporter2
-							hashKey1 = make_password(string1)
-							hashKey2 = make_password(string2)
-							candidatesSupporter = SupportersDetails(candidatesName = candidatesName,candidatesRollNo = candidatesRollno,firstSupporter = supporter1,secondSupporter = supporter2,firstSupporterHashKey = hashKey1,secondSupporterHashKey = hashKey2)
-							candidatesSupporter.save()
-							if sendmail(email1,supporter1,candidatesName,hashKey1):
-								sent_mail_to_supporter1 = True
-							else :
-								errors.append("Some Error occured!!! Couldn't send email to " + supporter1)
+							try:
+								supp1AcademicDetails = AcademicDetails.objects.get(rollNumber = supporter1)
+							except AcademicDetails.DoesNotExist:
+								supp1AcademicDetails = None
+							try:
+								supp2AcademicDetails = AcademicDetails.objects.get(rollNumber = supporter2)
+							except AcademicDetails.DoesNotExist:
+								supp2AcademicDetails = None
+							if userAcademicDetails.year == supp1AcademicDetails.year and userAcademicDetails.year == supp2AcademicDetails.year and userAcademicDetails.program == supp1AcademicDetails.program and userAcademicDetails.program == supp2AcademicDetails.program:
+								email1 = supporter1Object.emailId;
+								email2 = supporter2Object.emailId;
+								string1 = candidatesRollno + supporter1
+								string2 = candidatesRollno + supporter2
+								hashKey1 = make_password(string1)
+								hashKey2 = make_password(string2)
+								candidatesSupporter = SupportersDetails(candidatesName = candidatesName,candidatesRollNo = candidatesRollno,firstSupporter = supporter1,secondSupporter = supporter2,firstSupporterHashKey = hashKey1,secondSupporterHashKey = hashKey2)
+								candidatesSupporter.save()
+								if sendmail(email1,supporter1,candidatesName,hashKey1):
+									sent_mail_to_supporter1 = True
+								else :
+									errors.append("Some Error occured!!! Couldn't send email to " + supporter1)
 
-							if sendmail(email2,supporter2,candidatesName,hashKey2):
-								sent_mail_to_supporter2 = True
-							else :
-								errors.append("Some Error occured!!! Couldn't send email to " + supporter2)
-							if (sent_mail_to_supporter1 and sent_mail_to_supporter2):
-								newCandidate = CandidatesList(candidatesName = candidatesName,candidatesRollNo = candidatesRollno,hostel = hostel,position = position,firstSupporter = supporter1,secondSupporter = supporter2,eligibility = 1)
-								newCandidate.save()
-								return render_to_response('successfullNomination.html',{'name' : candidatesRollno})
+								if sendmail(email2,supporter2,candidatesName,hashKey2):
+									sent_mail_to_supporter2 = True
+								else :
+									errors.append("Some Error occured!!! Couldn't send email to " + supporter2)
+								if (sent_mail_to_supporter1 and sent_mail_to_supporter2):
+									newCandidate = CandidatesList(candidatesName = candidatesName,candidatesRollNo = candidatesRollno,hostel = hostel,position = position,firstSupporter = supporter1,secondSupporter = supporter2,eligibility = 1)
+									newCandidate.save()
+									return render_to_response('successfullNomination.html',{'name' : candidatesRollno})
+								else:
+									return render_to_response('electionNominationForm.html',{'positions':positionsList,'hostels':hostelsList,'errors' : errors,'roll':request.session['member_id']})
 							else:
+								errors.append("You can only give your supporter from the same year as yours!!!")
 								return render_to_response('electionNominationForm.html',{'positions':positionsList,'hostels':hostelsList,'errors' : errors,'roll':request.session['member_id']})
 						else:
 							return render_to_response('electionNominationForm.html',{'positions':positionsList,'hostels':hostelsList,'errors' : errors,'roll':request.session['member_id']})
@@ -292,7 +307,7 @@ def validateCandidate(request):
 					errors.append("Candidate has already registered")
 					return render_to_response('electionNominationForm.html',{'positions':positionsList,'hostels':hostelsList,'errors' : errors,'roll':request.session['member_id']})
 			if not user:
-				return  render_to_response('messages.html',{'message': username+" ,You have already filled the nomination form.",'messageTitle':'E-Voting'})
+				return  render_to_response('messages.html',{'message': username+" ,doesnt exists in db or something is wrong with the sessions",'messageTitle':'E-Voting'})
 		elif(len(candidatesName) == 0):
 			errors.append("Please enter the name of the candidate")
 			return render_to_response('electionNominationForm.html',{'positions':positionsList,'hostels':hostelsList,'errors' : errors,'roll':request.session['member_id']})			
@@ -315,13 +330,18 @@ def validateCandidate(request):
 #This fnction creates the final list of candidates who pass all the eligibility criterias
 def createFinalNomineesList(request):
 	if 'adminUsername' in request.session:
-		nominees =CandidatesList.objects.all().filter(eligibility = 1)
+		nominees =CandidatesList.objects.all()
 		ListOfNominee.objects.all().delete()
 		for i in range(nominees.count()):
-			if (nominees[i].firstSupportersSupport == 1 and nominees[i].secondSupportersSupport == 1):
-				newCandidate = ListOfNominee(nomineesName = nominees[i].candidatesName,nomineesRollNo = nominees[i].candidatesRollNo,hostel = nominees[i].hostel,position = nominees[i].position,NumberOfVotes = 0)
-				newCandidate.save()
-		return render_to_response('messages.html',{'message':"Successfully created list of nominee's",'messageTitle':"E-Voting"})
+			try:
+				nomineescpi = AcademicDetails.objects.get(rollNumber = nominees[i].candidatesRollNo)
+			except AcademicDetails.DoesNotExist:
+				nomineescpi = None
+			if nomineescpi:
+				if (nominees[i].firstSupportersSupport == 1 and nominees[i].secondSupportersSupport == 1 and nomineescpi.cpi > 6.0):
+					newCandidate = ListOfNominee(nomineesName = nominees[i].candidatesName,nomineesRollNo = nominees[i].candidatesRollNo,hostel = nominees[i].hostel,position = nominees[i].position,NumberOfVotes = 0)
+					newCandidate.save()
+		return render_to_response('adminMessages.html',{'message':"Successfully created list of nominee's",'messageTitle':"E-Voting"})
 	else:
 		return HttpResponseRedirect('/administrator')
 
@@ -572,7 +592,7 @@ def finalVoteCount(request):
 					#return HttpResponse("hello")
 					secretary = ListOfSecretary(hostelsName = hostel.hostelsName,position = position.position,nameOfSecretary = name,rollNoOfSecretary = roll)
 					secretary.save()
-		return render_to_response('messages.html',{'message':'Successfully counted the votes!!!','messageTitle':"E-Voting"})
+		return render_to_response('adminMessages.html',{'message':'Successfully counted the votes!!!','messageTitle':"E-Voting"})
 	else:
 		return HttpResponseRedirect('EVoting/admin')
 
@@ -635,6 +655,34 @@ def checkValidUsers(request):
 
 	else:
 		return HttpResponseRedirect('/administrator')
+
+def checkIfVoteCounted(request):
+	if 'username' in request.session:
+		rollno = request.session['member_id']
+		try:
+			user = UserList.objects.get(rollNumber = rollno)
+		except UserList.DoesNotExist:
+			user = None
+		if user:
+			try:
+				voter = VotersList.objects.get(voterDetails = user)
+			except VotersList.DoesNotExist:
+				voter = None
+			if voter:
+				try:
+					voted = Ballot.objects.all().filter(voter = voter)
+				except Ballot.DoesNotExist:
+					voted = None
+				if voted.count() != 0:
+					return render_to_response('messages.html',{'message':"You vote has been counted!!!"})
+				else:
+					return render_to_response('messages.html',{'message':"Your vote is not counted"})
+			if not voter:
+				return render_to_response('messages.html',{'message':"You are not eligible to vote as you have not yet created the two passwords"})
+		if not user:
+			return render_to_response('messages.html',{'message':"You are not a valid user"})
+	else:
+		return HttpResponseRedirect('/login')
 
 
 
